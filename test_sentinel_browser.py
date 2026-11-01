@@ -1,10 +1,7 @@
 """Chromium evidence for sentinel tiers, all sorts and end-state glyphs."""
 import csv
-import io
 import json
 import statistics
-import subprocess
-from pathlib import Path
 from playwright.sync_api import expect
 from test_browser import BrowserFixture, EVIDENCE
 
@@ -21,19 +18,33 @@ class SentinelBrowserChecks(BrowserFixture):
         return self.page.locator('[data-patient]').evaluate_all('''els=>Object.fromEntries(els.map(e=>[e.dataset.patient,
           document.querySelectorAll('.mark[data-patient-key="'+e.dataset.patient+'"]').length]))''')
 
+    def assert_visible_marks(self, state, tier):
+        start,end=self.page.locator('#timeline').evaluate('e=>[+e.dataset.start,+e.dataset.end]')
+        from test_focus import stamp
+        expected=[m for m in state['marks']+state['sentinels']
+                  if not m.get('display_suppressed') and (m['tier']<=tier or m['lane'] in ('AE','CM'))
+                  and (not m['date'] or (stamp(m['date'])<=end and stamp(m['end_date'] if m['interval_status'] in ('complete','ongoing') else m['date'])>=start))]
+        self.assertEqual(self.page.locator('.mark').evaluate_all('es=>es.map(e=>e.dataset.displayId).sort()'),sorted(m['display_id'] for m in expected))
+        return expected
+
     def test_actual_per_line_counts_before_after_and_unchanged_analysis(self):
         p=self.page
         state=self.initial()
         expect(p.locator('#timeline')).to_have_attribute('data-max-tier','0')
         after=self.line_counts()
         self.assertEqual(len(after),100)
-        self.assertLessEqual(max(after.values()),8)
-        expect(p.locator('.mark:not([data-tier="0"])')).to_have_count(0)
+        expected_overview=self.assert_visible_marks(state,0)
+        for key,n in after.items():
+            self.assertEqual(n,sum('/'.join(m['patient_key'])==key for m in expected_overview))
+        # Eight is a sentinel-only budget, not a cap on AE/CM context geometry.
+        sentinel_counts={key:sum('/'.join(m['patient_key'])==key and m['tier']==0 for m in expected_overview) for key in after}
+        self.assertLessEqual(max(sentinel_counts.values()),8)
         counts=p.locator('#counts').text_content()
         spec=self.spec()
         signature=p.locator('#diagnostics').text_content()
         p.locator('#tiers').select_option('2')
         before=self.line_counts()
+        self.assert_visible_marks(state,2)
         expected=state['marks']+state['sentinels']
         for key,n in before.items():
             self.assertEqual(n,sum('/'.join(m['patient_key'])==key and not m.get('display_suppressed') for m in expected))
@@ -43,22 +54,18 @@ class SentinelBrowserChecks(BrowserFixture):
             self.assertEqual(self.spec(),spec)
             self.assertEqual(p.locator('#diagnostics').text_content(),signature)
         self.assertEqual(self.line_counts(),after)
-        # Original v1 baseline uses the reviewed generator, not fabricated measurements.
-        namespace={}
-        exec(subprocess.check_output(['git','show','reviewed-baseline:cohort.py'],text=True),namespace)
-        base=json.loads((Path(__file__).parent/'data/fixtures.json').read_text())
-        original=namespace['scale_cohort'](base)
-        old={key:sum(r['values']['STUDYID']+'/'+r['values']['USUBJID']==key for d in ('AE','CM','EX','RS') for r in original['datasets'][d]) for key in after}
+        # Compare two measured views of this fixture. The historical private
+        # reviewed-baseline git ref is not shipped in the public repository.
         def summary(values):
             return dict(total=sum(values),min=min(values),max=max(values),mean=statistics.mean(values),median=statistics.median(values))
-        report={'browser':self.browser.version,'patients':100,'original_v1_untiered':summary(list(old.values())),
-                'current_fixture_all_tiers':summary(list(before.values())), 'current_fixture_sentinel_only':summary(list(after.values())),
+        report={'browser':self.browser.version,'patients':100,
+                'current_fixture_all_tiers':summary(list(before.values())), 'current_fixture_overview':summary(list(after.values())),
                 'analysis_unchanged':True,'qualifying_ae_records':298,'browser_errors':self.errors,
                 'count_definition':'One logical event/interval .mark, including coincident events separately; caps, labels and +N chooser badges are not additional events.',
-                'per_line':[dict(patient=k,original_v1=old[k],before_all_tiers=before[k],after_sentinel=after[k]) for k in sorted(after)]}
+                'per_line':[dict(patient=k,all_tiers=before[k],overview=after[k],sentinels=sentinel_counts[k]) for k in sorted(after)]}
         (EVIDENCE/'mark-counts.json').write_text(json.dumps(report,indent=2)+'\n')
         with (EVIDENCE/'mark-counts.csv').open('w') as f:
-            writer=csv.DictWriter(f,fieldnames=['patient','original_v1','before_all_tiers','after_sentinel'])
+            writer=csv.DictWriter(f,fieldnames=['patient','all_tiers','overview','sentinels'])
             writer.writeheader();writer.writerows(report['per_line'])
         p.locator('#timeline').screenshot(path=str(EVIDENCE/'sentinel-overview.png'))
 
@@ -92,17 +99,25 @@ class SentinelBrowserChecks(BrowserFixture):
         for record in ('AE-004-1','CM-005-2'):
             m=p.locator('[data-record-id="'+record+'"]')
             expect(m.locator('.interval-body')).to_have_count(1)
-            expect(m.locator('.interval-cap')).to_have_count(2)
-            expect(m.locator('.ongoing-terminus')).to_have_count(0)
+            expect(m.locator('.domain-symbol')).to_have_count(1)
+            expect(m.locator('.end-terminus')).to_have_count(1)
+            expect(m.locator('.end-terminus')).to_have_attribute('data-end-state','recorded')
+            expect(m.locator('.end-terminus')).to_have_attribute('d','M -1.5 -6 H 1.5 V 6 H -1.5 Z')
         for record,field,date in [('AE-004-2','AEFUDTC','2025-02-05'),('CM-004-1','CMFUDTC','2025-02-15')]:
             m=p.locator('[data-record-id="'+record+'"]')
             expect(m.locator('.interval-body')).to_have_count(1)
-            expect(m.locator('.interval-cap')).to_have_count(1)
-            expect(m.locator('.ongoing-terminus')).to_have_attribute('stroke-dasharray','2 2')
-            expect(m.locator('.followup-label')).to_have_text(field+'='+date)
+            expect(m.locator('.end-terminus')).to_have_count(1)
+            expect(m.locator('.end-terminus')).to_have_attribute('data-end-state','ongoing')
+            expect(m.locator('.end-terminus')).to_have_attribute('d','M -5 -6 L 1 0 L -5 6')
+            expect(m.locator('.end-terminus')).to_have_attribute('fill','none')
+            expect(m).to_have_attribute('aria-label',__import__('re').compile('ongoing at last observed '+date+' \\('+field+'\\)'))
+            expect(m.locator('.followup-label')).to_have_count(0)  # overview is label-free
         for record in ('AE-004-3','CM-004-2'):
             m=p.locator('[data-record-id="'+record+'"]')
             expect(m.locator('.interval-body')).to_have_count(0)
+            expect(m.locator('.end-terminus')).to_have_count(1)
+            expect(m.locator('.end-terminus')).to_have_attribute('data-end-state','unknown')
+            expect(m.locator('.end-terminus')).to_have_attribute('d','M -6 2 Q -3 -5 0 0 Q 3 5 6 -2')
             expect(m).to_have_attribute('aria-label',__import__('re').compile('end unknown'))
             self.assertEqual(m.get_attribute('data-x'),m.get_attribute('data-end-x'))
         death=p.locator('[data-record-id="AE-010-1"]')
@@ -116,7 +131,9 @@ class SentinelBrowserChecks(BrowserFixture):
         p.locator('#event-selector').select_option('AE-004-2')
         expect(p.locator('#sources')).to_contain_text('AEFUDTC')
         p.locator('#tiers').select_option('0')
-        expect(p.locator('#selection')).to_contain_text('logical selection retained')
+        self.settled()
+        expect(p.locator('#selection')).to_have_text('Selected AE-004-2 · visible')
+        expect(p.locator('[data-record-id="AE-004-2"]')).to_have_count(1)
         expect(p.locator('#event-selector')).to_have_value('AE-004-2')
         p.locator('#open-source').click()
         expect(p.locator('#sources')).to_contain_text('2025-02-05')
@@ -129,11 +146,12 @@ class SentinelBrowserChecks(BrowserFixture):
             p.locator('#zoom-in').click()
             expect(p.locator('#timeline')).to_have_attribute('data-animating','false')
         expect(p.locator('#timeline')).to_have_attribute('data-max-tier','1')
-        expect(p.locator('.mark[data-tier="2"]')).to_have_count(0)
+        self.assert_visible_marks(self.initial(),1)
         for _ in range(3):
             p.locator('#zoom-in').click()
             expect(p.locator('#timeline')).to_have_attribute('data-animating','false')
         expect(p.locator('#timeline')).to_have_attribute('data-max-tier','2')
+        self.assert_visible_marks(self.initial(),2)
         self.assertGreater(p.locator('.mark[data-tier="0"]').count(),0)
         p.locator('#save').click()
         expect(p.locator('#replay-result')).to_contain_text('Saved exact normalized review')

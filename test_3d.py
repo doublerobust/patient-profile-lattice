@@ -31,14 +31,19 @@ class ThreeChecks(unittest.TestCase):
         self.load()
         self.assertEqual(self.p.request.get(self.base+'/').status,200)
         self.assertEqual(self.p.locator('#sort option').count(),6)
-        self.assertEqual(self.p.evaluate('clinical3d.stats().marks'),648)
+        data=self.p.request.get(self.base+'/api/initial').json()
+        # stats().marks counts logical display marks, not endpoint primitives.
+        def expected(tier):
+            return [m for m in data['marks']+data['sentinels'] if not m.get('display_suppressed') and (m['tier']<=tier or m['lane'] in ('AE','CM'))]
+        self.assertEqual(self.p.evaluate('clinical3d.stats().marks'),len(expected(0)))
         baseline=self.p.locator('#spec').text_content()
         signature=self.p.locator('#diagnostics').text_content()
         for sort in ['asc','desc','duration','response','pd','reason']:
             self.p.select_option('#sort',sort)
             self.assertEqual(self.p.locator('#spec').text_content(),baseline)
         self.p.select_option('#tiers','2')
-        self.assertEqual(self.p.evaluate('clinical3d.stats().marks'),1577)
+        self.assertEqual(self.p.evaluate('clinical3d.stats().marks'),len(expected(2)))
+        self.assertEqual(self.p.evaluate('clinical3d.auditGeometry().marks.map(m=>m.display_id).sort()'),sorted(m['display_id'] for m in expected(2)))
         self.p.click('#peel');self.p.wait_for_timeout(1100)
         self.p.click('#oblique');self.p.wait_for_timeout(1100)
         self.assertEqual(self.p.locator('#diagnostics').text_content(),signature)
@@ -67,10 +72,35 @@ class ThreeChecks(unittest.TestCase):
             expect(p.locator('#sources')).to_contain_text(text)
         semantics=p.evaluate('clinical3d.stats().endStates')
         self.assertGreater(semantics['recorded'],0);self.assertGreater(semantics['ongoing'],0);self.assertGreater(semantics['unknown'],0)
-        p.wait_for_timeout(600)
+        # Selection now starts a 900ms focus tween; source evidence arrives first.
+        p.wait_for_function('() => !busy && !clinical3d.stats().animating')
+        p.evaluate('() => new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))')
         frames=p.evaluate('clinical3d.stats().frames');p.wait_for_timeout(300)
         self.assertEqual(p.evaluate('clinical3d.stats().frames'),frames)
         p.click('#open-source');expect(p.locator('#sources')).to_contain_text('AE-004-3')
         expect(p.locator('#error')).to_be_empty()
+
+    def test_short_interval_focus_zoom_direction(self):
+        self.load();p=self.p
+        p.select_option('#event-selector','AE-004-1')
+        expect(p.locator('#selection')).to_contain_text('Selected AE-004-1')
+        p.wait_for_function('() => !busy && !clinical3d.stats().animating')
+        before=p.evaluate('clinical3d.stats().view.span')
+        self.assertLess(before,35)
+        spec=p.locator('#spec').text_content()
+        counts=p.locator('#counts').text_content()
+        p.click('#zoom-in')
+        p.wait_for_function('() => !clinical3d.stats().animating')
+        self.assertEqual(p.evaluate('clinical3d.stats().view.span'),before)
+        p.locator('#scene').hover()
+        p.mouse.wheel(0,-80)
+        p.wait_for_timeout(100)
+        self.assertEqual(p.evaluate('clinical3d.stats().view.span'),before)
+        p.click('#zoom-out')
+        p.wait_for_function('() => !clinical3d.stats().animating')
+        # GSAP rounds interpolated property values to six decimal places.
+        self.assertAlmostEqual(p.evaluate('clinical3d.stats().view.span'),before/0.65,delta=1e-6)
+        self.assertEqual(p.locator('#spec').text_content(),spec)
+        self.assertEqual(p.locator('#counts').text_content(),counts)
 
 if __name__=='__main__':unittest.main()

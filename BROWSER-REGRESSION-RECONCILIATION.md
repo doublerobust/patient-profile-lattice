@@ -1,0 +1,40 @@
+# Browser regression reconciliation — 31 October build
+
+Base: public commit `166f5e8`. Verified locally with Python 3.9.6, Playwright 1.56.0 and its bundled Chromium 141.0.7390.37 on macOS. The release report used Chromium 149; that version was not rerun here. No analytical engine, fixture, contract or display-priority configuration changed.
+
+## Per-test adjudication
+
+Names below are unittest method names, grouped by module. Every original failure/error reproduced locally is listed. The local baseline ran 38 tests with 11 failures and 4 errors (the release reported 10 failures and 4 errors). The extra failure exposed a real zoom-direction defect, not merely different copy.
+
+| Module / test | Verdict and replacement contract |
+|---|---|
+| `test_browser.test_group_evidence_supplement_and_temporal_counts` | Stale interaction/geometry assumption. Overlapping interval bodies open a source chooser rather than silently selecting the clicked logical record. Follow the actual mouse click through that chooser, retain exact selected ID/source/evidence assertions, reset the click-focused viewport before testing all dates. Incomplete-date domain symbols are groups with `data-x=1055`, not circles with `cx`. |
+| `test_browser.test_ordinary_sort_filter_peel_pick_source_export_replay` | Stale camera assumption. Selecting January 12 focuses the interval, leaving January 31 outside the viewport even after changing patients. Explicitly reset before picking AE-002-1. Preserve exact export/replay, provenance and analytical signatures. |
+| `test_3d.test_route_and_same_data` | Stale sentinel-only count. Overview now includes AE and CM geometry regardless of tier. Assert the exact count derived from unsuppressed source/display marks satisfying `(tier <= requested tier OR domain in AE, CM)`; all-tier submitted geometry must also have exactly the expected display IDs. `stats().marks` is logical marks, not primitive/end-glyph counts. |
+| `test_3d.test_interrupt_idle_pick_and_end_semantics` | Stale timing assumption. Source evidence arrives before the new 900 ms click-focus tween ends. Await completed selection and animation plus the final render frames, then retain the strict assertion that idle frames do not increase over 300 ms. |
+| `test_zoom.test_one_line_and_cross_domain_same_day_offsets` | Stale label assumption. The grammar emits collision-allocated annotations, not a hidden standalone label for every source. Assert zero overview annotations and level-2, nonempty close annotations while retaining offsets, colors, opacity, picking and source checks. |
+| `test_zoom.test_moving_pointer_mid_animation_and_continuous_detail` | Stale helper. Measuring mark opacity must not dereference a nonexistent per-record label. Retain cursor-anchor, intermediate opacity and singleton-line assertions. |
+| `test_zoom.test_overview_collision_chooser_and_trackpad_modes` | Mixed: stale camera setup plus real regression. Selection now focuses a 1.25-day interval; old manual zoom clamps forced a zoom-in back OUT to two days. Reset explicitly for this overview-wheel test and add a dedicated short-focus regression so the defect is not hidden by that reset. Fix described below. |
+| `test_focus.test_vsets` | Stale geometry oracle. Domain, terminus and sentinel quads now cap their world dimensions by `min(1, view span / canvas height)`. Reconstruct scaled quads, dashed/double interval bodies and the selected underline independently; compare the exact visible source-key set at all 24 route/zoom/tier combinations. No missing-key tolerance added. |
+| `test_feedback.test_rs_selection_replaces_ae_everywhere` | Stale picking/camera assumptions. Follow the overlapping-body chooser, await focus, then reset before selecting another same-day record. Keep exact RS replacement checks across panel, selector, spec, glyph and replay. |
+| `test_feedback.test_pan_at_overview_and_close_then_ordinary_click_selection` | Stale synchronization. Selection now animates and replaces SVG nodes; await focus before reacquiring geometry and starting another drag. Still require unchanged analysis/spec on drag, retained width, and no pan on sub-threshold motion. |
+| `test_feedback.test_overview_100_patients_sidebar_intervals_and_scale_timings` | Stale interval primitive rule. Replace two generic caps with exact body coordinates (two lines for EX, one for AE/CM), one state-specific endpoint at the source end, and unchanged same-day zero span. Keep scale timing, sidebar, selection and zoom invariants. |
+| `test_sentinel_browser.test_actual_per_line_counts_before_after_and_unchanged_analysis` | Stale budget interpretation plus public-test portability defect. Eight applies to tier-0 sentinels only, not the added AE/CM geometry. Assert exact visible IDs and per-patient counts, and retain the eight-sentinel limit. Remove the unshipped `reviewed-baseline` git-ref dependency from historical report generation: report measured all-tier/overview counts of the current fixture, not invented historical values. |
+| `test_sentinel_browser.test_auto_zoom_tiers_and_replay_defaults` | Stale tier visibility assumption. AE/CM remain visible at mid zoom even with tier 2. Assert exact display-ID sets using the visibility rule and date-window intersection; preserve tier thresholds, replay defaults and analytical signature. |
+| `test_sentinel_browser.test_interval_glyphs_death_and_source_selection` | Stale glyph/copy expectations. Recorded intervals have a domain onset and one vertical terminus; ongoing intervals have one open chevron at documented follow-up; unknown intervals have no body and one unknown-end wave. Assert exact state/path/fill and source follow-up meaning. Overview has no free-standing follow-up labels. AE remains visible in tier-0 mode, so assert visibility rather than falsely expecting it hidden. |
+| `test_grammar_browser.test_shared_grammar_zoom_annotations_selection` | Stale camera assumption, not a changed annotation threshold. Selection already focuses to close detail. Reset before the mid-zoom wheel gesture; retain strict level 1 at mid, level 2 at close, non-overlapping labels and exact clinical/source fields. |
+
+The other original tests remained covered, including hash rejection, hidden selection, sorting and engine/contract checks. Closed diagnostic/spec details are read with `text_content()`, already present in the published tree; relationships are explicitly opened. No new `inner_text()` workaround or application change was needed.
+
+## Real fixes and red/green evidence
+
+1. `run_checks.sh` was committed mode 100644: `./run_checks.sh` failed with permission denied (exit 126). Restore executable mode 100755.
+2. Short interval focus could be below the manual zoom minimum. Dedicated new browser tests reproduced `172800000 != 108000000` in 2D and `35 != 19.339623` in 3D after Zoom in. In `static/app.js` and `renderer3d.js`, the effective lower bound is now the smaller of the normal minimum and the current span. Zoom in stays at that floor; Zoom out increases smoothly by the requested factor. Both button and wheel paths are exercised. The 3D bundle was rebuilt with pinned dependencies using `npm ci && npm run build` (build succeeded; npm audit reported zero vulnerabilities).
+
+Normal two-day/manual limits are still tested. The added tests verify unchanged spec and analytical counts. The existing view-only tests also retain analysis signatures across sort, focus, tier, hide, zoom, peel and replay.
+
+## Verification
+
+See `TEST-RESULTS.txt` for exact commands, exit codes and Ran/OK lines for each module, the aggregate `./run_checks.sh`, data validator and pinned-data verification. Local full logs and generated JSON/CSV/screenshots live in ignored `evidence/`; screenshots were not sent to any image model. `.venv/` is ignored.
+
+No skipped/expected-failure exception was introduced. This is implementer verification, not independent review. Public main and live services were not changed; changes are submitted as a PR for review.

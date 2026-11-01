@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 .pytest_cache/
 node_modules/
+.venv/
 browsers/
 .DS_Store
 *.log

@@ -132,7 +132,10 @@ function zoom(factor, fraction=0.5) {
   if (!camera || busy) return;
   const base = targetCamera;
   const span = base.end-base.start;
-  const nextSpan = Math.max(2*DAY, Math.min(overview.end-overview.start, span*factor));
+  // Click-focus may fit an interval more tightly than the manual two-day floor.
+  // Do not turn a subsequent zoom-in into a zoom-out; let zoom-out grow smoothly.
+  const minimumSpan = Math.min(2*DAY, span);
+  const nextSpan = Math.max(minimumSpan, Math.min(overview.end-overview.start, span*factor));
   // Anchor the date currently under the cursor, even when it moves mid-animation.
   const anchor = camera.start + fraction*(camera.end-camera.start);
   // No boundary clamping: it would move the date under the pointer. Reset restores extent.

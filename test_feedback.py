@@ -13,8 +13,11 @@ class SelectionFeedbackChecks(BrowserFixture):
         self.pixel_pick('AE-002-1')
         p.locator('#open-source').click()
         expect(p.locator('#sources')).to_contain_text('AE-002-1 · AE original row 4')
+        p.locator('#reset-zoom').click()
+        self.settled()
         p.locator('[data-cluster="SYN-SPIKE/SYN-002/2025-01-31"]').click()
         p.locator('#coincident-events button').filter(has_text='RS-002-1').click()
+        self.settled()
         expect(p.locator('#selection')).to_contain_text('Selected RS-002-1')
         expect(p.locator('#selection')).not_to_contain_text('AE-002-1')
         expect(p.locator('#event-selector')).to_have_value('RS-002-1')
@@ -38,6 +41,7 @@ class PanFeedbackChecks(BrowserFixture):
         return self.page.locator('#timeline').evaluate('el => [Number(el.dataset.start),Number(el.dataset.end)]')
 
     def pan_from_record(self, record, delta):
+        self.settled()
         mark = self.page.locator('[data-record-id="'+record+'"]')
         mark.scroll_into_view_if_needed()
         box = mark.bounding_box()
@@ -74,6 +78,7 @@ class PanFeedbackChecks(BrowserFixture):
         expect(p.locator('#sources > .source-card > summary').nth(1)).to_have_text('SUPPAE-001-1 · SUPPAE original row 1')
         before = self.bounds()
         self.pan_from_record('AE-001-1', 2)  # Sub-threshold hand motion is still a click.
+        self.choose_hit('AE-001-1')
         self.assertEqual(self.bounds(), before)
         expect(p.locator('#selection')).to_contain_text('Selected AE-001-1')
         p.locator('#reset-zoom').click()
@@ -102,8 +107,9 @@ class ScaleFeedbackChecks(BrowserFixture):
         # Every interval uses exact start/end coordinates; same-day stays zero-span.
         for record in ['AE-001-1','AE-002-1','CM-001-1','EX-004-1']:
             mark = next(m for m in state['marks'] if m['record_id']==record)
-            geometry = p.locator('[data-record-id="'+record+'"]').evaluate('el=>({start:+el.dataset.x,end:+el.dataset.endX,caps:[...el.querySelectorAll(".interval-cap")].map(c=>+c.getAttribute("x1"))})')
-            self.assertEqual(geometry['caps'], [geometry['start'],geometry['end']])
+            geometry = p.locator('[data-record-id="'+record+'"]').evaluate('el=>({start:+el.dataset.x,end:+el.dataset.endX,body:[...el.querySelectorAll(".interval-body line")].map(c=>[+c.getAttribute("x1"),+c.getAttribute("x2")]),termini:[...el.querySelectorAll(".end-terminus")].map(c=>({state:c.dataset.endState,x:+c.getAttribute("transform").split("(")[1].split(" ")[0]}))})')
+            self.assertEqual(geometry['body'], [[geometry['start'],geometry['end']]] * (2 if mark['lane']=='EX' else 1))
+            self.assertEqual(geometry['termini'], [{'state':mark['end_state'],'x':geometry['end']}])
             self.assertEqual(geometry['end']==geometry['start'], mark['date']==mark['end_date'])
         expect(p.locator('aside #analysis-controls')).to_have_count(1)
         expect(p.locator('aside #view-controls')).to_have_count(1)

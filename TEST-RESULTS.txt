@@ -1,0 +1,92 @@
+Local verification: 1 November 2026
+Python 3.9.6; Playwright 1.56.0; bundled Chromium 141.0.7390.37; macOS.
+All run_checks commands below used PYTHON=.venv/bin/python.
+No skipped tests or documented failing exceptions.
+
+./run_checks.sh test_app — exit 0
+Ran 5 tests in 0.427s
+OK
+
+./run_checks.sh test_cohort — exit 0
+Ran 4 tests in 0.491s
+OK
+
+./run_checks.sh test_addresses — exit 0
+Ran 3 tests in 0.536s
+OK
+
+./run_checks.sh test_sentinel — exit 0
+Ran 3 tests in 0.145s
+OK
+
+./run_checks.sh test_grammar — exit 0
+Ran 2 tests in 1.093s
+OK
+
+./run_checks.sh test_browser — exit 0
+Ran 3 tests in 10.247s
+OK
+
+./run_checks.sh test_3d — exit 0
+Ran 3 tests in 12.739s
+OK
+
+./run_checks.sh test_zoom — exit 0
+Ran 6 tests in 18.405s
+OK
+
+./run_checks.sh test_focus — exit 0
+Ran 1 test in 16.090s
+OK
+
+./run_checks.sh test_feedback — exit 0
+Ran 4 tests in 21.760s
+OK
+
+./run_checks.sh test_sentinel_browser — exit 0
+Ran 4 tests in 7.507s
+OK
+
+./run_checks.sh test_grammar_browser — exit 0
+Ran 2 tests in 10.519s
+OK
+
+./run_checks.sh — exit 0
+Ran 40 tests in 97.475s
+OK
+
+.venv/bin/python data/validate.py — exit 0
+Ran 18 tests in 0.060s
+OK
+
+.venv/bin/python app.py --verify-data — exit 0
+PASS: pinned file hashes, normalized spec, synthetic-only flag and SUPPAE parent links
+
+Preparation:
+python3 -m venv .venv — exit 0 (system python3 is 3.9.6)
+.venv/bin/python -m pip install -r requirements-test.txt — exit 0
+.venv/bin/python -m playwright install chromium — exit 0
+npm ci — exit 0; audited 5 packages, zero vulnerabilities
+npm run build — exit 0
+
+Before changes:
+./run_checks.sh — exit 126 (not executable)
+After chmod +x only: PYTHON=.venv/bin/python ./run_checks.sh — exit 1
+Ran 38 tests in 112.314s
+FAILED (failures=11, errors=4)
+
+Dedicated short-focus red reproductions, before the corresponding application fixes:
+PYTHON=.venv/bin/python ./run_checks.sh test_zoom.TimelineChecks.test_zoom_in_after_short_interval_focus_does_not_zoom_out — exit 1
+AssertionError: 172800000 != 108000000
+Ran 1 test in 1.338s
+FAILED (failures=1)
+
+PYTHON=.venv/bin/python ./run_checks.sh test_3d.ThreeChecks.test_short_interval_focus_zoom_direction — exit 1
+AssertionError: 35 != 19.339623
+Ran 1 test in 3.106s
+FAILED (failures=1)
+
+The final module and aggregate passes above include both new tests, exercising
+button and wheel zoom direction, unchanged specifications and analytical counts.
+Full local logs: evidence/baseline.log, evidence/short-focus-red.log,
+evidence/short-focus-3d-red.log, evidence/final-*.log.

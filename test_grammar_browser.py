@@ -65,6 +65,7 @@ class GrammarBrowserChecks(BrowserFixture):
                 p.click('#readable');self.settle(gpu)
                 p.click('#zoom-out');self.settle(gpu)
             else:
+                p.click('#reset-zoom');self.settle(gpu)
                 # Pointer anchored at the source onset, not at an interval's midpoint.
                 point=p.locator('[data-record-id="AE-004-1"]').evaluate('e=>{const p=new DOMPoint(+e.dataset.x,+e.dataset.y).matrixTransform(e.ownerSVGElement.getScreenCTM());return {clientX:p.x,clientY:p.y}}')
                 p.locator('#timeline').dispatch_event('wheel',dict(point,deltaY=-330))
