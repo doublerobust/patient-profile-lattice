@@ -1,6 +1,6 @@
 # Browser regression reconciliation — 31 October build
 
-Base: public commit `166f5e8`. Verified locally with Python 3.9.6, Playwright 1.56.0 and its bundled Chromium 141.0.7390.37 on macOS. The release report used Chromium 149; that version was not rerun here. No analytical engine, fixture, contract or display-priority configuration changed.
+Base: public commit `166f5e8`. Verified locally with Python 3.9.6, Playwright 1.56.0 and its bundled Chromium 141.0.7390.37 on macOS. Playwright 1.56.x bundles Chromium 141, so 141 is the pinned environment for these results, not a downgrade. An earlier report referred to "Chromium 149"; no artifact in this repository or on the verification machine supports that version (Playwright 1.56 ships 141, and the system Chrome on the verification Mac is 156), so the reference is treated as unattributed and withdrawn. Frame-timing numbers remain tagged with the browser that produced them and are not compared across versions. No analytical engine, fixture, contract or display-priority configuration changed.
 
 ## Per-test adjudication
 
