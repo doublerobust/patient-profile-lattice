@@ -90,3 +90,27 @@ The final module and aggregate passes above include both new tests, exercising
 button and wheel zoom direction, unchanged specifications and analytical counts.
 Full local logs: evidence/baseline.log, evidence/short-focus-red.log,
 evidence/short-focus-3d-red.log, evidence/final-*.log.
+
+KNOWN LIMITATION — intermittent 3D animation wait (recorded, not resolved)
+--------------------------------------------------------------------------
+Two results exist for the same head and must both be kept:
+
+  1. Isolated review run: test_3d.test_route_and_same_data and
+     test_3d.test_interrupt_idle_pick_and_end_semantics timed out (30 s)
+     waiting for animation completion, after the review-oracle patch.
+  2. Fresh-clone verification: test_3d (3 tests) and test_sentinel_browser
+     (4 tests) pass in 18.7 s on a clean clone of the merged tree, with no
+     assertion changes.
+
+Neither run invalidates the other. The cause is undiagnosed.
+
+Lead, unconfirmed: this server sends Content-Security-Policy
+"script-src 'self'" without 'unsafe-eval'. Playwright's wait_for_function
+compiles its predicate, and that can raise EvalError on this page; a throwing
+predicate is retried until the deadline, which surfaces as a timeout rather
+than an assertion failure. This was not reproduced deterministically and is
+not the confirmed cause.
+
+No fix is applied for this. Polling page.evaluate from Python instead of
+wait_for_function would sidestep the lead if it ever proves real, and relaxing
+the CSP is not on the table.
