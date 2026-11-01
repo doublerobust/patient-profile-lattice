@@ -9,3 +9,6 @@ browsers/
 
 # Local screenshot / evidence output from ad hoc runs
 /run-evidence/
+
+# Test-run artifacts
+/evidence/
