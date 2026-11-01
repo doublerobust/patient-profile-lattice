@@ -104,6 +104,10 @@ Internal handoff notes, captured local evidence directories, patch bundles and s
 
 ## Licensing
 
-No license file is included, and no license is granted by this repository. If you want to reuse the code, ask first. The KN189-style fixture is generated output from an upstream repository that carried no license at the pinned commit; it is here under a data-only authorization for demonstration and carries no redistribution rights of its own.
+No license file is included and no license is granted for this repository's own source code. If you want to reuse it, ask first.
+
+That statement covers our code only. Bundled third-party components keep their own terms and are unaffected by it: three.js is MIT, GSAP ships under its own standard license, and both are bundled into `static/`. See `THIRD-PARTY.md`.
+
+The KN189-style fixture under `fixtures/keynote189-synthetic/` is generated output from an upstream repository that carried no license at the pinned commit. It is here under a data-use authorization for demonstration only, carries no redistribution rights of its own, and is not covered by anything stated about this project's code. See `DATA.md` and `NOTICE.md`.
 
 Nothing in this repository is medical advice, a validated analysis, or a substitute for a statistician and a qualified reviewer working from real source data.
