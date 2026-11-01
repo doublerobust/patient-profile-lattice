@@ -1,7 +1,10 @@
 """Chromium evidence for sentinel tiers, all sorts and end-state glyphs."""
 import csv
+import hashlib
+import importlib.util
 import json
 import statistics
+from pathlib import Path
 from playwright.sync_api import expect
 from test_browser import BrowserFixture, EVIDENCE
 
@@ -54,11 +57,31 @@ class SentinelBrowserChecks(BrowserFixture):
             self.assertEqual(self.spec(),spec)
             self.assertEqual(p.locator('#diagnostics').text_content(),signature)
         self.assertEqual(self.line_counts(),after)
-        # Compare two measured views of this fixture. The historical private
-        # reviewed-baseline git ref is not shipped in the public repository.
+        # Restore the historical oracle using original archived bytes, not an
+        # unavailable private Git ref or counts regenerated from today's code.
+        baseline_dir=Path(__file__).parent/'test-fixtures'
+        source=baseline_dir/'baseline-cohort-v1.py'
+        self.assertEqual(hashlib.sha256(source.read_bytes()).hexdigest(),
+                         'ea5d42260581d92a02e63d60ee05c57cde9f5d7c6a86ba682603eefb18016be5')
+        definition=importlib.util.spec_from_file_location('archived_cohort',source)
+        assert definition is not None and definition.loader is not None
+        archived=importlib.util.module_from_spec(definition)
+        definition.loader.exec_module(archived)
+        original=archived.scale_cohort(json.loads((Path(__file__).parent/'data/fixtures.json').read_text()))
+        old={key:sum(r['values']['STUDYID']+'/'+r['values']['USUBJID']==key
+                     for d in ('AE','CM','EX','RS') for r in original['datasets'][d]) for key in after}
+        historical_bytes=(baseline_dir/'historical-mark-counts.json').read_bytes()
+        self.assertEqual(hashlib.sha256(historical_bytes).hexdigest(),
+                         '20bf01665f266233d99e3651af85f0dd6bba339b005d1a69cdad6e456f4dde28')
+        historical=json.loads(historical_bytes)['per_line']
+        self.assertEqual(old,{r['patient']:r['original_v1'] for r in historical})
+        self.assertEqual(before,{r['patient']:r['before_all_tiers'] for r in historical})
+        # Historical sentinel-only counts do NOT constrain today's AE/CM overview.
+        self.assertEqual(sentinel_counts,{r['patient']:r['after_sentinel'] for r in historical})
         def summary(values):
             return dict(total=sum(values),min=min(values),max=max(values),mean=statistics.mean(values),median=statistics.median(values))
         report={'browser':self.browser.version,'patients':100,
+                'original_v1_untiered':summary(list(old.values())), 'historical_comparison_passed':True,
                 'current_fixture_all_tiers':summary(list(before.values())), 'current_fixture_overview':summary(list(after.values())),
                 'analysis_unchanged':True,'qualifying_ae_records':298,'browser_errors':self.errors,
                 'count_definition':'One logical event/interval .mark, including coincident events separately; caps, labels and +N chooser badges are not additional events.',

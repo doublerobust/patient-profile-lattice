@@ -1,0 +1,11 @@
+{
+  "source_task": "t_a45a091e",
+  "source_attachment": "sentinel-viewer.zip",
+  "source_attachment_sha256": "ca582b714375c5efb18b557aa69927a4f33cd76318690e7397e79cb703ff118a",
+  "member": "evidence/baseline-cohort-v1.py",
+  "sha256": "ea5d42260581d92a02e63d60ee05c57cde9f5d7c6a86ba682603eefb18016be5",
+  "historical_counts_member": "evidence/mark-counts.json",
+  "historical_counts_sha256": "20bf01665f266233d99e3651af85f0dd6bba339b005d1a69cdad6e456f4dde28",
+  "authority": "Original task handoff explicitly identifies this member as the archived reviewed-baseline generator for reproduction outside Git.",
+  "limitation": "Original Git object is unavailable. These are authentic archived generator bytes, not a reconstructed Git commit or a newly generated substitute."
+}

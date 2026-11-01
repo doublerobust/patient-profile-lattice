@@ -41,9 +41,15 @@ class ThreeChecks(unittest.TestCase):
         for sort in ['asc','desc','duration','response','pd','reason']:
             self.p.select_option('#sort',sort)
             self.assertEqual(self.p.locator('#spec').text_content(),baseline)
-        self.p.select_option('#tiers','2')
-        self.assertEqual(self.p.evaluate('clinical3d.stats().marks'),len(expected(2)))
-        self.assertEqual(self.p.evaluate('clinical3d.auditGeometry().marks.map(m=>m.display_id).sort()'),sorted(m['display_id'] for m in expected(2)))
+        # Frozen review counts for the 100-patient fixture (see REVIEW-ORACLES.md).
+        # Do not derive these literals from the same eligibility rule as the renderer.
+        for tier, count in ((0, 1135), (1, 1480), (2, 1577)):
+            self.p.select_option('#tiers',str(tier))
+            self.assertEqual(self.p.evaluate('clinical3d.stats().marks'),count)
+            self.assertEqual(len(expected(tier)),count)
+            submitted=self.p.evaluate('clinical3d.auditGeometry().marks.map(m=>m.display_id).sort()')
+            self.assertEqual(len(submitted),count)
+            self.assertEqual(submitted,sorted(m['display_id'] for m in expected(tier)))
         self.p.click('#peel');self.p.wait_for_timeout(1100)
         self.p.click('#oblique');self.p.wait_for_timeout(1100)
         self.assertEqual(self.p.locator('#diagnostics').text_content(),signature)
