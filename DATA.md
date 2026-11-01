@@ -23,6 +23,22 @@ trial design. It is not real trial data and it is not submission-ready.
    compatible upstream licence first, or replace the fixtures with a fetch script that
    never stores the rows here.
 
+## Permission status
+
+Upstream permission: **not yet obtained.** The dataset is published here under the project
+owner's data-use authorisation while a permission request is pending.
+
+When a reply arrives, record it here in the following form, quoting the reply verbatim:
+
+    Granted: <date> by <name>, via <channel>
+    Scope: republish the generated synthetic dataset at
+           fixtures/keynote189-synthetic/raw.json, commit be3744c, with attribution
+    Excluded: generator code, licence to the code
+    Text: "<their words>"
+
+Record the scope, not just the fact, and keep the quoted file path so the permission trail
+names what was granted.
+
 ## On the copyright status of generated output
 
 The rows here were emitted by running a seeded generator; the human contribution was the
