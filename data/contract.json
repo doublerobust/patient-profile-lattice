@@ -1,0 +1,110 @@
+{
+  "contract_id": "patient-lane-spike",
+  "contract_version": "1.0.0",
+  "schema_file": "schemas.json",
+  "scope": {
+    "data_classification": "synthetic_only",
+    "purpose": "Local 2D feasibility spike, not regulatory submission or clinical inference",
+    "standards_reference": "SDTMIG 3.3 / SDTM 1.7, deliberately pinned reference, not a claim of latest version or full conformance",
+    "required_datasets": ["AE", "CM", "EX", "RS", "RELREC", "SUPPAE"],
+    "suppqual_convention": "SUPPQUAL is the model/category; this package uses the domain-specific SUPPAE dataset, not a submitted pooled SUPPQUAL dataset",
+    "out_of_scope": ["real patient data", "3D", "freeform chat", "submission validation", "dataset-level RELREC joins", "partial-date imputation", "causal inference"]
+  },
+  "snapshot": {
+    "snapshot_id": "synthetic-spike-v1",
+    "seed": 82087039,
+    "fixture_file": "fixtures.json",
+    "digest_algorithm": "sha256",
+    "digest_scope": "Exact fixtures.json file bytes, including roster and synthetic relationship documentation",
+    "lock_file": "manifest.json",
+    "seed_semantics": "Reserved deterministic generator seed for downstream implementation; these are hand-authored golden inputs, not output of a random generator"
+  },
+  "rule_bundle": {
+    "rule_bundle_id": "spike-rules",
+    "rule_bundle_version": "1.0.0",
+    "rule_ids": ["count-v1", "relrec-v1", "supp-v1", "time-v1", "view-v1", "provenance-v1", "replay-v1"],
+    "count-v1": {
+      "patient_key": ["STUDYID", "USUBJID"],
+      "ae_record_key": ["STUDYID", "USUBJID", "AESEQ"],
+      "qualifying_patient_count": "Cardinality of distinct patient keys with at least one qualifying AE record",
+      "qualifying_ae_record_count": "Cardinality of qualifying AE source record IDs, deduplicated before any relationship expansion",
+      "clinical_episode_count": "Not computed; AE-record count must not be relabeled as unique clinical episodes",
+      "denominator": "Explicit roster population before the AE qualification predicate; never visible lanes or joined row count",
+      "empty_qualifications": "Return zero counts only for a fully specified executable query with no matches; clarification-required requests have null result, not zero"
+    },
+    "relrec-v1": {
+      "supported_scope": "subject_record_relationship",
+      "relationship_key": ["snapshot_id", "STUDYID", "USUBJID", "RELID"],
+      "endpoint_selection": ["STUDYID", "RDOMAIN selects dataset", "USUBJID", "IDVAR names variable", "IDVARVAL is exact character selector"],
+      "allowed_idvars": {"AE": ["AESEQ", "AEGRPID"], "CM": ["CMSEQ", "CMGRPID"], "EX": ["EXSEQ", "EXGRPID"], "RS": ["RSSEQ", "RSGRPID"]},
+      "numeric_selector_comparison": "For --SEQ only, compare IDVARVAL to the decimal integer representation of the numeric source value; do not coerce arbitrary IDs or trim/rewrite raw tokens",
+      "group_endpoint": "Retain one logical endpoint with the raw selector and all matching source-record IDs; never select only the first match",
+      "blank_reltype": "Preserve empty string exactly. Accept for subject-record relationships. Do not fill ONE/MANY, infer hierarchy, or drop association",
+      "observed_cardinality": "Number of resolved records per endpoint is observed data, not a replacement for RELTYPE",
+      "meaning": "RELREC establishes association. Clinical meaning/direction needs separately cited documentation; absence remains unknown. RELTYPE is not clinical semantics",
+      "representation": "Keep relationship as an endpoint set/hyperedge; pairwise drawing is a projection, not extra evidence or extra AE records",
+      "no_transitive_inference": true,
+      "resolution_statuses": ["resolved", "unresolved", "unsupported_scope"],
+      "zero_matches": "Keep selector and evidence, mark unresolved, expose diagnostic; never silently discard",
+      "dataset_scope": "Blank USUBJID or blank IDVARVAL is unsupported in v1; retain raw rows and return unsupported_scope, never join all patients"
+    },
+    "supp-v1": {
+      "parent_selector": ["STUDYID", "RDOMAIN", "USUBJID", "IDVAR", "IDVARVAL"],
+      "identity": ["STUDYID", "RDOMAIN", "USUBJID", "IDVAR", "IDVARVAL", "QNAM"],
+      "behavior": "SUPPAE augments its parent AE; it is neither an AE record nor a RELREC relationship. Preserve QVAL, QORIG and QEVAL. Never require RELREC to attach it"
+    },
+    "time-v1": {
+      "required_parameters": ["anchor_domain", "anchor_variable", "anchor_occurrence", "event_variable", "direction", "lower_days", "upper_days", "lower_inclusive", "upper_inclusive", "date_policy", "missing_anchor_policy"],
+      "supported_resolution": "Complete ISO calendar dates YYYY-MM-DD only; no timezone arithmetic or SDTM --DY subtraction",
+      "clarification_trigger": "Any required temporal parameter omitted or unresolved",
+      "clarification_behavior": "status=clarification_required; normalized_analysis_state=null; result=null; ask explicit questions before execution",
+      "resolved_fixture_policy": {"anchor_domain": "EX", "anchor_variable": "EXSTDTC", "anchor_occurrence": "first", "event_variable": "AESTDTC", "direction": "after", "lower_days": 0, "upper_days": 30, "lower_inclusive": true, "upper_inclusive": true, "date_policy": "exclude_incomplete_with_diagnostic", "missing_anchor_policy": "exclude_patient_with_diagnostic"},
+      "date_delta": "event calendar date minus first complete EXSTDTC for the same study and patient",
+      "not_assumed": ["treatment-emergent AE status", "causality", "treatment of an AE", "30 study-day labels equal 30 elapsed days"]
+    },
+    "view-v1": {
+      "analysis_fields": ["population", "ae_predicate", "temporal_window"],
+      "view_fields": ["patient_sort", "hidden_lanes", "focus_patient_keys", "display_date_window", "selection"],
+      "view_only_operations": ["sort patients", "hide or peel lanes", "focus patients", "clip visible calendar range", "select a mark"],
+      "invariant": "View-only changes never alter qualifying patient or AE-record counts, population, or analysis signature",
+      "analytical_filter": "Changing population, AE predicate, or temporal window changes analysis state and recomputes counts",
+      "stable_sort": "Patient-key lexicographic tie-break; no index-based identity",
+      "mark_identity": "mark:<snapshot_id>:<record_id> for a single-record mark; aggregated marks need a stable ID and all contributing source-record IDs",
+      "picking": "Picking maps stable mark IDs to source-record IDs, not screen position or current row index",
+      "selection_policy": "Hidden/focused-away marks retain logical selection but are not rendered/pickable. If an analytical change removes the selected record from eligible marks, clear selection with reason analysis_excluded; never retarget"
+    },
+    "provenance-v1": {
+      "envelope": ["record_id", "dataset", "row_number", "values"],
+      "row_number": "1-based original row in the named snapshot dataset, not the sorted display row",
+      "source_record_ref": ["snapshot_id", "record_id", "dataset", "row_number", "source_key"],
+      "identity_stability": "Record IDs are immutable within the pinned snapshot; external identity is snapshot_id plus record_id",
+      "mark_evidence": "Each mark carries all contributing source-record refs and the derivation rule ID; relationship marks also retain RELREC row refs and any semantics-document ref",
+      "raw_values": "Provenance lookup returns the original values, including blanks; derived facts are stored separately"
+    },
+    "replay-v1": {
+      "normalized_spec_required": ["contract_version", "snapshot_id", "snapshot_sha256", "rule_bundle_id", "rule_bundle_version", "rule_bundle_sha256", "analysis_state", "view_state"],
+      "canonical_json": "UTF-8 JSON, ensure_ascii=true, sorted object keys, compact separators comma and colon, no trailing newline, no NaN/Infinity; ordered arrays remain ordered",
+      "normalization": "Require every schema field explicitly, including null for an unused window or selection; reject unknown fields, missing fields and duplicate population keys, hidden lanes or focus keys; sort those unordered arrays lexicographically; preserve patient_sort priority order. Normalization does not fill defaults or repair duplicates.",
+      "rule_bundle_digest": "sha256 of canonical JSON of the rule_bundle object in contract.json",
+      "analysis_signature": "sha256 of canonical JSON of contract_version, snapshot_id, snapshot_sha256, rule_bundle_id, rule_bundle_version, rule_bundle_sha256, and analysis_state; view_state excluded",
+      "exact_restoration": "Export, import, and export normalized spec; canonical bytes and all pins must match",
+      "analysis_reproduction": "Same pins and normalized analysis produce identical ordered qualified patient keys, AE record IDs, counts and exclusion diagnostics; not merely visually similar",
+      "pin_mismatch": "Fail closed with snapshot_mismatch or rule_bundle_mismatch; never silently fall forward to newest data or rules"
+    }
+  },
+  "relationship_evidence_fields": ["relationship_id", "snapshot_id", "scope", "source_relid", "relrec_source_record_ids", "endpoints", "resolution_status", "clinical_meaning", "clinical_direction", "semantics_evidence_refs", "derivation_rule_id"],
+  "fixture_ids": ["F01_counts", "F02_group_endpoint", "F03_blank_reltype", "F04_undocumented_meaning", "F05_ambiguous_time", "F06_explicit_time", "F07_view_replay_picking", "F08_suppqual"],
+  "acceptance": [
+    {"id": "A01", "fixture": "F01_counts", "require": "Separate patient and AE-record counts and label units"},
+    {"id": "A02", "fixture": "F02_group_endpoint", "require": "Preserve group selector and full scoped membership; joins cannot multiply counts"},
+    {"id": "A03", "fixture": "F03_blank_reltype", "require": "Preserve blanks; no hierarchy imputation"},
+    {"id": "A04", "fixture": "F04_undocumented_meaning", "require": "Association displayed with clinical meaning unknown"},
+    {"id": "A05", "fixture": "F05_ambiguous_time", "require": "Clarification, no executable state or counts"},
+    {"id": "A06", "fixture": "F06_explicit_time", "require": "Inclusive boundaries and partial-date diagnostic"},
+    {"id": "A07", "fixture": "F07_view_replay_picking", "require": "Exact spec restore, reproduced analysis, invariant counts under view changes, stable picking and selection clearing"},
+    {"id": "A08", "fixture": "F08_suppqual", "require": "Supplement resolves to parent without creating events"}
+  ],
+  "evidence_file": "evidence.json",
+  "expected_results_file": "expected_results.json",
+  "review_independence": "Authored and self-checked by GPT Sol in this task; expected values are stated separately from the checker but not independently authored by another reviewer"
+}

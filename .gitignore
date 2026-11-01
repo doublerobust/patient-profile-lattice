@@ -1,0 +1,11 @@
+# Local tooling and run artifacts
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+browsers/
+.DS_Store
+*.log
+
+# Local screenshot / evidence output from ad hoc runs
+/run-evidence/

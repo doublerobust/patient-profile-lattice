@@ -1,0 +1,43 @@
+Event-cube comparison and reuse boundary
+
+Reference exactly pinned:
+https://github.com/pzhang724/patient-profile-linkage/tree/be3744cd7768373552e87201ea0efe90578c094f
+README inspected:
+https://raw.githubusercontent.com/pzhang724/patient-profile-linkage/be3744cd7768373552e87201ea0efe90578c094f/README.md
+Recursive tree inspected:
+https://api.github.com/repos/pzhang724/patient-profile-linkage/git/trees/be3744cd7768373552e87201ea0efe90578c094f?recursive=1
+The API response identifies that SHA and truncated=false. No LICENSE file appears in the returned tree. The README contains no reuse grant. No compatible source-code license was verified. Public accessibility is not permission to copy source code. Yue separately authorized reuse of generated synthetic data only; README.md documents the exact extraction, hashes, attribution and boundaries.
+
+Inspection scope: README and repository tree establish the advertised feature set. Retrieved c1_extra.html confirms the four-view controls, alignment/filter controls, and agent/patient/signal panels. c1_base.html retrieval failed. The external application was not interactively executed; this is not a claim that its implementation satisfies free-rotation projection behavior. External source was not copied into this implementation. Our adapter was written against the current local engine and locally installed Three.js/GSAP.
+
+Comparison
+Current local / view: single patient baselines with semantic tiers, six clinical sorts, explicit intervals and evidence selection; pinned synthetic engine, 100 patients / 298 AE source records in unrestricted analysis.
+Current local /3d view: batched GPU patient-time scene with display-tier depth, restrained rotation limits, eased camera actions. Depth separates tiers, not domains, and it does not supply patient-layer/cohort-time summary projections.
+Reference README: 60-patient synthetic KEYNOTE-189-style fixture; patient × domain × time cube; collapsed patient-time, patient-domain matrix and domain-time arm-percentage windows; event-based alignment, signal detection and an agent panel.
+Task implementation: true domain-layer coordinate independent of tier priority, one freely rotating scene whose camera normals trigger meaningful projected summaries. Existing clinical engine and data stay authoritative.
+
+Adopted concepts, independently implemented
+- Three orthogonal dimensions and four canonical views.
+- Domain collapse yielding a single timeline per patient.
+- Time collapse yielding a patient-by-domain summary.
+- Patient collapse yielding a domain-by-calendar-window cohort summary.
+- Click summary -> enumerate exact contributors -> inspect original provenance.
+- Smooth camera destinations with direct-manipulation interruption.
+The task additionally requires angle-driven projections during free rotation; this is implemented by camera-normal detection, not by switching to independent tabs.
+
+Rejected / deliberately not adopted
+- External source code, styling and data generator: no reuse license verified. The 60-patient generated synthetic dataset IS now included under Yue's explicit data-only authorization; no external generator or inference code is shipped.
+- Claude/agent integration or fallback chat commands: outside scope and would change privacy/service behavior.
+- Signal-inference rules (Hy's law, AE after death, missing steroid, dosing gap): outside scope and not authoritative in the local clinical engine.
+- Event-aligned patient exclusion and response confirmation rules: would alter interpretation/counts; retained fixed calendar dates and pinned analysis rules.
+- Arm-specific percentages: no compatible arm analysis added. Local cohort view reports distinct patients with displayed source starts / current visible patients, explicitly not incidence/prevalence or an arm comparison.
+- Header-click clinical sort derivations: retained all six existing sorts and their definitions.
+
+Summary definitions / safeguards
+These are display aggregations, not new clinical endpoints. Inputs are existing visible marks at the current tier. Source IDs deduplicate sentinel copies. Canonical source marks supply starts/end states so a last-dose sentinel cannot shift a source into a different onset bin. Patient-layer cells count distinct source records. Cohort cells group original starts into fixed 30-calendar-day bins anchored at the initial view's earliest complete source/sentinel date; incomplete starts have a separate bucket. Denominator is current visible patient count, explicitly distinct from the analytical roster denominator. Domain hide, focus, tier and zoom may affect display summaries but do not mutate analytical specification/counts. Zero displayed records does not mean no disease. A patient can contribute to multiple bins/domains. No durations are imputed.
+
+Licenses of existing build dependencies
+Three.js 0.180.0 and GSAP 3.13.0 were already dependencies in the baseline package/lock. This implementation reuses them, not external event-cube code. Three.js is MIT; retain its notices. GSAP uses its standard license, not an assumed MIT grant; baseline brief notes free commercial use with a competing-product restriction. Bundled legal comments are retained with esbuild --legal-comments=eof. Reconfirm dependency license terms for any public distribution; this run did not perform a full legal/dependency audit.
+
+Limitations
+Dense overview requires zoom/focus for exact readings. Axis transitions shrink geometry continuously but aggregate glyph replacement happens at an angular threshold rather than a complete continuous morph. Camera state is session-only under the existing adapter convention, not added to the pinned replay schema. Imported labs remain preserved but unrendered; toxicity grade is not inferred to be AESEV. No current performance claim, independent visual/clinical review, or deployment approval. See README.md and HANDOFF-LATTICE.txt for the resumed implementation, executed tests and outstanding checks.

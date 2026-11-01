@@ -1,0 +1,23 @@
+test_01_schema_and_manifest_integrity (__main__.GoldenContractChecks) ... ok
+test_02_fixture_identity_and_provenance (__main__.GoldenContractChecks) ... ok
+test_03_patient_vs_ae_record_counts (__main__.GoldenContractChecks) ... ok
+test_04_relationship_golden_outputs (__main__.GoldenContractChecks) ... ok
+test_05_group_scope_collision_and_no_count_inflation (__main__.GoldenContractChecks) ... ok
+test_06_raw_blanks_and_documentation_not_inferred (__main__.GoldenContractChecks) ... ok
+test_07_unresolved_group_preserves_evidence (__main__.GoldenContractChecks) ... ok
+test_08_dataset_scope_fails_closed (__main__.GoldenContractChecks) ... ok
+test_09_ambiguous_time_clarification (__main__.GoldenContractChecks) ... ok
+test_10_explicit_time_boundaries_and_partial_dates (__main__.GoldenContractChecks) ... ok
+test_11_suppqual_parent_no_new_events (__main__.GoldenContractChecks) ... ok
+test_12_spec_exact_restore_and_analysis_reproduction (__main__.GoldenContractChecks) ... ok
+test_13_view_sort_peel_focus_and_stable_pick (__main__.GoldenContractChecks) ... ok
+test_14_analytical_filter_clears_selection_never_retargets (__main__.GoldenContractChecks) ... ok
+test_15_pin_mismatches_rejected (__main__.GoldenContractChecks) ... ok
+test_16_unknown_state_fields_and_semantic_inventions_rejected (__main__.GoldenContractChecks) ... ok
+test_17_display_clip_does_not_filter_analysis (__main__.GoldenContractChecks) ... ok
+test_18_normalization_and_zero_not_clarification (__main__.GoldenContractChecks) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.060s
+
+OK

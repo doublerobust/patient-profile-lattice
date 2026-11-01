@@ -1,0 +1,22 @@
+{
+  "name": "clinical-review-overview-priorities",
+  "version": "1.0.0",
+  "wording": "Overview priorities chosen for clinical review; endpoint and censoring annotations follow the protocol/SAP.",
+  "overview_geometry_domains": ["AE", "CM"],
+  "focus_margin_fraction": 0.1,
+  "tiers": [
+    {"tier": 0, "zoom": "always", "label_zoom": 2, "detail_zoom": 5, "kinds": ["treatment_start", "first_response", "first_pd", "death", "last_dose", "treatment_discontinuation", "trial_withdrawal", "subsequent_therapy"]},
+    {"tier": 1, "zoom": "mid", "label_zoom": 2, "detail_zoom": 5, "kinds": ["response", "dose_interruption", "dose_reduction", "serious_or_grade3_ae", "exposure"]},
+    {"tier": 2, "zoom": "close", "label_zoom": 2, "detail_zoom": 5, "kinds": ["routine_ae", "concomitant_medication", "assessment"]}
+  ],
+  "overrides": [
+    {"when": "AE.AETOXGR = 5", "kind": "death", "tier": 0, "date_priority": ["DTHDTC", "AEENDTC"], "replace_ae_tick": true},
+    {"when": "AE.AESEV = SEVERE", "escalate_tiers": 1, "note": "Escalate from the routine AE base tier; serious/Grade 3+ already has that priority, not a second escalation."}
+  ],
+  "mid_zoom_max_days": 90,
+  "close_zoom_max_days": 30,
+  "default_sort": "duration",
+  "response_order": ["CR", "PR", "SD", "PD", "NE"],
+  "interval_followup_fields": {"AE": {"ongoing": "AEONGO", "date": "AEFUDTC"}, "CM": {"ongoing": "CMONGO", "date": "CMFUDTC"}},
+  "followup_note": "Synthetic source extensions: ongoing=Y explicitly documents ongoing at the domain-specific follow-up date. RFENDTC is never used. No end date and no documented ongoing follow-up means end unknown."
+}

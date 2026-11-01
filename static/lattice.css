@@ -1,0 +1,12 @@
+.scene-toolbar button[aria-pressed="true"] {background:#dcecf9;color:#172a3c;border:2px solid #79b9eb}
+.lattice-cell-control {display:block;padding:12px;color:#d8e6f3}
+.lattice-cell-control select {max-width:100%;width:100%;margin:8px 0}
+.lattice-cell-control[hidden] {display:none}
+#lattice-contributors {border:1px solid #698da8;border-radius:6px;padding:12px;margin:12px 0;max-height:340px;overflow:auto}
+#lattice-contributors button {display:block;text-align:left;margin:6px 0;width:100%}
+#scene {height:700px}
+#scene:focus-visible {outline:3px solid #fbd278}
+.lattice-shell {position:relative}
+#lattice-annotation {position:absolute;pointer-events:none;max-width:310px;padding:10px;background:#071322;color:#fff;border:1px solid #b2cce3;border-radius:4px;font-size:13px;line-height:1.4;box-shadow:0 2px 8px #000}
+#scenario-note {margin:12px 24px;color:#e6d4a6;font-size:14px}
+@media(max-width:800px) {#scene {height:520px}}

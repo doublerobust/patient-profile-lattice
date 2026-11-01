@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "review_independent": false,
+  "scope": "Golden contract/fixture self-verification and reference harness only; not downstream generator, UI or submission validation",
+  "tests_run": 18,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "python_version": "3.9.6",
+  "command": "python3 validate.py",
+  "completed_at_utc": "2026-10-30T18:37:34.743283+00:00",
+  "transcript_file": "verification.txt",
+  "transcript_sha256": "a1c7c39a93123116bbd076126922534ceda6ef14408dcc922c27b08a833d05b6",
+  "snapshot_sha256": "86da855baf7f7139424aae61d6fbb9874f6403b89dab21540f1a9bc3b63c7737",
+  "rule_bundle_sha256": "389658286fe48f15dad396937749cb984d71f544a32fd0192b76b1c5a50700f0",
+  "analysis_signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de",
+  "not_checked": [
+    "Google Antigravity execution",
+    "downstream synthetic generator",
+    "rendered UI/pixel picking",
+    "full SDTM conformance",
+    "independent third-party review"
+  ]
+}

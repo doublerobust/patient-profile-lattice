@@ -1,0 +1,42 @@
+{
+  "evidence_version": "1.0.0",
+  "retrieved_at_utc": "2026-10-30T12:53:31Z",
+  "retrieval_note": "Timestamp from terminal during retrieval session. Quotations below copied from the original CDISC HTML fetched by web_extract; no patient or private data was sent.",
+  "sources": [
+    {
+      "source_id": "CDISC-SDTMIG-3.3",
+      "title": "Study Data Tabulation Model Implementation Guide: Human Clinical Trials, Version 3.3 (Final)",
+      "url": "https://www.cdisc.org/standards/foundational/sdtmig/sdtmig-v3-3/html",
+      "publication_date": "2018-11-20",
+      "reference_version_note": "Pin chosen for accessible original definitions; no claim that 3.3 is the latest standard.",
+      "excerpts": [
+        {"id": "E01", "section": "8.2 Relating Peer Records", "quote": "Each record in the RELREC special purpose dataset contains keys that identify a record (or group of records) and the relationship identifier, which is stored in the RELID variable."},
+        {"id": "E02", "section": "8.2 Relating Peer Records", "quote": "Single records can be related by using a unique-record-identifier variable such as --SEQ in IDVAR. Groups of records can be related by using grouping variables such as --GRPID in IDVAR."},
+        {"id": "E03", "section": "8.2.1 RELREC Dataset, RELTYPE", "quote": "Identifies the hierarchical level of the records in the relationship. Values should be either ONE or MANY. Used only when identifying a relationship between datasets"},
+        {"id": "E04", "section": "8.2.1 RELREC Dataset, RELID", "quote": "Unique value within USUBJID that identifies the relationship. All records for the same USUBJID that have the same RELID are considered \"related/associated.\""},
+        {"id": "E05", "section": "8.2.2 RELREC Dataset Examples, Example 1", "observation": "The original table has blank RELTYPE cells for the subject-specific AESEQ/CMSEQ/LBSEQ associations. Example 3 uses CMGRPID=COMBO1 with blank RELTYPE."},
+        {"id": "E06", "section": "8.3.1 RELREC Dataset Relationship Example", "quote": "In the example below, all the records in one domain are being related to all of the records in the other, so both USUBJID and IDVARVAL are null."},
+        {"id": "E07", "section": "8.4.2 Submitting Supplemental Qualifiers in Separate Datasets", "quote": "The single SUPPQUAL dataset option that was introduced in SDTMIG v3.1 was deprecated. The set of Supplemental Qualifiers for each domain is included in a separate dataset with the name SUPP-- where \"--\" denotes the source domain which the Supplemental Qualifiers relate back to."},
+        {"id": "E08", "section": "8.3 Relating Datasets", "quote": "Note that it is not necessary to use the RELREC dataset to identify associations from data in the SUPP-- datasets or the CO dataset to their parent general-observation-class dataset records or special purpose domain records, as both these datasets include the key variable identifiers of the parent record(s) that are necessary to make the association."},
+        {"id": "E09", "section": "8.2.2 RELREC Dataset Examples, Example 1", "quote": "This example represents a situation in which an adverse event is related both to concomitant medications and to lab tests, but there is no relationship between the lab values and the concomitant medications."}
+      ]
+    }
+  ],
+  "claim_checks": [
+    {"claim": "RELREC may identify groups using --GRPID; a group endpoint is not a unique row ID", "classification": "confirmed", "severity": "none", "evidence": ["E01", "E02", "E05"], "smallest_correction": null},
+    {"claim": "Blank RELTYPE is appropriate for the subject-record examples; it does not erase the association", "classification": "confirmed", "severity": "none", "evidence": ["E03", "E04", "E05"], "smallest_correction": null},
+    {"claim": "RELTYPE is hierarchy information for dataset relationships, not a treatment/causality/clinical-meaning code", "classification": "confirmed", "severity": "none", "evidence": ["E03", "E04"], "smallest_correction": null},
+    {"claim": "Same RELID alone, without subject/study scoping, is enough to merge endpoints", "classification": "contradicted", "severity": "high_if_implemented", "evidence": ["E04"], "smallest_correction": "Use the pinned snapshot plus STUDYID, USUBJID and RELID; collision controls included in fixtures."},
+    {"claim": "A pooled submitted SUPPQUAL dataset is appropriate under the pinned SDTMIG 3.3", "classification": "contradicted", "severity": "medium_if_claimed", "evidence": ["E07"], "smallest_correction": "Use SUPPAE for these qualifiers and call SUPPQUAL the model/category, not a claimed conformant pooled dataset."},
+    {"claim": "SUPPAE can identify its parent without a separate RELREC association", "classification": "confirmed", "severity": "none", "evidence": ["E08"], "smallest_correction": null},
+    {"claim": "Sharing another endpoint proves a direct or clinical relationship between all members", "classification": "contradicted", "severity": "high_if_implemented", "evidence": ["E09"], "smallest_correction": "Preserve each relationship endpoint set separately; do not infer transitive associations or a semantic clique."},
+    {"claim": "SYN-002 RU has a documented clinical meaning", "classification": "unsupported", "severity": "high_if_inferred", "evidence": ["fixtures.json#REL-5", "fixtures.json#REL-6", "fixtures.json#synthetic_relationship_documentation"], "smallest_correction": "Keep association resolved but clinical_meaning and clinical_direction unknown; no semantics evidence refs."},
+    {"claim": "The package satisfies full SDTM submission conformance or establishes a clinical endpoint", "classification": "not checked", "severity": "out_of_scope", "evidence": [], "smallest_correction": "Use only the stated SDTM-like synthetic feasibility scope; do not claim submission or clinical validation."}
+  ],
+  "design_not_external_facts": [
+    "Patient/AE-record count definitions, temporal policy, clarification gate, version pins, canonicalization, state split and stable mark IDs are normative project choices.",
+    "The synthetic relationship documentation is deliberately authored test input, not an external medical source.",
+    "Numerical expected results must be recalculated against fixtures by validate.py; this evidence file does not by itself prove numerical correctness."
+  ],
+  "review_independence": "Self-verification only: this session authored the package. Original CDISC evidence was inspected directly, not accepted from a producer summary."
+}

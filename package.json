@@ -1,0 +1,1 @@
+{"name":"patient-profile-lattice","private":true,"scripts":{"build":"esbuild renderer3d.js --bundle --minify --format=iife --outfile=static/renderer3d.js --legal-comments=eof"},"dependencies":{"three":"0.180.0","gsap":"3.13.0"},"devDependencies":{"esbuild":"0.25.11"}}

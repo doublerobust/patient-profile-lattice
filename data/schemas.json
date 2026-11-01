@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:patient-lane-spike:schemas:1.0.0",
+  "title": "Patient lane feasibility spike schemas 1.0.0",
+  "$defs": {
+    "id": {"type": "string", "minLength": 1},
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "patient_key": {"type": "array", "prefixItems": [{"$ref": "#/$defs/id"}, {"$ref": "#/$defs/id"}], "minItems": 2, "maxItems": 2},
+    "patient_keys": {"type": "array", "items": {"$ref": "#/$defs/patient_key"}, "uniqueItems": true},
+    "record_ids": {"type": "array", "items": {"$ref": "#/$defs/id"}, "uniqueItems": true},
+    "record_envelope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["record_id", "dataset", "row_number", "values"],
+      "properties": {
+        "record_id": {"$ref": "#/$defs/id"},
+        "dataset": {"enum": ["AE", "CM", "EX", "RS", "RELREC", "SUPPAE"]},
+        "row_number": {"type": "integer", "minimum": 1},
+        "values": {"type": "object", "minProperties": 1}
+      }
+    },
+    "source_record_ref": {
+      "type": "object", "additionalProperties": false,
+      "required": ["snapshot_id", "record_id", "dataset", "row_number", "source_key"],
+      "properties": {
+        "snapshot_id": {"$ref": "#/$defs/id"}, "record_id": {"$ref": "#/$defs/id"},
+        "dataset": {"enum": ["AE", "CM", "EX", "RS", "RELREC", "SUPPAE"]},
+        "row_number": {"type": "integer", "minimum": 1},
+        "source_key": {"type": "object", "minProperties": 1}
+      }
+    },
+    "temporal_window": {
+      "type": "object", "additionalProperties": false,
+      "required": ["anchor_domain", "anchor_variable", "anchor_occurrence", "event_variable", "direction", "lower_days", "upper_days", "lower_inclusive", "upper_inclusive", "date_policy", "missing_anchor_policy"],
+      "properties": {
+        "anchor_domain": {"const": "EX"}, "anchor_variable": {"const": "EXSTDTC"},
+        "anchor_occurrence": {"const": "first"}, "event_variable": {"const": "AESTDTC"},
+        "direction": {"const": "after"}, "lower_days": {"const": 0}, "upper_days": {"const": 30},
+        "lower_inclusive": {"const": true}, "upper_inclusive": {"const": true},
+        "date_policy": {"const": "exclude_incomplete_with_diagnostic"},
+        "missing_anchor_policy": {"const": "exclude_patient_with_diagnostic"}
+      },
+      "description": "Only this resolved temporal mode is executable in v1. Other clarified semantics require a versioned extension, never silent coercion."
+    },
+    "ae_predicate": {
+      "type": "object", "additionalProperties": false,
+      "required": ["variable", "operator", "value"],
+      "properties": {"variable": {"const": "AESEV"}, "operator": {"const": "eq"}, "value": {"enum": ["MILD", "MODERATE", "SEVERE"]}}
+    },
+    "analysis_state": {
+      "type": "object", "additionalProperties": false,
+      "required": ["population", "ae_predicate", "temporal_window"],
+      "properties": {
+        "population": {"$ref": "#/$defs/patient_keys"},
+        "ae_predicate": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/ae_predicate"}]},
+        "temporal_window": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/temporal_window"}]}
+      }
+    },
+    "selection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mark_id", "source_record_ids"],
+      "properties": {"mark_id": {"$ref": "#/$defs/id"}, "source_record_ids": {"allOf": [{"$ref": "#/$defs/record_ids"}], "minItems": 1}}
+    },
+    "view_state": {
+      "type": "object", "additionalProperties": false,
+      "required": ["patient_sort", "hidden_lanes", "focus_patient_keys", "display_date_window", "selection"],
+      "properties": {
+        "patient_sort": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"type": "object", "additionalProperties": false, "required": ["field", "direction"], "properties": {"field": {"const": "USUBJID"}, "direction": {"enum": ["asc", "desc"]}}}},
+        "hidden_lanes": {"type": "array", "uniqueItems": true, "items": {"enum": ["AE", "CM", "EX", "RS", "RELREC", "SUPPAE"]}},
+        "focus_patient_keys": {"$ref": "#/$defs/patient_keys"},
+        "display_date_window": {"oneOf": [{"type": "null"}, {"type": "object", "additionalProperties": false, "required": ["start", "end"], "properties": {"start": {"type": "string", "format": "date"}, "end": {"type": "string", "format": "date"}}}]},
+        "selection": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/selection"}]}
+      }
+    },
+    "normalized_spec": {
+      "type": "object", "additionalProperties": false,
+      "required": ["contract_version", "snapshot_id", "snapshot_sha256", "rule_bundle_id", "rule_bundle_version", "rule_bundle_sha256", "analysis_state", "view_state"],
+      "properties": {
+        "contract_version": {"const": "1.0.0"}, "snapshot_id": {"$ref": "#/$defs/id"}, "snapshot_sha256": {"$ref": "#/$defs/sha256"},
+        "rule_bundle_id": {"const": "spike-rules"}, "rule_bundle_version": {"const": "1.0.0"}, "rule_bundle_sha256": {"$ref": "#/$defs/sha256"},
+        "analysis_state": {"$ref": "#/$defs/analysis_state"}, "view_state": {"$ref": "#/$defs/view_state"}
+      }
+    },
+    "selector": {
+      "type": "object", "additionalProperties": false,
+      "required": ["STUDYID", "RDOMAIN", "USUBJID", "IDVAR", "IDVARVAL"],
+      "properties": {
+        "STUDYID": {"$ref": "#/$defs/id"}, "RDOMAIN": {"enum": ["AE", "CM", "EX", "RS"]},
+        "USUBJID": {"$ref": "#/$defs/id"}, "IDVAR": {"$ref": "#/$defs/id"}, "IDVARVAL": {"$ref": "#/$defs/id"}
+      }
+    },
+    "endpoint": {
+      "type": "object", "additionalProperties": false,
+      "required": ["relrec_source_record_id", "selector", "raw_reltype", "endpoint_kind", "resolved_source_record_ids", "observed_record_count"],
+      "properties": {
+        "relrec_source_record_id": {"$ref": "#/$defs/id"}, "selector": {"$ref": "#/$defs/selector"},
+        "raw_reltype": {"enum": ["", "ONE", "MANY"]}, "endpoint_kind": {"enum": ["record", "group"]},
+        "resolved_source_record_ids": {"$ref": "#/$defs/record_ids"}, "observed_record_count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "relationship": {
+      "type": "object", "additionalProperties": false,
+      "required": ["relationship_id", "snapshot_id", "scope", "source_relid", "relrec_source_record_ids", "endpoints", "resolution_status", "clinical_meaning", "clinical_direction", "semantics_evidence_refs", "derivation_rule_id"],
+      "properties": {
+        "relationship_id": {"$ref": "#/$defs/id"}, "snapshot_id": {"$ref": "#/$defs/id"},
+        "scope": {"type": "object", "additionalProperties": false, "required": ["STUDYID", "USUBJID"], "properties": {"STUDYID": {"$ref": "#/$defs/id"}, "USUBJID": {"$ref": "#/$defs/id"}}},
+        "source_relid": {"$ref": "#/$defs/id"}, "relrec_source_record_ids": {"allOf": [{"$ref": "#/$defs/record_ids"}], "minItems": 2},
+        "endpoints": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/endpoint"}},
+        "resolution_status": {"enum": ["resolved", "unresolved"]},
+        "clinical_meaning": {"enum": ["unknown", "medication_used_to_treat_ae"]},
+        "clinical_direction": {"enum": ["unknown", "CM_to_AE"]},
+        "semantics_evidence_refs": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "derivation_rule_id": {"const": "relrec-v1"}
+      },
+      "allOf": [
+        {"if": {"properties": {"clinical_meaning": {"const": "unknown"}}}, "then": {"properties": {"clinical_direction": {"const": "unknown"}, "semantics_evidence_refs": {"maxItems": 0}}}, "else": {"properties": {"clinical_direction": {"const": "CM_to_AE"}, "semantics_evidence_refs": {"minItems": 1}}}}
+      ]
+    },
+    "unsupported_relationship": {
+      "type": "object", "additionalProperties": false,
+      "required": ["resolution_status", "raw_relrec_rows", "diagnostic"],
+      "properties": {
+        "resolution_status": {"const": "unsupported_scope"},
+        "raw_relrec_rows": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/record_envelope"}},
+        "diagnostic": {"const": "dataset_scope_not_supported"}
+      }
+    },
+    "clarification": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "normalized_analysis_state", "result", "missing_parameters", "questions"],
+      "properties": {
+        "status": {"const": "clarification_required"}, "normalized_analysis_state": {"type": "null"}, "result": {"type": "null"},
+        "missing_parameters": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/id"}},
+        "questions": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/id"}}
+      }
+    }
+  }
+}

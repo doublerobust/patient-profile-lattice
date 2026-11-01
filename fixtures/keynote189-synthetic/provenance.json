@@ -1,0 +1,23 @@
+{
+  "synthetic_only": true,
+  "repository": "https://github.com/pzhang724/patient-profile-linkage",
+  "imported_at_utc": "2026-10-31T18:38:32Z",
+  "commit": "be3744cd7768373552e87201ea0efe90578c094f",
+  "generator_path": "src/cube/c0_data.js",
+  "source_url": "https://raw.githubusercontent.com/pzhang724/patient-profile-linkage/be3744cd7768373552e87201ea0efe90578c094f/src/cube/c0_data.js",
+  "source_sha256": "a3fc77bc4f5c0244e4bef5cbe5dc45d0119e183debf535bd6547d268783efd0c",
+  "raw_sha256": "4dd5639d3b9799ee6c8b31615659d2433452fd6e077aca1ba8cb7d26064fbb54",
+  "seed": 189,
+  "entrypoint": "PTS = Array.from({length:60},(_,i)=>makePatient(i)); then plant() IIFE",
+  "extraction": "Execute prefix before Derived per-patient metrics + signal engine in Node VM; serialize CUTOFF, DOM, LABS, PTS. Preserve raw outputs including planted anomalies. Do not execute derived metrics/signals or rewrite ds.eot.",
+  "permission": "Yue explicitly authorized synthetic data reuse for this demo. No source-code reuse license verified; generator source is not retained.",
+  "warning": "This dataset is synthetic. NOT real trial data. NOT a submission-ready dataset.",
+  "counts": {
+    "patients": 60,
+    "ae": 260,
+    "cm": 80,
+    "ex": 1771,
+    "tr": 391,
+    "lb": 4962
+  }
+}

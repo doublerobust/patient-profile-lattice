@@ -1,0 +1,545 @@
+{
+  "clinical": [
+    {
+      "tier": 0,
+      "counts": {
+        "AE": 298,
+        "CM": 199,
+        "RS": 147,
+        "DS": 291,
+        "EX": 200
+      },
+      "actual_keys": 1133,
+      "expected_keys": 1133,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": null,
+      "state": "overview",
+      "mode": "auto"
+    },
+    {
+      "tier": 0,
+      "counts": {
+        "AE": 298,
+        "CM": 199,
+        "RS": 147,
+        "DS": 291,
+        "EX": 200
+      },
+      "actual_keys": 1133,
+      "expected_keys": 1133,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": null,
+      "state": "overview",
+      "mode": "0"
+    },
+    {
+      "tier": 1,
+      "counts": {
+        "AE": 298,
+        "CM": 199,
+        "EX": 398,
+        "RS": 294,
+        "DS": 291
+      },
+      "actual_keys": 1280,
+      "expected_keys": 1280,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": null,
+      "state": "overview",
+      "mode": "1"
+    },
+    {
+      "tier": 2,
+      "counts": {
+        "AE": 298,
+        "CM": 199,
+        "EX": 398,
+        "RS": 391,
+        "DS": 291
+      },
+      "actual_keys": 1377,
+      "expected_keys": 1377,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": null,
+      "state": "overview",
+      "mode": "2"
+    },
+    {
+      "tier": 1,
+      "counts": {
+        "CM": 199,
+        "AE": 288,
+        "EX": 301,
+        "RS": 199
+      },
+      "actual_keys": 884,
+      "expected_keys": 884,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 90,
+      "state": "mid",
+      "mode": "auto"
+    },
+    {
+      "tier": 0,
+      "counts": {
+        "CM": 199,
+        "AE": 288,
+        "RS": 52,
+        "EX": 103
+      },
+      "actual_keys": 640,
+      "expected_keys": 640,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 90,
+      "state": "mid",
+      "mode": "0"
+    },
+    {
+      "tier": 1,
+      "counts": {
+        "CM": 199,
+        "AE": 288,
+        "EX": 301,
+        "RS": 199
+      },
+      "actual_keys": 884,
+      "expected_keys": 884,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 90,
+      "state": "mid",
+      "mode": "1"
+    },
+    {
+      "tier": 2,
+      "counts": {
+        "CM": 199,
+        "AE": 288,
+        "EX": 301,
+        "RS": 296
+      },
+      "actual_keys": 981,
+      "expected_keys": 981,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 90,
+      "state": "mid",
+      "mode": "2"
+    },
+    {
+      "tier": 2,
+      "counts": {
+        "CM": 198,
+        "AE": 189,
+        "EX": 204,
+        "RS": 2
+      },
+      "actual_keys": 490,
+      "expected_keys": 490,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 30,
+      "state": "close",
+      "mode": "auto"
+    },
+    {
+      "tier": 0,
+      "counts": {
+        "CM": 198,
+        "AE": 189,
+        "EX": 103
+      },
+      "actual_keys": 488,
+      "expected_keys": 488,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 30,
+      "state": "close",
+      "mode": "0"
+    },
+    {
+      "tier": 1,
+      "counts": {
+        "CM": 198,
+        "AE": 189,
+        "EX": 204,
+        "RS": 2
+      },
+      "actual_keys": 490,
+      "expected_keys": 490,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 30,
+      "state": "close",
+      "mode": "1"
+    },
+    {
+      "tier": 2,
+      "counts": {
+        "CM": 198,
+        "AE": 189,
+        "EX": 204,
+        "RS": 2
+      },
+      "actual_keys": 490,
+      "expected_keys": 490,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 30,
+      "state": "close",
+      "mode": "2"
+    }
+  ],
+  "gpu": [
+    {
+      "tier": 0,
+      "counts": {
+        "AE": 298,
+        "RS": 147,
+        "DS": 291,
+        "EX": 200,
+        "CM": 199
+      },
+      "actual_keys": 1133,
+      "expected_keys": 1133,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": null,
+      "state": "overview",
+      "mode": "auto"
+    },
+    {
+      "tier": 0,
+      "counts": {
+        "AE": 298,
+        "RS": 147,
+        "DS": 291,
+        "EX": 200,
+        "CM": 199
+      },
+      "actual_keys": 1133,
+      "expected_keys": 1133,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": null,
+      "state": "overview",
+      "mode": "0"
+    },
+    {
+      "tier": 1,
+      "counts": {
+        "AE": 298,
+        "RS": 294,
+        "DS": 291,
+        "EX": 398,
+        "CM": 199
+      },
+      "actual_keys": 1280,
+      "expected_keys": 1280,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": null,
+      "state": "overview",
+      "mode": "1"
+    },
+    {
+      "tier": 2,
+      "counts": {
+        "AE": 298,
+        "RS": 391,
+        "DS": 291,
+        "EX": 398,
+        "CM": 199
+      },
+      "actual_keys": 1377,
+      "expected_keys": 1377,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": null,
+      "state": "overview",
+      "mode": "2"
+    },
+    {
+      "tier": 1,
+      "counts": {
+        "RS": 54,
+        "DS": 27,
+        "EX": 78,
+        "AE": 64,
+        "CM": 45
+      },
+      "actual_keys": 233,
+      "expected_keys": 238,
+      "missing": [
+        "DS-013-2",
+        "DS-014-1",
+        "EX-023-2",
+        "RS-023-1",
+        "RS-023-2"
+      ],
+      "unexpected": [],
+      "pass": false,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 90,
+      "state": "mid",
+      "mode": "auto"
+    },
+    {
+      "tier": 0,
+      "counts": {
+        "RS": 24,
+        "DS": 27,
+        "EX": 35,
+        "AE": 64,
+        "CM": 45
+      },
+      "actual_keys": 193,
+      "expected_keys": 197,
+      "missing": [
+        "DS-013-2",
+        "DS-014-1",
+        "EX-014-2",
+        "EX-023-1"
+      ],
+      "unexpected": [],
+      "pass": false,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 90,
+      "state": "mid",
+      "mode": "0"
+    },
+    {
+      "tier": 1,
+      "counts": {
+        "RS": 54,
+        "DS": 27,
+        "EX": 78,
+        "AE": 64,
+        "CM": 45
+      },
+      "actual_keys": 233,
+      "expected_keys": 238,
+      "missing": [
+        "DS-013-2",
+        "DS-014-1",
+        "EX-023-2",
+        "RS-023-1",
+        "RS-023-2"
+      ],
+      "unexpected": [],
+      "pass": false,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 90,
+      "state": "mid",
+      "mode": "1"
+    },
+    {
+      "tier": 2,
+      "counts": {
+        "RS": 73,
+        "DS": 27,
+        "EX": 78,
+        "AE": 64,
+        "CM": 45
+      },
+      "actual_keys": 252,
+      "expected_keys": 258,
+      "missing": [
+        "DS-013-2",
+        "DS-014-1",
+        "EX-023-2",
+        "RS-023-1",
+        "RS-023-2",
+        "RS-023-4"
+      ],
+      "unexpected": [],
+      "pass": false,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 90,
+      "state": "mid",
+      "mode": "2"
+    },
+    {
+      "tier": 1,
+      "counts": {
+        "RS": 10,
+        "EX": 24,
+        "AE": 26,
+        "CM": 19
+      },
+      "actual_keys": 66,
+      "expected_keys": 66,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 30,
+      "state": "close",
+      "mode": "auto"
+    },
+    {
+      "tier": 0,
+      "counts": {
+        "RS": 5,
+        "EX": 13,
+        "AE": 26,
+        "CM": 19
+      },
+      "actual_keys": 61,
+      "expected_keys": 61,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 30,
+      "state": "close",
+      "mode": "0"
+    },
+    {
+      "tier": 1,
+      "counts": {
+        "RS": 10,
+        "EX": 24,
+        "AE": 26,
+        "CM": 19
+      },
+      "actual_keys": 66,
+      "expected_keys": 66,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 30,
+      "state": "close",
+      "mode": "1"
+    },
+    {
+      "tier": 2,
+      "counts": {
+        "RS": 10,
+        "EX": 24,
+        "AE": 26,
+        "CM": 19
+      },
+      "actual_keys": 66,
+      "expected_keys": 66,
+      "missing": [],
+      "unexpected": [],
+      "pass": true,
+      "analysis_counts": [
+        100,
+        298
+      ],
+      "days": 30,
+      "state": "close",
+      "mode": "2"
+    }
+  ]
+}

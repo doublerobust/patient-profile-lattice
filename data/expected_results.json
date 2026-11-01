@@ -1,0 +1,117 @@
+{
+  "oracle_version": "1.0.0",
+  "contract_version": "1.0.0",
+  "snapshot_id": "synthetic-spike-v1",
+  "oracle_method": "Hand-stated golden results, separate from validation code and downstream implementation. Same author as contract; not independent review.",
+  "dataset_counts": {"AE": 7, "CM": 5, "EX": 4, "RS": 3, "RELREC": 8, "SUPPAE": 2},
+  "fixtures": {
+    "F01_counts": {
+      "status": "executed",
+      "population_patient_count": 3,
+      "population_ae_record_count": 7,
+      "qualifying_patient_keys": [["SYN-SPIKE", "SYN-001"], ["SYN-SPIKE", "SYN-002"]],
+      "qualifying_ae_record_ids": ["AE-001-1", "AE-001-2", "AE-002-1"],
+      "qualifying_patient_count": 2,
+      "qualifying_ae_record_count": 3,
+      "diagnostics": [],
+      "rationale": "SYN-001 has two SEVERE AE rows; SYN-002 has one; SYN-003 has none. The two SYN-001 rows share AEGRPID but count as two AE records, not a deduced episode count. Relationship expansion and SUPPAE never add events."
+    },
+    "F02_group_endpoint": {
+      "relationship_id": "synthetic-spike-v1:SYN-SPIKE:SYN-001:RG",
+      "snapshot_id": "synthetic-spike-v1",
+      "scope": {"STUDYID": "SYN-SPIKE", "USUBJID": "SYN-001"},
+      "source_relid": "RG",
+      "relrec_source_record_ids": ["REL-1", "REL-2"],
+      "endpoints": [
+        {"relrec_source_record_id": "REL-1", "selector": {"STUDYID": "SYN-SPIKE", "RDOMAIN": "AE", "USUBJID": "SYN-001", "IDVAR": "AESEQ", "IDVARVAL": "1"}, "raw_reltype": "", "endpoint_kind": "record", "resolved_source_record_ids": ["AE-001-1"], "observed_record_count": 1},
+        {"relrec_source_record_id": "REL-2", "selector": {"STUDYID": "SYN-SPIKE", "RDOMAIN": "CM", "USUBJID": "SYN-001", "IDVAR": "CMGRPID", "IDVARVAL": "G1"}, "raw_reltype": "", "endpoint_kind": "group", "resolved_source_record_ids": ["CM-001-1", "CM-001-2"], "observed_record_count": 2}
+      ],
+      "resolution_status": "resolved",
+      "clinical_meaning": "medication_used_to_treat_ae",
+      "clinical_direction": "CM_to_AE",
+      "semantics_evidence_refs": ["fixtures.json#synthetic_relationship_documentation/SYN-DOC-RG-001"],
+      "derivation_rule_id": "relrec-v1"
+    },
+    "F03_blank_reltype": {
+      "relationship_id": "synthetic-spike-v1:SYN-SPIKE:SYN-001:RB",
+      "snapshot_id": "synthetic-spike-v1",
+      "scope": {"STUDYID": "SYN-SPIKE", "USUBJID": "SYN-001"},
+      "source_relid": "RB",
+      "relrec_source_record_ids": ["REL-3", "REL-4"],
+      "endpoints": [
+        {"relrec_source_record_id": "REL-3", "selector": {"STUDYID": "SYN-SPIKE", "RDOMAIN": "AE", "USUBJID": "SYN-001", "IDVAR": "AESEQ", "IDVARVAL": "2"}, "raw_reltype": "", "endpoint_kind": "record", "resolved_source_record_ids": ["AE-001-2"], "observed_record_count": 1},
+        {"relrec_source_record_id": "REL-4", "selector": {"STUDYID": "SYN-SPIKE", "RDOMAIN": "CM", "USUBJID": "SYN-001", "IDVAR": "CMSEQ", "IDVARVAL": "3"}, "raw_reltype": "", "endpoint_kind": "record", "resolved_source_record_ids": ["CM-001-3"], "observed_record_count": 1}
+      ],
+      "resolution_status": "resolved",
+      "clinical_meaning": "medication_used_to_treat_ae",
+      "clinical_direction": "CM_to_AE",
+      "semantics_evidence_refs": ["fixtures.json#synthetic_relationship_documentation/SYN-DOC-RB-001"],
+      "derivation_rule_id": "relrec-v1"
+    },
+    "F04_undocumented_meaning": {
+      "relationship_id": "synthetic-spike-v1:SYN-SPIKE:SYN-002:RU",
+      "snapshot_id": "synthetic-spike-v1",
+      "scope": {"STUDYID": "SYN-SPIKE", "USUBJID": "SYN-002"},
+      "source_relid": "RU",
+      "relrec_source_record_ids": ["REL-5", "REL-6"],
+      "endpoints": [
+        {"relrec_source_record_id": "REL-5", "selector": {"STUDYID": "SYN-SPIKE", "RDOMAIN": "AE", "USUBJID": "SYN-002", "IDVAR": "AESEQ", "IDVARVAL": "1"}, "raw_reltype": "", "endpoint_kind": "record", "resolved_source_record_ids": ["AE-002-1"], "observed_record_count": 1},
+        {"relrec_source_record_id": "REL-6", "selector": {"STUDYID": "SYN-SPIKE", "RDOMAIN": "RS", "USUBJID": "SYN-002", "IDVAR": "RSSEQ", "IDVARVAL": "1"}, "raw_reltype": "", "endpoint_kind": "record", "resolved_source_record_ids": ["RS-002-1"], "observed_record_count": 1}
+      ],
+      "resolution_status": "resolved",
+      "clinical_meaning": "unknown",
+      "clinical_direction": "unknown",
+      "semantics_evidence_refs": [],
+      "derivation_rule_id": "relrec-v1"
+    },
+    "F05_ambiguous_time": {
+      "status": "clarification_required",
+      "normalized_analysis_state": null,
+      "result": null,
+      "missing_parameters": ["anchor_domain", "anchor_variable", "anchor_occurrence", "event_variable", "direction", "lower_days", "lower_inclusive", "upper_inclusive", "date_policy", "missing_anchor_policy"],
+      "questions": [
+        "Within 30 days of what event/date (for example EXSTDTC), and of the first, last, or each occurrence?",
+        "Do you mean AE onset (AESTDTC), AE end, or an interval overlapping the window?",
+        "Is the window before, after, or on either side of the anchor; what is its lower limit, and are the endpoints included?",
+        "How should partial/missing dates and absent anchors be handled?"
+      ],
+      "rationale": "The request names patients, so the patient unit is known; it does not resolve the time semantics. No query, default temporal anchor, zero count, treatment-emergence label or result is allowed. Wording of questions may vary, but all missing parameters must be covered."
+    },
+    "F06_explicit_time": {
+      "status": "executed",
+      "population_patient_count": 3,
+      "population_ae_record_count": 7,
+      "qualifying_patient_keys": [["SYN-SPIKE", "SYN-001"], ["SYN-SPIKE", "SYN-002"], ["SYN-SPIKE", "SYN-003"]],
+      "qualifying_ae_record_ids": ["AE-001-1", "AE-001-2", "AE-001-3", "AE-002-1", "AE-003-1"],
+      "qualifying_patient_count": 3,
+      "qualifying_ae_record_count": 5,
+      "diagnostics": [{"code": "incomplete_event_date", "source_record_id": "AE-003-2", "raw_value": "2025-02"}],
+      "elapsed_days_by_ae_record_id": {"AE-001-1": 9, "AE-001-2": 11, "AE-001-3": 14, "AE-002-1": 30, "AE-002-2": 31, "AE-003-1": 0},
+      "rationale": "First complete EXSTDTC is January 1 for each subject. Zero and 30 are included, 31 is excluded; a partial date is excluded with diagnostic, not imputed. The second EX for SYN-001 must not replace the first anchor."
+    },
+    "F07_view_replay_picking": {
+      "analysis_fixture": "F01_counts",
+      "base_eligible_patient_order": [["SYN-SPIKE", "SYN-001"], ["SYN-SPIKE", "SYN-002"]],
+      "operations": [
+        {"operation": "sort_descending", "visible_patient_order": [["SYN-SPIKE", "SYN-002"], ["SYN-SPIKE", "SYN-001"]], "qualifying_patient_count": 2, "qualifying_ae_record_count": 3},
+        {"operation": "hide_CM_and_focus_SYN_001", "visible_patient_order": [["SYN-SPIKE", "SYN-001"]], "qualifying_patient_count": 2, "qualifying_ae_record_count": 3},
+        {"operation": "pick_AE_001_2_after_sort_and_peel", "mark_id": "mark:synthetic-spike-v1:AE-001-2", "source_record_ids": ["AE-001-2"], "source_row_number": 2, "source_key": {"STUDYID": "SYN-SPIKE", "USUBJID": "SYN-001", "AESEQ": 2}},
+        {"operation": "analytically_restrict_population_to_SYN_002", "qualifying_patient_count": 1, "qualifying_ae_record_count": 1, "qualifying_ae_record_ids": ["AE-002-1"], "selection": null, "selection_cleared_reason": "analysis_excluded"}
+      ],
+      "canonical_spec_roundtrip_equal": true,
+      "same_pins_analysis_reproduced": true,
+      "view_changes_analysis_signature_unchanged": true,
+      "wrong_snapshot_rejected": "snapshot_mismatch",
+      "wrong_rule_bundle_rejected": "rule_bundle_mismatch",
+      "rationale": "These are downstream acceptance results, not evidence a UI exists. validate.py exercises a small reference harness only; actual renderer and pixel picking require the dependent implementation task."
+    },
+    "F08_suppqual": {
+      "supplement_source_record_id": "SUPPAE-001-1",
+      "parent_source_record_ids": ["AE-001-1"],
+      "qualifier": {"QNAM": "SYNFLAG", "QVAL": "Y", "QORIG": "CRF", "QEVAL": ""},
+      "ae_record_count_before": 7,
+      "ae_record_count_after": 7,
+      "rationale": "A supplement qualifies a source record, not a new AE or a peer relationship."
+    }
+  }
+}
