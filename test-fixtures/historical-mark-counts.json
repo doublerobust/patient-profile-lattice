@@ -1,0 +1,631 @@
+{
+  "browser": "141.0.7390.37",
+  "patients": 100,
+  "original_v1_untiered": {
+    "total": 892,
+    "min": 5,
+    "max": 9,
+    "mean": 8.92,
+    "median": 9.0
+  },
+  "current_fixture_all_tiers": {
+    "total": 1577,
+    "min": 7,
+    "max": 16,
+    "mean": 15.77,
+    "median": 16.0
+  },
+  "current_fixture_sentinel_only": {
+    "total": 648,
+    "min": 2,
+    "max": 8,
+    "mean": 6.48,
+    "median": 7.0
+  },
+  "analysis_unchanged": true,
+  "qualifying_ae_records": 298,
+  "browser_errors": [],
+  "count_definition": "One logical event/interval .mark, including coincident events separately; caps, labels and +N chooser badges are not additional events.",
+  "per_line": [
+    {
+      "patient": "SYN-SPIKE/SYN-001",
+      "original_v1": 9,
+      "before_all_tiers": 11,
+      "after_sentinel": 2
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-002",
+      "original_v1": 5,
+      "before_all_tiers": 7,
+      "after_sentinel": 3
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-003",
+      "original_v1": 5,
+      "before_all_tiers": 7,
+      "after_sentinel": 2
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-004",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-005",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-006",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-007",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-008",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-009",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-010",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-011",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-012",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-013",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-014",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-015",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-016",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-017",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-018",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-019",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-020",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 8
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-021",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-022",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-023",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-024",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-025",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-026",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-027",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-028",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-029",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-030",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-031",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-032",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-033",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-034",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-035",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-036",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-037",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-038",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-039",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-040",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 8
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-041",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-042",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-043",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-044",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-045",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-046",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-047",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-048",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-049",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-050",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-051",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-052",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-053",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-054",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-055",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-056",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-057",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-058",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-059",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-060",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 8
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-061",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-062",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-063",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-064",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-065",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-066",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-067",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-068",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-069",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-070",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-071",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-072",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-073",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-074",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-075",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-076",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-077",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-078",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-079",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-080",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 8
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-081",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-082",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-083",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-084",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-085",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-086",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-087",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-088",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-089",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-090",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-091",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-092",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-093",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-094",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-095",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-096",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-097",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 7
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-098",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-099",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 6
+    },
+    {
+      "patient": "SYN-SPIKE/SYN-100",
+      "original_v1": 9,
+      "before_all_tiers": 16,
+      "after_sentinel": 8
+    }
+  ]
+}

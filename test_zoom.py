@@ -5,6 +5,24 @@ from test_browser import BrowserFixture, EVIDENCE
 
 
 class TimelineChecks(BrowserFixture):
+    def test_zoom_in_after_short_interval_focus_does_not_zoom_out(self):
+        p = self.page
+        self.select('event-selector', 'CM-001-2')
+        self.settled()
+        before = self.span()
+        self.assertLess(before, 2*86400000)  # Short interval's exact focus fit.
+        spec, counts = self.spec(), p.locator('#counts').text_content()
+        p.locator('#zoom-in').click()
+        self.settled()
+        self.assertEqual(self.span(), before)  # At this focus floor, never enlarge.
+        self.zoom_at_record('CM-001-2', -80)
+        self.assertEqual(self.span(), before)
+        p.locator('#zoom-out').click()
+        self.settled()
+        self.assertAlmostEqual(self.span(), before/0.65, delta=1)
+        self.assertEqual(self.spec(), spec)
+        self.assertEqual(p.locator('#counts').text_content(), counts)
+
     def test_one_line_and_cross_domain_same_day_offsets(self):
         p = self.page
         expect(p.locator('.patient-line')).to_have_count(2)
@@ -15,16 +33,19 @@ class TimelineChecks(BrowserFixture):
         self.assertEqual(len({v['x'] for v in before}), 1)
         self.assertEqual({v['shape'] for v in before}, {'g'})  # AE and CM now use interval bars.
         self.assertEqual(len({v['color'] for v in before}), 2)
+        expect(p.locator('.annotation')).to_have_count(0)
         self.zoom_at_record('AE-001-1', -1000)
         after = self.positions(ids)
         self.assertEqual(len({v['y'] for v in after}), 3)
         self.assertEqual(len({v['x'] for v in after}), 1)
         self.assertLessEqual(max(v['y'] for v in after) - min(v['y'] for v in after), 72)
         self.assertGreater(after[1]['opacity'], before[1]['opacity'])
-        self.assertGreater(after[1]['label'], before[1]['label'])
+        expect(p.locator('.annotation-layer')).to_have_attribute('data-annotation-level', '2')
+        self.assertGreater(p.locator('.annotation').count(), 0)
         # Context mark is separately mouse-pickable at close zoom.
         p.locator('[data-record-id="CM-001-2"]').click()
         expect(p.locator('#sources')).to_contain_text('CM-001-2 · CM original row 2')
+        self.settled()
         self.pixel_pick('AE-001-1')
         p.locator('#open-source').click()
         expect(p.locator('#sources')).to_contain_text('SUPPAE-001-1')
@@ -35,12 +56,11 @@ class TimelineChecks(BrowserFixture):
     def positions(self, ids):
         return [self.page.locator('[data-record-id="' + rid + '"]').evaluate('''el => ({
             x: Number(el.dataset.x), y: Number(el.dataset.y), shape: el.tagName, color: el.getAttribute('fill'),
-            opacity: Number(el.getAttribute('opacity')),
-            label: Number(document.querySelector('[data-label-for="'+el.dataset.recordId+'"]').getAttribute('opacity'))
+            opacity: Number(el.getAttribute('opacity'))
         })''') for rid in ids]
 
     def settled(self):
-        expect(self.page.locator('#timeline')).to_have_attribute('data-animating', 'false')
+        super().settled()
 
     def span(self):
         return self.page.locator('#timeline').evaluate('el => Number(el.dataset.end)-Number(el.dataset.start)')
@@ -92,6 +112,9 @@ class TimelineChecks(BrowserFixture):
         expect(p.locator('#coincident-events')).to_contain_text('CM-001-2')
         p.get_by_role('button', name='Select CM-001-2', exact=True).click()
         expect(p.locator('#sources')).to_contain_text('CM-001-2 · CM original row 2')
+        self.settled()
+        p.locator('#reset-zoom').click()
+        self.settled()  # Selection now focuses the interval before the wheel exercise.
         before = self.span()
         # Line-mode wheel and ctrl+wheel are normalized without browser page zoom.
         point = p.locator('#timeline').evaluate('el => {const p = new DOMPoint(500,110).matrixTransform(el.getScreenCTM()); return {clientX:p.x,clientY:p.y};}')

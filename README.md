@@ -68,19 +68,23 @@ These are rejections, not missing features pending a sprint:
 
 ## Test status
 
-Plainly, so nobody treats this as a green build:
+Verified locally on 1 November 2026 with Python 3.9.6, Playwright 1.56.0 and its bundled Chromium 141.0.7390.37 on macOS:
 
 - **Engine and contract modules pass.** `test_app` (5), `test_cohort` (4), `test_addresses` (3), `test_sentinel` (3), `test_grammar` (2): 17 tests, all OK. `data/validate.py`: 18 tests, all OK.
-- **Browser regression modules are currently red.** Against the 31 October build, `test_browser`, `test_3d`, `test_zoom`, `test_focus`, `test_feedback`, `test_sentinel_browser` and `test_grammar_browser` ran 21 tests with 10 failures and 4 errors. Several assert exact render counts and exact panel copy from the earlier 30 October build, which changed when the domain grammar and interval end states landed on 31 October. Each failure has not been adjudicated as stale expectation versus real regression.
+- **Browser modules pass.** `test_browser` (3), `test_3d` (3), `test_zoom` (6), `test_focus` (1), `test_feedback` (4), `test_sentinel_browser` (4), `test_grammar_browser` (2): 23 tests, all OK. Aggregate `./run_checks.sh`: `Ran 40 tests in 97.475s`, `OK`, exit 0. No skipped tests or failing exceptions.
+- The earlier red suite has been adjudicated per test in [BROWSER-REGRESSION-RECONCILIATION.md](BROWSER-REGRESSION-RECONCILIATION.md). Expectations now enforce the AE/CM overview visibility rule, state-specific endpoints, collision-aware selection, click-focus timing and pixel-capped geometry. A real short-interval focus bug that made Zoom in zoom out was fixed in both 2D and 3D, with red/green regression tests. Analytical counts and pinned data are unchanged.
+- [TEST-RESULTS.txt](TEST-RESULTS.txt) records exact commands, exit codes and Ran/OK lines for each module and the aggregate, plus the 18-test validator and `--verify-data` PASS. This is local implementer verification on the pinned Playwright 1.56 / Chromium 141 environment, not independent review. Frame-timing figures are tagged with the browser that produced them and are not compared across browser versions.
 
 What was verified interactively for this release, in Chromium, against a live server: all three routes return 200 with no page errors; the default cohort reports 100 qualifying patients and 298 qualifying AE source records; the KN189 cohort reports 60 qualifying patients and 260 qualifying AE source records; the lattice renderer reports `ready: true`, 291 marks, 3 draw calls and 60 ordered patients, and all four projection controls are present and operable.
 
 To run the browser modules yourself you need Playwright and Chromium:
 
 ```sh
+python3 -m venv .venv
+. .venv/bin/activate
 python3 -m pip install -r requirements-test.txt
 python3 -m playwright install chromium
-./run_checks.sh test_app
+./run_checks.sh
 ```
 
 ## Files

@@ -31,6 +31,9 @@ document.querySelector('h1').textContent='Clinical timelines · GPU depth study'
 const description=document.createElement('p');description.className='small';description.textContent='Vertical cap = recorded end. Dashed/open > = ongoing at documented follow-up. ? = end unknown, no inferred duration. Domain symbols stay alongside sentinel signs; hover/select for full details. Labels appear at 2× / 5× and are suppressed where crowded. Tier depth is display priority, not a clinical value. No bloom/fog.';sceneFrame.after(description);
 
 function stop(){if(tween){tween.kill();tween=null;}gsap.ticker.sleep();}
+// Exact interval focus can be tighter than the manual 35-unit floor. Keep
+// zoom direction monotone there instead of enlarging on the next zoom-in.
+const zoomSpan=factor=>THREE.MathUtils.clamp(view.span*factor,Math.min(35,view.span),fullSpan*2);
 function invalidate(){if(!pending)pending=requestAnimationFrame(render);}
 function animate(next){stop();if(matchMedia('(prefers-reduced-motion: reduce)').matches){Object.assign(view,next);invalidate();return;}tween=gsap.to(view,{...next,duration:0.9,ease:'power3.inOut',onUpdate:invalidate,onComplete:()=>{tween=null;invalidate();gsap.ticker.sleep();}});}
 function applyCamera(){
@@ -165,7 +168,7 @@ el.addEventListener('pointermove',e=>{
 });
 el.addEventListener('pointerup',e=>{if(!pan)return;const click=!pan.moved;pan=null;el.releasePointerCapture(e.pointerId);if(click){applyCamera();const choices=[...new Map(hits(e.clientX,e.clientY).flatMap(m=>m.related_death_record_ids?m.related_death_record_ids.map(id=>model.state.marks.find(s=>s.record_id===id)).filter(Boolean):[m]).map(m=>[m.record_id,m])).values()];if(choices.length===1)model.activateMark(choices[0]);else if(choices.length){const panel=$('coincident-events');panel.replaceChildren();panel.hidden=false;for(const m of choices){const b=document.createElement('button');b.textContent=`${m.record_id} · ${model.dateLabel(m)}`;b.onclick=()=>model.activateMark(m);panel.append(b);}panel.querySelector('button').focus();}}});
 el.addEventListener('pointercancel',()=>{pan=null;});el.addEventListener('lostpointercapture',()=>{pan=null;});
-el.addEventListener('wheel',e=>{if(!renderer)return;e.preventDefault();model.cancelFocus();const unit=e.deltaMode===1?16:e.deltaMode===2?el.clientHeight:1;view.span=THREE.MathUtils.clamp(view.span*Math.exp(e.deltaY*unit*(e.ctrlKey?.01:.002)),35,fullSpan*2);invalidate();},{passive:false});
+el.addEventListener('wheel',e=>{if(!renderer)return;e.preventDefault();model.cancelFocus();const unit=e.deltaMode===1?16:e.deltaMode===2?el.clientHeight:1;view.span=zoomSpan(Math.exp(e.deltaY*unit*(e.ctrlKey?.01:.002)));invalidate();},{passive:false});
 $('front').onclick=()=>animate({yaw:0,pitch:0,peel:0});$('oblique').onclick=()=>animate({yaw:.38,pitch:.15});
 $('peel').onclick=()=>animate({peel:view.peel>100?0:180});
 $('readable').onclick=()=>{
@@ -179,7 +182,7 @@ function focus(mark){
   const row=model.patients.findIndex(p=>p.join('/')===mark.patient_key.join('/'));
   animate({x:(range.start+range.end)/2,y:-row*14,span:(range.end-range.start)/aspect,yaw:0,pitch:0,peel:0});
 }
-window.clinical3d={ready:false,update,stop,focus,reset:()=>animate({x:880,y:-model.patients.length*7,span:fullSpan,yaw:0,pitch:0,peel:0}),zoom:factor=>animate({span:THREE.MathUtils.clamp(view.span*factor,35,fullSpan*2)}),
+window.clinical3d={ready:false,update,stop,focus,reset:()=>animate({x:880,y:-model.patients.length*7,span:fullSpan,yaw:0,pitch:0,peel:0}),zoom:factor=>animate({span:zoomSpan(factor)}),
   // Audit submitted triangles, not the model list: owners intersecting the clip volume.
   auditGeometry:()=>{
     applyCamera();const owners=new Map();

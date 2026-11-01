@@ -58,13 +58,26 @@ class BrowserFixture(unittest.TestCase):
         expect(self.page.locator('#hide-' + lane)).to_be_enabled()
 
     def pixel_pick(self, record):
+        self.settled()
         mark = self.page.locator('[data-record-id="' + record + '"]')
         mark.scroll_into_view_if_needed()
         box = mark.bounding_box()
         self.assertIsNotNone(box)
         self.page.mouse.click(box['x'] + box['width']/2, box['y'] + box['height']/2)
-        expect(self.page.locator('#selection')).to_contain_text('Selected ' + record)
+        self.choose_hit(record)
         expect(self.page.locator('#sort')).to_be_enabled()
+
+    def settled(self):
+        self.page.wait_for_function("() => !busy && document.querySelector('#timeline').dataset.animating === 'false'")
+
+    def choose_hit(self, record):
+        # Overlapping bodies now offer an explicit source chooser, not a silent pick.
+        chooser = self.page.locator('#coincident-events')
+        if chooser.is_visible():
+            chooser.get_by_role('button', name='Select ' + record, exact=True).click()
+        expect(self.page.locator('#selection')).to_contain_text('Selected ' + record)
+        expect(self.page.locator('#event-selector')).to_have_value(record)
+        self.settled()
 
 class BrowserChecks(BrowserFixture):
     def test_ordinary_sort_filter_peel_pick_source_export_replay(self):
@@ -108,6 +121,8 @@ class BrowserChecks(BrowserFixture):
         expect(p.locator('#counts')).to_have_text('1 qualifying patients · 1 qualifying AE source records')
         self.check('AE', False)
         self.select('focus', 'all')
+        p.locator('#reset-zoom').click()
+        self.settled()  # The previous click focused January 12; January 31 is offscreen.
         self.pixel_pick('AE-002-1')
         p.locator('#open-source').click()
         expect(p.locator('#sources')).to_contain_text('AE-002-1 · AE original row 4')
@@ -136,6 +151,8 @@ class BrowserChecks(BrowserFixture):
         expect(relationship).to_contain_text('"endpoint_kind": "group"')
         expect(relationship).to_contain_text('It does not establish cause.')
         self.select('severity', 'all')
+        p.locator('#reset-zoom').click()
+        self.settled()
         self.select('temporal', 'explicit')
         expect(p.locator('#counts')).to_have_text('3 qualifying patients · 5 qualifying AE source records')
         expect(p.locator('[data-record-id="AE-002-1"]')).to_have_count(1)
@@ -145,7 +162,7 @@ class BrowserChecks(BrowserFixture):
         expect(p.locator('#diagnostics')).to_contain_text('AE-003-2')
         self.select('temporal', 'none')
         partial = p.locator('[data-record-id="AE-003-2"]')
-        expect(partial).to_have_attribute('cx', '1055')
+        expect(partial).to_have_attribute('data-x', '1055')
 
     def test_replay_hash_error_does_not_replace_current_view(self):
         p = self.page

@@ -42,18 +42,38 @@ class FocusChecks(BrowserFixture):
             left, right = v['x']-half_x, v['x']+half_x
             bottom, top = v['y']-v['span']/2, v['y']+v['span']/2
             row = {tuple(k): -i*14 for i, k in enumerate(audit['patients'])}
+            self.assertEqual([v['yaw'],v['pitch'],v['peel']],[0,0,0])
+            scale = min(1, v['span']/audit['height'])
             def intersects(m):
                 x = 120+(stamp(m['date'])-audit['minDate'])/(audit['maxDate']-audit['minDate'])*1640 if m['date'] else 1860
                 end = 120+(stamp(m['end_date'])-audit['minDate'])/(audit['maxDate']-audit['minDate'])*1640 if m['interval_status'] in ('complete','ongoing') else x
-                # Front camera, actual glyph quad + interval/cap bounds. Extra signs extend right.
-                interval=m['interval_status'] in ('complete','ongoing')
-                extra = 17.5 if m['display_kind'] in data['display_config']['tiers'][0]['kinds'] else 22 if m['is_interval'] and not interval else 6.5
                 y=row[tuple(m['patient_key'])]
-                # Independently build source geometry bounds. Endpoint quads are 16 world units.
-                glyph=x-6.5<=right and x+extra>=left and y-6.5<=top and y+6.5>=bottom
-                body=interval and x<=right and end>=left and y-1.25<=top and y+1.25>=bottom
-                cap=m['is_interval'] and (end if interval else x+14)-8<=right and (end if interval else x+14)+8>=left and y-8<=top and y+8>=bottom
-                return glyph or body or cap
+                # Pixel-capped domain/end/sentinel quads (31 Oct), independently
+                # reconstructed from the documented sizes, not audit's owner set.
+                rects: list[tuple[float,float,float,float]]=[(x,y,13*scale,13*scale)]
+                if m['display_kind'] in data['display_config']['tiers'][0]['kinds']:
+                    rects.append((x+12*scale,y,11*scale,11*scale))
+                selected=m['mark_id']==data['spec']['view_state']['selection']['mark_id']
+                low=m['lane'] in ('AE','CM') and m['tier']!=0 and not selected
+                if m['interval_status'] in ('complete','ongoing'):
+                    rects.append((end,y,16*scale,16*scale))
+                    if m['lane']=='CM' and audit['fullSpan']/v['span']>=2:
+                        start=x
+                        while start<end:
+                            stop=min(end,start+5)
+                            width=stop-start
+                            rects.append(((start+stop)/2,y,width*(scale if width<=1.5 else 1),(1.25 if low else 2.5)*scale))
+                            start+=9
+                    else:
+                        width=max(1,end-x)
+                        for dy in ([-2,2] if m['lane']=='EX' else [0]):
+                            rects.append(((x+end)/2,y+dy,width*(scale if width<=1.5 else 1),(1.25 if low else 1.2 if m['lane']=='EX' else 2.5)*scale))
+                elif m['is_interval']:
+                    rects.append((x+14*scale,y,16*scale,16*scale))
+                if selected:
+                    width=13*scale
+                    rects.append((x,y-6*scale,width*(scale if width<=1.5 else 1),1.5*scale))
+                return any(cx-w/2<=right and cx+w/2>=left and cy-h/2<=top and cy+h/2>=bottom for cx,cy,w,h in rects)
         else:
             audit = p.evaluate('({start:camera.start,end:camera.end,tier:+document.querySelector("#timeline").dataset.maxTier})')
             tier = audit['tier']
