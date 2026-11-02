@@ -26,7 +26,11 @@ button:hover:not(:disabled) { background: #c3e3df; }
 #error { color: #9d2222; white-space: pre-wrap; overflow-wrap: anywhere; }
 .timeline-wrap { overflow: auto; max-height: 65vh; background: white; border: 1px solid #bccbd4; border-radius: 6px; }
 svg { display: block; width: 100%; min-width: 1000px; }
-#timeline { touch-action: pan-y; cursor: grab; }
+#timeline, #scene { touch-action: none; }
+#timeline { cursor: grab; }
+.gesture-modes { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: #eaf1f4; }
+.gesture-modes button[aria-pressed="true"] { background: #c3e3df; color: #123b3c; border: 2px solid #167675; }
+button { min-width: 44px; min-height: 44px; }
 #timeline.panning, #timeline.panning .mark { cursor: grabbing; }
 svg text { font: 12px system-ui, sans-serif; fill: #294350; }
 svg .patient { font-size: 14px; font-weight: 750; }
@@ -62,4 +66,5 @@ summary { cursor: pointer; }
 .file { display: inline-block; }
 .file input { max-width: 240px; }
 footer { font-size: .85rem; color: #526d7a; }
-@media (max-width: 760px) { main { grid-template-columns: 220px minmax(360px, 1fr); gap: 12px; } header, main, footer { padding: 16px; } }
+@media (max-width: 1100px) { #timeline { min-width: 0; } }
+@media (max-width: 760px) { main { grid-template-columns: minmax(0, 1fr); gap: 12px; } .controls { position: static; max-height: none; } header, main, footer { padding: 16px; } }

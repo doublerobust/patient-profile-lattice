@@ -113,7 +113,7 @@ class ScaleFeedbackChecks(BrowserFixture):
             self.assertEqual(geometry['end']==geometry['start'], mark['date']==mark['end_date'])
         expect(p.locator('aside #analysis-controls')).to_have_count(1)
         expect(p.locator('aside #view-controls')).to_have_count(1)
-        side = p.locator('aside').bounding_box()
+        side = p.locator('aside.controls').bounding_box()  # view-chat is also an <aside>
         summary = p.locator('.summary').bounding_box()
         assert side is not None and summary is not None
         self.assertLessEqual(side['x']+side['width'], summary['x'])

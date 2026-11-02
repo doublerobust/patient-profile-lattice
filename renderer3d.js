@@ -6,9 +6,9 @@ import {gsap} from 'gsap';
 const $=id=>document.getElementById(id);
 const scene=new THREE.Scene(); scene.background=new THREE.Color('#101b2a');
 const camera=new THREE.OrthographicCamera(-900,900,700,-700,1,12000);
-const view={x:880,y:-680,span:1520,yaw:0,pitch:0,peel:0};
+const view={x:880,y:-680,z:0,span:1520,yaw:0,pitch:0,peel:0};
 let renderer, model, atlas, material, axes, baseline, tiers=[], marks=[], locations=new Map();
-let pending=0,tween=null,frames=0,lastTier=-1,lastAnnotation=-1,pan=null,geometryVersion=0;
+let pending=0,tween=null,frames=0,lastTier=-1,lastAnnotation=-1,geometryVersion=0;
 let lastSymbolScale=-1, atlasKey='';
 const symbolScale=()=>Math.min(1,view.span/el.clientHeight);
 const metrics={cpu:[],gpu:[]}; let measure=false;
@@ -26,7 +26,7 @@ for(const [id,label] of [['front','Clinical front'],['oblique','Depth view'],['p
 sceneFrame.before(toolbar);
 const info=document.createElement('p');info.id='scene-info';sceneFrame.after(info);
 const tooltip=document.createElement('p');tooltip.id='scene-tooltip';tooltip.setAttribute('role','status');sceneFrame.after(tooltip);
-$('zoom-help').textContent='Drag to pan both axes · Shift-drag or right-drag to rotate · wheel/pinch to zoom · camera buttons ease into place. Any pointer-down or wheel immediately stops the tween at its current position. Peel separates display tiers in depth without changing counts. Full-cohort overview is dense: use Read detail or focus a patient to read endpoints.';
+$('zoom-help').textContent='Touch: one finger rotates (or choose Pan); two fingers pan; pinch zooms around your fingers. Tap selects and focuses; overlaps open a chooser. Scroll the page outside the canvas. Mouse: drag to pan; Shift-drag / right-drag to rotate; wheel to zoom. Any gesture stops focus animation. Camera buttons ease into place unless reduced motion is enabled. Peel separates display tiers without changing counts.';
 document.querySelector('h1').textContent='Clinical timelines · GPU depth study';
 const description=document.createElement('p');description.className='small';description.textContent='Vertical cap = recorded end. Dashed/open > = ongoing at documented follow-up. ? = end unknown, no inferred duration. Domain symbols stay alongside sentinel signs; hover/select for full details. Labels appear at 2× / 5× and are suppressed where crowded. Tier depth is display priority, not a clinical value. No bloom/fog.';sceneFrame.after(description);
 
@@ -40,7 +40,7 @@ function applyCamera(){
   const aspect=el.clientWidth/el.clientHeight;
   camera.left=-view.span*aspect/2;camera.right=view.span*aspect/2;camera.top=view.span/2;camera.bottom=-view.span/2;
   const direction=new THREE.Vector3(Math.sin(view.yaw)*Math.cos(view.pitch),Math.sin(view.pitch),Math.cos(view.yaw)*Math.cos(view.pitch));
-  camera.position.set(view.x,view.y,0).addScaledVector(direction,5000);camera.up.set(0,1,0);camera.lookAt(view.x,view.y,0);camera.updateProjectionMatrix();camera.updateMatrixWorld();
+  camera.position.set(view.x,view.y,view.z).addScaledVector(direction,view.distance||5000);camera.up.set(0,1,0);camera.lookAt(view.x,view.y,view.z);camera.updateProjectionMatrix();camera.updateMatrixWorld();
   tiers.forEach((mesh,i)=>{mesh.position.z=i*view.peel;});scene.updateMatrixWorld(true);
 }
 function maxTier(){if(model.tierMode!=='auto')return +model.tierMode;const days=(maxDate-minDate)/86400000*view.span/fullSpan;return days<=model.state.display_config.close_zoom_max_days?2:days<=model.state.display_config.mid_zoom_max_days?1:0;}
@@ -136,6 +136,10 @@ function rebuild(){
     b.quad(x,y,z+.3,13,13,color,m.lane,m);
     if(symbols[m.display_kind])b.quad(x+12*symbolScale(),y,z+.4,11,11,'#ffffff',symbols[m.display_kind],m);
     if(m.mark_id===model.state.spec.view_state.selection?.mark_id){b.quad(x,y-6*symbolScale(),z+.5,13*symbolScale(),1.5,'#ffffff','solid',m);}
+    if(model.highlightIds?.includes(m.record_id)) {
+      for(const dx of [-10,10])b.quad(x+dx,y,z+.7,2,20,'#ff5cdb','solid',m);
+      for(const dy of [-10,10])b.quad(x,y+dy,z+.7,20,2,'#ff5cdb','solid',m);
+    }
     if(!locations.has(m.record_id)||m.display_kind==='death')locations.set(m.record_id,{x,y,z,tier:m.tier,mark:m});
   }
   tiers=batches.map(b=>b.mesh());
@@ -156,33 +160,43 @@ function update(next){
 }
 function hits(clientX,clientY){const r=el.getBoundingClientRect();pointer.set((clientX-r.left)/r.width*2-1,-(clientY-r.top)/r.height*2+1);raycaster.setFromCamera(pointer,camera);return raycaster.intersectObjects(tiers).map(hit=>hit.object.userData.owners[hit.faceIndex]).filter(Boolean);}
 el.addEventListener('contextmenu',e=>e.preventDefault());
-el.addEventListener('pointerdown',e=>{if(!renderer||![0,2].includes(e.button))return;model.cancelFocus();tooltip.textContent='';pan={id:e.pointerId,x:e.clientX,y:e.clientY,moved:false,rotate:e.shiftKey||e.button===2};el.setPointerCapture(e.pointerId);});
-el.addEventListener('pointermove',e=>{
-  if(!renderer)return;
-  if(!pan){const m=hits(e.clientX,e.clientY)[0];tooltip.textContent=m?`${m.patient_key[1]} · ${m.record_id} · ${grammar.lines(m,2).join(' · ')}`:'';return;}
-  const dx=e.clientX-pan.x,dy=e.clientY-pan.y;
-  if(Math.abs(dx)+Math.abs(dy)>0)pan.moved=true;
-  if(pan.rotate){view.yaw=THREE.MathUtils.clamp(view.yaw+dx*.004,-.85,.85);view.pitch=THREE.MathUtils.clamp(view.pitch+dy*.003,-.55,.55);}
-  else {const scale=view.span/el.clientHeight;const right=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,0),up=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,1);view.x+=(-dx*right.x+dy*up.x)*scale;view.y+=(-dx*right.y+dy*up.y)*scale;}
-  pan.x=e.clientX;pan.y=e.clientY;invalidate();
+const touchMode=window.ViewGestures.modeToggle(toolbar,()=>model?.cancelFocus());
+window.ViewGestures.bind(el, {
+  ready:()=>!!renderer,
+  interrupt:()=>{model.cancelFocus();tooltip.textContent='';},
+  touchMode,
+  mouseMode:e=>e.shiftKey||e.button===2?'rotate':'pan',
+  hover:e=>{if(!renderer)return;const m=hits(e.clientX,e.clientY)[0];tooltip.textContent=m?`${m.patient_key[1]} · ${m.record_id} · ${grammar.lines(m,2).join(' · ')}`:'';},
+  transform:g=>{
+    if(g.mode==='rotate') {
+      view.yaw=THREE.MathUtils.clamp(view.yaw+(g.to.x-g.from.x)*.004,-.85,.85);
+      view.pitch=THREE.MathUtils.clamp(view.pitch+(g.to.y-g.from.y)*.003,-.55,.55);
+    } else {
+      applyCamera();
+      const right=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,0),up=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,1);
+      window.ViewGestures.orthographic(view,el,right,up,g,zoomSpan(g.factor));
+    }
+    invalidate();
+  },
+  tap:e=>{applyCamera();const choices=[...new Map(hits(e.clientX,e.clientY).flatMap(m=>m.related_death_record_ids?m.related_death_record_ids.map(id=>model.state.marks.find(s=>s.record_id===id)).filter(Boolean):[m]).map(m=>[m.record_id,m])).values()];if(choices.length===1)model.activateMark(choices[0]);else if(choices.length){const panel=$('coincident-events');panel.replaceChildren();panel.hidden=false;for(const m of choices){const b=document.createElement('button');b.textContent=`${m.record_id} · ${model.dateLabel(m)}`;b.onclick=()=>model.activateMark(m);panel.append(b);}panel.querySelector('button').focus();}}
 });
-el.addEventListener('pointerup',e=>{if(!pan)return;const click=!pan.moved;pan=null;el.releasePointerCapture(e.pointerId);if(click){applyCamera();const choices=[...new Map(hits(e.clientX,e.clientY).flatMap(m=>m.related_death_record_ids?m.related_death_record_ids.map(id=>model.state.marks.find(s=>s.record_id===id)).filter(Boolean):[m]).map(m=>[m.record_id,m])).values()];if(choices.length===1)model.activateMark(choices[0]);else if(choices.length){const panel=$('coincident-events');panel.replaceChildren();panel.hidden=false;for(const m of choices){const b=document.createElement('button');b.textContent=`${m.record_id} · ${model.dateLabel(m)}`;b.onclick=()=>model.activateMark(m);panel.append(b);}panel.querySelector('button').focus();}}});
-el.addEventListener('pointercancel',()=>{pan=null;});el.addEventListener('lostpointercapture',()=>{pan=null;});
 el.addEventListener('wheel',e=>{if(!renderer)return;e.preventDefault();model.cancelFocus();const unit=e.deltaMode===1?16:e.deltaMode===2?el.clientHeight:1;view.span=zoomSpan(Math.exp(e.deltaY*unit*(e.ctrlKey?.01:.002)));invalidate();},{passive:false});
 $('front').onclick=()=>animate({yaw:0,pitch:0,peel:0});$('oblique').onclick=()=>animate({yaw:.38,pitch:.15});
 $('peel').onclick=()=>animate({peel:view.peel>100?0:180});
 $('readable').onclick=()=>{
   const selected=model.state.spec.view_state.selection?.source_record_ids[0];
   const p=locations.get(selected)||[...locations.values()].find(p=>p.mark.patient_key.join('/')===model.patients[0]?.join('/')&&!p.mark.sentinel_copy);
-  animate({span:fullSpan/5,x:p?.x??880,y:p?.y??-120,yaw:0,pitch:0,peel:0});
+  animate({span:fullSpan/5,x:p?.x??880,y:p?.y??-120,z:0,yaw:0,pitch:0,peel:0});
 };
 function focus(mark){
   const aspect=el.clientWidth/el.clientHeight;
   const range=grammar.focusRange(mark,model.state.display_config,fullSpan,worldX(mark.date),worldX(mark.end_date||mark.date),aspect);
   const row=model.patients.findIndex(p=>p.join('/')===mark.patient_key.join('/'));
-  animate({x:(range.start+range.end)/2,y:-row*14,span:(range.end-range.start)/aspect,yaw:0,pitch:0,peel:0});
+  animate({x:(range.start+range.end)/2,y:-row*14,z:0,span:(range.end-range.start)/aspect,yaw:0,pitch:0,peel:0});
 }
-window.clinical3d={ready:false,update,stop,focus,reset:()=>animate({x:880,y:-model.patients.length*7,span:fullSpan,yaw:0,pitch:0,peel:0}),zoom:factor=>animate({span:zoomSpan(factor)}),
+window.clinical3d={ready:false,update,stop,focus,
+  chatSnapshot:()=>({distance:view.distance||5000,...Object.fromEntries(Object.entries(view).filter(([k])=>!k.startsWith('_')))}),
+  chatRestore:v=>{stop();Object.assign(view,v);rebuild();invalidate();}, reset:()=>animate({x:880,y:-model.patients.length*7,z:0,span:fullSpan,yaw:0,pitch:0,peel:0}),zoom:factor=>animate({span:zoomSpan(factor)}),
   // Audit submitted triangles, not the model list: owners intersecting the clip volume.
   auditGeometry:()=>{
     applyCamera();const owners=new Map();

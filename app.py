@@ -284,6 +284,14 @@ class Engine:
         return state
 
 
+class Server(ThreadingHTTPServer):
+    # Chromium opens one upstream connection per HTTP/2 stream; the socketserver
+    # default listen backlog of 5 gets overflowed, and macOS RSTs the excess, which
+    # the Tailscale proxy reports to the browser as 502 on random assets.
+    request_queue_size = 128
+    daemon_threads = True
+
+
 def make_handler(engine):
     class Handler(BaseHTTPRequestHandler):
 
@@ -306,7 +314,8 @@ def make_handler(engine):
             allowed.update(name + ':' + str(cast(ThreadingHTTPServer, self.server).server_port) for name in local_names)
             allowed.update(('yues-mac-studio.tail8e98a8.ts.net',
                             'yues-mac-studio.tail8e98a8.ts.net:9143',
-                            'yues-mac-studio.tail8e98a8.ts.net:9144'))
+                            'yues-mac-studio.tail8e98a8.ts.net:9144',
+                            'yues-mac-studio.tail8e98a8.ts.net:9145'))
             origin = self.headers.get('Origin')
             return host in allowed and (origin is None or origin in
                                         ('http://' + host, 'https://' + host))
@@ -338,6 +347,9 @@ def make_handler(engine):
                      '/3d.css': ('3d.css', 'text/css; charset=utf-8'),
                      '/app.js': ('app.js', 'text/javascript; charset=utf-8'),
                      '/grammar.js': ('grammar.js', 'text/javascript; charset=utf-8'),
+                     '/gestures.js': ('gestures.js', 'text/javascript; charset=utf-8'),
+                     '/view-chat.js': ('view-chat.js', 'text/javascript; charset=utf-8'),
+                     '/view-chat.css': ('view-chat.css', 'text/css; charset=utf-8'),
                      '/lattice.js': ('lattice.js', 'text/javascript; charset=utf-8'),
                      '/lattice.css': ('lattice.css', 'text/css; charset=utf-8'),
                      '/style.css': ('style.css', 'text/css; charset=utf-8')}
@@ -357,6 +369,9 @@ def make_handler(engine):
                 path = urlparse(self.path).path
                 if path == '/api/evaluate':
                     result = engine.evaluate(body['spec'], analysis_change=body.get('analysis_change') is True)
+                elif path == '/api/view-query':
+                    from view_tools import query_records
+                    result = query_records(engine, body['spec'], body['args'])
                 elif path == '/api/pick':
                     result = engine.pick(body['spec'], body['mark_id'])
                 elif path == '/api/source':
@@ -390,7 +405,7 @@ def main():
         elif args.verify_data:
             print('PASS: pinned file hashes, normalized spec, synthetic-only flag and SUPPAE parent links')
         else:
-            server = ThreadingHTTPServer(('127.0.0.1', args.port), make_handler(engine))
+            server = Server(('127.0.0.1', args.port), make_handler(engine))
             print('Synthetic-only lane viewer: http://127.0.0.1:%d' % server.server_port, flush=True)
             server.serve_forever()
         return 0

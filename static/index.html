@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Synthetic patient timeline review</title><link rel="stylesheet" href="/style.css"><script src="/grammar.js" defer></script><script src="/app.js" defer></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Synthetic patient timeline review</title><link rel="stylesheet" href="/style.css"><script src="/grammar.js" defer></script><script src="/gestures.js" defer></script><script src="/view-chat.js" defer></script><link rel="stylesheet" href="/view-chat.css"><script src="/app.js" defer></script></head>
 <body>
-<header><p class="eyebrow">LOCAL FEASIBILITY SPIKE · SYNTHETIC DATA ONLY</p><h1>One patient. One timeline.</h1><p>Fictional records. Not clinical evidence, not an SDTM conformance tool. No chat, uploads to external services, or causal inference.</p><p id="pins"></p></header>
+<header><p class="eyebrow">LOCAL FEASIBILITY SPIKE · SYNTHETIC DATA ONLY</p><h1>One patient. One timeline.</h1><p>Fictional records. Not clinical evidence, not an SDTM conformance tool. Local command panel only; no AI model, uploads to external services, or causal inference.</p><p id="pins"></p></header>
 <nav aria-label="Renderer"><a href="/">2D clinical view</a> · <a href="/3d">3D GPU prototype</a> · Same pinned engine and data</nav>
 <main>
 <aside class="controls" aria-label="Review filters sidebar"><h2>Review filters</h2>
@@ -31,7 +31,7 @@
 <section aria-label="Patient timeline">
 <p id="zoom-level"></p>
 <p id="priority-wording"></p><p id="mark-counts" class="small"></p>
-<p class="small" id="zoom-help">Drag horizontally across the date plot to pan at any zoom level (5 px movement threshold; dragging does not select). Wheel / two-finger vertical scroll over the date plot to zoom at the pointer; scroll over patient labels to move down the cohort. Trackpad ctrl-wheel pinch is supported. Buttons zoom at center. Pan and zoom are view-only; counts never change.</p>
+<p class="small" id="zoom-help">Touch: drag with one or two fingers to pan dates horizontally and the patient roster vertically; pinch to zoom around your fingers. Tap to select and focus; overlapping records open a chooser. Dragging never selects. Scroll the page outside the plot. Mouse: drag to pan; wheel / trackpad ctrl-wheel over dates to zoom at the pointer. Buttons zoom at center. Gestures stop focus animation. All navigation is view-only; counts never change.</p>
 <div class="legend" aria-label="Domain mark legend"></div>
 <p class="small">Domain colors are not severity. Shape + interval treatment identify each domain in both views. Overview has no event labels; 2× zoom reveals terms/results, 5× adds dates and clinical details where space permits. Labels never overlap; omitted or shortened details remain available by selecting a mark or using Selected event.</p>
 <p class="small">Sentinels: ▶ treatment start · R first CR/PR · P first PD · † death · ■ last dose · D treatment discontinuation · W trial discontinuation/withdrawal · N subsequent anticancer therapy. Hover or select for the exact source. A +N badge opens coincident records.</p>

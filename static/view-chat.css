@@ -1,0 +1,10 @@
+#view-chat { position:fixed; right:12px; top:12px; z-index:100; max-width:calc(100vw - 24px); }
+#view-chat button { min-height:44px; min-width:44px; }
+#chat-toggle { display:block; margin-left:auto; background:#17394f; color:white; }
+#chat-body { box-sizing:border-box; width:370px; max-width:calc(100vw - 24px); max-height:calc(100dvh - 80px); overflow:auto; overscroll-behavior:contain; padding:16px; border:2px solid #17394f; background:#fff; color:#152b3b; box-shadow:0 5px 20px #0004; }
+#chat-body[hidden] { display:none; }
+#chat-body textarea { display:block; box-sizing:border-box; width:100%; min-height:100px; font:inherit; }
+#chat-body pre { white-space:pre-wrap; overflow-wrap:anywhere; max-height:240px; overflow:auto; }
+#chat-body :focus-visible { outline:3px solid #007ca3; outline-offset:2px; }
+#chat-body summary { min-height:44px; cursor:pointer; }
+@media(max-width:600px) { #view-chat { top:auto; bottom:8px; right:8px; } #chat-body { max-height:55dvh; } }

@@ -12,7 +12,7 @@ const names = {'full':'Patient × time × visual layer', 'patient-time':'Patient
 const scene = new THREE.Scene(); scene.background = new THREE.Color('#101b2a');
 const camera = new THREE.OrthographicCamera(-1000,1000,800,-800,1,12000);
 const view = {yaw:.62,pitch:.38,span:1600,x:0,y:0,z:0};
-let model, renderer, atlas, material, mesh, lineMesh, pending=0, tween=null, pan=null;
+let model, renderer, atlas, material, mesh, lineMesh, pending=0, tween=null;
 let marks=[], cells=[], ptCells=[], ltCells=[], frames=0, tier=-1, mode='full', hitTargets=[], minDate=0,maxDate=DAY;
 let row=new Map(), layer=new Map(), fullSpan=1600, currentProjection=projection(view.yaw,view.pitch);
 let controlKey='', chosenCell=null, navigationEpoch=0;
@@ -38,7 +38,7 @@ const openCell=document.createElement('button');openCell.textContent='Inspect co
 openCell.onclick=()=>showCell(cells.find(c=>c.id===cellSelect.value));cellLabel.append(openCell);note.after(cellLabel);
 const contributors=document.createElement('div');contributors.id='lattice-contributors';contributors.hidden=true;
 contributors.setAttribute('aria-label','Projection contributing source records');$('coincident-events').after(contributors);
-$('zoom-help').textContent='Drag to freely rotate (including either side of all three axes) · Shift-drag / right-drag to pan · wheel to zoom · arrow keys rotate; Home resets. Camera buttons ease the SAME lattice to its axis normals. Near an axis, geometry collapses continuously and summaries appear automatically—even during free rotation. Pointer-down, wheel or a navigation key interrupts animation immediately.';
+$('zoom-help').textContent='Touch: one finger rotates (or choose Pan); two fingers pan; pinch zooms around your fingers. Tap selects and focuses; overlaps open a chooser. Scroll the page outside the canvas. Mouse: drag to rotate; Shift-drag / right-drag to pan; wheel to zoom. Arrow keys rotate; Home resets. Near an axis, geometry collapses and summaries appear. Any gesture stops focus animation. Camera buttons honour reduced motion.';
 document.querySelector('h1').textContent='Patient × time × visual layer';
 document.querySelector('.legend').textContent='Domain colors, NOT severity: salmon AE ● · mint CM □ · lilac EX ◆ · amber RS ▲ · blue DS ◆. Sentinel symbols are unchanged; PD P and death † remain explicit. Solid capped interval = recorded end; dashed/open > = documented ongoing follow-up; ? = unknown end, no inferred duration. Hover/select for exact source dates.';
 // The common page's last timeline paragraph describes the original 2D geometry.
@@ -80,7 +80,7 @@ function applyCamera(){
   const direction=new THREE.Vector3(sy*cp,sp,cy*cp);
   // An analytic up vector avoids the lookAt pole singularity; pitch is unrestricted.
   up.set(-sy*sp,cp,-cy*sp);right.set(cy,0,-sy);
-  camera.up.copy(up);camera.position.set(view.x,view.y,view.z).addScaledVector(direction,5000);
+  camera.up.copy(up);camera.position.set(view.x,view.y,view.z).addScaledVector(direction,view.distance||5000);
   camera.lookAt(view.x,view.y,view.z);camera.updateProjectionMatrix();camera.updateMatrixWorld();
 }
 const wx=d=>d ? -600+(dateNumber(d)-minDate)/(maxDate-minDate)*1200 : 730;
@@ -181,12 +181,16 @@ function render(){
         }
       }else {glyph(p,symbols[m.display_kind]||{AE:'●',CM:'□',EX:'◆',RS:'▲',DS:'◆'}[m.lane],color,m);
         if(m.is_interval)batch.text(new THREE.Vector3(...p).addScaledVector(right,h).toArray(),h,color,'?');}
+      if(model.highlightIds?.includes(m.record_id)){
+        const corners=[[-1,-1],[1,-1],[1,1],[-1,1]].map(([x,y])=>new THREE.Vector3(...p).addScaledVector(right,x*h).addScaledVector(up,y*h));
+        corners.forEach((c,i)=>line(c.toArray(),corners[(i+1)%4].toArray(),'#ff5cdb'));
+      }
       if(m.record_id===model.state.spec.view_state.selection?.source_record_ids[0]){
         const a=new THREE.Vector3(...p).addScaledVector(up,-h*.6);line(a.clone().addScaledVector(right,-h*.6).toArray(),a.clone().addScaledVector(right,h*.6).toArray(),'#ffffff');
       }
     }
   }else{
-    for(const c of cells){const p=cellPosition(c);glyph(p,c.mode==='patient-layer'?String(c.recordCount):`${c.patientCount}/${c.denominator}`,colors[c.lane],c,axis===0?Math.min(h,10):h*1.6);}
+    for(const c of cells){const p=cellPosition(c);if(c.records.some(m=>model.highlightIds?.includes(m.record_id)))glyph(p,'□','#ff5cdb',c,h*2.2);glyph(p,c.mode==='patient-layer'?String(c.recordCount):`${c.patientCount}/${c.denominator}`,colors[c.lane],c,axis===0?Math.min(h,10):h*1.6);}
   }
   // Labels are billboards anchored in the same coordinate system as their axis.
   if(!aggregate||axis===0){
@@ -253,29 +257,31 @@ function hits(x,y){
   }).map(t=>t.owner);
 }
 canvas.addEventListener('contextmenu',e=>e.preventDefault());
-canvas.addEventListener('pointerdown',e=>{if(!renderer||![0,2].includes(e.button))return;stop();pan={id:e.pointerId,x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY,moved:false,pan:e.shiftKey||e.button===2};canvas.setPointerCapture(e.pointerId);});
-canvas.addEventListener('pointermove',e=>{
-  if(!renderer)return;
-  if(!pan){const item=hits(e.clientX,e.clientY)[0];tooltip.textContent=item?(item.records?cellText(item):`${item.patient_key[1]} · ${item.record_id} · ${model.dateLabel(item)}`):'';return;}
-  const dx=e.clientX-pan.x,dy=e.clientY-pan.y;
-  if(Math.hypot(e.clientX-pan.startX,e.clientY-pan.startY)>4)pan.moved=true;
-  if(pan.pan){const d=right.clone().multiplyScalar(-dx).addScaledVector(up,dy).multiplyScalar(view.span/canvas.clientHeight);view.x+=d.x;view.y+=d.y;view.z+=d.z;}
-  else{view.yaw+=dx*.005;view.pitch+=dy*.005;}
-  pan.x=e.clientX;pan.y=e.clientY;invalidate();
-});
-canvas.addEventListener('pointerup',e=>{if(!pan)return;const click=!pan.moved;pan=null;canvas.releasePointerCapture(e.pointerId);
-  if(click){const choices=hits(e.clientX,e.clientY);const cell=choices.find(c=>c.records);
+const touchMode=window.ViewGestures.modeToggle(toolbar,()=>model?.cancelFocus());
+window.ViewGestures.bind(canvas, {
+  ready:()=>!!renderer,
+  interrupt:()=>{model.cancelFocus();tooltip.textContent='';},
+  touchMode,
+  mouseMode:e=>e.shiftKey||e.button===2?'pan':'rotate',
+  hover:e=>{if(!renderer)return;const item=hits(e.clientX,e.clientY)[0];tooltip.textContent=item?(item.records?cellText(item):`${item.patient_key[1]} · ${item.record_id} · ${model.dateLabel(item)}`):'';},
+  transform:g=>{
+    if(g.mode==='rotate'){view.yaw+=(g.to.x-g.from.x)*.005;view.pitch+=(g.to.y-g.from.y)*.005;}
+    else {applyCamera();window.ViewGestures.orthographic(view,canvas,right,up,g,THREE.MathUtils.clamp(view.span*g.factor,Math.min(8,view.span),fullSpan*3));}
+    invalidate();
+  },
+  tap:e=>{const choices=hits(e.clientX,e.clientY);const cell=choices.find(c=>c.records);
     if(cell){
       const overlapping=choices.filter(c=>c.records);
       if(overlapping.length>1)showRecords(overlapping.flatMap(c=>c.records),'Overlapping summary cells: choose any contributing source record.');else showCell(cell);
     }else{const records=uniqueSources(choices);if(records.length===1)model.activateMark(records[0]);else if(records.length)showRecords(records,'Overlapping displayed records: choose a source. No dates or patient identities have been displaced.');}}
 });
-canvas.addEventListener('pointercancel',()=>{pan=null;});canvas.addEventListener('lostpointercapture',()=>{pan=null;});
 canvas.addEventListener('wheel',e=>{if(!renderer)return;e.preventDefault();stop();const unit=e.deltaMode===1?16:e.deltaMode===2?canvas.clientHeight:1;view.span=THREE.MathUtils.clamp(view.span*Math.exp(e.deltaY*unit*(e.ctrlKey?.01:.002)),8,fullSpan*3);invalidate();},{passive:false});
 canvas.addEventListener('keydown',e=>{const directions={ArrowLeft:[-.06,0],ArrowRight:[.06,0],ArrowUp:[0,-.06],ArrowDown:[0,.06]};
   if(e.key==='Home'){e.preventDefault();snap('full');}else if(directions[e.key]){e.preventDefault();stop();view.yaw+=directions[e.key][0];view.pitch+=directions[e.key][1];invalidate();}});
-window.lattice={ready:false,update,focusIntent:()=>navigationEpoch,focusMark,reset:()=>snap('full'),zoom:factor=>animate({span:THREE.MathUtils.clamp(view.span*factor,8,fullSpan*3)}),
-  stats:()=>({frames,projection:mode,orthographic:camera.isOrthographicCamera,collapse:{...currentProjection},animating:!!tween,view:{yaw:view.yaw,pitch:view.pitch,span:view.span,x:view.x,y:view.y,z:view.z},marks:marks.length,tier,drawCalls:renderer?.info.render.calls,
+window.lattice={ready:false,update,stop,
+  chatSnapshot:()=>({yaw:view.yaw,pitch:view.pitch,span:view.span,x:view.x,y:view.y,z:view.z,distance:view.distance||5000}),
+  chatRestore:v=>{stop();Object.assign(view,v);rebuild();invalidate();}, focus:mark=>focusMark(mark,navigationEpoch),focusIntent:()=>navigationEpoch,focusMark,reset:()=>snap('full'),zoom:factor=>animate({span:THREE.MathUtils.clamp(view.span*factor,8,fullSpan*3)}),
+  stats:()=>({frames,projection:mode,orthographic:camera.isOrthographicCamera,collapse:{...currentProjection},animating:!!tween,view:{yaw:view.yaw,pitch:view.pitch,span:view.span,x:view.x,y:view.y,z:view.z},marks:marks.length,tier,drawCalls:renderer?.info.render.calls,lines:renderer?.info.render.lines,
     patientOrder:model?.patients.map(p=>p[1]),endStates:marks.reduce((a,m)=>{a[m.end_state]=(a[m.end_state]||0)+1;return a;},{}),
     cells:cells.map(({records,...c})=>c)}),
   projectRecord:id=>{const t=hitTargets.find(t=>t.owner.record_id===id);return t?project(t.point):null;},

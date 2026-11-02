@@ -24,7 +24,7 @@ Then open one of:
 | `http://127.0.0.1:8765/lattice` | Patient x time x visual layer lattice, four free-rotating projections |
 | `http://127.0.0.1:8765/3d` | GPU prototype of the same records and the same pinned engine |
 
-The server binds loopback only. There are no uploads, no outbound service calls from the viewer, no chat interface, no agent panel and no telemetry.
+The server binds loopback only. There are no uploads, no outbound service calls from the viewer, no telemetry, and the "Ask about this view" panel is a local rule parser with validated local tools, not a model connection. Touch devices get a shared pointer controller: one-finger rotate (or pan by toggle), two-finger translate, centred pinch zoom, with desktop drag conventions retained.
 
 Two read-only integrity checks:
 
