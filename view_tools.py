@@ -8,7 +8,7 @@ def query_records(engine, spec, args):
     if args['scope'] != 'current_analysis' or args['unit'] not in ('patients', 'AE records'):
         raise ValueError('Choose current_analysis scope and patients or AE records; no counting-unit inference.')
     filters = args['filters']
-    if not isinstance(filters, dict) or set(filters) - {'term', 'grade', 'patient', 'date_window', 'linked_cm'}:
+    if not isinstance(filters, dict) or set(filters) - {'term', 'grade', 'patient', 'date_window', 'linked_cm', 'record_ids'}:
         raise ValueError('Unsupported filter. Which explicit date window and anchor do you intend?')
     if 'grade' in filters and (type(filters['grade']) is not int or not 1 <= filters['grade'] <= 5):
         raise ValueError('Grade must be an integer 1–5; severity is not toxicity grade.')
@@ -25,9 +25,16 @@ def query_records(engine, spec, args):
             if window['start'] > window['end']: raise ValueError()
         except (ValueError, TypeError):
             raise ValueError('Use valid ordered YYYY-MM-DD window endpoints.')
+    selected = filters.get('record_ids')
+    if 'record_ids' in filters:
+        if (not isinstance(selected, list) or any(not isinstance(rid, str) or not rid for rid in selected)
+                or len(set(selected)) != len(selected)
+                or any(rid not in engine.records or engine.records[rid]['dataset'] != 'AE' for rid in selected)):
+            raise ValueError('record_ids must be unique, existing AE source record IDs; never inferred.')
     evaluated = engine.evaluate(spec)
     matches, patients, links, unknown_grade, incomplete_date = [], set(), set(), 0, 0
     for rid in evaluated['analysis']['qualifying_ae_record_ids']:
+        if selected is not None and rid not in selected: continue
         v = engine.records[rid]['values']
         if 'term' in filters and v.get('AETERM', '').casefold() != filters['term'].casefold(): continue
         if 'patient' in filters and v['USUBJID'] != filters['patient']: continue

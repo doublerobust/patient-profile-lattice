@@ -44,3 +44,12 @@ class ToolChecks(unittest.TestCase):
         before=query_records(self.engine,self.spec,args)
         self.spec['view_state']['hidden_lanes']=['AE']
         self.assertEqual(before,query_records(self.engine,self.spec,args))
+
+    def test_exact_record_ids_fail_closed(self):
+        args={'scope':'current_analysis','unit':'AE records','filters':{'record_ids':['AE-001-1']}}
+        self.assertEqual(query_records(self.engine,self.spec,args)['record_ids'],['AE-001-1'])
+        for ids in [['missing'],['CM-001-1'],['AE-001-1','AE-001-1'],[3], 'AE-001-1']:
+            with self.assertRaises(ValueError):
+                query_records(self.engine,self.spec,{**args,'filters':{'record_ids':ids}})
+        self.spec['analysis_state']['population']=[]
+        self.assertEqual(query_records(self.engine,self.spec,args)['record_ids'],[])

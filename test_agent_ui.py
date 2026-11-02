@@ -66,7 +66,7 @@ class AgentUIChecks(baseline.AgentBrowserChecks):
         expect(self.page.locator('#chat-result')).to_contain_text('I cannot infer causality')
         expect(self.page.locator('#chat-result')).to_contain_text('Unverified model message')
         self.assertEqual(self.snapshot(), before)
-        self.assertEqual(json.loads(self.page.locator('#chat-history').inner_text()), [])
+        self.assertEqual(json.loads(self.page.locator('#chat-history').text_content()), [])
 
     def test_stale_self_test_cannot_reconnect_after_disconnect(self):
         requests = []

@@ -21,6 +21,7 @@ def obj(properties=None, required=()):
 
 
 FILTERS = obj({'term': {'type': 'string', 'minLength': 1}, 'grade': {'type': 'integer', 'minimum': 1, 'maximum': 5},
+               'record_ids': {'type': 'array', 'items': {'type': 'string', 'minLength': 1}, 'uniqueItems': True},
                'patient': {'type': 'string', 'minLength': 1}, 'linked_cm': {'type': 'string', 'minLength': 1},
                'date_window': obj({'anchor': {'enum': ['AESTDTC']}, 'start': {'type': 'string'}, 'end': {'type': 'string'}}, ('anchor', 'start', 'end'))})
 QUERY = {'scope': {'enum': ['current_analysis']}, 'unit': {'enum': ['patients', 'AE records']}, 'filters': FILTERS}
@@ -30,7 +31,7 @@ CAMERA = {'oneOf': [obj({'position': VECTOR, 'target': VECTOR, 'span': {'type': 
 DEFINITIONS = {
     'get_capabilities': ('Read the real capability catalogue and limitations.', obj()),
     'get_view_state': ('Read display settings and aggregate analysis context; not raw patient rows.', obj()),
-    'set_view': ('Change DISPLAY ONLY. focus is one exact USUBJID or null; subset is an explicit list of USUBJIDs (empty means all). Never infer patients or clinical meaning.',
+    'set_view': ('Change DISPLAY ONLY. focus is one exact USUBJID or null (all); subset is an explicit nonempty list of USUBJIDs, mutually exclusive with focus. Never infer patients or clinical meaning.',
                  dict(obj({'sort': {'enum': ['duration', 'asc', 'desc', 'response', 'pd', 'reason']},
                            'focus': {'type': ['string', 'null']}, 'subset': {'type': 'array', 'items': {'type': 'string'}, 'uniqueItems': True, 'minItems': 1},
                            'layers': {'type': 'array', 'items': {'enum': ['AE', 'CM', 'EX', 'RS']}, 'uniqueItems': True},
@@ -61,7 +62,10 @@ def validate_tool(name, args):
     if name not in DEFINITIONS:
         raise ValueError('Unsupported tool; development task required.')
     try:
+        json.dumps(args, allow_nan=False)
         validate(args, DEFINITIONS[name][1])
+        if name == 'set_view' and 'focus' in args and 'subset' in args:
+            raise ValueError('focus and subset are mutually exclusive')
     except Exception:
         raise ValueError('Invalid or ambiguous tool arguments; nothing changed. Use the capability schema.') from None
 
@@ -93,11 +97,12 @@ def local_tool(engine, spec, name, args, record_egress=False):
         after_spec = copy.deepcopy(spec)
         after_spec['analysis_state']['population'] = chosen
         before = engine.evaluate(spec)['analysis']
-        after = engine.evaluate(after_spec, analysis_change=True)['analysis']
+        evaluated_after = engine.evaluate(after_spec, analysis_change=True)
+        after = evaluated_after['analysis']
         counts = lambda a: {'patients': len(a['qualifying_patient_keys']), 'AE records': len(a['qualifying_ae_record_ids'])}
         return {'status': 'confirmation_required', 'before': counts(before), 'after': counts(after),
                 'population_before': len(population), 'population_after': len(chosen),
-                'population': chosen, 'record_ids': after['qualifying_ae_record_ids'],
+                'population': chosen, 'view_state': evaluated_after['spec']['view_state'], 'record_ids': after['qualifying_ae_record_ids'],
                 'note': 'Proposed analysis population subset. Counts will be recomputed; existing AE/temporal predicates retained. No change until you confirm.'}
     raise ValueError('This tool is executed through the validated local view bridge.')
 

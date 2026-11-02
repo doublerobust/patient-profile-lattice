@@ -82,7 +82,7 @@ class AgentBrowserChecks(BrowserFixture):
         self.assertEqual(self.snapshot()['display']['view']['hidden_lanes'], ['CM', 'RS'])
         self.assertEqual(len(MockModel.requests), 4)
         history = json.loads(self.page.locator('#chat-history').text_content())
-        self.assertEqual(history[-1]['tool'], 'set_view'); self.assertIn('display', history[-1]['diff'])
+        self.assertEqual(history[-1]['action']['tool'], 'set_view'); self.assertIn('display', history[-1]['diff'])
         self.assertTrue(history[-1]['record_ids'])
         sent = json.dumps(MockModel.requests)
         self.assertNotIn('AE-001-1', sent); self.assertNotIn(self.credential, sent)
@@ -110,7 +110,7 @@ class AgentBrowserChecks(BrowserFixture):
         self.page.locator('#agent-confirm').click()
         expect(self.page.locator('#counts')).to_have_text('1 qualifying patients · 2 qualifying AE source records')
         history = json.loads(self.page.locator('#chat-history').text_content())
-        self.assertEqual(history[-1]['tool'], 'confirm_analysis_subset')
+        self.assertEqual(history[-1]['action']['tool'], 'confirm_analysis_subset')
         self.assertIn('analysis', history[-1]['diff'])
         self.page.locator('#chat-undo').click()
         expect(self.page.locator('#chat-result')).to_contain_text('Undo:')
@@ -132,7 +132,9 @@ class AgentBrowserChecks(BrowserFixture):
         self.assertEqual(self.snapshot(), baseline)
         self.ask('clinical inference', [call('propose_development_task', {'description': 'Clinical inference is unsupported; this is a development suggestion, not a clinical result.'})])
         self.assertEqual(self.snapshot(), baseline)
-        self.assertFalse(json.loads(self.page.locator('#chat-history').text_content())[-1]['result']['result_created'])
+        task=json.loads(self.page.locator('#chat-history').text_content())[-1]['action']['args']['task']
+        self.assertFalse(task['result_created'])
+        self.assertEqual(json.loads(self.page.locator('#chat-tasks').text_content())[-1]['id'], task['id'])
 
     def test_source_ids_units_highlights_and_record_egress(self):
         self.connect(); baseline = self.snapshot()

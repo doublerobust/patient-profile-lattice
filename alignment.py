@@ -34,6 +34,8 @@ def resolve_alignment(engine, anchor):
                 'patients': [], 'record_ids': [], 'note': 'Absolute calendar dates restored; analysis unchanged.'}
     if anchor not in ANCHORS:
         return {'status': 'unsupported', 'anchor': anchor, 'record_ids': [],
+                'denominator': len(engine.fixtures['population']), 'denominator_unit': 'loaded roster patients (unchanged)',
+                'missing_anchor_handling': 'Requested anchor is unsupported. No transform applied, no patients excluded and no dates imputed.',
                 'note': 'Unsupported alignment; development task required. No randomization/DM anchor is established in this fixture. Supported display anchors: calendar, first_treatment (first_dose), first_PR, first_PD, death. No approximation was made.'}
     by_patient = {}
     for row in engine.records.values():

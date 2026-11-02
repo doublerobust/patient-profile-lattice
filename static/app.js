@@ -431,7 +431,29 @@ function mountChat() {
     state=next;displaySort=saved.sort;tierMode=saved.tier;highlightIds=[...saved.highlights];displayAlignment=structuredClone(saved.alignment);$('tiers').value=tierMode;
     render();applyCamera(saved.camera);
   }
-  window.viewChatBridge={snapshot,restore,roster:()=>state.roster,is3d:()=>!!window.clinical3d,
+  async function applySnapshot(saved) {
+    // Evaluate the combined proposal before committing ANY live display/analysis state.
+    ViewStateCore.validateState(saved);
+    const previous={analysis:structuredClone(state.spec.analysis_state),display:snapshot()}, previousState=state;
+    const spec=structuredClone(state.spec);
+    const analysis_change=JSON.stringify(saved.analysis)!==JSON.stringify(spec.analysis_state);
+    spec.analysis_state=structuredClone(saved.analysis);
+    spec.view_state=structuredClone(saved.display.view);
+    const next=await api('evaluate',{spec,analysis_change});
+    if(JSON.stringify(previous)!==JSON.stringify({analysis:state.spec.analysis_state,display:snapshot()}))throw Error('View changed during evaluation; retry. Nothing applied.');
+    const normalized={analysis:next.spec.analysis_state,display:{...saved.display,view:next.spec.view_state}};
+    if(Object.keys(ViewStateCore.stateDiff(saved,normalized)).length)throw Error('Evaluated state differs from validated proposal; nothing applied.');
+    try {
+    state=next;displaySort=saved.display.sort;tierMode=saved.display.tier;
+    highlightIds=[...saved.display.highlights];displayAlignment=structuredClone(saved.display.alignment);
+    $('tiers').value=tierMode;render();applyCamera(saved.display.camera);
+    } catch(error) {
+      state=previousState;displaySort=previous.display.sort;tierMode=previous.display.tier;
+      highlightIds=[...previous.display.highlights];displayAlignment=structuredClone(previous.display.alignment);
+      $('tiers').value=tierMode;render();applyCamera(previous.display.camera);throw error;
+    }
+  }
+  window.viewChatBridge={snapshot,restore,applySnapshot,roster:()=>state.roster,is3d:()=>!!window.clinical3d,
     busy:()=>busy,signature:()=>state.analysis_signature,
     dataset:()=>state.spec.snapshot_sha256,
     agent:body=>api('agent/model',{...body,spec:state.spec,view:snapshot()}),

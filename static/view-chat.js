@@ -34,6 +34,7 @@ window.mountViewChat = bridge => {
     <p id="chat-result" role="status" aria-live="polite"></p>
     <details open><summary>Matched source record IDs</summary><pre id="chat-records">None</pre></details>
     <details><summary>In-page action history (session only)</summary><pre id="chat-history">[]</pre></details>
+    <details><summary>Local development tasks (not external tickets; Undo/Reset do not delete tasks)</summary><pre id="chat-tasks">[]</pre></details>
   </section>
   <dialog id="agent-egress-dialog" aria-labelledby="agent-egress-title" aria-describedby="agent-egress-details">
     <h2 id="agent-egress-title">Confirm model data egress</h2>
@@ -51,19 +52,18 @@ window.mountViewChat = bridge => {
     {tool:'highlight_events',args:{scope:'current_analysis',filters:{grade:3}}},
     {tool:'query_data',args:{scope:'current_analysis',unit:'patients',filters:{grade:3}}}
   ].map(x=>JSON.stringify(x)).join('\n');
-  let history=[], initial=null, signature=null, audit=[], connected=null, pending=null, working=false, configVersion=0, testSecret='';
+  let signature=null, connected=null, working=false, configVersion=0, testSecret='';
   const clean = x => {const secret=connected?.credential||testSecret;return secret ? String(x).split(secret).join('[REDACTED]') : String(x);};
   const fullSnapshot=()=>({display:copy(bridge.snapshot()),analysis:bridge.analysisSnapshot()});
-  async function restoreFull(saved){
-    if(JSON.stringify(saved.analysis)!==JSON.stringify(bridge.analysisSnapshot()))await bridge.setAnalysis(saved.analysis);
-    await bridge.restore(saved.display);
+  const session=new ViewTools.ToolSession({snapshot:fullSnapshot,roster:bridge.roster,
+    resolve:bridge.agentTool,apply:bridge.applySnapshot,records:bridge.records,dataset:bridge.dataset});
+  function syncHistory(){
+    el('chat-history').textContent=clean(JSON.stringify(session.audit,null,2));
+    el('chat-tasks').textContent=clean(JSON.stringify(session.tasks,null,2));
+    el('agent-proposal').hidden=!session.pending;
+    el('agent-consequence').textContent=session.pending?JSON.stringify(session.pending.result,null,2):'';
   }
-  function record(tool,before,result){
-    const after=fullSnapshot(), diff={};
-    for(const key of ['display','analysis'])if(JSON.stringify(before[key])!==JSON.stringify(after[key]))diff[key]={before:before[key],after:after[key]};
-    audit.push({tool,diff,result,record_ids:result.record_ids||[],undo:'Use Undo for the most recent executed action; Reset returns to the session baseline.'});
-    el('chat-history').textContent=clean(JSON.stringify(audit,null,2));
-  }
+
   const object = x => x && typeof x==='object' && !Array.isArray(x);
   const keys = (x,allowed) => {if(!object(x)||Object.keys(x).some(k=>!allowed.includes(k)))throw Error('Unsupported fields. Use only the documented tool arguments.');};
   function parse(text) {
@@ -72,66 +72,30 @@ window.mountViewChat = bridge => {
     if(a||b)return {tool:'query_data',args:{scope:'current_analysis',unit:a?'AE records':'patients',filters:{grade:+(a||b)[1]}}};
     try{return JSON.parse(text);}catch{throw Error('Unsupported or ambiguous request. Which counting unit (patients or AE records), date window and anchor? Use an explicit documented command; nothing changed.');}
   }
-  function validateView(args) {
-    keys(args,['sort','focus','subset','layers','tier','camera']);
-    if(!Object.keys(args).length)throw Error('Which view property should change?');
-    if('sort' in args&&!['duration','asc','desc','response','pd','reason'].includes(args.sort))throw Error('Unsupported sort order.');
-    if('tier' in args&&!['auto','0','1','2'].includes(args.tier))throw Error('Choose tier auto, 0, 1 or 2 as a string.');
-    if('focus' in args && args.focus!==null && bridge.roster().filter(p=>p[1]===args.focus).length!==1)throw Error('Choose one unambiguous roster patient ID, or null for all.');
-    if('subset' in args && ('focus' in args||!Array.isArray(args.subset)||!args.subset.length||new Set(args.subset).size!==args.subset.length||args.subset.some(id=>bridge.roster().filter(p=>p[1]===id).length!==1)))throw Error('Choose an explicit unique display subset of roster IDs, without focus.');
-    if('layers' in args && (!Array.isArray(args.layers)||args.layers.some(l=>!['AE','CM','EX','RS'].includes(l))||new Set(args.layers).size!==args.layers.length))throw Error('Choose unique visible layers AE/CM/EX/RS.');
-    if('camera' in args) {
-      const c=args.camera;
-      if(bridge.is3d()) {
-        keys(c,['position','target','span']);
-        if(Object.keys(c).length!==3||![c.position,c.target].every(v=>Array.isArray(v)&&v.length===3&&v.every(n=>Number.isFinite(n)&&Math.abs(n)<1e6))||!Number.isFinite(c.span)||c.span<8||c.span>100000)throw Error('Supply finite camera position, target and span (8–100000).');
-        const d=c.position.map((v,i)=>v-c.target[i]), distance=Math.hypot(...d);
-        if(distance<1||distance>10000||Math.hypot(d[0],d[2])<.001)throw Error('Camera direction must be nonvertical, with distance 1–10000.');
-      } else {
-        keys(c,['start','end']);
-        if(!Number.isFinite(c.start)||!Number.isFinite(c.end)||c.end<=c.start||Math.abs(c.start)>8e15||Math.abs(c.end)>8e15)throw Error('Timeline camera needs finite ordered UTC epoch start/end.');
-      }
-    }
-  }
   function report(text,ids=[]) {el('chat-result').textContent=clean(text);el('chat-records').textContent=ids.length?clean(ids.join('\n')):'None';}
-  function buttons(){el('chat-undo').disabled=working||!history.length;el('chat-reset').disabled=working||!initial;el('agent-send').disabled=working||!connected||!!pending;el('agent-test').disabled=working;el('agent-confirm').disabled=working;}
+  function buttons(){el('chat-undo').disabled=working||!session.stack.length;el('chat-reset').disabled=working||!session.initial;el('agent-send').disabled=working||!connected||!!session.pending;el('agent-test').disabled=working;el('agent-confirm').disabled=working;}
   async function run(work) {
     if(bridge.busy()||working)return;
     working=true;buttons();
     el('chat-tool-status').textContent='Tool execution: validating locally…';
     try {await bridge.lock(async()=>{
-      if(signature!==bridge.signature()){history=[];initial=null;pending=null;el('agent-proposal').hidden=true;signature=bridge.signature();}
+      if(signature!==bridge.signature()||JSON.stringify(session.history.snapshot().state)!==JSON.stringify(ViewStateCore.createState(fullSnapshot()))){
+        const pending=!!session.pending;session.clear();syncHistory();signature=bridge.signature();
+        if(pending)throw Error('State changed; pending proposal expired. Request a new proposal.');
+      }
       await work();
       signature=bridge.signature();
     });el('chat-tool-status').textContent='Tool execution: completed locally. See action history for display/analysis diffs.';}
     catch(e){el('chat-tool-status').textContent='Tool execution: refused; rejected action changed nothing. Earlier completed actions remain undoable.';report(e.message);}
-    testSecret='';working=false;buttons();
+    syncHistory();testSecret='';working=false;buttons();
   }
   el('chat-toggle').onclick=()=>{const open=el('chat-body').hidden;el('chat-body').hidden=!open;el('chat-toggle').setAttribute('aria-expanded',String(open));if(open)el('chat-request').focus();};
   root.addEventListener('keydown',e=>{if(e.key==='Escape'&&!el('agent-egress-dialog').open){el('chat-body').hidden=true;el('chat-toggle').setAttribute('aria-expanded','false');el('chat-toggle').focus();}});
   el('chat-form').onsubmit=e=>{e.preventDefault();run(async()=>{
-    const cmd=parse(el('chat-request').value);keys(cmd,['tool','args']);
-    if(!['set_view','highlight_events','query_data'].includes(cmd.tool))throw Error('Unsupported tool. Choose set_view, highlight_events or query_data.');
-    let result;
-    if(cmd.tool==='set_view')validateView(cmd.args);
-    else {
-      keys(cmd.args,cmd.tool==='query_data'?['scope','unit','filters']:['scope','filters']);
-      result=await bridge.query({...cmd.args,...(cmd.tool==='highlight_events'?{unit:'AE records'}:{})});
-    }
-    const before=fullSnapshot();
-    if(cmd.tool==='set_view') {
-      await bridge.setView(cmd.args);
-      result={record_ids:bridge.records()};
-    } else if(cmd.tool==='highlight_events') bridge.highlight(result.record_ids);
-    history.push(before);if(!initial)initial=copy(before);
-    record(cmd.tool,before,result);
-    const detail=cmd.tool==='query_data'?`${result.count} ${result.unit}; read-only, view unchanged`:
-      cmd.tool==='highlight_events'?`Highlight overlay replaced: ${result.record_ids.length} AE records`:`View changed: ${JSON.stringify(cmd.args)}`;
-    report(`${detail}. Analysis unchanged.${result.note?' '+result.note+' Missing grade excluded: '+result.excluded_missing_grade+'; incomplete onset excluded: '+result.excluded_incomplete_onset+'.':''}`,
-      [...result.record_ids,...(result.linked_record_ids||[]).map(id=>id+' (linked CM evidence)')]);
+    await execute(parse(el('chat-request').value),false);
   });};
-  el('chat-undo').onclick=()=>run(async()=>{if(!history.length)throw Error('No history for this analysis.');const before=fullSnapshot(),previous=history.at(-1);await restoreFull(previous);history.pop();pending=null;el('agent-proposal').hidden=true;record('Undo',before,{record_ids:previous.display.highlights});report('Undo: previous view and analysis restored exactly.',previous.display.highlights);});
-  el('chat-reset').onclick=()=>run(async()=>{if(!initial)throw Error('No session baseline for this analysis.');const before=fullSnapshot();await restoreFull(initial);record('Reset',before,{record_ids:initial.display.highlights});report('Reset: pre-session view and analysis restored exactly.',initial.display.highlights);history=[];initial=null;pending=null;el('agent-proposal').hidden=true;});
+  el('chat-undo').onclick=()=>run(async()=>{const result=await session.undo();report('Undo: previous view and analysis restored exactly.',result.record_ids);});
+  el('chat-reset').onclick=()=>run(async()=>{const result=await session.reset();report('Reset: pre-session view and analysis restored exactly.',result.record_ids);});
 
   function disconnect(){configVersion++;connected=null;el('agent-key').value='';el('agent-consent').checked=false;el('agent-record-consent').checked=false;el('agent-status').textContent='No model is connected. Local rule/parser commands remain available; not an AI agent.';buttons();}
   function destination(){el('agent-destination').textContent=`Endpoint: ${el('agent-endpoint').value || '(unset)'} | Model: ${el('agent-model').value || '(unset)'} | Dataset: ${bridge.dataset()} (synthetic)`;}
@@ -173,34 +137,17 @@ window.mountViewChat = bridge => {
   });
   async function execute(call,recordEgress){
     keys(call,['tool','args']);
-    const before=fullSnapshot();let result;
-    if(call.tool==='set_view'){
-      validateView(call.args);await bridge.setView(call.args);
-      result={status:'executed',note:'View changed; analysis unchanged.',record_ids:bridge.records()};
-    } else if(call.tool==='get_view_state'){
-      keys(call.args,[]);result={status:'read_only',view:bridge.snapshot(),record_ids:bridge.records()};
-    } else {
-      result=await bridge.agentTool(call.tool,call.args,recordEgress);
-      if(call.tool==='set_alignment' && result.status==='resolved'){
-        bridge.setAlignment(result);result={...result,status:'executed'};
-      }
-      if(call.tool==='highlight_events')bridge.highlight(result.record_ids);
-      if(call.tool==='propose_analysis_subset'){
-        pending={result,signature:bridge.signature(),before:fullSnapshot()};
-        el('agent-consequence').textContent=JSON.stringify(result,null,2);
-        el('agent-proposal').hidden=false;
-      }
-    }
-    history.push(before);if(!initial)initial=copy(before);record(call.tool,before,result);
+    const result=await session.dispatch(call.tool,call.args,{recordEgress});
+    syncHistory();
     const summary=call.tool==='query_data'?`${result.count} ${result.unit}; read-only, view unchanged`:
       call.tool==='highlight_events'?`Highlight overlay replaced: ${result.record_ids.length} AE records; analysis unchanged`:
       result.note||`${call.tool}: ${result.status||'capabilities returned'}`;
-    report(summary,result.record_ids||[]);
+    report(summary,[...(result.record_ids||[]),...(result.linked_record_ids||[]).map(id=>id+' (linked CM evidence)')]);
     return result;
   }
   el('agent-send').onclick=()=>run(async()=>{
     if(!connected||connected.dataset!==bridge.dataset()){disconnect();throw Error('No tested model/consent for this dataset. Reconnect explicitly.');}
-    if(pending)throw Error('Confirm or cancel the pending analysis proposal first.');
+    if(session.pending)throw Error('Confirm or cancel the pending analysis proposal first.');
     const prompt=el('chat-request').value.trim();if(!prompt)throw Error('Enter a request.');
     const config=connected,version=configVersion,recordEgress=el('agent-record-consent').checked;
     el('agent-record-consent').checked=false;
@@ -221,19 +168,15 @@ window.mountViewChat = bridge => {
       if(message.tool_calls.length!==1)throw Error('Model requested multiple actions at once. Refused; request one explicit action per turn.');
       const call=message.tool_calls[0];let result;
       try {result=await execute({tool:call.function.name,args:JSON.parse(call.function.arguments)},recordEgress);executed=true;}
-      catch(e){result={status:'refused',note:clean(e.message)};report(result.note);record('refused tool',fullSnapshot(),result);}
+      catch(e){result={status:'refused',note:clean(e.message)};report(result.note);}
       messages.push({role:'tool',tool_call_id:call.id,content:JSON.stringify(result)});
-      if(pending||['clarification_required','development_proposal','refused','unsupported'].includes(result.status))return;
+      if(session.pending||['clarification_required','development_proposal','refused','unsupported'].includes(result.status))return;
     }
     report('Model tool-turn limit reached. Completed actions remain in history; no further actions executed.');
   });
   el('agent-confirm').onclick=()=>run(async()=>{
-    if(!pending||pending.signature!==bridge.signature())throw Error('Analysis changed; proposal expired.');
-    const proposal=pending,before=fullSnapshot();
-    await bridge.setPopulation(proposal.result.population);
-    history.push(before);if(!initial)initial=copy(before);
-    record('confirm_analysis_subset',before,{status:'executed_after_user_confirmation',record_ids:proposal.result.record_ids});
-    pending=null;el('agent-proposal').hidden=true;report('Analysis subset executed after explicit confirmation; counts recomputed. Undo restores the previous analysis and display.',proposal.result.record_ids);
+    const result=await session.confirm(session.pending?.id);
+    report('Analysis subset executed after explicit confirmation; counts recomputed. Undo restores the previous analysis and display.',result.record_ids);
   });
-  el('agent-cancel').onclick=()=>run(async()=>{pending=null;el('agent-proposal').hidden=true;record('cancel_analysis_proposal',fullSnapshot(),{status:'cancelled',record_ids:[]});report('Analysis proposal cancelled. Nothing changed.');});
+  el('agent-cancel').onclick=()=>run(async()=>{session.cancel();report('Analysis proposal cancelled. Nothing changed.');});
 };
