@@ -1,0 +1,52 @@
+▶ AC1/4: invalid, ambiguous and inferential calls fail closed before resolver or commit
+  ✔ eval {"code":"globalThis.modelRan=true"} (1.544083ms)
+  ✔ constructor {} (0.225375ms)
+  ✔ confirm_analysis_subset {} (0.2605ms)
+  ✔ set_view {} (0.269417ms)
+  ✔ set_view {"sort":"best prognosis"} (0.208916ms)
+  ✔ set_view {"tier":2} (0.228667ms)
+  ✔ set_view {"layers":["AE","AE"]} (0.209084ms)
+  ✔ set_view {"subset":[]} (0.227042ms)
+  ✔ set_view {"focus":"not-in-roster"} (0.220625ms)
+  ✔ set_view {"camera":{"start":null,"end":10}} (0.214542ms)
+  ✔ set_view {"camera":{"start":5,"end":5}} (0.185375ms)
+  ✔ query_data {"scope":"current_analysis","filters":{}} (0.147708ms)
+  ✔ query_data {"scope":"visible","unit":"patients","filters":{}} (0.161667ms)
+  ✔ query_data {"scope":"current_analysis","unit":"patients","filters":{"caused_by":"drug"}} (0.357458ms)
+  ✔ highlight_events {"scope":"current_analysis","filters":{"grade":true}} (0.147334ms)
+  ✔ highlight_events {"scope":"current_analysis","filters":{"record_ids":["AE-test-1","AE-test-1"]}} (0.149458ms)
+  ✔ highlight_events {"scope":"current_analysis","filters":{"date_window":{"anchor":"AESTDTC","start":"2025-02-30","end":"2025-03-01"}}} (0.787833ms)
+  ✔ propose_analysis_subset {"patients":[]} (0.136791ms)
+  ✔ propose_development_task {"description":""} (0.127458ms)
+  ✔ clarify_request {"question":"Which anchor?","execute":true} (0.115709ms)
+  ✔ get_view_state {"code":"alert(1)"} (0.116292ms)
+✔ AC1/4: invalid, ambiguous and inferential calls fail closed before resolver or commit (7.2085ms)
+✔ AC1/5: functions, getters, cycles, sparse arrays and prototype keys are never executed (0.816834ms)
+✔ AC2/9: proposal discloses consequences; only matching out-of-band confirmation applies combined diff (1.754333ms)
+✔ AC2: cancelled and dataset-stale proposals cannot commit (0.689ms)
+✔ AC3/4: unsupported anchors, resolver refusals and clarification return unchanged state and history (0.602459ms)
+✔ AC6: both counting units retain contributing and linked IDs; invalid resolver counts cannot enter history (1.07425ms)
+✔ AC7: development requests create real local ledger entries, not results; Undo/Reset do not erase tasks (0.826875ms)
+✔ AC8/9: every executed registered tool has replayable diff, IDs and Undo/Reset; reverse restores each exact state (6.692583ms)
+✔ AC8: failed bridge commit adds neither state nor history and releases dispatch lock (0.530833ms)
+✖ AC5: all registered paths run with DOM access trapped and string code generation disabled (2.137916ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 30
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 121.931042
+
+✖ failing tests:
+
+test at tool-registry.acceptance.test.cjs:150:1
+✖ AC5: all registered paths run with DOM access trapped and string code generation disabled (2.137916ms)
+  TypeError [Error]: State objects must be plain records.
+      at fail (state-core.js:7:35)
+      at json (state-core.js:20:59)
+      at validateState (state-core.js:126:5)
+      at Object.stateDiff (state-core.js:140:27)
+      at tool-registry.js:118:23
+      at async ToolSession.exclusive (tool-registry.js:82:121)
