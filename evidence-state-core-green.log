@@ -1,0 +1,21 @@
+✔ legacy 3d chatSnapshot includes peel, preserved exactly on apply/revert (1.669ms)
+✔ documented temporal contract survives exact restoration without inferred semantics (0.286542ms)
+✔ alignment resolver result shape preserves dates and null missing anchors; invalid forms rejected (1.810792ms)
+✔ stores analysis separately; display diff round trips exactly without mutating inputs (1.983208ms)
+✔ analysis and combined diffs restore predicates, population, selection and camera exactly (1.544041ms)
+✔ display-only undo preserves later independent analysis changes (0.24425ms)
+✔ stale apply/revert rejects atomically, including combined domain conflicts (0.425125ms)
+✔ empty diff, serialized diff, and key-order-independent equality (0.252667ms)
+✔ snapshots and diff payloads are detached and deeply immutable (0.164208ms)
+✔ unknown fields cannot smuggle analysis changes into display-only diff (0.238166ms)
+✔ malformed values, arrays, IDs, dates, cameras and unsupported analysis semantics fail closed (0.98825ms)
+✔ only finite JSON data accepted; accessors are rejected without execution (0.394208ms)
+✔ browser global loads without DOM/network and executes real diff round trip (1.79075ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 105.75075

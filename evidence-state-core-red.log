@@ -1,0 +1,39 @@
+node:internal/modules/cjs/loader:1607
+  throw err;
+  ^
+
+Error: Cannot find module './static/state-core.js'
+Require stack:
+- /Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216/state-core.test.cjs
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1603:15)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1145:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1169:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1196:12)
+    at Module._load (node:internal/modules/cjs/loader:1370:5)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.require (node:internal/modules/cjs/loader:1713:12)
+    at require (node:internal/modules/helpers:318:16)
+    at Object.<anonymous> (/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216/state-core.test.cjs:6:14)
+    at Module._compile (node:internal/modules/cjs/loader:1968:14) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216/state-core.test.cjs'
+  ]
+}
+
+Node.js v26.12.1
+✖ state-core.test.cjs (85.97ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 89.100583
+
+✖ failing tests:
+
+test at state-core.test.cjs:1:1
+✖ state-core.test.cjs (85.97ms)
+  'test failed'

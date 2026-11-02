@@ -1,0 +1,53 @@
+Task t_b42b5216 — state core implementation handoff
+
+Workspace: /Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216
+Branch: wt/t_b42b5216
+Baseline: ca13cdf. Only additive files; parent/sibling worktrees unchanged.
+
+Completed:
+- Pure immutable state core with separate analysis/display domains, strict runtime
+  schemas, validated before/after diffs, conflict-safe apply/revert, exact reset.
+- Complete spec-backed tests, including independent analysis preservation during
+  display-only undo, atomic rejection, input immutability and non-JSON rejection.
+- Browser global smoke in Node vm, native timeline/3d/lattice camera shape checks,
+  documented temporal-rule preservation, synthetic alignment-shape checks.
+- API and ownership contract in docs/state-core.md.
+
+Commands and actual results:
+1. node --test state-core.test.cjs > evidence-state-core-red.log 2>&1
+   Exit 1 before implementation: MODULE_NOT_FOUND for static/state-core.js.
+2. node --test state-core.test.cjs > evidence-state-core-green.log 2>&1
+   Exit 0: initial 10 tests passed (log replaced by final combined run below).
+3. node --test state-core.integration.test.cjs > evidence-state-core-camera-red.log 2>&1
+   Exit 1: 2 failures due to legacy 3d peel field, 1 alignment test passed.
+   Fixed native camera validator to accept optional numeric peel only for 3d.
+4. node --test state-core.test.cjs state-core.integration.test.cjs > evidence-state-core-green.log 2>&1
+   Exit 0: 13 tests passed, 0 failed, 0 skipped.
+5. node --check static/state-core.js
+   Exit 0.
+6. git diff --check
+   Exit 0 (also repeat after staging to check added files).
+
+Changed paths:
+  static/state-core.js
+  state-core.test.cjs
+  state-core.integration.test.cjs
+  docs/state-core.md
+  STATE-CORE-HANDOFF.txt
+  evidence-state-core-red.log
+  evidence-state-core-camera-red.log
+  evidence-state-core-green.log
+
+Downstream integration:
+- Read docs/state-core.md before consuming; browser global is ViewStateCore.
+- Existing parent static/tool-registry.js stateDiff envelope is compatible.
+- Parent's minimal mocked snapshots must gain full pinned view/analysis fields.
+- Add module HTTP route and load before history/registry during integration.
+- Tool/history layer must gate analysis changes on explicit human confirmation,
+  validate source membership/capabilities, handle async renderer commits, and
+  invalidate history when dataset/session changes. Core performs no I/O.
+- Retain initial=createState(snapshot); Reset restores that entire baseline.
+- Revert applies only touched domains, rejects stale same-domain state rather
+  than silently clobbering changes. Display-only revert preserves analysis.
+- No UI/registry files touched, no clinical counts asserted, no external model
+  calls, no full browser suite or independent-review claim for this core card.
