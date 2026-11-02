@@ -14,6 +14,30 @@ The browser loads state-core.js, action-history.js, tool-registry.js, then view-
 - propose_development_task: creates a uniquely identified entry in the LOCAL SESSION task ledger, marked proposed and result_created:false. This is not an external kanban/GitHub ticket or implemented result. Tasks survive view Undo/Reset but not page reload; there is no durable task backend in this implementation.
 - clarify_request: returns a question without state/history mutation. Unsupported and clinically inferential structured arguments are rejected rather than reinterpreted.
 
+## Model display-scope approval
+
+Model calls that select patients (set_view focus/subset) or source records
+(highlight_events) cannot execute directly. They must use propose_display_scope
+with the exact whole request as evidence and an action matching the deterministic
+scope grammar, then stop for a local approval. Supported forms include:
+
+- Show only patients SYN-001, SYN-002
+- Focus on SYN-001
+- Show all patients
+- Highlight source IDs AE-001-1, AE-002-1
+- Highlight grade 3 AE records
+- Highlight exact term SYNTHETIC NAUSEA
+- An exact JSON set_view/highlight_events command with the existing schema
+
+Unknown paraphrases require clarification, and clinical predicates are not
+translated into source selections. Approval is one-shot, bound to the request,
+connection, dataset and state snapshot. Editing, cancellation, disconnect or
+state drift invalidates it. Approval executes the captured action only; it does
+not resume the model conversation. This additional display approval does not
+replace the separate analysis-population confirmation. Direct user-entered local
+parser commands retain their original behavior. The model still chooses tools;
+the local grammar is an authorization boundary, not an AI model.
+
 ## State and history
 
 ToolSession receives a trusted bridge with snapshot, roster, records, dataset, resolve and atomic apply callbacks. snapshot contains {analysis,display}. A validated display operation cannot write analysis. Core validation rejects unknown fields, malformed cameras, invalid dates, nonfinite values, executable values/accessors, cycles and prototype payloads.

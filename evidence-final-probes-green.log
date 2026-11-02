@@ -1,0 +1,16 @@
+test_original_raw_anchor_counts_and_dates (fact_check_probes.SourceReview) ... ok
+test_selected_review_contains_synthetic_source_values (fact_check_probes.SourceReview) ... ok
+test_supported_anchor_requires_loaded_source_fields (fact_check_probes.SourceReview) ... ok
+test_unresolved_candidate_is_not_imputed (fact_check_probes.SourceReview) ... ok
+test_ambiguous_request_must_not_mutate_with_valid_but_inferred_call (fact_check_probes.ProbeBrowser) ... ok
+test_clinically_inferential_request_must_not_mutate (fact_check_probes.ProbeBrowser) ... ok
+test_default_egress_has_no_local_raw_values_or_ids (fact_check_probes.ProbeBrowser) ... ok
+test_selected_source_save_has_no_session_credential (fact_check_probes.ProbeBrowser) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 8.160s
+
+OK
+Original raw KN189 date/count cross-check: {"death": 36, "first_PD": 45, "first_PR": 23, "first_treatment": 60}
+Generic source-qualified PR patients: 25
+Selected local review/replay intentionally includes synthetic raw source values: confirmed

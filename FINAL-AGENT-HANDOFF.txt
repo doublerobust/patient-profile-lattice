@@ -1,0 +1,77 @@
+Model-driven lattice agent — integration handoff for t_bf154f89
+
+Status: implementation integrated and locally verified; independent final review requested, not self-approved. No deployment or publication.
+Workspace: /Users/openclaw/research/hermes-specialist-team/workspaces/writer/model-agent-final
+Branch: feature/model-agent-final
+Base: d1e76c3 (0eb084b integrated implementation plus independent fact-check probes).
+Imported F1 bf8ec76 as c4c616f; imported F2/F3 ac28071 as 4e4cb48, without conflicts.
+Use this integrated branch, not the older writer/model-agent partial implementation.
+
+Delivered behavior
+- User-configured OpenAI-compatible endpoint/model, session-only credential, local loopback adapter, opt-in egress consent and honest disconnected/tested labels.
+- Public HTTPS:443 destinations only, DNS validation/pinned connection, no redirects/proxies; loopback development requires exact startup allowlist.
+- Validated tool registry, separate analysis/display state, source-keyed query/highlight results, explicit counting units, analysis consequence preview and human confirmation, in-page diffs/IDs/Undo/Reset.
+- F1: whole-request-grounded display-scope proposal and one-shot local approval. Direct model subsets/focus/highlights fail closed; ambiguous and causal subset probes leave state/history unchanged and stop model follow-ups. This is a conservative grammar authorization boundary, not a universal language classifier.
+- Source-grounded alignment on /lattice preserves dates and analytical counts. Missing event and unresolved date groups remain visible. KN189 resolves treatment 60, first recorded PR 23, PD 45, death 36. Generic 100 resolves treatment 100 and PR 25; PR=1 in the old acceptance comment is contradicted by unchanged source records.
+- F2: no death capability for small/generic fixtures without loaded death mappings. Randomization unavailable everywhere. F3: snapshot-pinned audit at docs/lattice-agent-capabilities.md.
+- README now describes actual connection workflow, endpoint form, privacy and local development allowlist.
+
+Environment and setup
+The live terminal's python3 is Python 3.9.6 (not the 3.11 value declared by the runtime brief). It satisfies this project's >=3.9 requirement. Dependencies include pinned Playwright 1.56.0 and jsonschema 4.25.1; installed Chromium was exercised by the browser suites.
+Commands from the workspace:
+  git cherry-pick bf8ec76 ac28071
+    Both succeeded, followed by uv venv --python 3.11 .venv failing because uv is not on PATH; combined setup command exit 127. No cherry-pick retry needed.
+  python3 --version && python3 -m venv .venv && .venv/bin/python -m pip install -r requirements-test.txt && npm ci
+    Exit 0. npm reported zero vulnerabilities and an esbuild install-script review warning; subsequent real build succeeded.
+
+Verification executed on integrated production code (all subsequent edits are documentation/probe expectations only)
+  .venv/bin/python -m unittest discover -v > evidence-final-regression.log 2>&1
+    Exit 0: 109 tests, 244.792s, OK. Includes browser/local mock, endpoint/consent/credential tests; no skips reported.
+  npm test > evidence-final-node.log 2>&1
+    Exit 0: 58 tests passed, zero failures/skips.
+  node --test alignment-model.test.mjs > evidence-final-geometry.log 2>&1
+    Exit 0: 2 tests passed.
+  npm run build > evidence-final-build.log 2>&1
+    Exit 0. Real esbuild generated both bundles.
+  git diff --exit-code -- static/lattice.js static/renderer3d.js
+    Exit 0: regenerated bundles identical.
+  .venv/bin/python -m unittest fact_check_probes.SourceReview fact_check_probes.ProbeBrowser.test_ambiguous_request_must_not_mutate_with_valid_but_inferred_call fact_check_probes.ProbeBrowser.test_clinically_inferential_request_must_not_mutate fact_check_probes.ProbeBrowser.test_default_egress_has_no_local_raw_values_or_ids fact_check_probes.ProbeBrowser.test_selected_source_save_has_no_session_credential -v
+    Initial exit 1: 8 tests, 2 teardown failures, 7.747s. evidence-final-probes.log retained. Original no-mutation assertions passed; obsolete mock scripts expected a second model response despite the new immediate-refusal boundary.
+    Updated only those two probes to remove the unauthorized follow-up responses, retaining no-mutation assertions and adding refusal text, empty history and exactly two HTTP requests (test + action) assertions. Strict mock exhaustion remains enforced.
+    Rerun exit 0: 8 tests, 8.160s, OK. evidence-final-probes-green.log. These are implementer reruns of adapted independent probes, not independent approval.
+  .venv/bin/python -m unittest test_agent_e2e test_model_scope test_alignment_mapping_browser test_alignment_browser test_model_agent -v > evidence-final-acceptance.log 2>&1
+    Exit 0: 25 tests, 60.028s, OK.
+  .venv/bin/python audit_alignment.py > evidence-final-anchor-audit.json && cmp evidence-anchor-audit.json evidence-final-anchor-audit.json
+    Exit 0: exact reproduction of all three cohort audits.
+  .venv/bin/python app.py --verify-data > evidence-final-data.log 2>&1
+    Exit 0: PASS pinned hashes, normalized spec, synthetic flag, SUPPAE links.
+  .venv/bin/python data/validate.py >> evidence-final-data.log 2>&1
+    Exit 0: 18 tests, 0.065s, OK. This command refreshes data/verification.json and data/verification.txt, contrary to README's previous read-only wording (now corrected).
+  git diff --exit-code ca13cdf -- data fixtures cohort.py scenario_adapter.py
+    First exit 1 solely from refreshed verification timestamps/transcript, not patient fixtures. Restored only those two generated reports with git restore -- data/verification.json data/verification.txt; rerun exit 0. Source fixture/code unchanged.
+  git diff --check
+    Exit 0.
+
+Current integration edits beyond imported commits
+  README.md — connection/egress/endpoint instructions and validator side-effect disclosure.
+  docs/tool-registry.md — documents F1 scope approval and grammar.
+  docs/lattice-agent-capabilities.md — final integration F1 status, preserving bounded-language limitations.
+  fact_check_probes.py — immediate-refusal transport expectations plus stronger assertions.
+  FINAL-AGENT-HANDOFF.txt, evidence-final-*.log/json — this handoff and actual execution evidence.
+Imported application paths
+  alignment.py, model_agent.py, static/tool-registry.js, static/view-chat.js, static/view-chat.css.
+Imported audit/tests/CI
+  audit_alignment.py, test_alignment_capabilities.py, test_alignment_mapping_browser.py, test_tool_acceptance.py, test_model_scope.py, model-scope.test.cjs, test_agent_browser.py, test_agent_e2e.py, .github/workflows/model-agent-tests.yml, docs/lattice-agent-capabilities.md, docs/tool-registry.md, upstream handoffs/evidence.
+No production changes were added beyond the two focused prerequisite commits.
+Hotspots: static/view-chat.js and alignment.py; sibling fixes integrated as commits, no older snapshot overwrite. Main/other worktrees untouched.
+
+Intentionally unsupported / bounded claims
+- Randomization everywhere; small/generic death mapping; anchor-relative analytical windows; relative alignment outside /lattice; persistent/replayed relative alignment.
+- Clinical inference/causality, treatment advice, inferred response/dose/induction. Unknown display-selection wording requires explicit restatement. Read-only query and styling intent interpretation is still model-dependent, not a proven universal semantic firewall.
+- Development proposals are local session ledger entries, not persistent external tickets. They survive view Undo/Reset but not reload.
+- Credential tests cover actual exercised persistence/export/history/log/fixture surfaces using generated sentinel values. No universal secret-absence guarantee. Raw synthetic source data intentionally remains available in local selected review/export/replay; default model egress excludes it. Prompt text can contain IDs typed by the user.
+- Canvas gesture concurrency is not comprehensively serialized; detected snapshot drift is refused.
+- No external provider, real credential, public TLS handshake, physical iPad, hosted CI, deployment, publication, or final independent approval performed.
+
+Review request
+Recheck integrated F1/F2/F3 and original privacy/confirmation requirements at this branch. Inspect probe adaptations against preserved failing log, the bounded grammar safety tradeoff, and README/audit claims. All current proof is local execution with a scripted OpenAI-compatible endpoint, not a claim about actual provider language performance.

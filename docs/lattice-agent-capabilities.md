@@ -194,10 +194,15 @@ Implementation references: `alignment.py`, `model_agent.py`, `view_tools.py`,
   Display alignment is not support for those analyses.
 - Relative alignment on timeline and legacy `/3d`; persistence/replay of relative
   alignment (currently session-only), and durable external development tickets.
-- Arbitrary natural-language semantic grounding: the fact-check's F1 demonstrates
-  that schema-valid inferred patient selections can evade prompt-only ambiguity/
-  clinical-inference safeguards in the base snapshot. F2/F3 do not fix or approve
-  that separate defect. Structured schema refusal is not proof of intent safety.
+- Arbitrary natural-language semantic grounding is not established. The fact-check's
+  F1 reproduced inferred selections in the base snapshot. The final integration
+  includes the separate F1 fix: model display selections require a whole-request-
+  grounded `propose_display_scope` and one-shot local approval. Only explicit IDs,
+  source filters and exact JSON commands in the documented grammar are accepted;
+  unsupported paraphrases require clarification. This is a conservative safety
+  boundary, not general clinical-language understanding. Read-only queries and
+  non-selection styling still depend on the model for intent interpretation.
+  See [tool-registry.md](tool-registry.md) and `F1-HANDOFF.txt`.
 - Comprehensive canvas-gesture concurrency serialization, physical-device checks,
   live external-provider/TLS testing, hosted CI execution, deployment and
   independent approval are not established by this audit. Browser verification

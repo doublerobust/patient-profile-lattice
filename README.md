@@ -26,7 +26,48 @@ Then open one of:
 
 The server binds loopback only. The "Ask about this view" panel starts disconnected, with explicitly labeled local rule/parser commands. An optional user-configured model connection sends requests through the loopback adapter only after endpoint/model testing and explicit egress consent; it is not enabled by default. Credentials are session-only. See [the tool registry contract](docs/tool-registry.md) for validation, analysis confirmation, source IDs, Undo/Reset and limitations. Touch devices get a shared pointer controller: one-finger rotate (or pan by toggle), two-finger translate, centred pinch zoom, with desktop drag conventions retained.
 
-Two read-only integrity checks:
+### Optional model-driven panel (local, not deployed)
+
+For the model adapter, install the pinned JSON-schema dependency in a virtualenv
+(the test requirements also install it):
+
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install jsonschema==4.25.1
+.venv/bin/python app.py --cohort keynote189
+```
+
+Open `http://127.0.0.1:8765/lattice`, expand **Ask about this view**, then the model
+configuration. Enter the complete OpenAI-compatible `https://…/chat/completions`
+URL (not just a base URL), exact model ID and session credential. Test the
+connection and acknowledge the displayed endpoint/model/dataset egress dialog.
+Only a successful test changes the label to **Model-driven agent**. Local parser
+commands remain explicitly separate. External endpoints must resolve exclusively
+to public addresses and use HTTPS port 443; redirects and URL credentials/query
+parameters are refused. No external provider was used in verification.
+
+Model prompts leave this machine after consent. Default tool follow-ups send
+aggregate context, not source IDs or rows; text you type can itself contain
+identifiers. Record-level results require the separate per-request egress control
+and confirmation. Credentials stay in session memory, are cleared from the input
+before connection testing, and must not be saved in review/export/history files.
+Disconnect clears the configured connection.
+
+Try `Sort descending; show AE and EX at tier 2`, or request alignment to first
+recorded PR on the KN189 fixture. Patient/event selections use a separate one-shot
+scope approval; see [supported wording](docs/tool-registry.md#model-display-scope-approval).
+Analysis-population proposals have their own consequence preview and confirmation.
+Use in-panel Undo/Reset to reverse executed actions. Randomization and
+anchor-relative analytical windows remain unsupported, not approximated.
+
+For a development-only loopback model, pass an exact endpoint allowlist at startup,
+for example `--agent-dev-endpoint http://127.0.0.1:9000/v1/chat/completions`, and
+configure that identical URL in the panel. This does not start a model server.
+Automated tests start their own scripted local endpoint and use no external
+credentials. See [capability audit](docs/lattice-agent-capabilities.md) and
+[local-mock acceptance](docs/model-agent-e2e.md).
+
+Two integrity checks (the validator refreshes its local verification report):
 
 ```sh
 python3 app.py --verify-data     # pinned file hashes, normalized spec, synthetic-only flag, SUPPAE parent links

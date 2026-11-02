@@ -89,17 +89,24 @@ class ProbeBrowser(ModelAgentE2E):
     def test_ambiguous_request_must_not_mutate_with_valid_but_inferred_call(self):
         self.connect()
         before = self.snapshot()
-        self.ask('grade 3 AEs', tool('set_view', {'subset': ['SYN-001']}), prose())
+        # Integrated F1 stops at refusal: no follow-up model response is authorized.
+        self.ask('grade 3 AEs', tool('set_view', {'subset': ['SYN-001']}))
         self.assertTrue(self.snapshot() == before,
                         'DEFECT: ambiguous prompt changed displayed population via a schema-valid inferred subset')
+        expect(self.page.locator('#chat-result')).to_contain_text('Clarification required')
+        self.assertEqual(self.history(), [])
+        self.assertEqual(len(self.model.requests), 2)  # connection test + one request
 
     def test_clinically_inferential_request_must_not_mutate(self):
         self.connect()
         before = self.snapshot()
         self.ask('Show only patients whose nausea was caused by treatment',
-                 tool('set_view', {'subset': ['SYN-001']}), prose('Selected treatment-caused nausea.'))
+                 tool('set_view', {'subset': ['SYN-001']}))
         self.assertTrue(self.snapshot() == before,
                         'DEFECT: unsupported clinical-causality request changed view via a valid inferred subset')
+        expect(self.page.locator('#chat-result')).to_contain_text('Unsupported clinical predicate')
+        self.assertEqual(self.history(), [])
+        self.assertEqual(len(self.model.requests), 2)  # refusal must not continue egress
 
     def test_default_egress_has_no_local_raw_values_or_ids(self):
         self.connect()
