@@ -1,6 +1,7 @@
 import json
 from playwright.sync_api import expect
 from test_browser import BrowserFixture
+from waitfor import wait_for
 
 class ChatChecks(BrowserFixture):
     interactions=[]
@@ -29,7 +30,7 @@ class ChatChecks(BrowserFixture):
         for route in ['/', '/3d', '/lattice']:
             with self.subTest(route=route):
                 self.page.goto('http://127.0.0.1:%d%s' % (self.server.server_port,route))
-                self.page.wait_for_function('window.viewChatBridge !== undefined')
+                wait_for(self.page, 'window.viewChatBridge !== undefined')
                 self.page.emulate_media(reduced_motion='reduce')
                 self.page.locator('#tiers').select_option('2')
                 expect(self.page.locator('#chat-body')).to_be_hidden()
@@ -49,7 +50,7 @@ class ChatChecks(BrowserFixture):
                     expect(self.page.locator('[data-highlight-record]')).to_have_count(2)
                 else:
                     metric='lines' if route=='/lattice' else 'triangles'
-                    self.page.wait_for_function('(x)=>clinical3d.stats()[x.metric]>x.before',arg={'metric':metric,'before':geometry[metric]})
+                    wait_for(self.page, '(x)=>clinical3d.stats()[x.metric]>x.before',arg={'metric':metric,'before':geometry[metric]})
                 self.assertEqual(self.snapshot()['highlights'],['AE-001-1','AE-001-2'])
                 expect(self.page.locator('#chat-records')).to_have_text('AE-001-1\nAE-001-2')
                 self.assertEqual(counts,self.invariants())

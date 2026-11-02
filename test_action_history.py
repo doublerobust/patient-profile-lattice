@@ -5,6 +5,7 @@ from pathlib import Path
 import threading
 import unittest
 from playwright.sync_api import sync_playwright, expect
+from waitfor import wait_for
 
 ROOT = Path(__file__).resolve().parent
 
@@ -31,7 +32,7 @@ class HistoryBrowserChecks(unittest.TestCase):
         self.errors = []
         self.page.on('pageerror', lambda e: self.errors.append(str(e)))
         self.page.goto(f'http://127.0.0.1:{self.server.server_port}/history-demo.html')
-        self.page.wait_for_function('window.demoHistory !== undefined')
+        wait_for(self.page, 'window.demoHistory !== undefined')
 
     def tearDown(self):
         self.page.close()

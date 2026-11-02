@@ -19,6 +19,7 @@ from unittest.mock import patch
 
 from playwright.sync_api import expect, sync_playwright
 from app import Engine, ROOT, make_handler
+from waitfor import wait_for
 
 
 def tool(name, args):
@@ -113,7 +114,7 @@ class ModelAgentE2E(unittest.TestCase):
                 route.abort()
         self.context.route('**/*', local_only)
         self.page.goto(self.origin + '/lattice')
-        self.page.wait_for_function('window.viewChatBridge && window.lattice && lattice.ready && !busy')
+        wait_for(self.page, 'window.viewChatBridge && window.lattice && lattice.ready && !busy')
         self.page.emulate_media(reduced_motion='reduce')
         self.page.locator('#chat-toggle').click()
         self.page.locator('#agent-config summary').click()
@@ -325,7 +326,7 @@ class ModelAgentE2E(unittest.TestCase):
                              ('replay state', json.dumps(self.snapshot()))]:
             self.no_secret(value, label)
         self.page.reload()
-        self.page.wait_for_function('window.viewChatBridge && window.lattice && lattice.ready')
+        wait_for(self.page, 'window.viewChatBridge && window.lattice && lattice.ready')
         self.page.locator('#chat-toggle').click()
         expect(self.page.locator('#agent-status')).to_contain_text('No model is connected')
         expect(self.page.locator('#agent-key')).to_have_value('')

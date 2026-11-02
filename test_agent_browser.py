@@ -8,6 +8,7 @@ from playwright.sync_api import expect, sync_playwright
 from app import Engine, ROOT, make_handler
 from test_browser import BrowserFixture
 from test_model_agent import MockModel
+from waitfor import wait_for
 
 
 def call(name, args):
@@ -33,7 +34,7 @@ class AgentBrowserChecks(BrowserFixture):
     def setUp(self):
         super().setUp()
         self.page.goto('http://127.0.0.1:%d/lattice' % self.server.server_port)
-        self.page.wait_for_function('window.viewChatBridge !== undefined')
+        wait_for(self.page, 'window.viewChatBridge !== undefined')
         self.page.emulate_media(reduced_motion='reduce')
         self.page.locator('#chat-toggle').click()
         self.page.locator('#agent-config summary').click()

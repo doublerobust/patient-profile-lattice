@@ -6,6 +6,7 @@ from http.server import ThreadingHTTPServer
 from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 from app import Engine, make_handler
+from waitfor import wait_for
 ROOT=Path(__file__).parent
 
 class ThreeChecks(unittest.TestCase):
@@ -25,7 +26,7 @@ class ThreeChecks(unittest.TestCase):
         self.p.close();self.assertEqual(self.errors,[])
     def load(self):
         response=self.p.goto(self.base+'/3d');self.assertEqual(response.status,200)
-        self.p.wait_for_function('window.clinical3d?.ready')
+        wait_for(self.p, 'window.clinical3d?.ready')
         expect(self.p.locator('#counts')).to_have_text('100 qualifying patients · 298 qualifying AE source records')
     def test_route_and_same_data(self):
         self.load()
@@ -79,7 +80,7 @@ class ThreeChecks(unittest.TestCase):
         semantics=p.evaluate('clinical3d.stats().endStates')
         self.assertGreater(semantics['recorded'],0);self.assertGreater(semantics['ongoing'],0);self.assertGreater(semantics['unknown'],0)
         # Selection now starts a 900ms focus tween; source evidence arrives first.
-        p.wait_for_function('() => !busy && !clinical3d.stats().animating')
+        wait_for(p, '() => !busy && !clinical3d.stats().animating')
         p.evaluate('() => new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))')
         frames=p.evaluate('clinical3d.stats().frames');p.wait_for_timeout(300)
         self.assertEqual(p.evaluate('clinical3d.stats().frames'),frames)
@@ -90,20 +91,20 @@ class ThreeChecks(unittest.TestCase):
         self.load();p=self.p
         p.select_option('#event-selector','AE-004-1')
         expect(p.locator('#selection')).to_contain_text('Selected AE-004-1')
-        p.wait_for_function('() => !busy && !clinical3d.stats().animating')
+        wait_for(p, '() => !busy && !clinical3d.stats().animating')
         before=p.evaluate('clinical3d.stats().view.span')
         self.assertLess(before,35)
         spec=p.locator('#spec').text_content()
         counts=p.locator('#counts').text_content()
         p.click('#zoom-in')
-        p.wait_for_function('() => !clinical3d.stats().animating')
+        wait_for(p, '() => !clinical3d.stats().animating')
         self.assertEqual(p.evaluate('clinical3d.stats().view.span'),before)
         p.locator('#scene').hover()
         p.mouse.wheel(0,-80)
         p.wait_for_timeout(100)
         self.assertEqual(p.evaluate('clinical3d.stats().view.span'),before)
         p.click('#zoom-out')
-        p.wait_for_function('() => !clinical3d.stats().animating')
+        wait_for(p, '() => !clinical3d.stats().animating')
         # GSAP rounds interpolated property values to six decimal places.
         self.assertAlmostEqual(p.evaluate('clinical3d.stats().view.span'),before/0.65,delta=1e-6)
         self.assertEqual(p.locator('#spec').text_content(),spec)

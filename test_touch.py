@@ -4,6 +4,7 @@ An iPad viewport/hasTouch is emulation, NOT a physical Safari result.
 import json
 from playwright.sync_api import expect
 from test_browser import BrowserFixture
+from waitfor import wait_for
 
 
 class TouchChecks(BrowserFixture):
@@ -22,7 +23,7 @@ class TouchChecks(BrowserFixture):
         self.page.locator('#tiers').select_option('2')
         self.canvas = self.page.locator('#timeline' if route == '/' else '#scene')
         if route != '/':
-            self.page.wait_for_function('() => window.clinical3d?.ready')
+            wait_for(self.page, '() => window.clinical3d?.ready')
         self.canvas.scroll_into_view_if_needed()
         self.page.wait_for_timeout(100)
         self.baseline = self.invariants()
@@ -181,7 +182,7 @@ class TouchChecks(BrowserFixture):
                     self.page.clock.pause_at(self.page.evaluate('Date.now()'))
                 self.page.locator('#event-selector').evaluate('''e => {
                     e.value='AE-001-2';e.dispatchEvent(new Event('change',{bubbles:true}));}''')
-                self.page.wait_for_function('''() => window.clinical3d ? window.clinical3d.stats().animating :
+                wait_for(self.page, '''() => window.clinical3d ? window.clinical3d.stats().animating :
                   document.querySelector('#timeline').dataset.animating==='true' ''')
                 x, y = self.center()
                 self.touch('touchStart', [(x, y)])

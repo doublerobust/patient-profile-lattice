@@ -2,12 +2,13 @@
 import json
 from playwright.sync_api import expect
 from test_browser import BrowserFixture
+from waitfor import wait_for
 
 
 class UnavailableMappingBrowser(BrowserFixture):
     def test_small_death_is_development_limitation_without_state_or_history_change(self):
         self.page.goto('http://127.0.0.1:%d/lattice' % self.server.server_port)
-        self.page.wait_for_function('window.viewChatBridge !== undefined && window.lattice.ready')
+        wait_for(self.page, 'window.viewChatBridge !== undefined && window.lattice.ready')
         self.page.emulate_media(reduced_motion='reduce')
         self.page.locator('#chat-toggle').click()
 

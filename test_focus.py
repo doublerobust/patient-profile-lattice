@@ -6,6 +6,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from playwright.sync_api import expect
 from test_browser import BrowserFixture, EVIDENCE
+from waitfor import wait_for
 
 
 def stamp(value):
@@ -19,7 +20,7 @@ class FocusChecks(BrowserFixture):
 
     def settle(self, gpu):
         if gpu:
-            self.page.wait_for_function('() => clinical3d.ready && !clinical3d.stats().animating')
+            wait_for(self.page, '() => clinical3d.ready && !clinical3d.stats().animating')
         else:
             expect(self.page.locator('#timeline')).to_have_attribute('data-animating', 'false')
         self.page.wait_for_timeout(60)

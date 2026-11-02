@@ -1,0 +1,2235 @@
+[
+  {
+    "route": "/",
+    "request": "grade 3 AEs",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "result": "Unsupported or ambiguous request. Which counting unit (patients or AE records), date window and anchor? Use an explicit documented command; nothing changed.",
+    "record_ids": "None",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/",
+    "request": "patients after treatment",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "result": "Unsupported or ambiguous request. Which counting unit (patients or AE records), date window and anchor? Use an explicit documented command; nothing changed.",
+    "record_ids": "None",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/",
+    "request": "count grade 3 AEs",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "result": "Unsupported or ambiguous request. Which counting unit (patients or AE records), date window and anchor? Use an explicit documented command; nothing changed.",
+    "record_ids": "None",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/",
+    "request": "{\"tool\": \"set_view\", \"args\": {\"sort\": \"asc\", \"analysis_state\": {}}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "result": "Unsupported fields or ambiguous arguments; specify the documented fields.",
+    "record_ids": "None",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/",
+    "request": "{\"tool\": \"set_view\", \"args\": {\"sort\": \"desc\", \"focus\": \"SYN-001\", \"layers\": [\"AE\", \"EX\"], \"tier\": \"2\", \"camera\": {\"start\": 1735603200000, \"end\": 1739491200000}}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ]
+        ],
+        "hidden_lanes": [
+          "CM",
+          "RS"
+        ],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "desc",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735603200000,
+        "end": 1739491200000
+      },
+      "highlights": []
+    },
+    "result": "View changed; analysis unchanged.",
+    "record_ids": "AE-001-1\nAE-001-2\nAE-002-1\nCM-001-1\nCM-001-2\nCM-001-3\nCM-002-1\nEX-001-1\nEX-001-2\nEX-002-1\nRS-001-1\nRS-002-1",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/",
+    "request": "{\"tool\": \"highlight_events\", \"args\": {\"scope\": \"current_analysis\", \"filters\": {\"term\": \"SYNTHETIC NAUSEA\"}}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": [
+        "AE-001-1",
+        "AE-001-2"
+      ]
+    },
+    "result": "Highlight overlay replaced: 2 AE records; analysis unchanged. Synthetic fixture counts, not trial prevalence. Current qualifying analysis, independent of view; exact AE onset calendar window inclusive, or all dates when omitted. Linked CM means documented association, not causation.",
+    "record_ids": "AE-001-1\nAE-001-2",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/",
+    "request": "{\"tool\": \"query_data\", \"args\": {\"scope\": \"current_analysis\", \"unit\": \"AE records\", \"filters\": {\"term\": \"SYNTHETIC NAUSEA\"}}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "result": "2 AE records; read-only, view unchanged. Synthetic fixture counts, not trial prevalence. Current qualifying analysis, independent of view; exact AE onset calendar window inclusive, or all dates when omitted. Linked CM means documented association, not causation.",
+    "record_ids": "AE-001-1\nAE-001-2",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/",
+    "request": "{\"tool\": \"query_data\", \"args\": {\"scope\": \"current_analysis\", \"unit\": \"patients\", \"filters\": {\"term\": \"SYNTHETIC NAUSEA\"}}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "result": "1 patients; read-only, view unchanged. Synthetic fixture counts, not trial prevalence. Current qualifying analysis, independent of view; exact AE onset calendar window inclusive, or all dates when omitted. Linked CM means documented association, not causation.",
+    "record_ids": "AE-001-1\nAE-001-2",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/",
+    "request": "{\"tool\": \"set_view\", \"args\": {\"tier\": \"1\"}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "1",
+      "alignment": null,
+      "renderer": "timeline",
+      "camera": {
+        "start": 1735516800000,
+        "end": 1738627200000
+      },
+      "highlights": []
+    },
+    "result": "View changed; analysis unchanged.",
+    "record_ids": "AE-001-1\nAE-001-2\nAE-002-1\nCM-001-1\nCM-001-2\nCM-001-3\nCM-002-1\nEX-001-1\nEX-001-2\nEX-002-1\nRS-001-1\nRS-002-1",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/3d",
+    "request": "{\"tool\": \"set_view\", \"args\": {\"sort\": \"desc\", \"focus\": \"SYN-001\", \"layers\": [\"AE\", \"EX\"], \"tier\": \"2\", \"camera\": {\"position\": [500, 500, 4000], \"target\": [0, 0, 0], \"span\": 900}}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "3d",
+      "camera": {
+        "distance": 5000,
+        "x": 880,
+        "y": -14,
+        "z": 0,
+        "span": 1400,
+        "yaw": 0,
+        "pitch": 0,
+        "peel": 0
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ]
+        ],
+        "hidden_lanes": [
+          "CM",
+          "RS"
+        ],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "desc",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "3d",
+      "camera": {
+        "distance": 4062.01920231798,
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "span": 900,
+        "yaw": 0.12435499454676144,
+        "pitch": 0.12340446673478643,
+        "peel": 0
+      },
+      "highlights": []
+    },
+    "result": "View changed; analysis unchanged.",
+    "record_ids": "AE-001-1\nAE-001-2\nAE-002-1\nCM-001-1\nCM-001-2\nCM-001-3\nCM-002-1\nEX-001-1\nEX-001-2\nEX-002-1\nRS-001-1\nRS-002-1",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/3d",
+    "request": "{\"tool\": \"highlight_events\", \"args\": {\"scope\": \"current_analysis\", \"filters\": {\"term\": \"SYNTHETIC NAUSEA\"}}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "3d",
+      "camera": {
+        "distance": 5000,
+        "x": 880,
+        "y": -14,
+        "z": 0,
+        "span": 1400,
+        "yaw": 0,
+        "pitch": 0,
+        "peel": 0
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "3d",
+      "camera": {
+        "distance": 5000,
+        "x": 880,
+        "y": -14,
+        "z": 0,
+        "span": 1400,
+        "yaw": 0,
+        "pitch": 0,
+        "peel": 0
+      },
+      "highlights": [
+        "AE-001-1",
+        "AE-001-2"
+      ]
+    },
+    "result": "Highlight overlay replaced: 2 AE records; analysis unchanged. Synthetic fixture counts, not trial prevalence. Current qualifying analysis, independent of view; exact AE onset calendar window inclusive, or all dates when omitted. Linked CM means documented association, not causation.",
+    "record_ids": "AE-001-1\nAE-001-2",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/3d",
+    "request": "{\"tool\": \"query_data\", \"args\": {\"scope\": \"current_analysis\", \"unit\": \"AE records\", \"filters\": {\"term\": \"SYNTHETIC NAUSEA\"}}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "3d",
+      "camera": {
+        "distance": 5000,
+        "x": 880,
+        "y": -14,
+        "z": 0,
+        "span": 1400,
+        "yaw": 0,
+        "pitch": 0,
+        "peel": 0
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "3d",
+      "camera": {
+        "distance": 5000,
+        "x": 880,
+        "y": -14,
+        "z": 0,
+        "span": 1400,
+        "yaw": 0,
+        "pitch": 0,
+        "peel": 0
+      },
+      "highlights": []
+    },
+    "result": "2 AE records; read-only, view unchanged. Synthetic fixture counts, not trial prevalence. Current qualifying analysis, independent of view; exact AE onset calendar window inclusive, or all dates when omitted. Linked CM means documented association, not causation.",
+    "record_ids": "AE-001-1\nAE-001-2",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/3d",
+    "request": "{\"tool\": \"query_data\", \"args\": {\"scope\": \"current_analysis\", \"unit\": \"patients\", \"filters\": {\"term\": \"SYNTHETIC NAUSEA\"}}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "3d",
+      "camera": {
+        "distance": 5000,
+        "x": 880,
+        "y": -14,
+        "z": 0,
+        "span": 1400,
+        "yaw": 0,
+        "pitch": 0,
+        "peel": 0
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "3d",
+      "camera": {
+        "distance": 5000,
+        "x": 880,
+        "y": -14,
+        "z": 0,
+        "span": 1400,
+        "yaw": 0,
+        "pitch": 0,
+        "peel": 0
+      },
+      "highlights": []
+    },
+    "result": "1 patients; read-only, view unchanged. Synthetic fixture counts, not trial prevalence. Current qualifying analysis, independent of view; exact AE onset calendar window inclusive, or all dates when omitted. Linked CM means documented association, not causation.",
+    "record_ids": "AE-001-1\nAE-001-2",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/3d",
+    "request": "{\"tool\": \"set_view\", \"args\": {\"tier\": \"1\"}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "3d",
+      "camera": {
+        "distance": 5000,
+        "x": 880,
+        "y": -14,
+        "z": 0,
+        "span": 1400,
+        "yaw": 0,
+        "pitch": 0,
+        "peel": 0
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "1",
+      "alignment": null,
+      "renderer": "3d",
+      "camera": {
+        "distance": 5000,
+        "x": 880,
+        "y": -14,
+        "z": 0,
+        "span": 1400,
+        "yaw": 0,
+        "pitch": 0,
+        "peel": 0
+      },
+      "highlights": []
+    },
+    "result": "View changed; analysis unchanged.",
+    "record_ids": "AE-001-1\nAE-001-2\nAE-002-1\nCM-001-1\nCM-001-2\nCM-001-3\nCM-002-1\nEX-001-1\nEX-001-2\nEX-002-1\nRS-001-1\nRS-002-1",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/lattice",
+    "request": "{\"tool\": \"set_view\", \"args\": {\"sort\": \"desc\", \"focus\": \"SYN-001\", \"layers\": [\"AE\", \"EX\"], \"tier\": \"2\", \"camera\": {\"position\": [500, 500, 4000], \"target\": [0, 0, 0], \"span\": 900}}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "lattice",
+      "camera": {
+        "yaw": 0.62,
+        "pitch": 0.38,
+        "span": 1600,
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "distance": 5000
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ]
+        ],
+        "hidden_lanes": [
+          "CM",
+          "RS"
+        ],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "desc",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "lattice",
+      "camera": {
+        "yaw": 0.12435499454676144,
+        "pitch": 0.12340446673478643,
+        "span": 900,
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "distance": 4062.01920231798
+      },
+      "highlights": []
+    },
+    "result": "View changed; analysis unchanged.",
+    "record_ids": "AE-001-1\nAE-001-2\nAE-002-1\nCM-001-1\nCM-001-2\nCM-001-3\nCM-002-1\nEX-001-1\nEX-001-2\nEX-002-1\nRS-001-1\nRS-002-1",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/lattice",
+    "request": "{\"tool\": \"highlight_events\", \"args\": {\"scope\": \"current_analysis\", \"filters\": {\"term\": \"SYNTHETIC NAUSEA\"}}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "lattice",
+      "camera": {
+        "yaw": 0.62,
+        "pitch": 0.38,
+        "span": 1600,
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "distance": 5000
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "lattice",
+      "camera": {
+        "yaw": 0.62,
+        "pitch": 0.38,
+        "span": 1600,
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "distance": 5000
+      },
+      "highlights": [
+        "AE-001-1",
+        "AE-001-2"
+      ]
+    },
+    "result": "Highlight overlay replaced: 2 AE records; analysis unchanged. Synthetic fixture counts, not trial prevalence. Current qualifying analysis, independent of view; exact AE onset calendar window inclusive, or all dates when omitted. Linked CM means documented association, not causation.",
+    "record_ids": "AE-001-1\nAE-001-2",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/lattice",
+    "request": "{\"tool\": \"query_data\", \"args\": {\"scope\": \"current_analysis\", \"unit\": \"AE records\", \"filters\": {\"term\": \"SYNTHETIC NAUSEA\"}}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "lattice",
+      "camera": {
+        "yaw": 0.62,
+        "pitch": 0.38,
+        "span": 1600,
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "distance": 5000
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "lattice",
+      "camera": {
+        "yaw": 0.62,
+        "pitch": 0.38,
+        "span": 1600,
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "distance": 5000
+      },
+      "highlights": []
+    },
+    "result": "2 AE records; read-only, view unchanged. Synthetic fixture counts, not trial prevalence. Current qualifying analysis, independent of view; exact AE onset calendar window inclusive, or all dates when omitted. Linked CM means documented association, not causation.",
+    "record_ids": "AE-001-1\nAE-001-2",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/lattice",
+    "request": "{\"tool\": \"query_data\", \"args\": {\"scope\": \"current_analysis\", \"unit\": \"patients\", \"filters\": {\"term\": \"SYNTHETIC NAUSEA\"}}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "lattice",
+      "camera": {
+        "yaw": 0.62,
+        "pitch": 0.38,
+        "span": 1600,
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "distance": 5000
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "lattice",
+      "camera": {
+        "yaw": 0.62,
+        "pitch": 0.38,
+        "span": 1600,
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "distance": 5000
+      },
+      "highlights": []
+    },
+    "result": "1 patients; read-only, view unchanged. Synthetic fixture counts, not trial prevalence. Current qualifying analysis, independent of view; exact AE onset calendar window inclusive, or all dates when omitted. Linked CM means documented association, not causation.",
+    "record_ids": "AE-001-1\nAE-001-2",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  },
+  {
+    "route": "/lattice",
+    "request": "{\"tool\": \"set_view\", \"args\": {\"tier\": \"1\"}}",
+    "before": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "2",
+      "alignment": null,
+      "renderer": "lattice",
+      "camera": {
+        "yaw": 0.62,
+        "pitch": 0.38,
+        "span": 1600,
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "distance": 5000
+      },
+      "highlights": []
+    },
+    "after": {
+      "view": {
+        "display_date_window": null,
+        "focus_patient_keys": [],
+        "hidden_lanes": [],
+        "patient_sort": [
+          {
+            "direction": "asc",
+            "field": "USUBJID"
+          }
+        ],
+        "selection": {
+          "mark_id": "mark:synthetic-spike-v1:AE-001-2",
+          "source_record_ids": [
+            "AE-001-2"
+          ]
+        }
+      },
+      "sort": "duration",
+      "tier": "1",
+      "alignment": null,
+      "renderer": "lattice",
+      "camera": {
+        "yaw": 0.62,
+        "pitch": 0.38,
+        "span": 1600,
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "distance": 5000
+      },
+      "highlights": []
+    },
+    "result": "View changed; analysis unchanged.",
+    "record_ids": "AE-001-1\nAE-001-2\nAE-002-1\nCM-001-1\nCM-001-2\nCM-001-3\nCM-002-1\nEX-001-1\nEX-001-2\nEX-002-1\nRS-001-1\nRS-002-1",
+    "analysis": {
+      "analysis": {
+        "diagnostics": [],
+        "population_ae_record_count": 7,
+        "population_patient_count": 3,
+        "qualifying_ae_record_count": 3,
+        "qualifying_ae_record_ids": [
+          "AE-001-1",
+          "AE-001-2",
+          "AE-002-1"
+        ],
+        "qualifying_patient_count": 2,
+        "qualifying_patient_keys": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ]
+        ],
+        "status": "executed"
+      },
+      "spec": {
+        "ae_predicate": {
+          "operator": "eq",
+          "value": "SEVERE",
+          "variable": "AESEV"
+        },
+        "population": [
+          [
+            "SYN-SPIKE",
+            "SYN-001"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-002"
+          ],
+          [
+            "SYN-SPIKE",
+            "SYN-003"
+          ]
+        ],
+        "temporal_window": null
+      },
+      "signature": "25e0a5cdb2016a0060cc090904e06c253d16c4a14df625ce995183d95a3948de"
+    }
+  }
+]

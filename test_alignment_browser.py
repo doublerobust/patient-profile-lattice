@@ -8,6 +8,7 @@ from app import Engine, ROOT, make_handler
 from test_browser import BrowserFixture
 import test_agent_browser as agent_tests
 from test_model_agent import MockModel
+from waitfor import wait_for
 
 
 class AlignmentBrowserChecks(BrowserFixture):
@@ -30,7 +31,7 @@ class AlignmentBrowserChecks(BrowserFixture):
     def setUp(self):
         super().setUp()
         self.page.goto('http://127.0.0.1:%d/lattice' % self.server.server_port)
-        self.page.wait_for_function('window.viewChatBridge !== undefined && window.lattice.ready')
+        wait_for(self.page, 'window.viewChatBridge !== undefined && window.lattice.ready')
         self.page.emulate_media(reduced_motion='reduce')
         self.page.locator('#chat-toggle').click()
         self.page.locator('#agent-config summary').click()
@@ -70,14 +71,14 @@ class AlignmentBrowserChecks(BrowserFixture):
         self.page.locator('#chat-undo').click()
         expect(self.page.locator('#chat-result')).to_contain_text('Undo:')
         self.assertEqual(self.snapshot(), baseline)
-        self.page.wait_for_function('lattice.stats().alignment === "calendar"')
+        wait_for(self.page, 'lattice.stats().alignment === "calendar"')
         self.assertEqual(self.page.evaluate('lattice.stats().coordinates'), coordinates)
         # Exercise every projection with aligned coordinates; no records disappear.
         self.ask('Align by first PR', [agent_tests.call('set_alignment', {'anchor': 'first_PR'})])
         self.page.locator('#chat-toggle').click()
         for projection in ('patient-time', 'patient-layer', 'layer-time', 'full'):
             self.page.locator('#lattice-'+projection).click()
-            self.page.wait_for_function('p=>lattice.stats().projection===p', arg=projection)
+            wait_for(self.page, 'p=>lattice.stats().projection===p', arg=projection)
             self.assertEqual(self.page.evaluate('state.analysis'), original['analysis'])
             if projection == 'layer-time':
                 cells = self.page.evaluate('lattice.stats().cells')
@@ -108,7 +109,7 @@ class AlignmentBrowserChecks(BrowserFixture):
         self.ask('Restore absolute dates', [agent_tests.call('set_alignment', {'anchor':'calendar'})])
         expect(self.page.locator('#lattice-alignment')).to_contain_text('Calendar date (absolute)')
         self.page.goto('http://127.0.0.1:%d/3d' % self.server.server_port)
-        self.page.wait_for_function('window.viewChatBridge !== undefined')
+        wait_for(self.page, 'window.viewChatBridge !== undefined')
         result = self.page.evaluate("async()=>{const r=await viewChatBridge.agentTool('set_alignment',{anchor:'first_PR'});try{viewChatBridge.setAlignment(r)}catch(e){return e.message}}")
         self.assertIn('supported on /lattice only', result)
         self.assertIsNone(self.snapshot()['display']['alignment'])

@@ -6,6 +6,7 @@ import threading
 import unittest
 from playwright.sync_api import sync_playwright, expect
 from app import Engine, canonical, make_handler
+from waitfor import wait_for
 
 ROOT = Path(__file__).resolve().parent
 EVIDENCE = ROOT / 'evidence'
@@ -68,7 +69,7 @@ class BrowserFixture(unittest.TestCase):
         expect(self.page.locator('#sort')).to_be_enabled()
 
     def settled(self):
-        self.page.wait_for_function("() => !busy && document.querySelector('#timeline').dataset.animating === 'false'")
+        wait_for(self.page, "() => !busy && document.querySelector('#timeline').dataset.animating === 'false'")
 
     def choose_hit(self, record):
         # Overlapping bodies now offer an explicit source chooser, not a silent pick.
