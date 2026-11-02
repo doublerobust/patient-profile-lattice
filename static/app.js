@@ -10,6 +10,7 @@ let busy = false;
 let displaySort = 'duration';
 let tierMode = 'auto';
 let highlightIds = [];
+let displayAlignment = null; // Session-only view transform; never analytical state or source dates.
 const json = value => JSON.stringify(value, null, 2);
 async function api(path, body) {
   const options = body === undefined ? {} : {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)};
@@ -196,7 +197,7 @@ function showCoincident(marks) {
   panel.querySelector('button').focus();
 }
 function drawTimeline() {
-  if (window.clinical3d) return window.clinical3d.update({state, patients:sortedPatients(), tierMode, activateMark, dateLabel, cancelFocus, highlightIds});
+  if (window.clinical3d) return window.clinical3d.update({state, patients:sortedPatients(), tierMode, activateMark, dateLabel, cancelFocus, highlightIds, alignment:displayAlignment});
   if (!camera) initCamera();
   const svg = $('timeline'); svg.replaceChildren();
   if (frame === null) svg.dataset.animating = 'false';
@@ -401,7 +402,7 @@ function bind() {
   $('open-source').addEventListener('click',()=>action(async()=>{ const packageData=await api('export',{spec:state.spec});showEvidence(packageData.selection_evidence); }));
   $('save').addEventListener('click',()=>action(async()=>{ const packageData=await api('export',{spec:state.spec});localStorage.setItem(storageKey,JSON.stringify(packageData));$('replay-result').textContent='Saved exact normalized review locally in this browser.'; }));
   async function replay(packageData) {
-    const restored=await api('replay',{package:packageData});state=restored;
+    const restored=await api('replay',{package:packageData});state=restored;displayAlignment=null;
     if (frame !== null) cancelAnimationFrame(frame);
     frame=null; camera={...overview}; targetCamera={...overview}; displaySort=state.display_config.default_sort; tierMode='auto'; $('tiers').value='auto'; render();
     if (window.clinical3d) window.clinical3d.reset();
@@ -421,17 +422,25 @@ function bind() {
   }));
 }
 function mountChat() {
-  const snapshot=()=>({view:structuredClone(state.spec.view_state),sort:displaySort,tier:tierMode,
+  const snapshot=()=>({view:structuredClone(state.spec.view_state),sort:displaySort,tier:tierMode,alignment:structuredClone(displayAlignment),renderer:window.lattice?'lattice':window.clinical3d?'3d':'timeline',
     camera:window.clinical3d?window.clinical3d.chatSnapshot():{...camera},highlights:[...highlightIds]});
   const applyCamera=c=>{cancelFocus();if(window.clinical3d)window.clinical3d.chatRestore(c);else {camera={...c};targetCamera={...c};drawTimeline();}};
   async function restore(saved) {
     const spec=structuredClone(state.spec);spec.view_state=structuredClone(saved.view);
     const next=await api('evaluate',{spec});
-    state=next;displaySort=saved.sort;tierMode=saved.tier;highlightIds=[...saved.highlights];$('tiers').value=tierMode;
+    state=next;displaySort=saved.sort;tierMode=saved.tier;highlightIds=[...saved.highlights];displayAlignment=structuredClone(saved.alignment);$('tiers').value=tierMode;
     render();applyCamera(saved.camera);
   }
   window.viewChatBridge={snapshot,restore,roster:()=>state.roster,is3d:()=>!!window.clinical3d,
     busy:()=>busy,signature:()=>state.analysis_signature,
+    dataset:()=>state.spec.snapshot_sha256,
+    agent:body=>api('agent/model',{...body,spec:state.spec,view:snapshot()}),
+    agentTool:(tool,args,record_egress=false)=>api('agent/tool',{spec:state.spec,tool,args,record_egress}),
+    capabilities:()=>api('agent/capabilities'),
+    setAlignment:result=>{if(!window.lattice)throw Error('Display alignment is supported on /lattice only; development task required for this renderer. Nothing changed.');displayAlignment=result.anchor==='calendar'?null:structuredClone(result);drawTimeline();},
+    analysisSnapshot:()=>structuredClone(state.spec.analysis_state),
+    setAnalysis:async analysis=>{const spec=structuredClone(state.spec);spec.analysis_state=structuredClone(analysis);state=await api('evaluate',{spec,analysis_change:true});render();},
+    setPopulation:async population=>{const spec=structuredClone(state.spec);spec.analysis_state.population=structuredClone(population);state=await api('evaluate',{spec,analysis_change:true});render();},
     lock:async work=>{busy=true;const controls=[...document.querySelectorAll('fieldset, .replay button, .replay input, #event-selector')];controls.forEach(e=>e.disabled=true);try{await work();}finally{busy=false;controls.forEach(e=>e.disabled=false);}},
     query:args=>api('view-query',{spec:state.spec,args}),
     records:()=>[...new Set(state.marks.map(m=>m.record_id))].sort(),
@@ -441,6 +450,7 @@ function mountChat() {
       if('sort' in args)saved.sort=args.sort;
       if('tier' in args)saved.tier=args.tier;
       if('focus' in args)saved.view.focus_patient_keys=args.focus===null?[]:state.roster.filter(p=>p[1]===args.focus);
+      if('subset' in args)saved.view.focus_patient_keys=state.roster.filter(p=>args.subset.includes(p[1]));
       if('layers' in args)saved.view.hidden_lanes=['AE','CM','EX','RS'].filter(l=>!args.layers.includes(l));
       if(args.camera){
         if(!window.clinical3d)saved.camera=args.camera;

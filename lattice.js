@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {gsap} from 'gsap';
-import {DAY, LAYERS, dateNumber, iso, visibleMarks, uniqueSources, summaries, projection} from './lattice-model.mjs';
+import {DAY, LAYERS, dateNumber, iso, visibleMarks, uniqueSources, summaries, projection, alignedTime, alignmentRoster} from './lattice-model.mjs';
 
 // Independent interaction implementation; external reference code is not used.
 // app.js remains the sole owner of engine state, analytical actions and provenance.
@@ -31,6 +31,8 @@ shell.before(toolbar);
 const info=document.createElement('p');info.id='scene-info';info.setAttribute('role','status');shell.after(info);
 const tooltip=document.createElement('p');tooltip.id='scene-tooltip';info.after(tooltip);
 const note=document.createElement('p');note.className='small';note.id='lattice-semantics';tooltip.after(note);
+const alignmentLabel=document.createElement('p');alignmentLabel.id='lattice-alignment';alignmentLabel.setAttribute('role','status');note.after(alignmentLabel);
+const unalignedList=document.createElement('details');unalignedList.id='lattice-unaligned';alignmentLabel.after(unalignedList);
 const cellLabel=document.createElement('label');cellLabel.textContent='Projection cell (keyboard drill-down) ';
 cellLabel.className='lattice-cell-control';
 const cellSelect=document.createElement('select');cellSelect.id='lattice-cell';cellLabel.append(cellSelect);
@@ -69,7 +71,7 @@ function focusMark(mark, intent){
   const aggregate=['patient-layer','layer-time'].includes(projection(view.yaw,view.pitch).mode);
   const angles=aggregate?{yaw:.62,pitch:.38}:{};
   const targetProjection=aggregate?projection(.62,.38):projection(view.yaw,view.pitch);
-  const p=[wx(mark.date),row.get(mark.patient_key.join('/')),layer.get(mark.lane)];
+  const p=[markX(mark.date,mark),row.get(mark.patient_key.join('/')),layer.get(mark.lane)];
   p[targetProjection.axis]*=1-targetProjection.strength;
   animate({...angles,x:p[0],y:p[1],z:p[2],span:Math.max(8,Math.min(120,fullSpan*model.state.display_config.close_zoom_max_days/((maxDate-minDate)/DAY)*.8))});
 }
@@ -83,14 +85,25 @@ function applyCamera(){
   camera.up.copy(up);camera.position.set(view.x,view.y,view.z).addScaledVector(direction,view.distance||5000);
   camera.lookAt(view.x,view.y,view.z);camera.updateProjectionMatrix();camera.updateMatrixWorld();
 }
-const wx=d=>d ? -600+(dateNumber(d)-minDate)/(maxDate-minDate)*1200 : 730;
+const relative=()=>!!model?.alignment && model.alignment.anchor!=='calendar';
+const timeX=t=>t===null?730:-600+(t-minDate)/(maxDate-minDate)*1200;
+const wx=d=>timeX(d?dateNumber(d):null);
+const bucketX=b=>b==='no_qualifying_event'?940:b==='event_date_unresolved'?1180:730;
+function markX(d,m){
+  const p=model.alignment?.patients.find(p=>p.patient_key.join('/')===m.patient_key.join('/'));
+  if(relative() && p?.status!=='resolved')return bucketX(p?.status||'no_qualifying_event');
+  return timeX(alignedTime(d,m.patient_key,model.alignment));
+}
+const tick=i=>minDate+(maxDate-minDate)*i/6;
+const tickLabel=i=>relative()?String(Math.round(tick(i)/DAY)):iso(tick(i));
+const bucketLabel=b=>b==='no_qualifying_event'?'Unaligned: no qualifying event recorded':b==='event_date_unresolved'?'Unaligned: event recorded but date unresolved':'Incomplete start';
 function maxTier(){return model.tierMode!=='auto'?+model.tierMode:
   view.span>=fullSpan?0:(maxDate-minDate)/DAY*view.span/fullSpan<=model.state.display_config.close_zoom_max_days?2:
   (maxDate-minDate)/DAY*view.span/fullSpan<=model.state.display_config.mid_zoom_max_days?1:0;}
 function cellText(c){return c.mode==='patient-layer'?`${c.patientKey[1]} · ${c.lane} · ${c.recordCount} source records`:
-  `${c.lane} · ${c.start?c.start+' to '+c.end:'Incomplete start'} · ${c.patientCount}/${c.denominator} visible patients · ${c.recordCount} source records`;}
+  `${c.lane} · ${c.start?c.start+' to '+c.end:bucketLabel(c.bucket)} · ${c.patientCount}/${c.denominator} ${relative()&&c.bin!==null?'anchor-resolved visible':'visible group'} patients · ${c.recordCount} source records`;}
 function cellPosition(c){return c.mode==='patient-layer'?[0,row.get(c.patientKey.join('/')),layer.get(c.lane)]:
-  [c.bin===null?730:wx(iso(minDate+(c.bin*30+14.5)*DAY)),0,layer.get(c.lane)];}
+  [c.bin===null?bucketX(c.bucket):timeX((relative()?0:minDate)+(c.bin*30+14.5)*DAY),0,layer.get(c.lane)];}
 function makeAtlas(texts){
   const el=document.createElement('canvas');el.width=4096;el.height=4096;
   const ctx=el.getContext('2d'),slots=new Map();let index=0;
@@ -110,10 +123,11 @@ function rebuild(){
   row=new Map(model.patients.map((p,i)=>[p.join('/'),(model.patients.length-1)*6-i*12]));
   // Keep domain coordinates fixed even if a domain is hidden.
   layer=new Map(LAYERS.map((d,i)=>[d,(i-2)*220]));
-  ptCells=summaries(marks,model.patients,minDate,'patient-layer',model.state.marks);ltCells=summaries(marks,model.patients,minDate,'layer-time',model.state.marks);
+  ptCells=summaries(marks,model.patients,minDate,'patient-layer',model.state.marks,model.alignment);ltCells=summaries(marks,model.patients,minDate,'layer-time',model.state.marks,model.alignment);
   if(material)material.dispose();if(atlas)atlas.texture.dispose();
   const texts=[...model.patients.map(p=>p[1]),...LAYERS,'Calendar date →','Sorted patients','Visual layers','Incomplete date',
-    ...Array.from({length:7},(_,i)=>iso(minDate+(maxDate-minDate)*i/6)),
+    'Unaligned: no event','Unaligned: unresolved','Days from anchor',
+    ...Array.from({length:7},(_,i)=>tickLabel(i)),
     ...ptCells.map(c=>String(c.recordCount)),...ltCells.map(c=>`${c.patientCount}/${c.denominator}`)];
   atlas=makeAtlas(texts);
   material=new THREE.MeshBasicMaterial({map:atlas.texture,vertexColors:true,transparent:true,depthTest:false,side:THREE.DoubleSide,toneMapped:false});
@@ -165,10 +179,10 @@ function render(){
     // Stable screen-depth ordering is only occlusion handling, never a date offset.
     const ordered=[...marks].sort((a,b)=>Number(a.display_kind==='death'||a.display_kind==='first_pd')-Number(b.display_kind==='death'||b.display_kind==='first_pd'));
     for(const m of ordered){
-      const p=collapse([wx(m.date),row.get(m.patient_key.join('/')),layer.get(m.lane)]), color=m.display_kind==='death'?'#ffffff':colors[m.lane];
-      const end=m.is_interval&&m.date&&m.end_date&&['recorded','ongoing'].includes(m.end_state);
+      const p=collapse([markX(m.date,m),row.get(m.patient_key.join('/')),layer.get(m.lane)]), color=m.display_kind==='death'?'#ffffff':colors[m.lane];
+      const end=m.is_interval&&m.date&&m.end_date&&['recorded','ongoing'].includes(m.end_state)&&alignedTime(m.date,m.patient_key,model.alignment)!==null;
       if(end){
-        const q=collapse([wx(m.end_date),row.get(m.patient_key.join('/')),layer.get(m.lane)]);
+        const q=collapse([markX(m.end_date,m),row.get(m.patient_key.join('/')),layer.get(m.lane)]);
         line(p,q,color);hitTargets.push({point:p,end:q,owner:m,radius:5});
         const cap=right.clone().multiplyScalar(0).addScaledVector(up,h*.38);
         line(new THREE.Vector3(...p).sub(cap).toArray(),new THREE.Vector3(...p).add(cap).toArray(),color);
@@ -198,8 +212,10 @@ function render(){
     for(const [i,p] of model.patients.entries())if(i%stride===0){const pos=aggregate?[0,row.get(p.join('/')),-510]:collapse([-690,row.get(p.join('/')),-440]);batch.text(pos,h*.8,'#c9d8e9',p[1]);}
   }
   if(!aggregate||axis===1){
-    for(let i=0;i<=6;i++){const d=iso(minDate+(maxDate-minDate)*i/6);batch.text(aggregate?[wx(d),0,-530]:collapse([wx(d),(model.patients.length-1)*6+65,-440]),h*.8,'#c9d8e9',d);}
+    for(let i=0;i<=6;i++){const d=tickLabel(i);batch.text(aggregate?[timeX(tick(i)),0,-530]:collapse([timeX(tick(i)),(model.patients.length-1)*6+65,-440]),h*.8,'#c9d8e9',d);}
     batch.text(aggregate?[730,0,-530]:collapse([730,(model.patients.length-1)*6+65,-440]),h*.7,'#c9d8e9','Incomplete date');
+    if(relative())for(const [x,label] of [[940,'Unaligned: no event'],[1180,'Unaligned: unresolved']])batch.text(aggregate?[x,0,-530]:collapse([x,(model.patients.length-1)*6+65,-440]),h*.7,'#c9d8e9',label);
+    batch.text(aggregate?[0,0,-600]:collapse([0,(model.patients.length-1)*6+110,-440]),h*.8,'#c9d8e9',relative()?'Days from anchor':'Calendar date →');
   }
   if(mode!=='patient-time')for(const [d,z] of layer)if(model.state.lane_order.includes(d)){
     batch.text(aggregate?(axis===0?[0,(model.patients.length-1)*6+45,z]:[-690,0,z]):[-670,(model.patients.length-1)*6+30,z],h,colors[d],d);
@@ -223,6 +239,7 @@ function render(){
   note.textContent=mode==='patient-layer'?'Each cell = distinct contributing source records for this patient and layer, across all displayed dates. Sentinel copies count once. Click to inspect original records and end states. Blank = 0 displayed records.':
     mode==='layer-time'?'Each cell = patients with a displayed record START in this 30-calendar-day bin / current visible patient denominator. This is NOT prevalence, incidence, an arm comparison, or person-time. Repeated starts for a patient count once per cell; patients can appear in multiple bins. Incomplete starts are separate. Click for distinct source records.':
     'Calendar date × sorted patient × source domain. Interval ends remain recorded, documented ongoing, or unknown. Hover/select for exact dates; overlapping records open a chooser. Rotate toward a labeled axis to collapse it; zoom or focus for clinical detail.';
+  if(relative())note.textContent=mode==='layer-time'?'Each cell = patients with a displayed source START in a 30 elapsed-calendar-day bin, divided by anchor-resolved visible patients. Unaligned groups have their own denominators. Not incidence, prevalence or an analytical endpoint. Source dates are unchanged.':model.alignment.axis_label+' × sorted patient × source domain. Unaligned events occupy labeled strips, not inferred dates/durations. Original dates remain available on selection. Display only; analysis unchanged.';
   $('zoom-level').textContent=`${(fullSpan/view.span).toFixed(2)}× · tiers 0–${tier} · view only`;
   $('mark-counts').textContent=`${marks.length} display marks · ${uniqueSources(marks).length} distinct displayed source records · ${model.patients.length} visible patients. Analysis totals above are unchanged.`;
   for(const key of Object.keys(names))$('lattice-'+key).setAttribute('aria-pressed',String(key===mode));
@@ -235,15 +252,27 @@ function render(){
 }
 const lineMaterial=new THREE.LineBasicMaterial({vertexColors:true,depthTest:false,toneMapped:false});
 function update(next){
-  const first=!model,rosterChanged=model&&JSON.stringify(model.patients)!==JSON.stringify(next.patients);model=next;
-  if(first){
-    const dates=[...model.state.marks,...model.state.sentinels].flatMap(m=>[m.date,m.end_date]).filter(Boolean).map(dateNumber);
+  const first=!model,alignmentChanged=JSON.stringify(model?.alignment)!==JSON.stringify(next.alignment),rosterChanged=model&&JSON.stringify(model.patients)!==JSON.stringify(next.patients);model=next;
+  if(first||alignmentChanged){
+    const dates=[...model.state.marks,...model.state.sentinels].flatMap(m=>[m.date,m.end_date].map(d=>alignedTime(d,m.patient_key,model.alignment))).filter(d=>d!==null);
+    if(relative())dates.push(0);
     minDate=dates.length?Math.min(...dates):Date.UTC(2025,0,1);maxDate=dates.length?Math.max(minDate+DAY,...dates):minDate+DAY;
+  }
+  if(first){
     try{renderer=new THREE.WebGLRenderer({canvas,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputColorSpace=THREE.SRGBColorSpace;}
     catch(error){$('error').textContent='WebGL unavailable; use the unchanged 2D route. '+error.message;return;}
     new ResizeObserver(()=>{renderer.setSize(canvas.clientWidth,canvas.clientHeight,false);invalidate();}).observe(canvas);
   }
   if(rosterChanged){contributors.hidden=true;chosenCell=null;}
+  const roster=alignmentRoster(model.alignment,model.patients);
+  alignmentLabel.textContent=relative()?`${model.alignment.axis_label}; elapsed calendar days, anchor = 0 (not SDTM study day). ${roster.counts.resolved}/${model.patients.length} visible patients resolved; ${roster.counts.no_qualifying_event} no qualifying event recorded; ${roster.counts.event_date_unresolved} event recorded but date unresolved. All remain visible; analysis unchanged.`:'Calendar date (absolute); analysis unchanged.';
+  unalignedList.hidden=!relative();unalignedList.replaceChildren();
+  if(relative()){
+    const summary=document.createElement('summary');summary.textContent='Unaligned patient groups (not excluded or imputed)';unalignedList.append(summary);
+    for(const status of ['no_qualifying_event','event_date_unresolved']){
+      const p=document.createElement('p');p.textContent=bucketLabel(status)+': '+(model.patients.filter(p=>roster.map.get(JSON.stringify(p))?.status===status).map(p=>p[1]).join(', ')||'None');unalignedList.append(p);
+    }
+  }
   rebuild();invalidate();window.lattice.ready=true;
   const selected=model.state.spec.view_state.selection?.source_record_ids[0];
   if(selected&&!marks.some(m=>m.record_id===selected))$('selection').textContent=`Selected ${selected} · hidden by view or tier; logical selection retained.`;
@@ -283,6 +312,8 @@ window.lattice={ready:false,update,stop,
   chatRestore:v=>{stop();Object.assign(view,v);rebuild();invalidate();}, focus:mark=>focusMark(mark,navigationEpoch),focusIntent:()=>navigationEpoch,focusMark,reset:()=>snap('full'),zoom:factor=>animate({span:THREE.MathUtils.clamp(view.span*factor,8,fullSpan*3)}),
   stats:()=>({frames,projection:mode,orthographic:camera.isOrthographicCamera,collapse:{...currentProjection},animating:!!tween,view:{yaw:view.yaw,pitch:view.pitch,span:view.span,x:view.x,y:view.y,z:view.z},marks:marks.length,tier,drawCalls:renderer?.info.render.calls,lines:renderer?.info.render.lines,
     patientOrder:model?.patients.map(p=>p[1]),endStates:marks.reduce((a,m)=>{a[m.end_state]=(a[m.end_state]||0)+1;return a;},{}),
+    alignment:model?.alignment?.anchor||'calendar',axisLabel:alignmentLabel.textContent,
+    coordinates:marks.map(m=>({record_id:m.record_id,display_kind:m.display_kind,date:m.date,end_date:m.end_date,time:alignedTime(m.date,m.patient_key,model.alignment),x:markX(m.date,m)})),
     cells:cells.map(({records,...c})=>c)}),
   projectRecord:id=>{const t=hitTargets.find(t=>t.owner.record_id===id);return t?project(t.point):null;},
   projectCell:id=>{const t=hitTargets.find(t=>t.owner.id===id);return t?project(t.point):null;}

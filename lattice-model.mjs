@@ -3,6 +3,18 @@ export const DAY = 86400000;
 export const LAYERS = ['AE', 'CM', 'EX', 'RS', 'DS'];
 export const dateNumber = d => Date.parse(d + 'T00:00:00Z');
 export const iso = t => new Date(t).toISOString().slice(0, 10);
+export function alignmentRoster(alignment, patients) {
+  const map = new Map((alignment?.patients || []).map(p=>[JSON.stringify(p.patient_key),p]));
+  const counts = {resolved:0,no_qualifying_event:0,event_date_unresolved:0};
+  for(const p of patients) counts[map.get(JSON.stringify(p))?.status || 'no_qualifying_event']++;
+  return {map,counts};
+}
+export function alignedTime(date, patient, alignment) {
+  if(!date)return null;
+  if(!alignment || alignment.anchor==='calendar')return dateNumber(date);
+  const anchor=alignment.patients.find(p=>JSON.stringify(p.patient_key)===JSON.stringify(patient));
+  return anchor?.status==='resolved' ? dateNumber(date)-dateNumber(anchor.date) : null;
+}
 export function visibleMarks(state, tier) {
   return [...state.marks, ...state.sentinels].filter(m => !m.display_suppressed && m.tier <= tier);
 }
@@ -11,8 +23,9 @@ export function uniqueSources(marks) {
 }
 // Calendar bins: starts only, not prevalence, duration, person-time, or incidence.
 // An incomplete start belongs only to the separate undated bucket.
-export function summaries(marks, patients, minDate, mode, sourceMarks = marks) {
+export function summaries(marks, patients, minDate, mode, sourceMarks = marks, alignment = null) {
   const cells = new Map();
+  const relative=alignment && alignment.anchor!=='calendar', roster=alignmentRoster(alignment,patients);
   // A sentinel can reuse a source at a different display date (e.g. last dose).
   // Summaries group source STARTS and end states, never the sentinel's glyph date.
   const sources = new Map(sourceMarks.map(m => [m.record_id, m]));
@@ -22,19 +35,22 @@ export function summaries(marks, patients, minDate, mode, sourceMarks = marks) {
     // but never use its overridden date or point end state as source metadata.
     const interval = source.source_interval || source;
     const mark = {...displayed, source_interval: interval};
-    const bin = interval.date ? Math.floor((dateNumber(interval.date) - minDate) / (30 * DAY)) : null;
+    const time=alignedTime(interval.date,mark.patient_key,alignment);
+    const status=roster.map.get(JSON.stringify(mark.patient_key))?.status || 'no_qualifying_event';
+    const bucket=relative && status!=='resolved' ? status : time===null ? 'incomplete_date' : 'dated';
+    const bin = time!==null ? Math.floor((time - (relative?0:minDate)) / (30 * DAY)) : null;
     const patientKey = mode === 'patient-layer' ? mark.patient_key : null;
-    const id = JSON.stringify([mode, patientKey, mark.lane, mode === 'layer-time' ? bin : null]);
+    const id = JSON.stringify([mode, patientKey, mark.lane, mode === 'layer-time' ? [bin,bucket] : null]);
     if (!cells.has(id)) cells.set(id, {id, mode, lane:mark.lane, patientKey,
-      bin:mode === 'layer-time' ? bin : null, records:[]});
+      bin:mode === 'layer-time' ? bin : null, bucket, records:[]});
     cells.get(id).records.push(mark);
   }
   return [...cells.values()].map(c => ({...c,
     recordIds:c.records.map(m=>m.record_id).sort(), recordCount:c.records.length,
     patientCount:new Set(c.records.map(m=>JSON.stringify(m.patient_key))).size,
-    denominator:patients.length,
-    start:c.mode === 'layer-time' && c.bin !== null ? iso(minDate+c.bin*30*DAY) : null,
-    end:c.mode === 'layer-time' && c.bin !== null ? iso(minDate+(c.bin+1)*30*DAY-DAY) : null,
+    denominator:relative && c.mode==='layer-time' ? (['no_qualifying_event','event_date_unresolved'].includes(c.bucket)?roster.counts[c.bucket]:roster.counts.resolved) : patients.length,
+    start:c.mode === 'layer-time' && c.bin !== null ? (relative?'day '+c.bin*30:iso(minDate+c.bin*30*DAY)) : null,
+    end:c.mode === 'layer-time' && c.bin !== null ? (relative?'day '+((c.bin+1)*30-1):iso(minDate+(c.bin+1)*30*DAY-DAY)) : null,
     endStates:c.records.reduce((counts,m)=>{const end=m.source_interval.end_state;counts[end]=(counts[end]||0)+1;return counts;},{}),
     displayKinds:[...new Set(marks.filter(m=>c.records.some(r=>r.record_id===m.record_id)).map(m=>m.display_kind))].filter(Boolean).sort()
   }));

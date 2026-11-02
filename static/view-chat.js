@@ -1,4 +1,4 @@
-/* Local deterministic command UI. No model, eval, or browser automation. */
+/* Optional model tool-calling UI plus explicit local commands. No eval or model DOM access. */
 'use strict';
 window.mountViewChat = bridge => {
   const el = id => document.getElementById(id);
@@ -7,8 +7,18 @@ window.mountViewChat = bridge => {
   root.id='view-chat'; root.setAttribute('aria-label','Ask about this view');
   root.innerHTML=`<button id="chat-toggle" aria-expanded="false" aria-controls="chat-body">Ask about this view</button>
   <section id="chat-body" hidden aria-label="Local view commands">
-    <p>Local rule/parser demo — not an AI agent.</p>
-    <p>Model connection: not connected. No outbound model calls.</p>
+    <p id="agent-status" role="status">No model is connected. Local rule/parser commands remain available; not an AI agent.</p>
+    <details id="agent-config"><summary>Configure model (session only)</summary>
+      <p>Synthetic demo, not real trial data. Calls go through this machine's loopback adapter. Public HTTPS only; loopback development URLs require a startup allowlist.</p>
+      <label>Full chat/completions endpoint <input id="agent-endpoint" type="url" autocomplete="off" placeholder="https://provider.example/v1/chat/completions"></label>
+      <label>Model ID <input id="agent-model" autocomplete="off"></label>
+      <label>Session credential <input id="agent-key" type="password" autocomplete="off"></label>
+      <p id="agent-destination"></p>
+      <label><input id="agent-consent" type="checkbox"> I acknowledge that my prompt, relevant view metadata and any data returned to the model will leave this machine for the exact endpoint/model shown above. This loaded dataset is synthetic. No raw patient records are sent by default. My own prompt may contain identifiers.</label>
+      <button id="agent-test" type="button">Test and connect model</button>
+      <button id="agent-disconnect" type="button">Disconnect and forget credential</button>
+    </details>
+    <label><input id="agent-record-consent" type="checkbox"> For the next request only, I explicitly request record-level content and confirm egress of source IDs and returned records to the tested endpoint/model. Leave unchecked for aggregate-only model context.</label>
     <p id="chat-tool-status" role="status">Tool execution: ready (local validated tools only).</p>
     <p>Counts use the current qualifying analysis, never the visible subset. Omitted date filter means all dates. Highlights are outlines, not analysis filters; hidden or off-screen matches stay listed below.</p>
     <details><summary>Command syntax and examples</summary>
@@ -16,11 +26,14 @@ window.mountViewChat = bridge => {
       <pre id="chat-examples"></pre>
       <p>Filters: term (exact AETERM), grade (integer 1–5, AETOXGR only), patient (USUBJID), linked_cm (exact CMTRT via source relationships), date_window: {"anchor":"AESTDTC","start":"2025-01-01","end":"2025-01-31"}. Dates are inclusive onset dates. No relative windows or inferred treatment anchor. Unknown grade and incomplete dates are excluded with diagnostics.</p>
       <p>set_view: sort duration/asc/desc/response/pd/reason; focus patient ID or null; layers array of AE/CM/EX/RS (DS context stays on); tier auto/0/1/2. Camera: timeline {start,end} as UTC epoch milliseconds, or 3D {position:[x,y,z],target:[x,y,z],span:number} in scene units. Undo restores the pre-command settled camera, not an animation in flight. Reset restores the view before this command session. Analysis changes invalidate history.</p>
+      <p>Model display alignment on /lattice: calendar, first_treatment (first_dose), first_PR, first_PD, death. Elapsed calendar days, not SDTM study days. Missing anchors remain in labeled unaligned groups. Alignment is session-only, like camera/sort, not part of saved analysis/replay packages. Randomization and anchor-relative analytical windows require a development task; display alignment never changes analysis counts.</p>
     </details>
-    <form id="chat-form"><label for="chat-request">View request</label><textarea id="chat-request" rows="4" required spellcheck="false"></textarea><button type="submit">Run local command</button></form>
+    <form id="chat-form"><label for="chat-request">View request</label><textarea id="chat-request" rows="4" required spellcheck="false"></textarea><button type="submit">Run local command</button><button type="button" id="agent-send" disabled>Ask configured model</button></form>
+    <section id="agent-proposal" hidden aria-label="Confirm analysis change"><p id="agent-consequence"></p><button id="agent-confirm" type="button">Confirm analysis subset</button><button id="agent-cancel" type="button">Cancel proposal</button></section>
     <div><button id="chat-undo" disabled>Undo</button> <button id="chat-reset" disabled>Reset</button></div>
     <p id="chat-result" role="status" aria-live="polite"></p>
     <details open><summary>Matched source record IDs</summary><pre id="chat-records">None</pre></details>
+    <details><summary>In-page action history (session only)</summary><pre id="chat-history">[]</pre></details>
   </section>`;
   document.body.append(root);
   el('chat-examples').textContent=[
@@ -28,7 +41,19 @@ window.mountViewChat = bridge => {
     {tool:'highlight_events',args:{scope:'current_analysis',filters:{grade:3}}},
     {tool:'query_data',args:{scope:'current_analysis',unit:'patients',filters:{grade:3}}}
   ].map(x=>JSON.stringify(x)).join('\n');
-  let history=[], initial=null, signature=null;
+  let history=[], initial=null, signature=null, audit=[], connected=null, pending=null, working=false;
+  const clean = x => connected?.credential ? String(x).split(connected.credential).join('[REDACTED]') : String(x);
+  const fullSnapshot=()=>({display:copy(bridge.snapshot()),analysis:bridge.analysisSnapshot()});
+  async function restoreFull(saved){
+    if(JSON.stringify(saved.analysis)!==JSON.stringify(bridge.analysisSnapshot()))await bridge.setAnalysis(saved.analysis);
+    await bridge.restore(saved.display);
+  }
+  function record(tool,before,result){
+    const after=fullSnapshot(), diff={};
+    for(const key of ['display','analysis'])if(JSON.stringify(before[key])!==JSON.stringify(after[key]))diff[key]={before:before[key],after:after[key]};
+    audit.push({tool,diff,result,record_ids:result.record_ids||[],undo:'Use Undo for the most recent executed action; Reset returns to the session baseline.'});
+    el('chat-history').textContent=clean(JSON.stringify(audit,null,2));
+  }
   const object = x => x && typeof x==='object' && !Array.isArray(x);
   const keys = (x,allowed) => {if(!object(x)||Object.keys(x).some(k=>!allowed.includes(k)))throw Error('Unsupported fields. Use only the documented tool arguments.');};
   function parse(text) {
@@ -38,11 +63,12 @@ window.mountViewChat = bridge => {
     try{return JSON.parse(text);}catch{throw Error('Unsupported or ambiguous request. Which counting unit (patients or AE records), date window and anchor? Use an explicit documented command; nothing changed.');}
   }
   function validateView(args) {
-    keys(args,['sort','focus','layers','tier','camera']);
+    keys(args,['sort','focus','subset','layers','tier','camera']);
     if(!Object.keys(args).length)throw Error('Which view property should change?');
     if('sort' in args&&!['duration','asc','desc','response','pd','reason'].includes(args.sort))throw Error('Unsupported sort order.');
     if('tier' in args&&!['auto','0','1','2'].includes(args.tier))throw Error('Choose tier auto, 0, 1 or 2 as a string.');
     if('focus' in args && args.focus!==null && bridge.roster().filter(p=>p[1]===args.focus).length!==1)throw Error('Choose one unambiguous roster patient ID, or null for all.');
+    if('subset' in args && ('focus' in args||!Array.isArray(args.subset)||!args.subset.length||new Set(args.subset).size!==args.subset.length||args.subset.some(id=>bridge.roster().filter(p=>p[1]===id).length!==1)))throw Error('Choose an explicit unique display subset of roster IDs, without focus.');
     if('layers' in args && (!Array.isArray(args.layers)||args.layers.some(l=>!['AE','CM','EX','RS'].includes(l))||new Set(args.layers).size!==args.layers.length))throw Error('Choose unique visible layers AE/CM/EX/RS.');
     if('camera' in args) {
       const c=args.camera;
@@ -57,17 +83,19 @@ window.mountViewChat = bridge => {
       }
     }
   }
-  function report(text,ids=[]) {el('chat-result').textContent=text;el('chat-records').textContent=ids.length?ids.join('\n'):'None';}
-  function buttons(){el('chat-undo').disabled=!history.length;el('chat-reset').disabled=!initial;}
+  function report(text,ids=[]) {el('chat-result').textContent=clean(text);el('chat-records').textContent=ids.length?clean(ids.join('\n')):'None';}
+  function buttons(){el('chat-undo').disabled=working||!history.length;el('chat-reset').disabled=working||!initial;el('agent-send').disabled=working||!connected||!!pending;}
   async function run(work) {
-    if(bridge.busy())return;
+    if(bridge.busy()||working)return;
+    working=true;buttons();
     el('chat-tool-status').textContent='Tool execution: validating locally…';
     try {await bridge.lock(async()=>{
-      if(signature!==bridge.signature()){history=[];initial=null;signature=bridge.signature();}
+      if(signature!==bridge.signature()){history=[];initial=null;pending=null;el('agent-proposal').hidden=true;signature=bridge.signature();}
       await work();
-    });el('chat-tool-status').textContent='Tool execution: completed locally. Analysis unchanged.';}
-    catch(e){el('chat-tool-status').textContent='Tool execution: refused; nothing changed.';report(e.message);}
-    buttons();
+      signature=bridge.signature();
+    });el('chat-tool-status').textContent='Tool execution: completed locally. See action history for display/analysis diffs.';}
+    catch(e){el('chat-tool-status').textContent='Tool execution: refused; rejected action changed nothing. Earlier completed actions remain undoable.';report(e.message);}
+    working=false;buttons();
   }
   el('chat-toggle').onclick=()=>{const open=el('chat-body').hidden;el('chat-body').hidden=!open;el('chat-toggle').setAttribute('aria-expanded',String(open));if(open)el('chat-request').focus();};
   root.addEventListener('keydown',e=>{if(e.key==='Escape'){el('chat-body').hidden=true;el('chat-toggle').setAttribute('aria-expanded','false');el('chat-toggle').focus();}});
@@ -80,17 +108,93 @@ window.mountViewChat = bridge => {
       keys(cmd.args,cmd.tool==='query_data'?['scope','unit','filters']:['scope','filters']);
       result=await bridge.query({...cmd.args,...(cmd.tool==='highlight_events'?{unit:'AE records'}:{})});
     }
-    const before=bridge.snapshot();
+    const before=fullSnapshot();
     if(cmd.tool==='set_view') {
       await bridge.setView(cmd.args);
       result={record_ids:bridge.records()};
     } else if(cmd.tool==='highlight_events') bridge.highlight(result.record_ids);
     history.push(before);if(!initial)initial=copy(before);
+    record(cmd.tool,before,result);
     const detail=cmd.tool==='query_data'?`${result.count} ${result.unit}; read-only, view unchanged`:
       cmd.tool==='highlight_events'?`Highlight overlay replaced: ${result.record_ids.length} AE records`:`View changed: ${JSON.stringify(cmd.args)}`;
     report(`${detail}. Analysis unchanged.${result.note?' '+result.note+' Missing grade excluded: '+result.excluded_missing_grade+'; incomplete onset excluded: '+result.excluded_incomplete_onset+'.':''}`,
       [...result.record_ids,...(result.linked_record_ids||[]).map(id=>id+' (linked CM evidence)')]);
   });};
-  el('chat-undo').onclick=()=>run(async()=>{if(!history.length)throw Error('No history for this analysis.');const previous=history.at(-1);await bridge.restore(previous);history.pop();report('Undo: previous view restored exactly. Analysis unchanged.',previous.highlights);});
-  el('chat-reset').onclick=()=>run(async()=>{if(!initial)throw Error('No session baseline for this analysis.');await bridge.restore(initial);report('Reset: pre-session view restored exactly. Analysis unchanged.',initial.highlights);history=[];initial=null;});
+  el('chat-undo').onclick=()=>run(async()=>{if(!history.length)throw Error('No history for this analysis.');const before=fullSnapshot(),previous=history.at(-1);await restoreFull(previous);history.pop();pending=null;el('agent-proposal').hidden=true;record('Undo',before,{record_ids:previous.display.highlights});report('Undo: previous view and analysis restored exactly.',previous.display.highlights);});
+  el('chat-reset').onclick=()=>run(async()=>{if(!initial)throw Error('No session baseline for this analysis.');const before=fullSnapshot();await restoreFull(initial);record('Reset',before,{record_ids:initial.display.highlights});report('Reset: pre-session view and analysis restored exactly.',initial.display.highlights);history=[];initial=null;pending=null;el('agent-proposal').hidden=true;});
+
+  function disconnect(){connected=null;el('agent-key').value='';el('agent-consent').checked=false;el('agent-record-consent').checked=false;el('agent-status').textContent='No model is connected. Local commands remain available.';buttons();}
+  function destination(){el('agent-destination').textContent=`Endpoint: ${el('agent-endpoint').value || '(unset)'} | Model: ${el('agent-model').value || '(unset)'} | Dataset: ${bridge.dataset()} (synthetic)`;}
+  for(const id of ['agent-endpoint','agent-model'])el(id).addEventListener('input',()=>{disconnect();destination();});
+  el('agent-key').addEventListener('input',()=>{connected=null;el('agent-consent').checked=false;el('agent-status').textContent='No model is connected. Test the new credential.';buttons();});
+  el('agent-disconnect').onclick=disconnect;
+  destination();
+  el('agent-test').onclick=()=>run(async()=>{
+    if(!el('agent-consent').checked)throw Error('Explicit egress acknowledgement required before the first model request, including the connection test.');
+    const config={endpoint:el('agent-endpoint').value,model:el('agent-model').value,credential:el('agent-key').value,dataset:bridge.dataset(),acknowledged:true};
+    connected=null;el('agent-status').textContent='No model is connected. Testing…';
+    await bridge.agent({...config,mode:'test',messages:[]});
+    connected=config;el('agent-key').value='';
+    el('agent-status').textContent=`Model-driven agent — tested ${config.model} at ${config.endpoint}. Tool execution is separately validated locally.`;
+    report('Configured endpoint/model connection test succeeded. No patient rows were sent.');
+  });
+  async function execute(call,recordEgress){
+    keys(call,['tool','args']);
+    const before=fullSnapshot();let result;
+    if(call.tool==='set_view'){
+      validateView(call.args);await bridge.setView(call.args);
+      result={status:'executed',note:'View changed; analysis unchanged.',record_ids:bridge.records()};
+    } else if(call.tool==='get_view_state'){
+      keys(call.args,[]);result={status:'read_only',view:bridge.snapshot(),record_ids:bridge.records()};
+    } else {
+      result=await bridge.agentTool(call.tool,call.args,recordEgress);
+      if(call.tool==='set_alignment' && result.status==='resolved'){
+        bridge.setAlignment(result);result={...result,status:'executed'};
+      }
+      if(call.tool==='highlight_events')bridge.highlight(result.record_ids);
+      if(call.tool==='propose_analysis_subset'){
+        pending={result,signature:bridge.signature(),before:fullSnapshot()};
+        el('agent-consequence').textContent=JSON.stringify(result,null,2);
+        el('agent-proposal').hidden=false;
+      }
+    }
+    history.push(before);if(!initial)initial=copy(before);record(call.tool,before,result);
+    const summary=call.tool==='query_data'?`${result.count} ${result.unit}; read-only, view unchanged`:
+      call.tool==='highlight_events'?`Highlight overlay replaced: ${result.record_ids.length} AE records; analysis unchanged`:
+      result.note||`${call.tool}: ${result.status||'capabilities returned'}`;
+    report(summary,result.record_ids||[]);
+    return result;
+  }
+  el('agent-send').onclick=()=>run(async()=>{
+    if(!connected||connected.dataset!==bridge.dataset()||!el('agent-consent').checked){disconnect();throw Error('No tested model/consent for this dataset. Reconnect explicitly.');}
+    if(pending)throw Error('Confirm or cancel the pending analysis proposal first.');
+    const prompt=el('chat-request').value.trim();if(!prompt)throw Error('Enter a request.');
+    const config={...connected},recordEgress=el('agent-record-consent').checked;
+    el('agent-record-consent').checked=false;
+    const messages=[{role:'user',content:prompt}];let executed=false;
+    for(let turn=0;turn<6;turn++){
+      const response=await bridge.agent({...config,record_egress:recordEgress,mode:'turn',messages});
+      if(connected!==null && (connected.endpoint!==config.endpoint||connected.model!==config.model))throw Error('Configuration changed; response discarded.');
+      if(!connected)throw Error('Disconnected; response discarded.');
+      const message=response.message;messages.push(message);
+      if(!message.tool_calls?.length){if(!executed)report('Model returned no validated tool action. No changes. Please clarify the counting unit, window, anchor or requested view property. Model prose is not treated as data evidence.');return;}
+      // Require one action per turn: avoids partial application of ambiguous batches.
+      if(message.tool_calls.length!==1)throw Error('Model requested multiple actions at once. Refused; request one explicit action per turn.');
+      const call=message.tool_calls[0];let result;
+      try {result=await execute({tool:call.function.name,args:JSON.parse(call.function.arguments)},recordEgress);executed=true;}
+      catch(e){result={status:'refused',note:clean(e.message)};report(result.note);record('refused tool',fullSnapshot(),result);}
+      messages.push({role:'tool',tool_call_id:call.id,content:JSON.stringify(result)});
+      if(pending||['clarification_required','development_proposal','refused','unsupported'].includes(result.status))return;
+    }
+    report('Model tool-turn limit reached. Completed actions remain in history; no further actions executed.');
+  });
+  el('agent-confirm').onclick=()=>run(async()=>{
+    if(!pending||pending.signature!==bridge.signature())throw Error('Analysis changed; proposal expired.');
+    const proposal=pending,before=fullSnapshot();
+    await bridge.setPopulation(proposal.result.population);
+    history.push(before);if(!initial)initial=copy(before);
+    record('confirm_analysis_subset',before,{status:'executed_after_user_confirmation',record_ids:proposal.result.record_ids});
+    pending=null;el('agent-proposal').hidden=true;report('Analysis subset executed after explicit confirmation; counts recomputed. Undo restores the previous analysis and display.',proposal.result.record_ids);
+  });
+  el('agent-cancel').onclick=()=>run(async()=>{pending=null;el('agent-proposal').hidden=true;record('cancel_analysis_proposal',fullSnapshot(),{status:'cancelled',record_ids:[]});report('Analysis proposal cancelled. Nothing changed.');});
 };
