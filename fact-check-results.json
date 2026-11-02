@@ -1,0 +1,54 @@
+{
+  "reviewed_commit": "0eb084bbcee7eebfed0f9115a821ec1780263037",
+  "overall": "CHANGES_REQUIRED",
+  "runs": {
+    "full_python": {
+      "file": "fact-check-regression.log",
+      "tests": 93,
+      "passed": 92,
+      "failures": 0,
+      "errors": 1,
+      "seconds": 251.12,
+      "exit_code": 1
+    },
+    "isolated_legacy_3d": {
+      "file": "fact-check-3d-rerun.log",
+      "tests": 1,
+      "passed": 1,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 4.39,
+      "exit_code": 0
+    },
+    "focused_acceptance": {
+      "file": "fact-check-acceptance.log",
+      "tests": 15,
+      "passed": 15,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 31.435,
+      "exit_code": 0
+    },
+    "independent_probes": {
+      "file": "fact-check-probes-verified.log",
+      "tests": 8,
+      "passed": 5,
+      "failures": 3,
+      "errors": 0,
+      "seconds": 8.922,
+      "exit_code": 1
+    },
+    "node": {
+      "tests": 54,
+      "pass": 54,
+      "fail": 0,
+      "file": "fact-check-node.log"
+    },
+    "alignment_geometry": {
+      "tests": 2,
+      "pass": 2,
+      "fail": 0,
+      "file": "fact-check-geometry.log"
+    }
+  }
+}

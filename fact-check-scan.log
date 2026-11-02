@@ -1,0 +1,8 @@
+{
+  "reviewed_commit": "0eb084bbcee7eebfed0f9115a821ec1780263037",
+  "reachable_history_blob_count": 181,
+  "high_confidence_token_pattern_findings": [],
+  "fixture_files_examined": 18,
+  "fixture_code_or_data_changes_since_baseline": [],
+  "scope": "Four token/private-key regexes over blobs reachable from the reviewed commit, not a proof that all possible secrets or real patient data are absent."
+}

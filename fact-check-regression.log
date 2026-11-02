@@ -1,0 +1,1592 @@
+test_interrupt_idle_pick_and_end_semantics (test_3d.ThreeChecks.test_interrupt_idle_pick_and_end_semantics) ... 127.0.0.1 - - [02/Nov/2026 11:26:47] "GET /3d HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:47] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:47] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:47] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:47] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:47] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:47] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:47] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:47] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:47] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:47] "GET /renderer3d.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:47] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:47] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:52] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:52] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:52] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:52] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:52] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:52] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:52] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:52] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:53] "POST /api/export HTTP/1.1" 200 -
+ok
+test_route_and_same_data (test_3d.ThreeChecks.test_route_and_same_data) ... 127.0.0.1 - - [02/Nov/2026 11:26:53] "GET /3d HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:53] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:53] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:53] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:53] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:53] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:53] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:53] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:53] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:53] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:53] "GET /renderer3d.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:53] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:53] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:53] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:53] "GET /api/initial HTTP/1.1" 200 -
+ok
+test_short_interval_focus_zoom_direction (test_3d.ThreeChecks.test_short_interval_focus_zoom_direction) ... 127.0.0.1 - - [02/Nov/2026 11:26:56] "GET /3d HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:56] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:56] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:56] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:56] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:56] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:56] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:56] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:56] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:56] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:56] "GET /renderer3d.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:56] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:56] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:56] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:26:57] "POST /api/evaluate HTTP/1.1" 200 -
+ERROR
+test_combined_state_read_only_history_undo_and_reset (test_action_history.HistoryBrowserChecks.test_combined_state_read_only_history_undo_and_reset) ... 127.0.0.1 - - [02/Nov/2026 11:27:30] "GET /history-demo.html HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:30] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:30] "GET /action-history.js HTTP/1.1" 200 -
+ok
+test_text_is_inert_and_failed_commit_is_honest (test_action_history.HistoryBrowserChecks.test_text_is_inert_and_failed_commit_is_honest) ... 127.0.0.1 - - [02/Nov/2026 11:27:32] "GET /history-demo.html HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:32] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:32] "GET /action-history.js HTTP/1.1" 200 -
+ok
+test_foreign_host_returns_readable_working_link (test_addresses.AddressChecks.test_foreign_host_returns_readable_working_link) ... 127.0.0.1 - - [02/Nov/2026 11:27:32] "GET / HTTP/1.1" 403 -
+ok
+test_foreign_origin_stays_refused (test_addresses.AddressChecks.test_foreign_origin_stays_refused) ... 127.0.0.1 - - [02/Nov/2026 11:27:32] "GET / HTTP/1.1" 403 -
+127.0.0.1 - - [02/Nov/2026 11:27:32] "GET / HTTP/1.1" 403 -
+ok
+test_supported_addresses_serve_the_viewer (test_addresses.AddressChecks.test_supported_addresses_serve_the_viewer) ... 127.0.0.1 - - [02/Nov/2026 11:27:32] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:32] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:32] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:32] "GET / HTTP/1.1" 200 -
+ok
+test_analysis_proposal_confirm_and_undo (test_agent_browser.AgentBrowserChecks.test_analysis_proposal_confirm_and_undo) ... 127.0.0.1 - - [02/Nov/2026 11:27:33] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:33] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:34] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:35] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:35] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:35] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:35] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_consent_multiturn_view_undo_privacy (test_agent_browser.AgentBrowserChecks.test_consent_multiturn_view_undo_privacy) ... 127.0.0.1 - - [02/Nov/2026 11:27:36] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:36] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:37] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:37] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:37] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:37] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:37] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:37] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:38] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:38] "POST /api/export HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "POST /api/export HTTP/1.1" 200 -
+ok
+test_display_subset_not_analysis_and_secret_echo (test_agent_browser.AgentBrowserChecks.test_display_subset_not_analysis_and_secret_echo) ... 127.0.0.1 - - [02/Nov/2026 11:27:39] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:39] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:40] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:40] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:40] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:40] "POST /api/agent/model HTTP/1.1" 200 -
+ok
+test_source_ids_units_highlights_and_record_egress (test_agent_browser.AgentBrowserChecks.test_source_ids_units_highlights_and_record_egress) ... 127.0.0.1 - - [02/Nov/2026 11:27:41] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:41] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:42] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:42] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:42] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:42] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:42] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:43] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:43] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:43] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:43] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:43] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:43] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:44] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:44] "POST /api/agent/tool HTTP/1.1" 400 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_unsupported_ambiguous_and_invalid_tools_do_not_change_view (test_agent_browser.AgentBrowserChecks.test_unsupported_ambiguous_and_invalid_tools_do_not_change_view) ... 127.0.0.1 - - [02/Nov/2026 11:27:45] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:45] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:46] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:47] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:47] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:47] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:48] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:48] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:27:48] "POST /api/agent/model HTTP/1.1" 200 -
+ok
+test_01_multiturn_validated_change_matches_history_and_protocol (test_agent_e2e.ModelAgentE2E.test_01_multiturn_validated_change_matches_history_and_protocol) ... ok
+test_02_unsupported_alignment_offers_development_without_transform (test_agent_e2e.ModelAgentE2E.test_02_unsupported_alignment_offers_development_without_transform) ... ok
+test_03_analysis_requires_confirmation_cancel_and_undo_restore_ids (test_agent_e2e.ModelAgentE2E.test_03_analysis_requires_confirmation_cancel_and_undo_restore_ids) ... ok
+test_04_ambiguity_and_model_confirmation_attempt_do_not_mutate (test_agent_e2e.ModelAgentE2E.test_04_ambiguity_and_model_confirmation_attempt_do_not_mutate) ... ok
+test_05_undo_restores_nonempty_source_ids_not_just_empty_state (test_agent_e2e.ModelAgentE2E.test_05_undo_restores_nonempty_source_ids_not_just_empty_state) ... ok
+test_07_credential_absent_from_storage_download_replay_logs_and_fixtures (test_agent_e2e.ModelAgentE2E.test_07_credential_absent_from_storage_download_replay_logs_and_fixtures) ... ok
+test_08_http_endpoint_policy_rejects_ssrf_before_socket_creation (test_agent_e2e.ModelAgentE2E.test_08_http_endpoint_policy_rejects_ssrf_before_socket_creation) ... ok
+test_09_status_waits_for_successful_self_test_and_consent (test_agent_e2e.ModelAgentE2E.test_09_status_waits_for_successful_self_test_and_consent) ... ok
+test_09b_failed_endpoint_self_test_never_claims_model_status (test_agent_e2e.ModelAgentE2E.test_09b_failed_endpoint_self_test_never_claims_model_status) ... ok
+test_analysis_proposal_confirm_and_undo (test_agent_ui.AgentUIChecks.test_analysis_proposal_confirm_and_undo) ... 127.0.0.1 - - [02/Nov/2026 11:28:08] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:08] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:08] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:08] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:08] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:08] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:08] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:08] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:08] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:08] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:08] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:09] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:09] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:09] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:09] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:09] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:09] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:09] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:09] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:09] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:09] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:09] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:09] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:09] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:09] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:09] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:10] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:10] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:10] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:10] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_consent_multiturn_view_undo_privacy (test_agent_ui.AgentUIChecks.test_consent_multiturn_view_undo_privacy) ... 127.0.0.1 - - [02/Nov/2026 11:28:11] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:11] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:12] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:12] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:12] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:12] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:12] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:12] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:12] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "POST /api/export HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "POST /api/export HTTP/1.1" 200 -
+ok
+test_dataset_change_requires_new_consent_without_egress (test_agent_ui.AgentUIChecks.test_dataset_change_requires_new_consent_without_egress) ... 127.0.0.1 - - [02/Nov/2026 11:28:13] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:13] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "POST /api/agent/model HTTP/1.1" 200 -
+ok
+test_display_subset_not_analysis_and_secret_echo (test_agent_ui.AgentUIChecks.test_display_subset_not_analysis_and_secret_echo) ... 127.0.0.1 - - [02/Nov/2026 11:28:14] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:14] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "POST /api/agent/model HTTP/1.1" 200 -
+ok
+test_escape_cancels_modal_and_mobile_dialog_fits (test_agent_ui.AgentUIChecks.test_escape_cancels_modal_and_mobile_dialog_fits) ... 127.0.0.1 - - [02/Nov/2026 11:28:16] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:16] "GET /api/initial HTTP/1.1" 200 -
+ok
+test_failed_self_test_clears_credential_and_never_connects (test_agent_ui.AgentUIChecks.test_failed_self_test_clears_credential_and_never_connects) ... 127.0.0.1 - - [02/Nov/2026 11:28:17] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:17] "GET /api/initial HTTP/1.1" 200 -
+ok
+test_false_self_test_result_does_not_connect (test_agent_ui.AgentUIChecks.test_false_self_test_result_does_not_connect) ... 127.0.0.1 - - [02/Nov/2026 11:28:18] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:18] "GET /api/initial HTTP/1.1" 200 -
+ok
+test_modal_precedes_egress_and_clears_secret (test_agent_ui.AgentUIChecks.test_modal_precedes_egress_and_clears_secret) ... 127.0.0.1 - - [02/Nov/2026 11:28:20] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:20] "GET /api/initial HTTP/1.1" 200 -
+ok
+test_record_confirmation_cancel_sends_nothing_and_is_request_scoped (test_agent_ui.AgentUIChecks.test_record_confirmation_cancel_sends_nothing_and_is_request_scoped) ... 127.0.0.1 - - [02/Nov/2026 11:28:21] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:21] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "POST /api/agent/model HTTP/1.1" 200 -
+ok
+test_refusal_prose_is_labeled_not_fabricated_as_a_result (test_agent_ui.AgentUIChecks.test_refusal_prose_is_labeled_not_fabricated_as_a_result) ... 127.0.0.1 - - [02/Nov/2026 11:28:22] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:22] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:23] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:23] "POST /api/agent/model HTTP/1.1" 200 -
+ok
+test_source_ids_units_highlights_and_record_egress (test_agent_ui.AgentUIChecks.test_source_ids_units_highlights_and_record_egress) ... 127.0.0.1 - - [02/Nov/2026 11:28:23] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:23] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:23] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:23] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:23] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:23] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:23] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:23] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:23] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:23] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:23] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:24] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:24] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:24] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:24] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:24] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:24] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:24] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:24] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:24] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:24] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:24] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:24] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:24] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:24] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:24] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:25] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:25] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:25] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:25] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:25] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:25] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:25] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:26] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:26] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:26] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:26] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:26] "POST /api/agent/tool HTTP/1.1" 400 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_stale_self_test_cannot_reconnect_after_disconnect (test_agent_ui.AgentUIChecks.test_stale_self_test_cannot_reconnect_after_disconnect) ... 127.0.0.1 - - [02/Nov/2026 11:28:27] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:27] "GET /api/initial HTTP/1.1" 200 -
+ok
+test_unsupported_ambiguous_and_invalid_tools_do_not_change_view (test_agent_ui.AgentUIChecks.test_unsupported_ambiguous_and_invalid_tools_do_not_change_view) ... 127.0.0.1 - - [02/Nov/2026 11:28:29] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:29] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:30] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:30] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:30] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:31] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:31] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:31] "POST /api/agent/model HTTP/1.1" 200 -
+ok
+test_model_alignment_source_dates_denominators_projections_undo (test_alignment_browser.AlignmentBrowserChecks.test_model_alignment_source_dates_denominators_projections_undo) ... 127.0.0.1 - - [02/Nov/2026 11:28:32] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:32] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:33] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:34] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:34] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:34] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:35] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:35] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:35] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:35] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:35] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:36] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:37] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:37] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:37] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:37] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:38] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:40] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:40] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "POST /api/agent/model HTTP/1.1" 200 -
+ok
+test_treatment_pd_death_and_legacy_renderer_refusal (test_alignment_browser.AlignmentBrowserChecks.test_treatment_pd_death_and_legacy_renderer_refusal) ... 127.0.0.1 - - [02/Nov/2026 11:28:41] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:41] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:42] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:42] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:42] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:42] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:42] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:43] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:43] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:43] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:43] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:43] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:44] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:44] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:44] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:44] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:44] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:44] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:44] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:45] "GET /3d HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:45] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:45] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:45] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:45] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:45] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:45] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:45] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:45] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:45] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:45] "GET /renderer3d.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:45] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:45] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:45] "POST /api/agent/tool HTTP/1.1" 200 -
+ok
+test_fixture_parent_link_tamper_is_not_repaired (test_app.LaneViewChecks.test_fixture_parent_link_tamper_is_not_repaired) ... ok
+test_normalization_sorts_sets_only_and_keeps_fixed_lane_order (test_app.LaneViewChecks.test_normalization_sorts_sets_only_and_keeps_fixed_lane_order) ... ok
+test_relationships_and_supplement_traceability (test_app.LaneViewChecks.test_relationships_and_supplement_traceability) ... ok
+test_replay_tampering_rejected_without_modifying_input (test_app.LaneViewChecks.test_replay_tampering_rejected_without_modifying_input) ... ok
+test_reviewer_path_and_replay (test_app.LaneViewChecks.test_reviewer_path_and_replay) ... ok
+test_group_evidence_supplement_and_temporal_counts (test_browser.BrowserChecks.test_group_evidence_supplement_and_temporal_counts) ... 127.0.0.1 - - [02/Nov/2026 11:28:46] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:46] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:46] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:46] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:46] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:46] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:46] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:46] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:46] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:46] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:46] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:46] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:46] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:47] "POST /api/export HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:47] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:48] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:48] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_ordinary_sort_filter_peel_pick_source_export_replay (test_browser.BrowserChecks.test_ordinary_sort_filter_peel_pick_source_export_replay) ... 127.0.0.1 - - [02/Nov/2026 11:28:48] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:48] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:48] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:48] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:48] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:48] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:48] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:48] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:48] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:48] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:48] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:48] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:48] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:49] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:49] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:49] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:49] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:49] "POST /api/export HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:50] "POST /api/export HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:50] "POST /api/export HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:50] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:51] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:51] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:51] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:52] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:52] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:52] "POST /api/export HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:53] "POST /api/replay HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:53] "POST /api/replay HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:53] "POST /api/export HTTP/1.1" 200 -
+ok
+test_replay_hash_error_does_not_replace_current_view (test_browser.BrowserChecks.test_replay_hash_error_does_not_replace_current_view) ... 127.0.0.1 - - [02/Nov/2026 11:28:54] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:54] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:54] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:54] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:54] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:54] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:54] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:54] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:54] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:54] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:54] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:54] "POST /api/export HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:54] "POST /api/replay HTTP/1.1" 400 -
+ok
+test_context_selection_replay_hide_and_analysis_exclusion (test_cohort.CohortChecks.test_context_selection_replay_hide_and_analysis_exclusion) ... ok
+test_deterministic_100_patient_fixture_and_original_sources (test_cohort.CohortChecks.test_deterministic_100_patient_fixture_and_original_sources) ... ok
+test_display_window_includes_crossing_interval_not_only_start (test_cohort.CohortChecks.test_display_window_includes_crossing_interval_not_only_start) ... ok
+test_intervals_preserve_source_boundaries_and_points (test_cohort.CohortChecks.test_intervals_preserve_source_boundaries_and_points) ... ok
+test_pan_at_overview_and_close_then_ordinary_click_selection (test_feedback.PanFeedbackChecks.test_pan_at_overview_and_close_then_ordinary_click_selection) ... 127.0.0.1 - - [02/Nov/2026 11:28:55] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:55] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:55] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:55] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:55] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:55] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:55] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:55] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:55] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:55] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:55] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:55] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:56] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:58] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:58] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:59] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:28:59] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_overview_100_patients_sidebar_intervals_and_scale_timings (test_feedback.ScaleFeedbackChecks.test_overview_100_patients_sidebar_intervals_and_scale_timings) ... 127.0.0.1 - - [02/Nov/2026 11:29:00] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:00] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:01] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:08] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:08] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:09] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_scale_rs_selection_hide_zoom_and_clear (test_feedback.ScaleFeedbackChecks.test_scale_rs_selection_hide_zoom_and_clear) ... 127.0.0.1 - - [02/Nov/2026 11:29:09] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:09] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:09] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:09] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:09] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:09] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:09] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:09] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:09] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:09] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:09] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:10] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:10] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:11] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:11] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:11] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:12] "POST /api/export HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:12] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_rs_selection_replaces_ae_everywhere (test_feedback.SelectionFeedbackChecks.test_rs_selection_replaces_ae_everywhere) ... 127.0.0.1 - - [02/Nov/2026 11:29:12] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:12] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:12] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:12] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:12] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:12] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:12] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:12] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:12] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:12] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:12] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:13] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:13] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:13] "POST /api/export HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:14] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:14] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:14] "POST /api/export HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:14] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:14] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:15] "POST /api/replay HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:15] "POST /api/export HTTP/1.1" 200 -
+ok
+test_vsets (test_focus.FocusChecks.test_vsets) ... 127.0.0.1 - - [02/Nov/2026 11:29:16] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:16] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:25] "GET /3d HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:25] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:25] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:25] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:25] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:25] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:25] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:25] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:25] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:25] "GET /renderer3d.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:25] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:25] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:25] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:25] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:25] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_annotation_preserves_source_values_and_counts (test_grammar.AnnotationChecks.test_annotation_preserves_source_values_and_counts) ... ok
+test_sentinel_annotations_keep_record_identity (test_grammar.AnnotationChecks.test_sentinel_annotations_keep_record_identity) ... ok
+test_collision_allocator_and_missing_values (test_grammar_browser.GrammarBrowserChecks.test_collision_allocator_and_missing_values) ... 127.0.0.1 - - [02/Nov/2026 11:29:32] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /api/initial HTTP/1.1" 200 -
+ok
+test_shared_grammar_zoom_annotations_selection (test_grammar_browser.GrammarBrowserChecks.test_shared_grammar_zoom_annotations_selection) ... 127.0.0.1 - - [02/Nov/2026 11:29:32] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:32] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:34] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:34] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:34] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/source HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/source HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/source HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/source HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/source HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/source HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:36] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:37] "GET /3d HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:37] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:37] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:37] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:37] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:37] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:37] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:37] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:37] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:37] "GET /renderer3d.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:37] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:37] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:37] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:37] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:38] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:38] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:38] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/source HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/source HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/source HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/source HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/source HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/source HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:40] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:41] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:41] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_consent_precedes_every_network_path (test_model_agent.AdapterChecks.test_consent_precedes_every_network_path) ... ok
+test_endpoint_policy (test_model_agent.AdapterChecks.test_endpoint_policy) ... ok
+test_tool_results_minimized_and_credentials_redacted (test_model_agent.AdapterChecks.test_tool_results_minimized_and_credentials_redacted) ... ok
+test_unsupported_alignment_and_source_units (test_model_agent.AdapterChecks.test_unsupported_alignment_and_source_units) ... ok
+test_config_and_sentinel_budget (test_sentinel.SentinelChecks.test_config_and_sentinel_budget) ... ok
+test_end_states_and_no_rfendtc_fallback (test_sentinel.SentinelChecks.test_end_states_and_no_rfendtc_fallback) ... ok
+test_source_derived_sort_metrics_and_severity (test_sentinel.SentinelChecks.test_source_derived_sort_metrics_and_severity) ... ok
+test_actual_per_line_counts_before_after_and_unchanged_analysis (test_sentinel_browser.SentinelBrowserChecks.test_actual_per_line_counts_before_after_and_unchanged_analysis) ... 127.0.0.1 - - [02/Nov/2026 11:29:43] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:43] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:43] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:43] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:43] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:43] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:43] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:43] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:43] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:43] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:43] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:43] "GET /api/initial HTTP/1.1" 200 -
+ok
+test_auto_zoom_tiers_and_replay_defaults (test_sentinel_browser.SentinelBrowserChecks.test_auto_zoom_tiers_and_replay_defaults) ... 127.0.0.1 - - [02/Nov/2026 11:29:45] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:45] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:45] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:45] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:45] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:45] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:45] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:45] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:45] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:45] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:45] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:46] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:47] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:47] "POST /api/export HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:47] "POST /api/replay HTTP/1.1" 200 -
+ok
+test_interval_glyphs_death_and_source_selection (test_sentinel_browser.SentinelBrowserChecks.test_interval_glyphs_death_and_source_selection) ... 127.0.0.1 - - [02/Nov/2026 11:29:48] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:48] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:48] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:48] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:48] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:48] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:48] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:48] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:48] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:48] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:48] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:48] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:48] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:49] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:49] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:49] "POST /api/export HTTP/1.1" 200 -
+ok
+test_sorting_staircase_and_all_five_choices (test_sentinel_browser.SentinelBrowserChecks.test_sorting_staircase_and_all_five_choices) ... 127.0.0.1 - - [02/Nov/2026 11:29:49] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:49] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:49] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:49] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:49] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:49] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:49] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:49] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:49] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:49] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:49] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:49] "GET /api/initial HTTP/1.1" 200 -
+ok
+test_ac2_proposal_counts_are_computed_from_actual_source_without_mutation (test_tool_acceptance.SourceToolAcceptance.test_ac2_proposal_counts_are_computed_from_actual_source_without_mutation) ... ok
+test_ac3_unsupported_anchor_names_limitation_and_preserves_sources (test_tool_acceptance.SourceToolAcceptance.test_ac3_unsupported_anchor_names_limitation_and_preserves_sources) ... ok
+test_ac4_inference_and_ambiguity_fail_closed (test_tool_acceptance.SourceToolAcceptance.test_ac4_inference_and_ambiguity_fail_closed) ... ok
+test_ac6_count_units_and_contributing_ids_match_actual_source (test_tool_acceptance.SourceToolAcceptance.test_ac6_count_units_and_contributing_ids_match_actual_source) ... ok
+test_calendar_alignment_discloses_denominator_and_no_anchor_requirement (test_tool_acceptance.SourceToolAcceptance.test_calendar_alignment_discloses_denominator_and_no_anchor_requirement) ... ok
+test_source_alignment_targets_use_recorded_response_and_preserve_dates (test_tool_acceptance.SourceToolAcceptance.test_source_alignment_targets_use_recorded_response_and_preserve_dates) ... ok
+test_gesture_cancels_focus_and_cancel_recovers (test_touch.TouchChecks.test_gesture_cancels_focus_and_cancel_recovers) ... 127.0.0.1 - - [02/Nov/2026 11:29:51] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:51] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:51] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:51] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:51] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:51] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:51] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:51] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:51] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:51] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:51] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:51] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:51] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:53] "GET /3d HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:53] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:53] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:53] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:53] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:53] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:53] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:53] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:53] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:53] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:53] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:53] "GET /renderer3d.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:53] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:54] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:54] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:56] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_one_finger_and_pan_toggle (test_touch.TouchChecks.test_one_finger_and_pan_toggle) ... 127.0.0.1 - - [02/Nov/2026 11:29:59] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:59] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:59] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:59] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:59] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:59] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:59] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:59] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:59] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:59] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:29:59] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:00] "GET /3d HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:00] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:00] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:00] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:00] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:00] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:00] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:00] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:00] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:00] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:00] "GET /renderer3d.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:00] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:00] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:02] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:02] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:02] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:02] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:02] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:02] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:02] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:02] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:02] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:02] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:02] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:02] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:02] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:02] "GET /api/initial HTTP/1.1" 200 -
+ok
+test_pinch_zoom_anchor (test_touch.TouchChecks.test_pinch_zoom_anchor) ... 127.0.0.1 - - [02/Nov/2026 11:30:05] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:05] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:05] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:05] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:05] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:05] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:05] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:05] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:05] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:05] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:05] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:06] "GET /3d HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:06] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:06] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:06] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:06] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:06] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:06] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:06] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:06] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:06] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:06] "GET /renderer3d.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:06] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:06] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:07] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:07] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:07] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:07] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:07] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:07] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:07] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:07] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:07] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:07] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:07] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:07] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:07] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:07] "GET /api/initial HTTP/1.1" 200 -
+ok
+test_tap_select_and_overlap_chooser (test_touch.TouchChecks.test_tap_select_and_overlap_chooser) ... 127.0.0.1 - - [02/Nov/2026 11:30:10] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:10] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:10] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:10] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:10] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:10] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:10] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:10] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:10] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:10] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:10] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:10] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:10] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:11] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:11] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:11] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:11] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:11] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:12] "GET /3d HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:12] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:12] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:12] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:12] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:12] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:12] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:12] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:12] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:12] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:12] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:12] "GET /renderer3d.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:12] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:12] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:12] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:13] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:13] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:14] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:15] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:15] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:16] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:16] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:17] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:17] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:17] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_two_finger_pan_and_membership_rebase (test_touch.TouchChecks.test_two_finger_pan_and_membership_rebase) ... 127.0.0.1 - - [02/Nov/2026 11:30:17] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:17] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:17] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:17] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:17] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:17] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:17] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:17] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:17] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:17] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:17] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:19] "GET /3d HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:19] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:19] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:19] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:19] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:19] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:19] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:19] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:19] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:19] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:19] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:19] "GET /renderer3d.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:19] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:21] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:21] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:21] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:21] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:21] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:21] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:21] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:21] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:21] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:21] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:21] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:21] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:21] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:21] "GET /api/initial HTTP/1.1" 200 -
+ok
+test_refusal_keyboard_narrow_and_no_external_requests (test_view_chat.ChatChecks.test_refusal_keyboard_narrow_and_no_external_requests) ... 127.0.0.1 - - [02/Nov/2026 11:30:23] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:23] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:23] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:23] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:23] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:23] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:23] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:23] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:23] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:23] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:23] "GET /api/initial HTTP/1.1" 200 -
+ok
+test_tools_all_routes (test_view_chat.ChatChecks.test_tools_all_routes) ... 127.0.0.1 - - [02/Nov/2026 11:30:24] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:24] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:25] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:25] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:25] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:25] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:26] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:27] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:27] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:28] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:28] "GET /3d HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:28] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:28] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:28] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:28] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:28] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:28] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:28] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:28] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:28] "GET /renderer3d.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:28] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:28] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:28] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:28] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:29] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:29] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:29] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:30] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:30] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:30] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:30] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:31] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:31] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:31] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:31] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:31] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:31] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:31] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:31] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:31] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:31] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:31] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:31] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:31] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:31] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:31] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:32] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:32] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:33] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:33] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:33] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:34] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:34] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:35] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:35] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_dates_linked_cm_and_missing_grade (test_view_tools.ToolChecks.test_dates_linked_cm_and_missing_grade) ... ok
+test_exact_record_ids_fail_closed (test_view_tools.ToolChecks.test_exact_record_ids_fail_closed) ... ok
+test_refuse_ambiguity (test_view_tools.ToolChecks.test_refuse_ambiguity) ... ok
+test_units_and_ids (test_view_tools.ToolChecks.test_units_and_ids) ... ok
+test_view_independent (test_view_tools.ToolChecks.test_view_independent) ... ok
+test_cursor_anchor_filters_sort_selection_and_reset (test_zoom.TimelineChecks.test_cursor_anchor_filters_sort_selection_and_reset) ... 127.0.0.1 - - [02/Nov/2026 11:30:36] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:36] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:36] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:36] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:36] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:36] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:36] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:36] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:36] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:36] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:36] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:37] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:37] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:37] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:38] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_moving_pointer_mid_animation_and_continuous_detail (test_zoom.TimelineChecks.test_moving_pointer_mid_animation_and_continuous_detail) ... 127.0.0.1 - - [02/Nov/2026 11:30:38] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:38] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:38] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:38] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:38] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:38] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:38] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:38] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:38] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:38] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:38] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:40] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:41] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:41] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_one_line_and_cross_domain_same_day_offsets (test_zoom.TimelineChecks.test_one_line_and_cross_domain_same_day_offsets) ... 127.0.0.1 - - [02/Nov/2026 11:30:41] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:41] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:41] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:41] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:41] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:41] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:41] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:41] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:41] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:41] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:41] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:42] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:43] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:43] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:43] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:44] "POST /api/export HTTP/1.1" 200 -
+ok
+test_overview_collision_chooser_and_trackpad_modes (test_zoom.TimelineChecks.test_overview_collision_chooser_and_trackpad_modes) ... 127.0.0.1 - - [02/Nov/2026 11:30:44] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:44] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:44] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:44] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:44] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:44] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:44] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:44] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:44] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:44] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:44] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:45] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:45] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_zoom_in_after_short_interval_focus_does_not_zoom_out (test_zoom.TimelineChecks.test_zoom_in_after_short_interval_focus_does_not_zoom_out) ... 127.0.0.1 - - [02/Nov/2026 11:30:48] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:48] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:48] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:48] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:48] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:48] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:48] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:48] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:48] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:48] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:48] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:48] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:49] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_zoom_limits_buttons_replay_and_all_domains_hidden (test_zoom.TimelineChecks.test_zoom_limits_buttons_replay_and_all_domains_hidden) ... 127.0.0.1 - - [02/Nov/2026 11:30:51] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:51] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:51] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:51] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:51] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:51] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:51] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:51] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:51] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:51] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:51] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:51] "POST /api/export HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:55] "POST /api/replay HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:56] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:56] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:56] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:57] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:30:57] "POST /api/export HTTP/1.1" 200 -
+ok
+
+======================================================================
+ERROR: test_short_interval_focus_zoom_direction (test_3d.ThreeChecks.test_short_interval_focus_zoom_direction)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_53d44f12/test_3d.py", line 106, in test_short_interval_focus_zoom_direction
+    p.wait_for_function('() => !clinical3d.stats().animating')
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_53d44f12/.venv/lib/python3.11/site-packages/playwright/sync_api/_generated.py", line 11559, in wait_for_function
+    self._sync(
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_53d44f12/.venv/lib/python3.11/site-packages/playwright/_impl/_sync_base.py", line 115, in _sync
+    return task.result()
+           ^^^^^^^^^^^^^
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_53d44f12/.venv/lib/python3.11/site-packages/playwright/_impl/_page.py", line 1112, in wait_for_function
+    return await self._main_frame.wait_for_function(**locals_to_params(locals()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_53d44f12/.venv/lib/python3.11/site-packages/playwright/_impl/_frame.py", line 860, in wait_for_function
+    await self._channel.send("waitForFunction", self._timeout, params)
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_53d44f12/.venv/lib/python3.11/site-packages/playwright/_impl/_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_53d44f12/.venv/lib/python3.11/site-packages/playwright/_impl/_connection.py", line 559, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.TimeoutError: Page.wait_for_function: Timeout 30000ms exceeded.
+
+----------------------------------------------------------------------
+Ran 93 tests in 251.120s
+
+FAILED (errors=1)

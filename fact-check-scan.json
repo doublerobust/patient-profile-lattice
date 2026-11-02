@@ -1,0 +1,82 @@
+{
+  "reviewed_commit": "0eb084bbcee7eebfed0f9115a821ec1780263037",
+  "reachable_history_blob_count": 181,
+  "high_confidence_token_pattern_findings": [],
+  "fixture_files_examined": 18,
+  "fixture_code_or_data_changes_since_baseline": [],
+  "fixtures": [
+    {
+      "path": "data/README.txt",
+      "sha256": "fa5dac994f2f6e4be9d2d5032288f650f83dcffc4a5508acb4e10afeb354d327"
+    },
+    {
+      "path": "data/__pycache__/validate.cpython-311.pyc",
+      "sha256": "7340d0ae14197a440d179696fb4a187468c80bcd5c734f03d53a405f68a1756d"
+    },
+    {
+      "path": "data/contract.json",
+      "sha256": "d088e061ea127d5c96fbe8591a3bb1813b2fd27bf24ecefc87f59226997079cc"
+    },
+    {
+      "path": "data/evidence.json",
+      "sha256": "9172d966a8229d9d2bbe74402db1158611d33169b3c054ba7705eba735343912"
+    },
+    {
+      "path": "data/expected_results.json",
+      "sha256": "efea9a9e33f7d2880a7278f733c319b10fed0097569c92e814ea9eae19b8d048"
+    },
+    {
+      "path": "data/fixtures.json",
+      "sha256": "86da855baf7f7139424aae61d6fbb9874f6403b89dab21540f1a9bc3b63c7737"
+    },
+    {
+      "path": "data/manifest.json",
+      "sha256": "f1729e2c35d5bc665f45034f40172528f9cdc5aa3fca0445e26bf64c6f4e39c3"
+    },
+    {
+      "path": "data/normalized_spec.json",
+      "sha256": "7dbc224e882905f68acd09463e1a4d2d208f027f6f8b373e5b57847018e0b140"
+    },
+    {
+      "path": "data/schemas.json",
+      "sha256": "ed642908638f9a04066eaae2db3047e14002f81e8a2c96fa87bae439e4b2d8c8"
+    },
+    {
+      "path": "data/validate.py",
+      "sha256": "0e5365e3318c324fcd1b143fb0184e13bfed9452aa56b9e3a71f6c7ea66c72e1"
+    },
+    {
+      "path": "data/verification.json",
+      "sha256": "339ece171087111609e1bb5f8ea295d98a245dba20f9e8bb0128fe6b63293c52"
+    },
+    {
+      "path": "data/verification.txt",
+      "sha256": "a1c7c39a93123116bbd076126922534ceda6ef14408dcc922c27b08a833d05b6"
+    },
+    {
+      "path": "fixtures/keynote189-synthetic/README.md",
+      "sha256": "20f4e1c18331f9d55cf31068054c9f3d81bc0f513aaec0c213eeb78e886a3d1c"
+    },
+    {
+      "path": "fixtures/keynote189-synthetic/provenance.json",
+      "sha256": "f2c41709b7bb0c6af20b6f42a5a2ce73edd0f882d7b5eb405bfb274efade175d"
+    },
+    {
+      "path": "fixtures/keynote189-synthetic/raw.json",
+      "sha256": "4dd5639d3b9799ee6c8b31615659d2433452fd6e077aca1ba8cb7d26064fbb54"
+    },
+    {
+      "path": "test-fixtures/baseline-cohort-v1.py",
+      "sha256": "ea5d42260581d92a02e63d60ee05c57cde9f5d7c6a86ba682603eefb18016be5"
+    },
+    {
+      "path": "test-fixtures/baseline-provenance.json",
+      "sha256": "034ea12604b097304bf35454accd372e046bbbb292bfcb44e71613e63adfbc95"
+    },
+    {
+      "path": "test-fixtures/historical-mark-counts.json",
+      "sha256": "20bf01665f266233d99e3651af85f0dd6bba339b005d1a69cdad6e456f4dde28"
+    }
+  ],
+  "scope": "Four token/private-key regexes over blobs reachable from the reviewed commit, not a proof that all possible secrets or real patient data are absent."
+}
