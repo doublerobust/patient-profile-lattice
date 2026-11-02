@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Loopback-only synthetic lane-view spike. No uploads, chat, or external services."""
+"""Loopback synthetic viewer. Optional, explicitly consented model API adapter."""
 import argparse
 import copy
 from datetime import datetime, timezone
@@ -292,7 +292,9 @@ class Server(ThreadingHTTPServer):
     daemon_threads = True
 
 
-def make_handler(engine):
+def make_handler(engine, agent_dev_endpoints=()):
+    from model_agent import ModelAdapter, capabilities, local_tool
+    agent = ModelAdapter(agent_dev_endpoints)
     class Handler(BaseHTTPRequestHandler):
 
         def reply(self, status, body, content_type='application/json'):
@@ -334,6 +336,8 @@ def make_handler(engine):
             path = urlparse(self.path).path
             if path == '/api/initial':
                 return self.reply(200, engine.evaluate(engine.default_spec()))
+            if path == '/api/agent/capabilities':
+                return self.reply(200, capabilities(engine))
             if path in ('/3d', '/3d/', '/lattice', '/lattice/'):
                 adapter = 'lattice' if path.startswith('/lattice') else 'renderer3d'
                 extra_css = '<link rel="stylesheet" href="/lattice.css">' if adapter == 'lattice' else ''
@@ -348,6 +352,9 @@ def make_handler(engine):
                      '/app.js': ('app.js', 'text/javascript; charset=utf-8'),
                      '/grammar.js': ('grammar.js', 'text/javascript; charset=utf-8'),
                      '/gestures.js': ('gestures.js', 'text/javascript; charset=utf-8'),
+                     '/tool-registry.js': ('tool-registry.js', 'text/javascript; charset=utf-8'),
+                     '/state-core.js': ('state-core.js', 'text/javascript; charset=utf-8'),
+                     '/action-history.js': ('action-history.js', 'text/javascript; charset=utf-8'),
                      '/view-chat.js': ('view-chat.js', 'text/javascript; charset=utf-8'),
                      '/view-chat.css': ('view-chat.css', 'text/css; charset=utf-8'),
                      '/lattice.js': ('lattice.js', 'text/javascript; charset=utf-8'),
@@ -367,7 +374,29 @@ def make_handler(engine):
                     raise ValueError('invalid_request_size')
                 body = json.loads(self.rfile.read(length))
                 path = urlparse(self.path).path
-                if path == '/api/evaluate':
+                if path.startswith('/api/agent/'):
+                    host = self.headers.get('Host', '')
+                    # No cross-origin forms, missing-Origin scripts or tailnet proxy access
+                    # to the credential-bearing adapter. Use this machine's loopback UI.
+                    if (host not in ('127.0.0.1:' + str(self.server.server_port), 'localhost:' + str(self.server.server_port))
+                            or self.headers.get('Origin') != 'http://' + host
+                            or self.headers.get('Content-Type', '').split(';')[0] != 'application/json'):
+                        return self.reply(403, {'error': 'Model adapter requires same-origin loopback JSON requests.'})
+                    try:
+                        if path == '/api/agent/model':
+                            result = agent.complete(engine, body)
+                        elif path == '/api/agent/tool':
+                            result = local_tool(engine, body['spec'], body['tool'], body['args'], body.get('record_egress') is True)
+                        else:
+                            return self.reply(404, {'error': 'not_found'})
+                    except ValueError as exc:
+                        message = str(exc)
+                        secret = body.get('credential')
+                        if isinstance(secret, str) and secret: message = message.replace(secret, '[REDACTED]')
+                        return self.reply(400, {'error': message})
+                    except Exception:
+                        return self.reply(400, {'error': 'Invalid agent request; no tool executed.'})
+                elif path == '/api/evaluate':
                     result = engine.evaluate(body['spec'], analysis_change=body.get('analysis_change') is True)
                 elif path == '/api/view-query':
                     from view_tools import query_records
@@ -392,6 +421,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--data', type=Path, default=ROOT / 'data')
     parser.add_argument('--port', type=int, default=8765)
+    parser.add_argument('--agent-dev-endpoint', action='append', default=[],
+                        help='Exact loopback chat/completions URL to allow for local model development (repeatable). External HTTPS public endpoints need no allowlist.')
     parser.add_argument('--cohort', choices=('100', 'small', 'keynote189'), default='100',
                         help='100-patient demo (default); keynote189 is the authorized imported synthetic scenario; small preserves golden fixture')
     parser.add_argument('--verify', type=Path, help='Read-only saved-review verification; never repairs or rewrites')
@@ -405,7 +436,7 @@ def main():
         elif args.verify_data:
             print('PASS: pinned file hashes, normalized spec, synthetic-only flag and SUPPAE parent links')
         else:
-            server = Server(('127.0.0.1', args.port), make_handler(engine))
+            server = Server(('127.0.0.1', args.port), make_handler(engine, args.agent_dev_endpoint))
             print('Synthetic-only lane viewer: http://127.0.0.1:%d' % server.server_port, flush=True)
             server.serve_forever()
         return 0

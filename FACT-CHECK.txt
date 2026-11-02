@@ -1,0 +1,100 @@
+INDEPENDENT FACT CHECK — CHANGES_REQUIRED
+Task t_53d44f12
+Reviewed implementation: 0eb084bbcee7eebfed0f9115a821ec1780263037
+Reviewer: fact-checker / GPT Sol (gpt-6.1-sol)
+Workspace: /Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_53d44f12
+
+Scope and independence
+  Fast-forwarded this isolated review worktree from ca13cdf to the integrated E2E commit. Read implementation and original task requirements; ran the implementation, producer tests and independent adversarial probes. I did not produce or modify the application. Reused the local mock/browser fixture for transport, but wrote independent assertions; no external model/provider, real credential, deployment or publication was used.
+
+Required corrections
+
+F1 — HIGH — Contradicted: ambiguous and clinically inferential model requests cannot change the view.
+  Two independent browser -> real adapter -> local mock probes failed the safety assertion:
+    Prompt: "grade 3 AEs"
+    Mock action: set_view {"subset":["SYN-001"]}
+    Result: displayed population changed without clarification.
+    Prompt: "Show only patients whose nausea was caused by treatment"
+    Same schema-valid subset action.
+    Result: displayed population changed despite the unsupported causal inference.
+  Analysis was not changed; this is an unauthorized/inferred DISPLAY selection, not an analysis-confirmation bypass. The failure is that valid argument shape is treated as sufficient grounding for the selection.
+  Implementation: static/view-chat.js:148-173 dispatches model calls without binding them to a user-confirmed semantic scope. static/tool-registry.js:41-49,83-88 accepts any explicit roster subset supplied by the model. model_agent.py:165-173 relies on a system prompt for ambiguity/clinical inference behavior; no enforcement connects the prompt to the selected patients.
+  Existing evidence does not prove the claimed boundary: test_agent_e2e.py:255-266 scripts a cooperative clarify_request; test_agent_browser.py:119-137 scripts cooperative refusal/development. Invalid caused_by arguments being rejected is not proof against a model translating causality into valid patient IDs. docs/model-agent-e2e.md:62-65 and docs/tool-registry.md:37 correctly admit this limitation, but that does not satisfy the original requirement.
+  Smallest correction: introduce a user-grounded scope/clarification or explicit structured action-approval gate before model-derived patient/record selections can execute. Unsupported clinical predicates must be refused, not laundered into an arbitrary explicit subset. Add adversarial tests where the model returns a valid mutation for ambiguous and causal prompts; assert no mutation until the user resolves the intent. Do not claim arbitrary-request refusal solely from schema validation or a system prompt.
+  Evidence: fact_check_probes.py:89-102; fact-check-probes-verified.log:8-9,22-35.
+
+F2 — MEDIUM — Contradicted: every advertised anchor has required fields in the loaded fixture.
+  alignment.py:77-85 unconditionally advertises every ANCHORS member. The small fixture has no DS records exposing DSDECOD/DSSTDTC, yet advertises death as supported; resolve_alignment returns status=resolved with missing patients rather than an unsupported source mapping.
+  This is different from a mapped domain with no qualifying event: no imputed dates were observed, but a nonexistent source mapping is still advertised as available.
+  Smallest correction: derive supported anchors from loaded dataset mappings/fields; mark death unsupported for small and return an explicit development limitation. Keep mapped-but-no-qualifying-event patients distinct from an unavailable anchor mapping. Include all three supported cohort modes in catalogue tests, not only KN189/100 counts.
+  Evidence: alignment.py:10-14,45-74,77-85; data/fixtures.json; fact_check_probes.py:17-30; fact-check-probes-verified.log:14-19.
+
+F3 — MEDIUM — Unsupported/missing: the specified capability audit is available as the source of truth.
+  docs/lattice-agent-capabilities.md does not exist in the reviewed tree. git ls-tree lists only action-history.md, model-agent-e2e.md, state-core.md, tool-acceptance-tests.md and tool-registry.md under docs. Audit task t_201e1470 was archived after spawn failure, with comments standing in for the requested deliverable.
+  Those comments claim generic-100 PR=1; direct source counting gives 25, matching cohort.py:51-53 and the implemented tests. The earlier audit number is contradicted for this exact snapshot. Do NOT modify data or discard qualifying PR records to make it equal 1.
+  Smallest correction: deliver the requested capability/source-field matrix, pinned to the fixture snapshot; correct generic-100 PR to 25, distinguish absent source mappings from missing events, and list limitations/development work. Existing tool-registry.md correctly states 25 and should be reconciled with the stale board evidence.
+  Evidence: task t_201e1470 state/comment, original parent acceptance comments, docs/tool-registry.md:27; fact_check_probes.py:32-57 and fact-check-probes-verified.log:1-3.
+
+Checklist verdicts
+
+1. Alignment grounding — PARTLY CONFIRMED, with F2/F3 contradicted or missing.
+  Independently recomputed every KN189 anchor DATE from raw.json, not just resolver totals: first_treatment=60, first_PR=23, first_PD=45, death=36. Used original ex[].d, tr[].d where resp=PR/PD, and ds.death with the documented fictional calendar mapping (2025-01-01 + enr + source day). All resolved dates match. Runtime fields are EXSTDTC, RSTESTCD=OVRLRESP / RSORRES=PR or PD / RSDTC, DSDECOD=DEATH / DSSTDTC (scenario_adapter.py:38-66).
+  Generic first_PR=25 is independently source-counted. Existing source tests also pass generic first_treatment=100, first_PD=97 and death=0. Randomization has no mapped source and returns an honest development limitation without transformation. first_dose is expressly an alias for first documented treatment, not a numeric-dose or induction inference.
+  Confirmed source preservation, explicit elapsed-calendar-day convention, missing-anchor groups, denominator labels and Undo through test_alignment_browser. An independent in-memory partial-date probe confirms a qualifying PR with unresolved date stays null rather than selecting another complete candidate. No on-disk fixture was changed.
+
+2. Model-status honesty — CONFIRMED in exercised paths.
+  Initial/parser state says no model is connected and not an AI agent. Model-driven label appears only after successful adapter self-test. Consent precedes network; gated pending response remains disconnected; HTTP 401, connected:false, configuration changes and stale responses cannot connect. See static/view-chat.js:10,100-135; test_agent_e2e.py:357-389; test_agent_ui.py:9-35,54-93. Focused acceptance and full-suite agent/UI cases passed.
+
+3. Credentials and raw patient records — bounded credential checks CONFIRMED; blanket no-raw-record wording CONTRADICTED if it includes synthetic records.
+  Ephemeral sentinel absent from exercised persistence, actual download/import replay, DOM/history, server stderr, browser console, mock message bodies and scanned fixtures; exact provider echo redacted. Independent selected-source Save also kept the credential out of localStorage. Scanned 181 git blobs reachable from the exact reviewed commit for four high-confidence token/private-key patterns: zero findings. Hashed 18 files in data/fixtures/test-fixtures; no fixture or cohort/adapter change versus ca13cdf. See fact-check-scan.json for hashes and scope. This is NOT proof of absence of every possible secret, encoding, prior unreachable object or real patient identity.
+  Synthetic raw values are intentionally present in tracked fixtures, source evidence, and selected-event exports/replay/localStorage: app.py:166-171,173-209,255-283; static/app.js:402-416. Independent source/replay and browser Save probes confirmed this. Therefore do not report that all raw records are absent from those surfaces. The original parent requirement prohibits credential persistence and DEFAULT model raw-row egress; it does not prohibit local synthetic provenance packages. State the accurate boundary: synthetic source evidence stays available locally, default model context is minimized, and record egress requires separate request/confirmation. A literal prohibition on all synthetic raw records would require a separate export/storage redesign and conflicts with the existing provenance workflow.
+  Engine enforces a declared synthetic-only fixture flag (app.py:53-54) and KN189 pinned provenance/hash; I did not independently establish every upstream row's fictional nature beyond supplied provenance/generation evidence.
+
+4. Adapter/egress/SSRF — CONFIRMED in code and local-mock paths; real external TLS NOT CHECKED.
+  Browser calls same-origin loopback /api/agent/model; CSP connect-src self and adapter Host/Origin/JSON restrictions exist (app.py:307,377-398; static/app.js:459-460). Tests block direct browser provider requests. Explicit destination/model/dataset acknowledgement and synthetic disclosure precede self-test; record permission is separately confirmed and request-scoped. Default tool follow-ups strip IDs, rows and arbitrary notes; independent get_view_state + query probe sent no tested source values/IDs.
+  model_agent.py:110-162 rejects non-HTTPS except exactly allowlisted loopback development endpoints, credentials/query/fragment, non-443 public ports, and any DNS result not exclusively global. post_model connects to a validated IP, uses the original TLS hostname, does not consume proxy settings and does not follow redirects. Endpoint rejection tests execute before socket creation, including mixed private/public DNS, IPv6/private/link-local cases. Public HTTPS acceptance uses mocked DNS; there was no live public TLS handshake, external provider test or general network penetration test. Do not describe those as performed.
+
+5. Analysis confirmation and ambiguity — analysis confirmation CONFIRMED; semantic refusal CONTRADICTED by F1.
+  Proposals calculate before/after patient and AE-record consequences but do not mutate. Only the local human confirmation control can commit; model confirmation-tool attempts fail, cancel is inert, stale proposals expire, and Undo restores exact analysis/display/highlights/source IDs. See model_agent.py:92-106; static/tool-registry.js:107-129; test_agent_e2e.py:219-266. Schema-invalid/inferential fields and unsupported tools fail closed. Schema-valid but semantically inferred selections do not.
+
+6. Coverage actually proves all claims — CONTRADICTED as a blanket claim.
+  Producer tests genuinely exercise model-driven tool execution, analysis confirmation, units/source IDs, history/Undo, aggregate-default egress and tested credential surfaces. They do not establish refusal against adversarial but schema-valid semantic translations, nor source availability for every advertised anchor. My eight independent probes have five passes and three safety-assertion failures (F1 twice, F2 once); final probe run has no harness errors. Early review-harness pick/wait mistakes were corrected; only fact-check-probes-verified.log is the final probe result.
+
+Execution evidence
+  Environment: isolated .venv, Python 3.11.15, Playwright 1.56.0, jsonschema 4.25.1, Node v26.12.1; uv installed requirements-test.txt. Local Chromium installed/available. npm ci completed with zero reported vulnerabilities.
+
+  .venv/bin/python -m unittest discover -v
+    EXIT 1: 93 tests, 92 passed, one ERROR in 251.120s.
+    test_3d.ThreeChecks.test_short_interval_focus_zoom_direction timed out after 30000ms waiting for !clinical3d.stats().animating at test_3d.py:106.
+    fact-check-regression.log:1566-1592. This resembles the pre-existing documented animation-wait limitation; I did not establish its root cause or call it a new agent regression.
+
+  .venv/bin/python -m unittest test_3d.ThreeChecks.test_short_interval_focus_zoom_direction -v
+    EXIT 0: 1 passed in 4.390s (isolated rerun).
+    fact-check-3d-rerun.log. Does not retroactively make the full run green.
+
+  .venv/bin/python -m unittest test_agent_e2e test_alignment_browser test_model_agent -v
+    EXIT 0: 15 passed in 31.435s.
+    fact-check-acceptance.log.
+
+  .venv/bin/python -m unittest fact_check_probes.SourceReview fact_check_probes.ProbeBrowser.test_ambiguous_request_must_not_mutate_with_valid_but_inferred_call fact_check_probes.ProbeBrowser.test_clinically_inferential_request_must_not_mutate fact_check_probes.ProbeBrowser.test_default_egress_has_no_local_raw_values_or_ids fact_check_probes.ProbeBrowser.test_selected_source_save_has_no_session_credential -v
+    EXIT 1: 8 tests, 5 passed, 3 failed, 0 errors in 8.922s.
+    fact-check-probes-verified.log. These failed assertions expose implementation defects, not invented responses from a real provider: all model replies were intentionally scripted locally.
+
+  npm test
+    EXIT 0: 54/54. fact-check-node.log.
+  node --test alignment-model.test.mjs
+    EXIT 0: 2/2. fact-check-geometry.log.
+  npm ci && npm run build
+    EXIT 0; built bundles match tracked outputs.
+  git diff --check
+    EXIT 0.
+  git diff --exit-code -- static/lattice.js static/renderer3d.js
+    EXIT 0.
+  .venv/bin/python fact_check_scan.py
+    EXIT 0; fact-check-scan.json / fact-check-scan.log.
+  .venv/bin/python fact_check_results.py
+    EXIT 0; parsed counts in fact-check-results.json.
+
+Disposition and changed files
+  Review complete; implementation NOT approved. Resolve F1/F2 and supply/reconcile F3 before claiming requirement completion. Preserve the failed full-regression result and the separate isolated rerun; investigate/stabilize the inherited animation wait as appropriate. No external provider, physical iPad, hosted CI, publication or deployment was checked.
+  No application, source fixture or production test file changed. Added FACT-CHECK.txt, fact_check_probes.py, fact_check_scan.py, fact_check_results.py, fact-check-results.json, fact-check-scan.json and final evidence logs. Full regression additionally generated evidence-chat-interactions.json, an untracked inherited test artifact, not a product edit or review deliverable. Early probe logs are intermediate diagnostics, not final deliverables.

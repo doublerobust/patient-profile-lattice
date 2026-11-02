@@ -1,0 +1,116 @@
+test_catalogue_and_resolver_agree_for_every_cohort (test_alignment_capabilities.AlignmentCapabilities.test_catalogue_and_resolver_agree_for_every_cohort) ...
+  test_catalogue_and_resolver_agree_for_every_cohort (test_alignment_capabilities.AlignmentCapabilities.test_catalogue_and_resolver_agree_for_every_cohort) (cohort='small') ... FAIL
+  test_catalogue_and_resolver_agree_for_every_cohort (test_alignment_capabilities.AlignmentCapabilities.test_catalogue_and_resolver_agree_for_every_cohort) (cohort='100') ... FAIL
+  test_catalogue_and_resolver_agree_for_every_cohort (test_alignment_capabilities.AlignmentCapabilities.test_catalogue_and_resolver_agree_for_every_cohort) (cohort='keynote189') ... ERROR
+test_death_mapping_is_not_fatal_ae_or_other_disposition (test_alignment_capabilities.AlignmentCapabilities.test_death_mapping_is_not_fatal_ae_or_other_disposition) ... FAIL
+test_mapping_requires_fields_not_cohort_name_or_nonempty_domain (test_alignment_capabilities.AlignmentCapabilities.test_mapping_requires_fields_not_cohort_name_or_nonempty_domain) ...
+  test_mapping_requires_fields_not_cohort_name_or_nonempty_domain (test_alignment_capabilities.AlignmentCapabilities.test_mapping_requires_fields_not_cohort_name_or_nonempty_domain) (anchor='first_treatment') ... FAIL
+  test_mapping_requires_fields_not_cohort_name_or_nonempty_domain (test_alignment_capabilities.AlignmentCapabilities.test_mapping_requires_fields_not_cohort_name_or_nonempty_domain) (anchor='first_PR') ... FAIL
+  test_mapping_requires_fields_not_cohort_name_or_nonempty_domain (test_alignment_capabilities.AlignmentCapabilities.test_mapping_requires_fields_not_cohort_name_or_nonempty_domain) (anchor='first_PD') ... FAIL
+  test_mapping_requires_fields_not_cohort_name_or_nonempty_domain (test_alignment_capabilities.AlignmentCapabilities.test_mapping_requires_fields_not_cohort_name_or_nonempty_domain) (anchor='death') ... FAIL
+test_partial_or_blank_dates_do_not_remove_mapping_or_impute_date (test_alignment_capabilities.AlignmentCapabilities.test_partial_or_blank_dates_do_not_remove_mapping_or_impute_date) ... ok
+test_response_mapping_does_not_require_a_pr_or_pd_event (test_alignment_capabilities.AlignmentCapabilities.test_response_mapping_does_not_require_a_pr_or_pd_event) ... ok
+test_supported_patient_states_and_supported_empty_event (test_alignment_capabilities.AlignmentCapabilities.test_supported_patient_states_and_supported_empty_event) ... ok
+
+======================================================================
+ERROR: test_catalogue_and_resolver_agree_for_every_cohort (test_alignment_capabilities.AlignmentCapabilities.test_catalogue_and_resolver_agree_for_every_cohort) (cohort='keynote189')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/.hermes/kanban/boards/ultimate-patient-profile-visualizer/workspaces/t_7d23a19e/test_alignment_capabilities.py", line 33, in test_catalogue_and_resolver_agree_for_every_cohort
+    self.assertEqual(result['limitation'], 'source_mapping_unavailable')
+                     ~~~~~~^^^^^^^^^^^^^^
+KeyError: 'limitation'
+
+======================================================================
+FAIL: test_catalogue_and_resolver_agree_for_every_cohort (test_alignment_capabilities.AlignmentCapabilities.test_catalogue_and_resolver_agree_for_every_cohort) (cohort='small')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/.hermes/kanban/boards/ultimate-patient-profile-visualizer/workspaces/t_7d23a19e/test_alignment_capabilities.py", line 26, in test_catalogue_and_resolver_agree_for_every_cohort
+    self.assertEqual(catalogue['supported_anchors'], expected)
+AssertionError: Lists differ: ['calendar', 'first_treatment', 'first_PR', 'first_PD', 'death'] != ['calendar', 'first_treatment', 'first_PR', 'first_PD']
+
+First list contains 1 additional elements.
+First extra element 4:
+'death'
+
+- ['calendar', 'first_treatment', 'first_PR', 'first_PD', 'death']
+?                                                       ---------
+
++ ['calendar', 'first_treatment', 'first_PR', 'first_PD']
+
+======================================================================
+FAIL: test_catalogue_and_resolver_agree_for_every_cohort (test_alignment_capabilities.AlignmentCapabilities.test_catalogue_and_resolver_agree_for_every_cohort) (cohort='100')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/.hermes/kanban/boards/ultimate-patient-profile-visualizer/workspaces/t_7d23a19e/test_alignment_capabilities.py", line 26, in test_catalogue_and_resolver_agree_for_every_cohort
+    self.assertEqual(catalogue['supported_anchors'], expected)
+AssertionError: Lists differ: ['calendar', 'first_treatment', 'first_PR', 'first_PD', 'death'] != ['calendar', 'first_treatment', 'first_PR', 'first_PD']
+
+First list contains 1 additional elements.
+First extra element 4:
+'death'
+
+- ['calendar', 'first_treatment', 'first_PR', 'first_PD', 'death']
+?                                                       ---------
+
++ ['calendar', 'first_treatment', 'first_PR', 'first_PD']
+
+======================================================================
+FAIL: test_death_mapping_is_not_fatal_ae_or_other_disposition (test_alignment_capabilities.AlignmentCapabilities.test_death_mapping_is_not_fatal_ae_or_other_disposition)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/.hermes/kanban/boards/ultimate-patient-profile-visualizer/workspaces/t_7d23a19e/test_alignment_capabilities.py", line 86, in test_death_mapping_is_not_fatal_ae_or_other_disposition
+    self.assertEqual(resolve_alignment(engine, 'death')['status'], 'unsupported')
+AssertionError: 'resolved' != 'unsupported'
+- resolved
++ unsupported
+
+
+======================================================================
+FAIL: test_mapping_requires_fields_not_cohort_name_or_nonempty_domain (test_alignment_capabilities.AlignmentCapabilities.test_mapping_requires_fields_not_cohort_name_or_nonempty_domain) (anchor='first_treatment')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/.hermes/kanban/boards/ultimate-patient-profile-visualizer/workspaces/t_7d23a19e/test_alignment_capabilities.py", line 64, in test_mapping_requires_fields_not_cohort_name_or_nonempty_domain
+    self.assertEqual(resolve_alignment(proxy, anchor)['status'], 'unsupported')
+AssertionError: 'resolved' != 'unsupported'
+- resolved
++ unsupported
+
+
+======================================================================
+FAIL: test_mapping_requires_fields_not_cohort_name_or_nonempty_domain (test_alignment_capabilities.AlignmentCapabilities.test_mapping_requires_fields_not_cohort_name_or_nonempty_domain) (anchor='first_PR')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/.hermes/kanban/boards/ultimate-patient-profile-visualizer/workspaces/t_7d23a19e/test_alignment_capabilities.py", line 64, in test_mapping_requires_fields_not_cohort_name_or_nonempty_domain
+    self.assertEqual(resolve_alignment(proxy, anchor)['status'], 'unsupported')
+AssertionError: 'resolved' != 'unsupported'
+- resolved
++ unsupported
+
+
+======================================================================
+FAIL: test_mapping_requires_fields_not_cohort_name_or_nonempty_domain (test_alignment_capabilities.AlignmentCapabilities.test_mapping_requires_fields_not_cohort_name_or_nonempty_domain) (anchor='first_PD')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/.hermes/kanban/boards/ultimate-patient-profile-visualizer/workspaces/t_7d23a19e/test_alignment_capabilities.py", line 64, in test_mapping_requires_fields_not_cohort_name_or_nonempty_domain
+    self.assertEqual(resolve_alignment(proxy, anchor)['status'], 'unsupported')
+AssertionError: 'resolved' != 'unsupported'
+- resolved
++ unsupported
+
+
+======================================================================
+FAIL: test_mapping_requires_fields_not_cohort_name_or_nonempty_domain (test_alignment_capabilities.AlignmentCapabilities.test_mapping_requires_fields_not_cohort_name_or_nonempty_domain) (anchor='death')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/.hermes/kanban/boards/ultimate-patient-profile-visualizer/workspaces/t_7d23a19e/test_alignment_capabilities.py", line 64, in test_mapping_requires_fields_not_cohort_name_or_nonempty_domain
+    self.assertEqual(resolve_alignment(proxy, anchor)['status'], 'unsupported')
+AssertionError: 'resolved' != 'unsupported'
+- resolved
++ unsupported
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.186s
+
+FAILED (failures=7, errors=1)

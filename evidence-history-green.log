@@ -1,0 +1,26 @@
+✔ records immutable schema, source IDs, no-op queries, and exact combined undo/reset (3.4595ms)
+✔ invalid/stale actions and failed commits never append or change authoritative state (1.111584ms)
+✔ serializes commits by rejecting overlap and prevents stale per-entry undo (0.660125ms)
+✔ session replacement drops old baseline and entries; returned snapshots cannot be tampered (0.58325ms)
+✔ rejects executable/non-JSON metadata without invoking getters; subscribers cannot break commit (0.79ms)
+✔ legacy 3d chatSnapshot includes peel, preserved exactly on apply/revert (1.809416ms)
+✔ documented temporal contract survives exact restoration without inferred semantics (0.339542ms)
+✔ alignment resolver result shape preserves dates and null missing anchors; invalid forms rejected (1.908792ms)
+✔ stores analysis separately; display diff round trips exactly without mutating inputs (2.03125ms)
+✔ analysis and combined diffs restore predicates, population, selection and camera exactly (1.518417ms)
+✔ display-only undo preserves later independent analysis changes (0.277667ms)
+✔ stale apply/revert rejects atomically, including combined domain conflicts (0.46225ms)
+✔ empty diff, serialized diff, and key-order-independent equality (0.2565ms)
+✔ snapshots and diff payloads are detached and deeply immutable (0.163625ms)
+✔ unknown fields cannot smuggle analysis changes into display-only diff (0.237666ms)
+✔ malformed values, arrays, IDs, dates, cameras and unsupported analysis semantics fail closed (1.141792ms)
+✔ only finite JSON data accepted; accessors are rejected without execution (0.413375ms)
+✔ browser global loads without DOM/network and executes real diff round trip (2.15225ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 117.813375

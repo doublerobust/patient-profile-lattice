@@ -1,0 +1,40 @@
+test_original_raw_anchor_counts_and_dates (fact_check_probes.SourceReview.test_original_raw_anchor_counts_and_dates) ... Original raw KN189 date/count cross-check: {"death": 36, "first_PD": 45, "first_PR": 23, "first_treatment": 60}
+Generic source-qualified PR patients: 25
+ok
+test_selected_review_contains_synthetic_source_values (fact_check_probes.SourceReview.test_selected_review_contains_synthetic_source_values) ... Selected local review/replay intentionally includes synthetic raw source values: confirmed
+ok
+test_supported_anchor_requires_loaded_source_fields (fact_check_probes.SourceReview.test_supported_anchor_requires_loaded_source_fields) ... FAIL
+test_unresolved_candidate_is_not_imputed (fact_check_probes.SourceReview.test_unresolved_candidate_is_not_imputed) ... ok
+test_ambiguous_request_must_not_mutate_with_valid_but_inferred_call (fact_check_probes.ProbeBrowser.test_ambiguous_request_must_not_mutate_with_valid_but_inferred_call) ... FAIL
+test_clinically_inferential_request_must_not_mutate (fact_check_probes.ProbeBrowser.test_clinically_inferential_request_must_not_mutate) ... FAIL
+test_default_egress_has_no_local_raw_values_or_ids (fact_check_probes.ProbeBrowser.test_default_egress_has_no_local_raw_values_or_ids) ... ok
+test_selected_source_save_has_no_session_credential (fact_check_probes.ProbeBrowser.test_selected_source_save_has_no_session_credential) ... ok
+
+======================================================================
+FAIL: test_supported_anchor_requires_loaded_source_fields (fact_check_probes.SourceReview.test_supported_anchor_requires_loaded_source_fields)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_53d44f12/fact_check_probes.py", line 29, in test_supported_anchor_requires_loaded_source_fields
+    self.assertTrue(any(all(f in r['values'] for f in required) for r in rows),
+AssertionError: False is not true : DEFECT: small advertises death without any loaded DS record exposing required source fields
+
+======================================================================
+FAIL: test_ambiguous_request_must_not_mutate_with_valid_but_inferred_call (fact_check_probes.ProbeBrowser.test_ambiguous_request_must_not_mutate_with_valid_but_inferred_call)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_53d44f12/fact_check_probes.py", line 93, in test_ambiguous_request_must_not_mutate_with_valid_but_inferred_call
+    self.assertTrue(self.snapshot() == before,
+AssertionError: False is not true : DEFECT: ambiguous prompt changed displayed population via a schema-valid inferred subset
+
+======================================================================
+FAIL: test_clinically_inferential_request_must_not_mutate (fact_check_probes.ProbeBrowser.test_clinically_inferential_request_must_not_mutate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_53d44f12/fact_check_probes.py", line 101, in test_clinically_inferential_request_must_not_mutate
+    self.assertTrue(self.snapshot() == before,
+AssertionError: False is not true : DEFECT: unsupported clinical-causality request changed view via a valid inferred subset
+
+----------------------------------------------------------------------
+Ran 8 tests in 8.922s
+
+FAILED (failures=3)

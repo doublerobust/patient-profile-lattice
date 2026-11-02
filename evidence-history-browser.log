@@ -1,0 +1,13 @@
+test_combined_state_read_only_history_undo_and_reset (test_action_history.HistoryBrowserChecks.test_combined_state_read_only_history_undo_and_reset) ... 127.0.0.1 - - [02/Nov/2026 10:40:52] "GET /history-demo.html HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 10:40:52] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 10:40:52] "GET /action-history.js HTTP/1.1" 200 -
+ok
+test_text_is_inert_and_failed_commit_is_honest (test_action_history.HistoryBrowserChecks.test_text_is_inert_and_failed_commit_is_honest) ... 127.0.0.1 - - [02/Nov/2026 10:40:54] "GET /history-demo.html HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 10:40:54] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 10:40:54] "GET /state-core.js HTTP/1.1" 200 -
+ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 2.208s
+
+OK

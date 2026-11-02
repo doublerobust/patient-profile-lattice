@@ -1,0 +1,21 @@
+test_short_interval_focus_zoom_direction (test_3d.ThreeChecks.test_short_interval_focus_zoom_direction) ... 127.0.0.1 - - [02/Nov/2026 11:31:52] "GET /3d HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:31:52] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:31:52] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:31:52] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:31:52] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:31:52] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:31:52] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:31:52] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:31:52] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:31:52] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:31:52] "GET /renderer3d.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:31:52] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:31:52] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:31:52] "POST /api/pick HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:31:52] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 4.390s
+
+OK

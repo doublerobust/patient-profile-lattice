@@ -1,0 +1,380 @@
+{
+  "cohorts": {
+    "100": {
+      "RSSTRESC_populated_rows": 3,
+      "RS_rows": 391,
+      "catalogue": {
+        "aliases": {
+          "first_dose": "first_treatment"
+        },
+        "anchors": {
+          "death": {
+            "axis_label": "days since recorded death",
+            "convention": "Elapsed calendar days; anchor date = 0. Not an SDTM study-day convention.",
+            "counts": {
+              "event_date_unresolved": 0,
+              "no_qualifying_event": 100,
+              "resolved": 0
+            },
+            "definition": "Earliest DSDECOD=DEATH at DSSTDTC; fatal AE onset is not a death date.",
+            "denominator": 100,
+            "denominator_unit": "loaded roster patients"
+          },
+          "first_PD": {
+            "axis_label": "days since first recorded PD",
+            "convention": "Elapsed calendar days; anchor date = 0. Not an SDTM study-day convention.",
+            "counts": {
+              "event_date_unresolved": 0,
+              "no_qualifying_event": 3,
+              "resolved": 97
+            },
+            "definition": "Earliest RSORRES=PD with RSTESTCD=OVRLRESP at RSDTC; no inferred progression.",
+            "denominator": 100,
+            "denominator_unit": "loaded roster patients"
+          },
+          "first_PR": {
+            "axis_label": "days since first recorded PR",
+            "convention": "Elapsed calendar days; anchor date = 0. Not an SDTM study-day convention.",
+            "counts": {
+              "event_date_unresolved": 0,
+              "no_qualifying_event": 75,
+              "resolved": 25
+            },
+            "definition": "Earliest RSORRES=PR with RSTESTCD=OVRLRESP at RSDTC; recorded, not confirmed response.",
+            "denominator": 100,
+            "denominator_unit": "loaded roster patients"
+          },
+          "first_treatment": {
+            "axis_label": "days since first documented treatment",
+            "convention": "Elapsed calendar days; anchor date = 0. Not an SDTM study-day convention.",
+            "counts": {
+              "event_date_unresolved": 0,
+              "no_qualifying_event": 0,
+              "resolved": 100
+            },
+            "definition": "Earliest documented exposure start (EXSTDTC); no numeric dose or induction predicate.",
+            "denominator": 100,
+            "denominator_unit": "loaded roster patients"
+          }
+        },
+        "missing_anchor_handling": "All patients in the current visible roster remain visible. Patients without a resolved anchor stay in labeled unaligned groups: no qualifying event recorded, or event recorded but date unresolved. No partial or missing date is imputed. Relative bins use the resolved visible patient denominator; unaligned groups are counted separately. Analysis is unchanged.",
+        "renderer": "/lattice only; timeline and legacy /3d remain calendar-only",
+        "supported_anchors": [
+          "calendar",
+          "first_treatment",
+          "first_PR",
+          "first_PD",
+          "death"
+        ],
+        "unsupported": [
+          "randomization",
+          "anchor-relative analytical windows (development task; no analysis execution)"
+        ]
+      },
+      "loaded_roster": 100,
+      "resolver": {
+        "death": {
+          "counts": {
+            "event_date_unresolved": 0,
+            "no_qualifying_event": 100,
+            "resolved": 0
+          },
+          "limitation": null,
+          "resolved_patients": 0,
+          "status": "resolved"
+        },
+        "first_PD": {
+          "counts": {
+            "event_date_unresolved": 0,
+            "no_qualifying_event": 3,
+            "resolved": 97
+          },
+          "limitation": null,
+          "resolved_patients": 97,
+          "status": "resolved"
+        },
+        "first_PR": {
+          "counts": {
+            "event_date_unresolved": 0,
+            "no_qualifying_event": 75,
+            "resolved": 25
+          },
+          "limitation": null,
+          "resolved_patients": 25,
+          "status": "resolved"
+        },
+        "first_treatment": {
+          "counts": {
+            "event_date_unresolved": 0,
+            "no_qualifying_event": 0,
+            "resolved": 100
+          },
+          "limitation": null,
+          "resolved_patients": 100,
+          "status": "resolved"
+        },
+        "randomization": {
+          "counts": null,
+          "limitation": null,
+          "resolved_patients": 0,
+          "status": "unsupported"
+        }
+      },
+      "snapshot_id": "synthetic-scale-100-v2-sentinel",
+      "snapshot_sha256": "9fcf5b2759edd4330486d05f390642e0b96b898a46b788166ac573934e61e303"
+    },
+    "keynote189": {
+      "RSSTRESC_populated_rows": 0,
+      "RS_rows": 391,
+      "catalogue": {
+        "aliases": {
+          "first_dose": "first_treatment"
+        },
+        "anchors": {
+          "death": {
+            "axis_label": "days since recorded death",
+            "convention": "Elapsed calendar days; anchor date = 0. Not an SDTM study-day convention.",
+            "counts": {
+              "event_date_unresolved": 0,
+              "no_qualifying_event": 24,
+              "resolved": 36
+            },
+            "definition": "Earliest DSDECOD=DEATH at DSSTDTC; fatal AE onset is not a death date.",
+            "denominator": 60,
+            "denominator_unit": "loaded roster patients"
+          },
+          "first_PD": {
+            "axis_label": "days since first recorded PD",
+            "convention": "Elapsed calendar days; anchor date = 0. Not an SDTM study-day convention.",
+            "counts": {
+              "event_date_unresolved": 0,
+              "no_qualifying_event": 15,
+              "resolved": 45
+            },
+            "definition": "Earliest RSORRES=PD with RSTESTCD=OVRLRESP at RSDTC; no inferred progression.",
+            "denominator": 60,
+            "denominator_unit": "loaded roster patients"
+          },
+          "first_PR": {
+            "axis_label": "days since first recorded PR",
+            "convention": "Elapsed calendar days; anchor date = 0. Not an SDTM study-day convention.",
+            "counts": {
+              "event_date_unresolved": 0,
+              "no_qualifying_event": 37,
+              "resolved": 23
+            },
+            "definition": "Earliest RSORRES=PR with RSTESTCD=OVRLRESP at RSDTC; recorded, not confirmed response.",
+            "denominator": 60,
+            "denominator_unit": "loaded roster patients"
+          },
+          "first_treatment": {
+            "axis_label": "days since first documented treatment",
+            "convention": "Elapsed calendar days; anchor date = 0. Not an SDTM study-day convention.",
+            "counts": {
+              "event_date_unresolved": 0,
+              "no_qualifying_event": 0,
+              "resolved": 60
+            },
+            "definition": "Earliest documented exposure start (EXSTDTC); no numeric dose or induction predicate.",
+            "denominator": 60,
+            "denominator_unit": "loaded roster patients"
+          }
+        },
+        "missing_anchor_handling": "All patients in the current visible roster remain visible. Patients without a resolved anchor stay in labeled unaligned groups: no qualifying event recorded, or event recorded but date unresolved. No partial or missing date is imputed. Relative bins use the resolved visible patient denominator; unaligned groups are counted separately. Analysis is unchanged.",
+        "renderer": "/lattice only; timeline and legacy /3d remain calendar-only",
+        "supported_anchors": [
+          "calendar",
+          "first_treatment",
+          "first_PR",
+          "first_PD",
+          "death"
+        ],
+        "unsupported": [
+          "randomization",
+          "anchor-relative analytical windows (development task; no analysis execution)"
+        ]
+      },
+      "loaded_roster": 60,
+      "resolver": {
+        "death": {
+          "counts": {
+            "event_date_unresolved": 0,
+            "no_qualifying_event": 24,
+            "resolved": 36
+          },
+          "limitation": null,
+          "resolved_patients": 36,
+          "status": "resolved"
+        },
+        "first_PD": {
+          "counts": {
+            "event_date_unresolved": 0,
+            "no_qualifying_event": 15,
+            "resolved": 45
+          },
+          "limitation": null,
+          "resolved_patients": 45,
+          "status": "resolved"
+        },
+        "first_PR": {
+          "counts": {
+            "event_date_unresolved": 0,
+            "no_qualifying_event": 37,
+            "resolved": 23
+          },
+          "limitation": null,
+          "resolved_patients": 23,
+          "status": "resolved"
+        },
+        "first_treatment": {
+          "counts": {
+            "event_date_unresolved": 0,
+            "no_qualifying_event": 0,
+            "resolved": 60
+          },
+          "limitation": null,
+          "resolved_patients": 60,
+          "status": "resolved"
+        },
+        "randomization": {
+          "counts": null,
+          "limitation": null,
+          "resolved_patients": 0,
+          "status": "unsupported"
+        }
+      },
+      "snapshot_id": "synthetic-keynote189-be3744cd-v1",
+      "snapshot_sha256": "b9d9600d018e472ce1dd5e23417c48844c908d20ec1f15ba28d8d78d5769e2d2"
+    },
+    "small": {
+      "RSSTRESC_populated_rows": 3,
+      "RS_rows": 3,
+      "catalogue": {
+        "aliases": {
+          "first_dose": "first_treatment"
+        },
+        "anchors": {
+          "death": {
+            "axis_label": "days since recorded death",
+            "convention": "Elapsed calendar days; anchor date = 0. Not an SDTM study-day convention.",
+            "counts": {
+              "event_date_unresolved": 0,
+              "no_qualifying_event": 3,
+              "resolved": 0
+            },
+            "definition": "Earliest DSDECOD=DEATH at DSSTDTC; fatal AE onset is not a death date.",
+            "denominator": 3,
+            "denominator_unit": "loaded roster patients"
+          },
+          "first_PD": {
+            "axis_label": "days since first recorded PD",
+            "convention": "Elapsed calendar days; anchor date = 0. Not an SDTM study-day convention.",
+            "counts": {
+              "event_date_unresolved": 0,
+              "no_qualifying_event": 3,
+              "resolved": 0
+            },
+            "definition": "Earliest RSORRES=PD with RSTESTCD=OVRLRESP at RSDTC; no inferred progression.",
+            "denominator": 3,
+            "denominator_unit": "loaded roster patients"
+          },
+          "first_PR": {
+            "axis_label": "days since first recorded PR",
+            "convention": "Elapsed calendar days; anchor date = 0. Not an SDTM study-day convention.",
+            "counts": {
+              "event_date_unresolved": 0,
+              "no_qualifying_event": 2,
+              "resolved": 1
+            },
+            "definition": "Earliest RSORRES=PR with RSTESTCD=OVRLRESP at RSDTC; recorded, not confirmed response.",
+            "denominator": 3,
+            "denominator_unit": "loaded roster patients"
+          },
+          "first_treatment": {
+            "axis_label": "days since first documented treatment",
+            "convention": "Elapsed calendar days; anchor date = 0. Not an SDTM study-day convention.",
+            "counts": {
+              "event_date_unresolved": 0,
+              "no_qualifying_event": 0,
+              "resolved": 3
+            },
+            "definition": "Earliest documented exposure start (EXSTDTC); no numeric dose or induction predicate.",
+            "denominator": 3,
+            "denominator_unit": "loaded roster patients"
+          }
+        },
+        "missing_anchor_handling": "All patients in the current visible roster remain visible. Patients without a resolved anchor stay in labeled unaligned groups: no qualifying event recorded, or event recorded but date unresolved. No partial or missing date is imputed. Relative bins use the resolved visible patient denominator; unaligned groups are counted separately. Analysis is unchanged.",
+        "renderer": "/lattice only; timeline and legacy /3d remain calendar-only",
+        "supported_anchors": [
+          "calendar",
+          "first_treatment",
+          "first_PR",
+          "first_PD",
+          "death"
+        ],
+        "unsupported": [
+          "randomization",
+          "anchor-relative analytical windows (development task; no analysis execution)"
+        ]
+      },
+      "loaded_roster": 3,
+      "resolver": {
+        "death": {
+          "counts": {
+            "event_date_unresolved": 0,
+            "no_qualifying_event": 3,
+            "resolved": 0
+          },
+          "limitation": null,
+          "resolved_patients": 0,
+          "status": "resolved"
+        },
+        "first_PD": {
+          "counts": {
+            "event_date_unresolved": 0,
+            "no_qualifying_event": 3,
+            "resolved": 0
+          },
+          "limitation": null,
+          "resolved_patients": 0,
+          "status": "resolved"
+        },
+        "first_PR": {
+          "counts": {
+            "event_date_unresolved": 0,
+            "no_qualifying_event": 2,
+            "resolved": 1
+          },
+          "limitation": null,
+          "resolved_patients": 1,
+          "status": "resolved"
+        },
+        "first_treatment": {
+          "counts": {
+            "event_date_unresolved": 0,
+            "no_qualifying_event": 0,
+            "resolved": 3
+          },
+          "limitation": null,
+          "resolved_patients": 3,
+          "status": "resolved"
+        },
+        "randomization": {
+          "counts": null,
+          "limitation": null,
+          "resolved_patients": 0,
+          "status": "unsupported"
+        }
+      },
+      "snapshot_id": "synthetic-spike-v1",
+      "snapshot_sha256": "86da855baf7f7139424aae61d6fbb9874f6403b89dab21540f1a9bc3b63c7737"
+    }
+  },
+  "source_sha256": {
+    "cohort.py": "d52921eb0c16829f0c0436f9cc31280ae437de7c213a04a11a012950c8b9cffb",
+    "data/fixtures.json": "86da855baf7f7139424aae61d6fbb9874f6403b89dab21540f1a9bc3b63c7737",
+    "data/manifest.json": "f1729e2c35d5bc665f45034f40172528f9cdc5aa3fca0445e26bf64c6f4e39c3",
+    "fixtures/keynote189-synthetic/raw.json": "4dd5639d3b9799ee6c8b31615659d2433452fd6e077aca1ba8cb7d26064fbb54",
+    "scenario_adapter.py": "f4b49e4cf287707cd61fe5a3a7fdcc0d458782521713152cf751e959ffd59ec2"
+  }
+}

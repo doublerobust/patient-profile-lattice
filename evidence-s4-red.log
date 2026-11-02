@@ -1,0 +1,50 @@
+test_category_not_claimed_as_single_preferred_term (test_table_s4.TableS4Checks.test_category_not_claimed_as_single_preferred_term) ... FAIL
+test_derivative_preserves_upstream_and_only_changes_mapped_fields (test_table_s4.TableS4Checks.test_derivative_preserves_upstream_and_only_changes_mapped_fields) ... ERROR
+test_loader_rejects_corrupt_derivative (test_table_s4.TableS4Checks.test_loader_rejects_corrupt_derivative) ... FAIL
+test_manifest_pins_both_files_and_distinguishes_categories (test_table_s4.TableS4Checks.test_manifest_pins_both_files_and_distinguishes_categories) ... ERROR
+test_term_query_and_highlight_retain_units_and_derivative_provenance (test_table_s4.TableS4Checks.test_term_query_and_highlight_retain_units_and_derivative_provenance) ... FAIL
+
+======================================================================
+ERROR: test_derivative_preserves_upstream_and_only_changes_mapped_fields (test_table_s4.TableS4Checks.test_derivative_preserves_upstream_and_only_changes_mapped_fields)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_6d894f3b/test_table_s4.py", line 19, in test_derivative_preserves_upstream_and_only_changes_mapped_fields
+    from populate_ae_table_s4 import populate, TABLE_S4
+ModuleNotFoundError: No module named 'populate_ae_table_s4'
+
+======================================================================
+ERROR: test_manifest_pins_both_files_and_distinguishes_categories (test_table_s4.TableS4Checks.test_manifest_pins_both_files_and_distinguishes_categories)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_6d894f3b/test_table_s4.py", line 38, in test_manifest_pins_both_files_and_distinguishes_categories
+    from populate_ae_table_s4 import TABLE_S4, DERIVATIVE_SHA256
+ModuleNotFoundError: No module named 'populate_ae_table_s4'
+
+======================================================================
+FAIL: test_category_not_claimed_as_single_preferred_term (test_table_s4.TableS4Checks.test_category_not_claimed_as_single_preferred_term)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_6d894f3b/test_table_s4.py", line 90, in test_category_not_claimed_as_single_preferred_term
+    self.assertTrue(sources)
+AssertionError: [] is not true
+
+======================================================================
+FAIL: test_loader_rejects_corrupt_derivative (test_table_s4.TableS4Checks.test_loader_rejects_corrupt_derivative)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_6d894f3b/test_table_s4.py", line 55, in test_loader_rejects_corrupt_derivative
+    with patch.object(Path, 'read_bytes', corrupt), self.assertRaisesRegex(ValueError, 'scenario_derivative_hash_mismatch'):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_term_query_and_highlight_retain_units_and_derivative_provenance (test_table_s4.TableS4Checks.test_term_query_and_highlight_retain_units_and_derivative_provenance)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_6d894f3b/test_table_s4.py", line 65, in test_term_query_and_highlight_retain_units_and_derivative_provenance
+    self.assertTrue(expected, 'New Table S4 term must be present')
+AssertionError: [] is not true : New Table S4 term must be present
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.309s
+
+FAILED (failures=3, errors=2)

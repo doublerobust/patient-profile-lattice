@@ -1,0 +1,9 @@
+
+> build
+> esbuild renderer3d.js lattice.js --bundle --minify --format=iife --outdir=static --legal-comments=eof
+
+
+  static/lattice.js     567.0kb
+  static/renderer3d.js  555.7kb
+
+⚡ Done in 64ms

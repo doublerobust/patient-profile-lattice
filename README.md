@@ -24,9 +24,50 @@ Then open one of:
 | `http://127.0.0.1:8765/lattice` | Patient x time x visual layer lattice, four free-rotating projections |
 | `http://127.0.0.1:8765/3d` | GPU prototype of the same records and the same pinned engine |
 
-The server binds loopback only. There are no uploads, no outbound service calls from the viewer, no telemetry, and the "Ask about this view" panel is a local rule parser with validated local tools, not a model connection. Touch devices get a shared pointer controller: one-finger rotate (or pan by toggle), two-finger translate, centred pinch zoom, with desktop drag conventions retained.
+The server binds loopback only. The "Ask about this view" panel starts disconnected, with explicitly labeled local rule/parser commands. An optional user-configured model connection sends requests through the loopback adapter only after endpoint/model testing and explicit egress consent; it is not enabled by default. Credentials are session-only. See [the tool registry contract](docs/tool-registry.md) for validation, analysis confirmation, source IDs, Undo/Reset and limitations. Touch devices get a shared pointer controller: one-finger rotate (or pan by toggle), two-finger translate, centred pinch zoom, with desktop drag conventions retained.
 
-Two read-only integrity checks:
+### Optional model-driven panel (local, not deployed)
+
+For the model adapter, install the pinned JSON-schema dependency in a virtualenv
+(the test requirements also install it):
+
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install jsonschema==4.25.1
+.venv/bin/python app.py --cohort keynote189
+```
+
+Open `http://127.0.0.1:8765/lattice`, expand **Ask about this view**, then the model
+configuration. Enter the complete OpenAI-compatible `https://…/chat/completions`
+URL (not just a base URL), exact model ID and session credential. Test the
+connection and acknowledge the displayed endpoint/model/dataset egress dialog.
+Only a successful test changes the label to **Model-driven agent**. Local parser
+commands remain explicitly separate. External endpoints must resolve exclusively
+to public addresses and use HTTPS port 443; redirects and URL credentials/query
+parameters are refused. No external provider was used in verification.
+
+Model prompts leave this machine after consent. Default tool follow-ups send
+aggregate context, not source IDs or rows; text you type can itself contain
+identifiers. Record-level results require the separate per-request egress control
+and confirmation. Credentials stay in session memory, are cleared from the input
+before connection testing, and must not be saved in review/export/history files.
+Disconnect clears the configured connection.
+
+Try `Sort descending; show AE and EX at tier 2`, or request alignment to first
+recorded PR on the KN189 fixture. Patient/event selections use a separate one-shot
+scope approval; see [supported wording](docs/tool-registry.md#model-display-scope-approval).
+Analysis-population proposals have their own consequence preview and confirmation.
+Use in-panel Undo/Reset to reverse executed actions. Randomization and
+anchor-relative analytical windows remain unsupported, not approximated.
+
+For a development-only loopback model, pass an exact endpoint allowlist at startup,
+for example `--agent-dev-endpoint http://127.0.0.1:9000/v1/chat/completions`, and
+configure that identical URL in the panel. This does not start a model server.
+Automated tests start their own scripted local endpoint and use no external
+credentials. See [capability audit](docs/lattice-agent-capabilities.md) and
+[local-mock acceptance](docs/model-agent-e2e.md).
+
+Two integrity checks (the validator refreshes its local verification report):
 
 ```sh
 python3 app.py --verify-data     # pinned file hashes, normalized spec, synthetic-only flag, SUPPAE parent links
@@ -40,9 +81,11 @@ Both were run against this release: `--verify-data` printed PASS, and `data/vali
 | Cohort | Source | Size | Status |
 |---|---|---|---|
 | `--cohort 100` (default) | `data/`, hand-authored spike snapshot `synthetic-spike-v1`, seed 82087039 | 100 patients, 298 qualifying AE source records | Invented feasibility records. No real patient or trial data. |
-| `--cohort keynote189` | `fixtures/keynote189-synthetic/`, imported generated output | 60 patients, 260 AE / 80 CM / 1771 EX / 391 TR / 4962 LB source rows | Synthetic. Not real trial data. Not a submission-ready dataset. |
+| `--cohort keynote189` | `fixtures/keynote189-synthetic/table-s4-synthetic.json`, local derivative of imported generated output | 60 patients, 260 AE / 80 CM / 1771 EX / 391 TR / 4962 LB source rows | Synthetic. Not real trial data. Not a submission-ready dataset. |
 
-The fixture is pinned by hash. `fixtures/keynote189-synthetic/provenance.json` records the upstream URL, commit, generator entry point, import time, both SHA-256 values, the vendored generator hash and the recomputed row counts. `extract_scenario.py` re-verifies the pinned generator hash before regenerating and re-verifies the raw output hash before writing (it needs Node; the viewer does not).
+Both fixture files are pinned by hash. `fixtures/keynote189-synthetic/provenance.json` retains the upstream URL, commit, generator entry point, import time, source/raw hashes and row counts, plus a separately identified local derivative. No generator source is vendored. `extract_scenario.py` regenerates only the unchanged upstream `raw.json` (needs Node). `populate_ae_table_s4.py --check` verifies the local derivative without writing.
+
+The derivative uses 40 literal AE terms from Table S4 of the archived 2022-01-08 NEJM appendix (DOI 10.1056/NEJMoa1801005), carboplatin as-treated subgroup N=294 vs 145, not the whole trial. The 12 immune-related rows are event categories including related terms, not single preferred terms. Assignment is our unweighted round-robin across existing synthetic AE rows, independent of arm; approximate SOC and `ir` mappings are also ours. No incidence weighting, trial prevalence, severity distribution, causality or actual patient events are reproduced. Imported `raw.json` remains byte-for-byte unchanged. See [exact vocabulary, source citation, mapping and hashes](docs/table-s4-synthetic.md).
 
 ## Acknowledgement: the reference repository and the KN189-style synthetic data
 
@@ -60,7 +103,7 @@ The full comparison, the adopted and rejected concepts and the licensing reasoni
 
 These are rejections, not missing features pending a sprint:
 
-- No agent panel and no third-party model calls from the viewer.
+- No automatic model egress. Optional model calls require explicit configuration and consent; local parser commands do not call a model.
 - No signal inference or alert rules. Sentinel markers are display annotations, not clinical judgments.
 - No event-based alignment that drops patients without an anchor event, because it changes the displayed population.
 - No confirmed-response redefinition, and no arm-percentage comparison rows. The cohort view is a display summary, not an endpoint.

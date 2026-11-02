@@ -1,0 +1,15 @@
+test_calendar_alignment_discloses_denominator_and_no_anchor_requirement (test_tool_acceptance.SourceToolAcceptance.test_calendar_alignment_discloses_denominator_and_no_anchor_requirement) ... ERROR
+
+======================================================================
+ERROR: test_calendar_alignment_discloses_denominator_and_no_anchor_requirement (test_tool_acceptance.SourceToolAcceptance.test_calendar_alignment_discloses_denominator_and_no_anchor_requirement)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_ac9c93cd/test_tool_acceptance.py", line 37, in test_calendar_alignment_discloses_denominator_and_no_anchor_requirement
+    self.assertEqual(result['denominator'], len(engine.fixtures['population']))
+                     ~~~~~~^^^^^^^^^^^^^^^
+KeyError: 'denominator'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.118s
+
+FAILED (errors=1)

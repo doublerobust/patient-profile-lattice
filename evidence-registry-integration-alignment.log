@@ -1,0 +1,10 @@
+✔ elapsed coordinate preserves source dates, unresolved never imputed (0.582208ms)
+✔ visible roster denominators and missing groups are explicit (0.272834ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 96.61525

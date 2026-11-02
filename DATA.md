@@ -13,6 +13,16 @@ trial design. It is not real trial data and it is not submission-ready.
 - Provenance: `fixtures/keynote189-synthetic/provenance.json` records the commit, the
   extraction method and the raw hashes. Keep it with the data.
 
+`raw.json` remains the unchanged imported generated output. The viewer now loads
+`table-s4-synthetic.json`, a separately named local derivative with 40 literal
+terms from Table S4 of the archived 2022-01-08 NEJM appendix (carboplatin as-treated
+subgroup N=294 vs 145, not the whole trial). Assignment is our unweighted
+round-robin, independent of arm; SOC and event-of-interest flags are local mappings.
+The immune-related rows are categories including related terms. No incidence
+weighting, trial prevalence, causal relationships or real patient events are copied.
+Both hashes and the complete mapping qualifications are in
+`docs/table-s4-synthetic.md`. This does not change upstream permission status.
+
 ## What this means in practice
 
 1. No licence applied to this repository's source code extends to these fixtures.

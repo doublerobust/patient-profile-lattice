@@ -1,0 +1,71 @@
+
+> test
+> node --test *.test.cjs
+
+✔ records immutable schema, source IDs, no-op queries, and exact combined undo/reset (3.577875ms)
+✔ invalid/stale actions and failed commits never append or change authoritative state (1.024459ms)
+✔ serializes commits by rejecting overlap and prevents stale per-entry undo (0.548167ms)
+✔ session replacement drops old baseline and entries; returned snapshots cannot be tampered (0.573375ms)
+✔ rejects executable/non-JSON metadata without invoking getters; subscribers cannot break commit (0.725209ms)
+✔ direct patient/focus/record selections all require scope, not ordinary display styling (0.376416ms)
+✔ complete evidence and exact allowlisted scope are required, not merely valid IDs (2.016209ms)
+✔ clinical predicates cannot be laundered into explicit IDs or approveable proposals (0.196041ms)
+✔ record scope and compound JSON retain exact filters and existing schemas (1.356208ms)
+✔ legacy 3d chatSnapshot includes peel, preserved exactly on apply/revert (1.912917ms)
+✔ documented temporal contract survives exact restoration without inferred semantics (0.307333ms)
+✔ alignment resolver result shape preserves dates and null missing anchors; invalid forms rejected (2.149125ms)
+✔ stores analysis separately; display diff round trips exactly without mutating inputs (2.064334ms)
+✔ analysis and combined diffs restore predicates, population, selection and camera exactly (1.653083ms)
+✔ display-only undo preserves later independent analysis changes (0.261375ms)
+✔ stale apply/revert rejects atomically, including combined domain conflicts (0.437541ms)
+✔ empty diff, serialized diff, and key-order-independent equality (0.244042ms)
+✔ snapshots and diff payloads are detached and deeply immutable (0.170041ms)
+✔ unknown fields cannot smuggle analysis changes into display-only diff (0.230917ms)
+✔ malformed values, arrays, IDs, dates, cameras and unsupported analysis semantics fail closed (1.207541ms)
+✔ only finite JSON data accepted; accessors are rejected without execution (0.391042ms)
+✔ browser global loads without DOM/network and executes real diff round trip (1.923125ms)
+▶ AC1/4: invalid, ambiguous and inferential calls fail closed before resolver or commit
+  ✔ eval {"code":"globalThis.modelRan=true"} (1.814959ms)
+  ✔ constructor {} (0.248917ms)
+  ✔ confirm_analysis_subset {} (0.686667ms)
+  ✔ set_view {} (0.301292ms)
+  ✔ set_view {"sort":"best prognosis"} (0.21825ms)
+  ✔ set_view {"tier":2} (0.21325ms)
+  ✔ set_view {"layers":["AE","AE"]} (0.207417ms)
+  ✔ set_view {"subset":[]} (0.218167ms)
+  ✔ set_view {"focus":"not-in-roster"} (0.292708ms)
+  ✔ set_view {"camera":{"start":null,"end":10}} (0.255167ms)
+  ✔ set_view {"camera":{"start":5,"end":5}} (0.172416ms)
+  ✔ query_data {"scope":"current_analysis","filters":{}} (0.183042ms)
+  ✔ query_data {"scope":"visible","unit":"patients","filters":{}} (0.163791ms)
+  ✔ query_data {"scope":"current_analysis","unit":"patients","filters":{"caused_by":"drug"}} (0.178792ms)
+  ✔ highlight_events {"scope":"current_analysis","filters":{"grade":true}} (0.377083ms)
+  ✔ highlight_events {"scope":"current_analysis","filters":{"record_ids":["AE-test-1","AE-test-1"]}} (0.234541ms)
+  ✔ highlight_events {"scope":"current_analysis","filters":{"date_window":{"anchor":"AESTDTC","start":"2025-02-30","end":"2025-03-01"}}} (0.8175ms)
+  ✔ propose_analysis_subset {"patients":[]} (0.195917ms)
+  ✔ propose_development_task {"description":""} (0.154042ms)
+  ✔ clarify_request {"question":"Which anchor?","execute":true} (0.12875ms)
+  ✔ get_view_state {"code":"alert(1)"} (0.155625ms)
+✔ AC1/4: invalid, ambiguous and inferential calls fail closed before resolver or commit (8.305042ms)
+✔ AC1/5: functions, getters, cycles, sparse arrays and prototype keys are never executed (0.680375ms)
+✔ AC2/9: proposal discloses consequences; only matching out-of-band confirmation applies combined diff (2.13225ms)
+✔ AC2: cancelled and dataset-stale proposals cannot commit (0.534125ms)
+✔ AC3/4: unsupported anchors, resolver refusals and clarification return unchanged state and history (0.823916ms)
+✔ AC6: both counting units retain contributing and linked IDs; invalid resolver counts cannot enter history (1.085625ms)
+✔ AC7: development requests create real local ledger entries, not results; Undo/Reset do not erase tasks (0.896ms)
+✔ AC8/9: every executed registered tool has replayable diff, IDs and Undo/Reset; reverse restores each exact state (6.133708ms)
+✔ AC8: failed bridge commit adds neither state nor history and releases dispatch lock (0.518333ms)
+✔ AC5: all registered paths run with DOM access trapped and string code generation disabled (10.542125ms)
+✔ rejects unknown, ambiguous, executable and clinically inferential calls atomically (3.307291ms)
+✔ core-backed history records reads, validated display diff and exact Undo/Reset (2.875041ms)
+✔ analysis population cannot change before separate explicit confirmation; undo exact (0.944916ms)
+✔ stale proposal and concurrent dispatch fail closed (0.870333ms)
+✔ unsupported alignments and clarification leave state unchanged; local task exists after reset (1.004625ms)
+ℹ tests 58
+ℹ suites 0
+ℹ pass 58
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 146.843667

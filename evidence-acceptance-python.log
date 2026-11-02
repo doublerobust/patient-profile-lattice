@@ -1,0 +1,19 @@
+test_ac2_proposal_counts_are_computed_from_actual_source_without_mutation (test_tool_acceptance.SourceToolAcceptance.test_ac2_proposal_counts_are_computed_from_actual_source_without_mutation) ... ok
+test_ac3_unsupported_anchor_names_limitation_and_preserves_sources (test_tool_acceptance.SourceToolAcceptance.test_ac3_unsupported_anchor_names_limitation_and_preserves_sources) ... ok
+test_ac4_inference_and_ambiguity_fail_closed (test_tool_acceptance.SourceToolAcceptance.test_ac4_inference_and_ambiguity_fail_closed) ... ok
+test_ac6_count_units_and_contributing_ids_match_actual_source (test_tool_acceptance.SourceToolAcceptance.test_ac6_count_units_and_contributing_ids_match_actual_source) ... ok
+test_source_alignment_targets_use_recorded_response_and_preserve_dates (test_tool_acceptance.SourceToolAcceptance.test_source_alignment_targets_use_recorded_response_and_preserve_dates) ... ok
+test_dates_linked_cm_and_missing_grade (test_view_tools.ToolChecks.test_dates_linked_cm_and_missing_grade) ... ok
+test_exact_record_ids_fail_closed (test_view_tools.ToolChecks.test_exact_record_ids_fail_closed) ... ok
+test_refuse_ambiguity (test_view_tools.ToolChecks.test_refuse_ambiguity) ... ok
+test_units_and_ids (test_view_tools.ToolChecks.test_units_and_ids) ... ok
+test_view_independent (test_view_tools.ToolChecks.test_view_independent) ... ok
+test_consent_precedes_every_network_path (test_model_agent.AdapterChecks.test_consent_precedes_every_network_path) ... ok
+test_endpoint_policy (test_model_agent.AdapterChecks.test_endpoint_policy) ... ok
+test_tool_results_minimized_and_credentials_redacted (test_model_agent.AdapterChecks.test_tool_results_minimized_and_credentials_redacted) ... ok
+test_unsupported_alignment_and_source_units (test_model_agent.AdapterChecks.test_unsupported_alignment_and_source_units) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.927s
+
+OK

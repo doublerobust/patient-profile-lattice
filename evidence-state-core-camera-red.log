@@ -1,0 +1,41 @@
+✖ legacy 3d chatSnapshot includes peel, preserved exactly on apply/revert (0.559834ms)
+✖ documented temporal contract survives exact restoration without inferred semantics (0.151958ms)
+✔ alignment resolver result shape preserves dates and null missing anchors; invalid forms rejected (2.538416ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 1
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 96.748833
+
+✖ failing tests:
+
+test at state-core.integration.test.cjs:7:1
+✖ legacy 3d chatSnapshot includes peel, preserved exactly on apply/revert (0.559834ms)
+  TypeError [Error]: Missing or unsupported state fields: x, y, z, yaw, pitch, distance, span
+      at fail (/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216/static/state-core.js:7:35)
+      at fields (/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216/static/state-core.js:34:163)
+      at display (/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216/static/state-core.js:117:9)
+      at validateState (/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216/static/state-core.js:125:64)
+      at Object.stateDiff (/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216/static/state-core.js:139:5)
+      at TestContext.<anonymous> (/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216/state-core.integration.test.cjs:9:19)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+
+test at state-core.integration.test.cjs:12:1
+✖ documented temporal contract survives exact restoration without inferred semantics (0.151958ms)
+  TypeError [Error]: Missing or unsupported state fields: x, y, z, yaw, pitch, distance, span
+      at fail (/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216/static/state-core.js:7:35)
+      at fields (/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216/static/state-core.js:34:163)
+      at display (/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216/static/state-core.js:117:9)
+      at validateState (/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216/static/state-core.js:125:64)
+      at Object.stateDiff (/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216/static/state-core.js:139:5)
+      at TestContext.<anonymous> (/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_b42b5216/state-core.integration.test.cjs:15:19)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)

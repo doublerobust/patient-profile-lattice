@@ -1,0 +1,27 @@
+test_01_multiturn_validated_change_matches_history_and_protocol (test_agent_e2e.ModelAgentE2E.test_01_multiturn_validated_change_matches_history_and_protocol) ... ok
+test_02_unsupported_alignment_offers_development_without_transform (test_agent_e2e.ModelAgentE2E.test_02_unsupported_alignment_offers_development_without_transform) ... ok
+test_03_analysis_requires_confirmation_cancel_and_undo_restore_ids (test_agent_e2e.ModelAgentE2E.test_03_analysis_requires_confirmation_cancel_and_undo_restore_ids) ... ok
+test_04_ambiguity_and_model_confirmation_attempt_do_not_mutate (test_agent_e2e.ModelAgentE2E.test_04_ambiguity_and_model_confirmation_attempt_do_not_mutate) ... ok
+test_05_undo_restores_nonempty_source_ids_not_just_empty_state (test_agent_e2e.ModelAgentE2E.test_05_undo_restores_nonempty_source_ids_not_just_empty_state) ... ok
+test_07_credential_absent_from_storage_download_replay_logs_and_fixtures (test_agent_e2e.ModelAgentE2E.test_07_credential_absent_from_storage_download_replay_logs_and_fixtures) ... ERROR
+test_08_http_endpoint_policy_rejects_ssrf_before_socket_creation (test_agent_e2e.ModelAgentE2E.test_08_http_endpoint_policy_rejects_ssrf_before_socket_creation) ... ok
+test_09_status_waits_for_successful_self_test_and_consent (test_agent_e2e.ModelAgentE2E.test_09_status_waits_for_successful_self_test_and_consent) ... ok
+test_09b_failed_endpoint_self_test_never_claims_model_status (test_agent_e2e.ModelAgentE2E.test_09b_failed_endpoint_self_test_never_claims_model_status) ... ok
+
+======================================================================
+ERROR: test_07_credential_absent_from_storage_download_replay_logs_and_fixtures (test_agent_e2e.ModelAgentE2E.test_07_credential_absent_from_storage_download_replay_logs_and_fixtures)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_12576a50/test_agent_e2e.py", line 322, in test_07_credential_absent_from_storage_download_replay_logs_and_fixtures
+    self.no_secret(path.read_text(), 'fixture ' + str(path.relative_to(ROOT)))
+                   ^^^^^^^^^^^^^^^^
+  File "/Users/openclaw/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/pathlib.py", line 1059, in read_text
+    return f.read()
+           ^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xa7 in position 0: invalid start byte
+
+----------------------------------------------------------------------
+Ran 9 tests in 19.255s
+
+FAILED (errors=1)

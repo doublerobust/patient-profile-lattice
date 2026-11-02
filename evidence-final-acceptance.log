@@ -1,0 +1,158 @@
+test_01_multiturn_validated_change_matches_history_and_protocol (test_agent_e2e.ModelAgentE2E) ... ok
+test_02_unsupported_alignment_offers_development_without_transform (test_agent_e2e.ModelAgentE2E) ... ok
+test_03_analysis_requires_confirmation_cancel_and_undo_restore_ids (test_agent_e2e.ModelAgentE2E) ... ok
+test_04_ambiguity_and_model_confirmation_attempt_do_not_mutate (test_agent_e2e.ModelAgentE2E) ... ok
+test_05_undo_restores_nonempty_source_ids_not_just_empty_state (test_agent_e2e.ModelAgentE2E) ... ok
+test_07_credential_absent_from_storage_download_replay_logs_and_fixtures (test_agent_e2e.ModelAgentE2E) ... ok
+test_08_http_endpoint_policy_rejects_ssrf_before_socket_creation (test_agent_e2e.ModelAgentE2E) ... ok
+test_09_status_waits_for_successful_self_test_and_consent (test_agent_e2e.ModelAgentE2E) ... ok
+test_09b_failed_endpoint_self_test_never_claims_model_status (test_agent_e2e.ModelAgentE2E) ... ok
+test_ambiguous_valid_subset_cannot_change_view (test_model_scope.ModelScopeChecks) ... ok
+test_approval_is_not_reused_for_later_request (test_model_scope.ModelScopeChecks) ... ok
+test_cancel_and_prompt_edit_invalidate_pending_scope (test_model_scope.ModelScopeChecks) ... ok
+test_causal_valid_subset_cannot_change_view (test_model_scope.ModelScopeChecks) ... ok
+test_configuration_change_invalidates_pending_scope (test_model_scope.ModelScopeChecks) ... ok
+test_direct_focus_and_record_selection_cannot_bypass_gate (test_model_scope.ModelScopeChecks) ... ok
+test_proposals_cannot_launder_causality_or_widen_scope (test_model_scope.ModelScopeChecks) ... ok
+test_record_approval_then_undo_restores_nonempty_highlights (test_model_scope.ModelScopeChecks) ... ok
+test_scope_approval_applies_exact_action_and_undo (test_model_scope.ModelScopeChecks) ... ok
+test_small_death_is_development_limitation_without_state_or_history_change (test_alignment_mapping_browser.UnavailableMappingBrowser) ... 127.0.0.1 - - [02/Nov/2026 11:58:47] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:47] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:48] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:48] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:48] "POST /api/agent/tool HTTP/1.1" 200 -
+ok
+test_model_alignment_source_dates_denominators_projections_undo (test_alignment_browser.AlignmentBrowserChecks) ... 127.0.0.1 - - [02/Nov/2026 11:58:49] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:49] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:49] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:49] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:49] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:49] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:49] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:49] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:49] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:49] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:49] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:49] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:50] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:50] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:50] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:50] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:50] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:50] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:50] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:50] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:50] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:50] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:50] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:50] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:50] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:51] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:51] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:51] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:51] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:53] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:53] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:53] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:53] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:53] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:53] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:55] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:55] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:55] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:55] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:55] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:57] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:57] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "POST /api/agent/model HTTP/1.1" 200 -
+ok
+test_treatment_pd_death_and_legacy_renderer_refusal (test_alignment_browser.AlignmentBrowserChecks) ... 127.0.0.1 - - [02/Nov/2026 11:58:58] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /lattice HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /lattice.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /lattice.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:58] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:58:59] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:00] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:00] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:00] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:00] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:00] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:00] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:00] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:00] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:01] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:01] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:01] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:01] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:01] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "POST /api/agent/tool HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "POST /api/evaluate HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "POST /api/agent/model HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "GET /3d HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "GET /style.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "GET /view-chat.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "GET /grammar.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "GET /3d.css HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "GET /gestures.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "GET /state-core.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "GET /tool-registry.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "GET /action-history.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "GET /view-chat.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "GET /app.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "GET /renderer3d.js HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "GET /api/initial HTTP/1.1" 200 -
+127.0.0.1 - - [02/Nov/2026 11:59:02] "POST /api/agent/tool HTTP/1.1" 200 -
+ok
+test_consent_precedes_every_network_path (test_model_agent.AdapterChecks) ... ok
+test_endpoint_policy (test_model_agent.AdapterChecks) ... ok
+test_tool_results_minimized_and_credentials_redacted (test_model_agent.AdapterChecks) ... ok
+test_unsupported_alignment_and_source_units (test_model_agent.AdapterChecks) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 60.028s
+
+OK
