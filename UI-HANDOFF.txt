@@ -1,0 +1,30 @@
+Task t_3c00b979 — implemented UI phase; downstream integration and independent review remain.
+
+Workspace: /Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_3c00b979
+Branch: wt/t_3c00b979
+Baseline import: 099f40a imports the existing uncommitted writer/model-agent implementation into this isolated workspace, leaving its source untouched. It includes app.py, static/app.js, static/view-chat.js, model_agent.py, alignment.py, lattice.js, lattice-model.mjs, static/lattice.js, test_model_agent.py, test_agent_browser.py. This is a prerequisite snapshot, not newly authored alignment/adapter work or independent validation of every inherited capability.
+
+Focused implementation paths: static/view-chat.js, static/view-chat.css, test_agent_browser.py, test_agent_ui.py.
+- Explicit modal confirmation before self-test/first egress, naming exact endpoint/model/dataset, prompt/view/returned-data disclosure, and synthetic provenance.
+- Separate per-request record-level modal includes the prompt and destination. Cancel/Escape sends no request; permission is consumed for one request including tool follow-ups.
+- Model-driven label only after connected:true from completed self-test. Disconnect/configuration edits invalidate in-flight results; dataset mismatch requires reconnect/consent.
+- Password field clears before modal/network calls, including failed/cancelled tests. Credentials remain transient in session memory, not localStorage/export/history. The password field necessarily contains the user-entered value during typing; absence from DOM is verified after submission, not during entry. The inherited adapter is stateless and receives the browser closure credential for each request; this UI task does not claim server-only credential storage.
+- Retains explicit analysis proposal/consequence/confirmation, source IDs, diff/history, Undo/Reset, separately labeled local parser.
+- Model refusal/clarification prose shown as unverified model message, never as data evidence; all inserted text uses textContent.
+- Responsive modal, keyboard Escape cancellation, 44px buttons and configuration inputs.
+
+Verification commands, run from the workspace:
+cp prior listed files and git commit: exit 0, baseline 099f40a.
+python3 -m venv .venv && .venv/bin/pip install -r requirements-test.txt && npm ci: exit 0.
+.venv/bin/python -m unittest test_agent_ui.AgentUIChecks.test_modal_precedes_egress_and_clears_secret -v > evidence-ui-red.log 2>&1: exit 1, expected pre-fix missing-dialog failure (1 test).
+.venv/bin/python -m unittest test_agent_ui test_view_chat test_model_agent -v > evidence-ui-tests.log 2>&1: exit 0, 16 tests in 32.766s.
+npm run build > evidence-ui-build.log 2>&1: exit 0.
+git diff --check > evidence-ui-diff.log 2>&1: exit 0.
+.venv/bin/python -m unittest discover -v > evidence-ui-full.log 2>&1: exit 0, 70 tests in 185.736s.
+Then added only three further regression tests, no production changes:
+.venv/bin/python -m unittest test_agent_ui.AgentUIChecks.test_stale_self_test_cannot_reconnect_after_disconnect test_agent_ui.AgentUIChecks.test_dataset_change_requires_new_consent_without_egress test_agent_ui.AgentUIChecks.test_escape_cancels_modal_and_mobile_dialog_fits -v > evidence-ui-final-checks.log 2>&1: exit 0, 3 tests in 4.582s.
+git diff --check: exit 0.
+
+Actual Chromium interactions exercised mock multi-turn view mutation/history, analysis preview/confirm/Undo, source IDs and count units, record egress, DOM/password clearing, localStorage/export non-persistence, failed/false/stale self-test, dataset invalidation, cancellation and narrow 390px viewport. Only local mock endpoints and runtime-generated test secrets used; no real external API or credentials. No human manual/visual inspection, actual iPad, publication, deployment or independent approval claimed. Full suite preceded the final three test additions; these additions passed separately. No alignment browser suite was imported; sibling owns alignment completion and conformance.
+
+Integration hotspot: static/view-chat.js and test_agent_browser.py overlap sibling tool-registry/history changes. Apply focused UI commit atop sibling baseline with explicit merge; do not replace sibling alignment/model_agent.py/app.js with this imported snapshot. Preserve sibling validation/confirmation/history hardening. Existing review/test children t_12576a50 and t_53d44f12 provide the downstream lane.

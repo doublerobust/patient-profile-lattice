@@ -44,8 +44,9 @@ class AgentBrowserChecks(BrowserFixture):
         self.page.locator('#agent-key').fill(self.credential)
 
     def connect(self):
-        self.page.locator('#agent-consent').check()
         self.page.locator('#agent-test').click()
+        self.page.locator('#agent-consent').check()
+        self.page.locator('#agent-egress-confirm').click()
         expect(self.page.locator('#agent-status')).to_contain_text('Model-driven agent')
         expect(self.page.locator('#agent-key')).to_have_value('')
 
@@ -55,14 +56,22 @@ class AgentBrowserChecks(BrowserFixture):
     def ask(self, prompt, replies):
         MockModel.replies = replies
         self.page.locator('#chat-request').fill(prompt)
+        record_egress = self.page.locator('#agent-record-consent').is_checked()
         self.page.locator('#agent-send').click()
+        if record_egress:
+            expect(self.page.locator('#agent-egress-dialog')).to_be_visible()
+            self.page.locator('#agent-consent').check()
+            self.page.locator('#agent-egress-confirm').click()
         expect(self.page.locator('#chat-tool-status')).not_to_contain_text('validating')
 
     def test_consent_multiturn_view_undo_privacy(self):
         self.page.locator('#agent-test').click()
-        expect(self.page.locator('#chat-result')).to_contain_text('egress acknowledgement required')
+        expect(self.page.locator('#agent-egress-dialog')).to_be_visible()
+        expect(self.page.locator('#agent-egress-confirm')).to_be_disabled()
         self.assertEqual(MockModel.requests, [])
         expect(self.page.locator('#agent-status')).to_contain_text('No model is connected')
+        self.page.locator('#agent-egress-cancel').click()
+        self.page.locator('#agent-key').fill(self.credential)
         self.connect()
         baseline = self.snapshot()
         self.ask('Sort descending and show only AE and EX at tier 2', [
