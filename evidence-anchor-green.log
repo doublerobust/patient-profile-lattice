@@ -1,0 +1,21 @@
+test_catalogue_and_resolver_agree_for_every_cohort (test_alignment_capabilities.AlignmentCapabilities.test_catalogue_and_resolver_agree_for_every_cohort) ... ok
+test_death_mapping_is_not_fatal_ae_or_other_disposition (test_alignment_capabilities.AlignmentCapabilities.test_death_mapping_is_not_fatal_ae_or_other_disposition) ... ok
+test_mapping_requires_fields_not_cohort_name_or_nonempty_domain (test_alignment_capabilities.AlignmentCapabilities.test_mapping_requires_fields_not_cohort_name_or_nonempty_domain) ... ok
+test_partial_or_blank_dates_do_not_remove_mapping_or_impute_date (test_alignment_capabilities.AlignmentCapabilities.test_partial_or_blank_dates_do_not_remove_mapping_or_impute_date) ... ok
+test_response_mapping_does_not_require_a_pr_or_pd_event (test_alignment_capabilities.AlignmentCapabilities.test_response_mapping_does_not_require_a_pr_or_pd_event) ... ok
+test_supported_patient_states_and_supported_empty_event (test_alignment_capabilities.AlignmentCapabilities.test_supported_patient_states_and_supported_empty_event) ... ok
+test_ac2_proposal_counts_are_computed_from_actual_source_without_mutation (test_tool_acceptance.SourceToolAcceptance.test_ac2_proposal_counts_are_computed_from_actual_source_without_mutation) ... ok
+test_ac3_unsupported_anchor_names_limitation_and_preserves_sources (test_tool_acceptance.SourceToolAcceptance.test_ac3_unsupported_anchor_names_limitation_and_preserves_sources) ... ok
+test_ac4_inference_and_ambiguity_fail_closed (test_tool_acceptance.SourceToolAcceptance.test_ac4_inference_and_ambiguity_fail_closed) ... ok
+test_ac6_count_units_and_contributing_ids_match_actual_source (test_tool_acceptance.SourceToolAcceptance.test_ac6_count_units_and_contributing_ids_match_actual_source) ... ok
+test_calendar_alignment_discloses_denominator_and_no_anchor_requirement (test_tool_acceptance.SourceToolAcceptance.test_calendar_alignment_discloses_denominator_and_no_anchor_requirement) ... ok
+test_source_alignment_targets_use_recorded_response_and_preserve_dates (test_tool_acceptance.SourceToolAcceptance.test_source_alignment_targets_use_recorded_response_and_preserve_dates) ... ok
+test_consent_precedes_every_network_path (test_model_agent.AdapterChecks.test_consent_precedes_every_network_path) ... ok
+test_endpoint_policy (test_model_agent.AdapterChecks.test_endpoint_policy) ... ok
+test_tool_results_minimized_and_credentials_redacted (test_model_agent.AdapterChecks.test_tool_results_minimized_and_credentials_redacted) ... ok
+test_unsupported_alignment_and_source_units (test_model_agent.AdapterChecks.test_unsupported_alignment_and_source_units) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.998s
+
+OK

@@ -11,7 +11,7 @@ class SourceToolAcceptance(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.engines = {cohort: Engine(Path(__file__).parent / 'data', cohort=cohort)
-                       for cohort in ('100', 'keynote189')}
+                       for cohort in ('small', '100', 'keynote189')}
 
     def test_ac3_unsupported_anchor_names_limitation_and_preserves_sources(self):
         for cohort, engine in self.engines.items():
@@ -97,13 +97,21 @@ class SourceToolAcceptance(unittest.TestCase):
             self.assertEqual(spec, before)
 
     def test_source_alignment_targets_use_recorded_response_and_preserve_dates(self):
-        expected = {'100': {'first_treatment': 100, 'first_PR': 25, 'first_PD': 97, 'death': 0},
+        expected = {'small': {'first_treatment': 3, 'first_PR': 1, 'first_PD': 0, 'death': 0},
+                    '100': {'first_treatment': 100, 'first_PR': 25, 'first_PD': 97, 'death': 0},
                     'keynote189': {'first_treatment': 60, 'first_PR': 23, 'first_PD': 45, 'death': 36}}
         for cohort, engine in self.engines.items():
             before = copy.deepcopy(engine.records)
             for anchor, count in expected[cohort].items():
                 with self.subTest(cohort=cohort, anchor=anchor):
                     result = resolve_alignment(engine, anchor)
+                    self.assertEqual(sum(p['status'] == 'resolved' for p in result.get('patients', [])), count)
+                    if anchor == 'death' and cohort != 'keynote189':
+                        self.assertEqual(result['status'], 'unsupported')
+                        self.assertEqual(result['limitation'], 'source_mapping_unavailable')
+                        self.assertNotIn('counts', result)
+                        continue
+                    self.assertEqual(result['status'], 'resolved')
                     self.assertEqual(result['counts']['resolved'], count)
                     self.assertEqual(sum(result['counts'].values()), result['denominator'])
                     for patient in result['patients']:

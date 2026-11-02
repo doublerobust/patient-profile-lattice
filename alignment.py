@@ -27,6 +27,29 @@ def complete(value):
         return None
 
 
+def mapping_availability(engine):
+    """Require loaded source fields, not a cohort name or a complete event date.
+
+    EX exposure and RS overall-response rows establish their respective mappings.
+    DS is heterogeneous: discontinuation rows do not establish a death mapping;
+    a loaded DEATH-coded row must expose DSSTDTC. Blank/partial dates still
+    establish a field mapping but cannot resolve a patient's anchor.
+    """
+    available = set()
+    for row in engine.records.values():
+        domain, values = row['dataset'], row['values']
+        if not {'STUDYID', 'USUBJID'} <= values.keys():
+            continue
+        if domain == 'EX' and 'EXSTDTC' in values:
+            available.add('first_treatment')
+        elif (domain == 'RS' and values.get('RSTESTCD') == 'OVRLRESP'
+              and {'RSORRES', 'RSDTC'} <= values.keys()):
+            available.update(('first_PR', 'first_PD'))
+        elif domain == 'DS' and values.get('DSDECOD') == 'DEATH' and 'DSSTDTC' in values:
+            available.add('death')
+    return available
+
+
 def resolve_alignment(engine, anchor):
     anchor = 'first_treatment' if anchor == 'first_dose' else anchor
     if anchor == 'calendar':
@@ -37,11 +60,15 @@ def resolve_alignment(engine, anchor):
                 'missing_anchor_handling': missing,
                 'patients': [], 'record_ids': [],
                 'note': f'Absolute calendar dates restored; {denominator} loaded roster patients. {missing} Analysis unchanged.'}
-    if anchor not in ANCHORS:
+    available = mapping_availability(engine)
+    if anchor not in available:
+        supported = ', '.join(['calendar', *(a for a in ANCHORS if a in available)])
         return {'status': 'unsupported', 'anchor': anchor, 'record_ids': [],
+                'limitation': 'source_mapping_unavailable',
                 'denominator': len(engine.fixtures['population']), 'denominator_unit': 'loaded roster patients (unchanged)',
                 'missing_anchor_handling': 'Requested anchor is unsupported. No transform applied, no patients excluded and no dates imputed.',
-                'note': 'Unsupported alignment; development task required. No randomization/DM anchor is established in this fixture. Supported display anchors: calendar, first_treatment (first_dose), first_PR, first_PD, death. No approximation was made.'}
+                'note': f'Unsupported alignment {anchor}; development task required. No source mapping for this anchor is established in the loaded fixture. '
+                        f'Supported display anchors: {supported}. No approximation was made.'}
     by_patient = {}
     for row in engine.records.values():
         v, domain = row['values'], row['dataset']
@@ -75,11 +102,16 @@ def resolve_alignment(engine, anchor):
 
 
 def alignment_capabilities(engine):
-    summaries = {}
-    for anchor in ANCHORS:
+    summaries, unavailable = {}, {}
+    for anchor in (*ANCHORS, 'randomization'):
         r = resolve_alignment(engine, anchor)
-        summaries[anchor] = {k: r[k] for k in ('axis_label', 'definition', 'convention', 'denominator', 'denominator_unit', 'counts')}
-    return {'supported_anchors': ['calendar', *ANCHORS], 'aliases': {'first_dose': 'first_treatment'},
+        if r['status'] == 'unsupported':
+            unavailable[anchor] = {'status': r['status'], 'limitation': r['limitation'], 'note': r['note']}
+        else:
+            summaries[anchor] = {k: r[k] for k in ('axis_label', 'definition', 'convention', 'denominator', 'denominator_unit', 'counts')}
+    return {'supported_anchors': ['calendar', *summaries],
+            'aliases': {'first_dose': 'first_treatment'} if 'first_treatment' in summaries else {},
             'renderer': '/lattice only; timeline and legacy /3d remain calendar-only',
             'anchors': summaries, 'missing_anchor_handling': MISSING,
-            'unsupported': ['randomization', 'anchor-relative analytical windows (development task; no analysis execution)']}
+            'unavailable_anchors': unavailable,
+            'unsupported': [*unavailable, 'anchor-relative analytical windows (development task; no analysis execution)']}

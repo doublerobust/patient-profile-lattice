@@ -1,0 +1,50 @@
+Task t_7d23a19e — F2/F3 implementation handoff
+Baseline: 0eb084bbcee7eebfed0f9115a821ec1780263037
+Branch: wt/t_7d23a19e
+Workspace: /Users/openclaw/.hermes/kanban/boards/ultimate-patient-profile-visualizer/workspaces/t_7d23a19e
+
+Implemented:
+  alignment.py derives supported anchors from loaded source mapping evidence. Small/100 death is unsupported with source_mapping_unavailable, a development note, no fabricated patient missing-event counts, and no transform. Small PD remains supported with no qualifying PD events. Supported patient resolution and unresolved-date states are preserved.
+  Added docs/lattice-agent-capabilities.md with source-field matrices, snapshot/source hashes, reproduction commands and development limitations. Generic PR=25 via RSORRES, not sparsely populated RSSTRESC. Added audit_alignment.py and reproducible JSON evidence.
+  Added all-cohort source/catalogue tests and a real Chromium small-cohort test proving death refusal preserves existing PR alignment, analysis, marks and history. Extended source acceptance to small mode.
+
+Exact execution (commands run from workspace):
+  python -m unittest test_alignment_capabilities -v > evidence-anchor-red.log 2>&1
+    EXIT 1 before fix: 6 tests, 7 failed subtest assertions, 1 error (missing limitation field).
+  python -m unittest test_alignment_capabilities test_tool_acceptance test_model_agent -v > evidence-anchor-green.log 2>&1
+    EXIT 0: 16 tests, 0.998s.
+  python audit_alignment.py > evidence-anchor-audit.json
+    EXIT 0; actual resolver/catalogue/source-hash output.
+  uv venv --python python .venv
+    EXIT 2: uv could not resolve shell python name. Corrected with explicit version below.
+  uv venv --python 3.11 .venv && uv pip install --python .venv/bin/python -r requirements-test.txt
+    EXIT 0; Python 3.11.15, Playwright 1.56.0.
+  .venv/bin/python -m unittest test_alignment_mapping_browser test_alignment_browser test_agent_e2e -v > evidence-anchor-browser.log 2>&1
+    EXIT 0: 12 tests, 33.352s, local Chromium/mock only.
+  .venv/bin/python -m unittest discover -v > evidence-anchor-regression.log 2>&1
+    EXIT 0: 100 tests, 220.389s.
+  npm ci
+    EXIT 0.
+  npm test > evidence-anchor-node.log 2>&1
+    EXIT 0: 54 tests passed.
+  node --test alignment-model.test.mjs > evidence-anchor-geometry.log 2>&1
+    EXIT 0: 2 tests passed.
+  npm run build
+    EXIT 0.
+  git diff --exit-code -- static/lattice.js static/renderer3d.js
+    EXIT 0: build leaves tracked bundles unchanged.
+  git diff --check
+    EXIT 0.
+  git diff --exit-code 0eb084b -- data fixtures cohort.py scenario_adapter.py
+    EXIT 0: source fixtures and generators unchanged.
+  .venv/bin/python audit_alignment.py > evidence-anchor-audit-repeat.json && cmp evidence-anchor-audit.json evidence-anchor-audit-repeat.json
+    EXIT 0: byte-identical reproducible report.
+  Initial python -c inspection was rejected by the command guard; audit_alignment.py replaced it with real executable evidence, not invented output.
+
+Integration / limitations:
+  Existing downstream t_bf154f89 owns integration and independent-review handoff; complete this implementation card to release that dependency, not same-card duplicate review.
+  hotspot: alignment.py — integrate this focused commit, do not overwrite with an older snapshot. No F1-owned model_agent.py/static/view-chat.js changes.
+  F1 semantic selection defect is not fixed by this task and is explicitly disclosed in the audit; integrate its separate owner before claiming full product approval.
+  No independent approval, external provider, physical iPad, hosted CI, publication or deployment performed.
+  Death mapping is conservatively attested by a loaded DEATH-coded DS row exposing DSSTDTC. Declarative schemas proving empty death sources are future work; nondeath dispositions/fatal AE display markers are not substitutes.
+  Full regression may generate untracked evidence-chat-interactions.json; not part of deliverable.
