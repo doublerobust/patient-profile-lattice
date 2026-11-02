@@ -1,0 +1,51 @@
+F1 implementation handoff — t_850b5f20
+Baseline: 0eb084b; isolated branch wt/t_850b5f20.
+Workspace: /Users/openclaw/.hermes/kanban/boards/ultimate-patient-profile-visualizer/workspaces/t_850b5f20
+
+Implemented
+  Browser rejects direct model set_view subset/focus (including null) and highlight_events actions. The new propose_display_scope tool supplies intent, whole-request evidence, and an unchanged-schema nested action. A separate local UI shows that mapping and requires approval before execution. Approval executes only the captured action, never resumes the model conversation, and cannot authorize a later request.
+  Whole-request deterministic grammar requires exact patient IDs or source filters; exact JSON commands support compound filters. Unknown free-form scope language requires clarification rather than a model interpretation. Recognized unsupported clinical predicates are refused. The gate does not rely on the system prompt or schema validation to prove natural-language grounding.
+  Original executable argument validation and analysis proposal/confirmation implementation remain unchanged. Direct user-entered local commands retain their prior behavior. Read-only queries and ordinary non-selection display styling are not changed by this display gate.
+  Approval is bound to request text, connection/configuration, dataset and state snapshot. Cancellation, editing, disconnect, Undo/Reset and local commands invalidate it. Approval-time validation rechecks the action.
+
+Supported model display scope wording
+  Show only patients SYN-001, SYN-002
+  Display only SYN-001
+  Focus on SYN-001
+  Show all patients
+  Highlight source IDs AE-001-1, AE-002-1
+  Highlight grade 3 AE records
+  Highlight exact term SYNTHETIC NAUSEA
+  An exact JSON set_view/highlight_events command, with existing schemas.
+  Evidence must equal the complete trimmed request. Action must exactly match the parsed request. The model cannot invent a different subset or add extra settings. This conservative grammar intentionally rejects otherwise reasonable paraphrases. Clinical keyword refusal is not a universal language classifier; unknown phrasing remains closed via the grammar.
+
+Real execution
+  uv venv --python 3.11 .venv && uv pip install --python .venv/bin/python -r requirements-test.txt
+    EXIT 0; local Python 3.11.15, pinned Playwright 1.56.0.
+  .venv/bin/python -m unittest test_model_scope -v (before implementation)
+    EXIT 1; four required tests red. Ambiguous and causal valid subsets actually mutated the display. Missing approval controls caused an assertion failure and timeout. The strict mock also caught unexpected post-mutation model follow-ups. evidence-scope-red.log preserves all failures; this is not a clean four-assertion-only result.
+  .venv/bin/python -m unittest test_model_scope -v (first implemented pass)
+    EXIT 0; four required tests passed. evidence-scope-green.log.
+  .venv/bin/python -m unittest test_model_scope test_agent_e2e test_agent_browser test_agent_ui test_alignment_browser test_model_agent -v
+    EXIT 0; 42 tests in 90.047s. Includes nine new adversarial scope browser tests, existing analysis confirmation/Undo, privacy and UI suites. evidence-scope-integration.log.
+  npm test
+    EXIT 0; 58 passed, zero failures/skips. Includes four new scope unit tests. evidence-scope-node.log.
+  git diff --check
+    EXIT 0.
+
+Changed application paths
+  model_agent.py — proposal schema/catalogue and model instructions.
+  static/tool-registry.js — separate scope classification/grounding helpers; original dispatch and analysis confirmation unchanged.
+  static/view-chat.js — model scope interception, mapping UI, one-shot approval and expiry.
+  static/view-chat.css — scope panel styling.
+Changed test/CI paths
+  test_model_scope.py, model-scope.test.cjs — new adversarial tests.
+  test_agent_e2e.py, test_agent_browser.py — existing positive selection tests now explicitly propose and approve; original state/Undo/privacy assertions retained.
+  .github/workflows/model-agent-tests.yml — scope suite added to repeated acceptance command.
+  F1-HANDOFF.txt and evidence-scope-*.log — handoff and execution evidence.
+
+Limitations / review
+  Full unittest discovery, build and separate geometry suite were not run in this bounded task. Existing checked-in browser bundles were exercised; none of their source files changed. CI updated but not executed remotely. No external provider, publication, deployment or independent approval.
+  F2/F3 are outside this task and remain untouched. No patient fixture changes.
+  hotspot: static/view-chat.js — shared sibling model/UI boundary; integrate this focused branch, not an older replacement snapshot.
+  Ready for independent review, not self-approved.

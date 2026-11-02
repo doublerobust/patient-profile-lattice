@@ -1,0 +1,9 @@
+test_ambiguous_valid_subset_cannot_change_view (test_model_scope.ModelScopeChecks.test_ambiguous_valid_subset_cannot_change_view) ... ok
+test_approval_is_not_reused_for_later_request (test_model_scope.ModelScopeChecks.test_approval_is_not_reused_for_later_request) ... ok
+test_causal_valid_subset_cannot_change_view (test_model_scope.ModelScopeChecks.test_causal_valid_subset_cannot_change_view) ... ok
+test_scope_approval_applies_exact_action_and_undo (test_model_scope.ModelScopeChecks.test_scope_approval_applies_exact_action_and_undo) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 9.769s
+
+OK

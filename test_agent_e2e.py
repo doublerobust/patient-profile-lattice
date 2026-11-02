@@ -31,6 +31,11 @@ def prose(text='Script complete'):
     return {'role': 'assistant', 'content': text}
 
 
+def scope_tool(prompt, name, args):
+    return tool('propose_display_scope', {'intent': 'display_patients' if name == 'set_view' else 'highlight_records',
+                'evidence': prompt, 'action': {'tool': name, 'args': args}})
+
+
 class ScriptedEndpoint(BaseHTTPRequestHandler):
     """All state is per-server; auth is checked but never recorded in a transcript."""
     def do_POST(self):
@@ -165,6 +170,14 @@ class ModelAgentE2E(unittest.TestCase):
     def history(self):
         return json.loads(self.page.locator('#chat-history').text_content())
 
+    def approve_scope(self, prompt, name, args):
+        before = self.snapshot()
+        self.ask(prompt, scope_tool(prompt, name, args))
+        self.assertEqual(self.snapshot(), before, 'Proposal must not mutate')
+        expect(self.page.locator('#agent-scope-proposal')).to_be_visible()
+        self.page.locator('#agent-scope-confirm').click()
+        self.settled()
+
     def test_01_multiturn_validated_change_matches_history_and_protocol(self):
         self.connect()
         before = self.snapshot()
@@ -218,8 +231,8 @@ class ModelAgentE2E(unittest.TestCase):
 
     def test_03_analysis_requires_confirmation_cancel_and_undo_restore_ids(self):
         self.connect()
-        self.ask('Highlight SYN-002 source record', tool('highlight_events',
-                 {'scope': 'current_analysis', 'filters': {'record_ids': ['AE-002-1']}}), prose())
+        self.approve_scope('Highlight source IDs AE-002-1', 'highlight_events',
+                           {'scope': 'current_analysis', 'filters': {'record_ids': ['AE-002-1']}})
         before, entries = self.snapshot(), self.history()
         proposal = tool('propose_analysis_subset', {'patients': ['SYN-001']})
         for confirm in (False, True):
@@ -270,8 +283,8 @@ class ModelAgentE2E(unittest.TestCase):
         for ids in (['AE-001-1', 'AE-001-2'], ['AE-002-1']):
             if ids == ['AE-002-1']:
                 before, entries = self.snapshot(), self.history()
-            self.ask('Highlight explicit source IDs', tool('highlight_events',
-                     {'scope': 'current_analysis', 'filters': {'record_ids': ids}}), prose())
+            self.approve_scope('Highlight source IDs ' + ', '.join(ids), 'highlight_events',
+                               {'scope': 'current_analysis', 'filters': {'record_ids': ids}})
             self.assertEqual(self.snapshot()['display']['highlights'], ids)
             self.assertEqual(self.history()[-1]['record_ids'], ids)
         self.page.locator('#chat-undo').click()

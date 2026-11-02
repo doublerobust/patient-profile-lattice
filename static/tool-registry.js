@@ -62,6 +62,35 @@
     if(name==='propose_analysis_subset'){keys(args,['patients'],['patients']);if(!unique(args.patients,text)||!args.patients.length||args.patients.some(id=>roster.filter(p=>p[1]===id).length!==1))fail('Choose explicit unique unambiguous patient IDs.');}
     for(const [tool,key] of [['propose_development_task','description'],['clarify_request','question']])if(name===tool){keys(args,[key],[key]);if(!text(args[key])||args[key].length>1000)fail('Provide nonempty text of at most 1000 characters.');}
   }
+  // Display authorization is deliberately separate from schema validity and analysis confirmation.
+  const selectsDisplay=(tool,args)=>tool==='highlight_events'||tool==='set_view'&&('subset' in args||'focus' in args);
+  const clinical=/\b(caus(?:ed|al|ality)|related\s+to|attribut(?:ed|able)|due\s+to|severity|severe|worsen\w*|improv\w*|endpoint|responders?|progress(?:ed|ion)|treatment[- ](?:related|emergent))\b/i;
+  function scopeFailure(prompt){
+    if(clinical.test(prompt))fail('Unsupported clinical predicate: causality, severity interpretation, change and inferred endpoints cannot select patients or records. Nothing changed.');
+    fail('Clarification required: specify exact patient IDs or explicit source filters, then review and approve a proposed display scope. Nothing changed.');
+  }
+  function validateScopeProposal(prompt,proposal,context){
+    json(proposal);keys(proposal,['intent','evidence','action'],['intent','evidence','action']);
+    const action=proposal.action;keys(action,['tool','args'],['tool','args']);
+    validateCall(action.tool,action.args,context);
+    if(!selectsDisplay(action.tool,action.args))fail('Scope proposals may only select display patients or highlight source records.');
+    if(typeof prompt!=='string'||clinical.test(prompt)||clinical.test(proposal.evidence||''))scopeFailure(prompt||'');
+    if(proposal.evidence!==prompt||proposal.intent!==(action.tool==='set_view'?'display_patients':'highlight_records'))scopeFailure(prompt);
+    // Whole-request grammar, not a substring/keyword classifier. Unknown language stays closed.
+    // Explicit JSON supports compound source filters without inventing an NL interpretation.
+    let expected=null,m;
+    try {expected=JSON.parse(prompt);}catch{}
+    const ids=s=>s.split(/\s*,\s*/);
+    if(m=prompt.match(/^(?:show|display) only(?: patients)? ([A-Za-z0-9_-]+(?:\s*,\s*[A-Za-z0-9_-]+)*)$/i))expected={tool:'set_view',args:{subset:ids(m[1])}};
+    if(m=prompt.match(/^focus(?: on)? ([A-Za-z0-9_-]+)$/i))expected={tool:'set_view',args:{focus:m[1]}};
+    if(/^show all patients$/i.test(prompt))expected={tool:'set_view',args:{focus:null}};
+    if(m=prompt.match(/^highlight source IDs ([A-Za-z0-9_-]+(?:\s*,\s*[A-Za-z0-9_-]+)*)$/i))expected={tool:'highlight_events',args:{scope:'current_analysis',filters:{record_ids:ids(m[1])}}};
+    if(m=prompt.match(/^highlight grade ([1-5]) AE records$/i))expected={tool:'highlight_events',args:{scope:'current_analysis',filters:{grade:+m[1]}}};
+    if(m=prompt.match(/^highlight exact term ([A-Za-z0-9 _-]+)$/i))expected={tool:'highlight_events',args:{scope:'current_analysis',filters:{term:m[1]}}};
+    const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
+    if(!expected||!equal(canonical(expected),canonical(action)))scopeFailure(prompt);
+    return copy(proposal);
+  }
   function planView(display,args,roster){
     validateCall('set_view',args,{roster,renderer:display.renderer});const next=copy(display);
     for(const k of ['sort','tier'])if(k in args)next[k]=args[k];
@@ -128,6 +157,6 @@
     async undo(){return this.exclusive(async()=>{this.assertCurrent(this.history.snapshot().state);await this.history.undo();this.pending=null;return {record_ids:copy(this.snapshot().display.highlights)};});}
     async reset(){return this.exclusive(async()=>{this.assertCurrent(this.history.snapshot().state);await this.history.reset();this.pending=null;return {record_ids:copy(this.snapshot().display.highlights)};});}
   }
-  const api=Object.freeze({ToolSession,validateCall,planView,stateDiff:core.stateDiff,names});
+  const api=Object.freeze({ToolSession,validateCall,planView,stateDiff:core.stateDiff,names,selectsDisplay,scopeFailure,validateScopeProposal});
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.ViewTools=api;
 })(globalThis);

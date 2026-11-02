@@ -45,6 +45,12 @@ DEFINITIONS = {
     'propose_development_task': ('Record a local development suggestion only; creates no clinical result, external ticket or code.', obj({'description': {'type': 'string', 'minLength': 1, 'maxLength': 1000}}, ('description',))),
     'clarify_request': ('Ask for a counting unit, window, anchor, patient IDs, or clarification. No change. Use for ambiguity or clinical inference.', obj({'question': {'type': 'string', 'minLength': 1, 'maxLength': 1000}}, ('question',)))
 }
+DEFINITIONS['propose_display_scope'] = (
+    'Propose, never execute, a display selection for local user approval. intent is display_patients or highlight_records; evidence must quote the entire exact user request. action uses the unchanged set_view/highlight_events schema. Never invent IDs or derive clinical predicates. Only explicit IDs/source filters are supported.',
+    obj({'intent': {'enum': ['display_patients', 'highlight_records']},
+         'evidence': {'type': 'string', 'minLength': 1, 'maxLength': 10000},
+         'action': {'oneOf': [obj({'tool': {'const': name}, 'args': DEFINITIONS[name][1]}, ('tool', 'args'))
+                              for name in ('set_view', 'highlight_events')]}}, ('intent', 'evidence', 'action')))
 TOOLS = [{'type': 'function', 'function': {'name': name, 'description': desc, 'parameters': schema}} for name, (desc, schema) in DEFINITIONS.items()]
 
 
@@ -164,6 +170,8 @@ def post_model(endpoint, dev_endpoints, payload, credential):
 
 SYSTEM = '''You control a synthetic-only patient view through the supplied tools, never code or DOM.
 Use tools for every data answer or action; do not invent results. Distinguish display subset from analysis subset.
+All set_view focus/subset and all highlight_events selections MUST use propose_display_scope, never direct calls. Quote the entire user request as evidence, supply the exact action and intent, then STOP for local human approval. Approval is one-shot and not an analysis confirmation.
+Supported scope wording: Show only patients ID1, ID2; Display only ID1; Focus on ID1; Show all patients; Highlight source IDs ID1, ID2; Highlight grade 3 AE records; Highlight exact term SOURCE VALUE. An exact JSON set_view/highlight_events command also works. Other wording requires clarification; ask the user to restate using explicit IDs/source filters. Do not translate clinical predicates into one of these forms. The browser independently enforces these boundaries.
 Ambiguous requests must use clarify_request before ANY mutation. Ask for explicit counting unit, dates/anchor, patient IDs where missing.
 Do not guess clinical meaning, infer causality or response, give treatment advice, or make clinical recommendations; use clarify_request or propose_development_task.
 Display alignment is supported only on /lattice for the exact listed source anchors. It never changes analytical windows, counts or populations. Randomization and anchor-relative analytical windows are unsupported: propose_development_task, never substitute display alignment or an analysis population subset for a windowed analysis.

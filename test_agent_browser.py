@@ -143,7 +143,12 @@ class AgentBrowserChecks(BrowserFixture):
             expect(self.page.locator('#chat-result')).to_contain_text(f'{count} {unit}')
             expect(self.page.locator('#chat-records')).to_contain_text('AE-001-1')
             self.assertEqual(self.snapshot(), baseline)
-        self.ask('highlight exact term SYNTHETIC NAUSEA', [call('highlight_events', {'scope': 'current_analysis', 'filters': {'term': 'SYNTHETIC NAUSEA'}}), {'role': 'assistant', 'content': 'Done'}])
+        self.ask('highlight exact term SYNTHETIC NAUSEA', [call('propose_display_scope', {
+            'intent': 'highlight_records', 'evidence': 'highlight exact term SYNTHETIC NAUSEA',
+            'action': {'tool': 'highlight_events', 'args': {'scope': 'current_analysis', 'filters': {'term': 'SYNTHETIC NAUSEA'}}}})])
+        self.assertEqual(self.snapshot(), baseline)
+        self.page.locator('#agent-scope-confirm').click()
+        expect(self.page.locator('#chat-result')).to_contain_text('explicitly approved')
         self.assertEqual(self.snapshot()['display']['highlights'], ['AE-001-1', 'AE-001-2'])
         self.assertEqual(self.snapshot()['analysis'], baseline['analysis'])
         self.assertNotIn('AE-001-1', json.dumps(MockModel.requests))
@@ -159,7 +164,13 @@ class AgentBrowserChecks(BrowserFixture):
 
     def test_display_subset_not_analysis_and_secret_echo(self):
         self.connect(); baseline = self.snapshot()
-        self.ask('Display only SYN-001', [call('set_view', {'subset': ['SYN-001']}), {'role': 'assistant', 'content': self.credential}])
+        self.ask('Display only SYN-001', [call('propose_display_scope', {
+            'intent': 'display_patients', 'evidence': 'Display only SYN-001',
+            'action': {'tool': 'set_view', 'args': {'subset': ['SYN-001']}}})])
+        self.assertEqual(self.snapshot(), baseline)
+        self.page.locator('#agent-scope-confirm').click()
+        expect(self.page.locator('#chat-result')).to_contain_text('explicitly approved')
+        self.ask('Read view state', [call('get_view_state', {}), {'role': 'assistant', 'content': self.credential}])
         self.assertEqual(self.snapshot()['display']['view']['focus_patient_keys'], [['SYN-SPIKE', 'SYN-001']])
         self.assertEqual(self.snapshot()['analysis'], baseline['analysis'])
         self.assertNotIn(self.credential, self.page.locator('#chat-body').text_content())

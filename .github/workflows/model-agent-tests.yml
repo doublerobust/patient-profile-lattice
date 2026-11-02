@@ -32,8 +32,8 @@ jobs:
       - run: node --test alignment-model.test.mjs
       - name: Repeat deterministic local-mock acceptance
         run: |
-          python -m unittest test_agent_e2e test_alignment_browser test_model_agent -v
-          python -m unittest test_agent_e2e test_alignment_browser test_model_agent -v
+          python -m unittest test_model_scope test_agent_e2e test_alignment_browser test_model_agent -v
+          python -m unittest test_model_scope test_agent_e2e test_alignment_browser test_model_agent -v
       - name: Full headless regression
         run: python -m unittest discover -v
       - name: Whitespace and reproducible bundle checks

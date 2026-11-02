@@ -9,8 +9,8 @@
 #chat-body summary { min-height:44px; cursor:pointer; }
 #chat-body input:not([type=checkbox]) { display:block; box-sizing:border-box; width:100%; min-height:44px; font:inherit; }
 #agent-destination, #agent-status { overflow-wrap:anywhere; }
-#agent-proposal { border:2px solid #995c00; padding:12px; margin:12px 0; }
-#agent-proposal[hidden] { display:none; }
+#agent-proposal, #agent-scope-proposal { border:2px solid #995c00; padding:12px; margin:12px 0; }
+#agent-proposal[hidden], #agent-scope-proposal[hidden] { display:none; }
 #agent-consequence { white-space:pre-wrap; overflow-wrap:anywhere; }
 #agent-egress-dialog { box-sizing:border-box; max-width:min(560px, calc(100vw - 24px)); max-height:85dvh; overflow:auto; border:2px solid #17394f; padding:20px; color:#152b3b; }
 #agent-egress-dialog::backdrop { background:#0008; }
