@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synthetic action history exercise</title>
+<style>body{font:16px system-ui;max-width:65rem;margin:1rem auto;padding:1rem}button{min-height:44px;margin:.25rem}pre{white-space:pre-wrap;overflow-wrap:anywhere}li{margin:.75rem 0}details{border:1px solid #888;padding:.5rem}</style>
+<h1>Synthetic action history exercise</h1>
+<p>Local synthetic data only. This is a component exercise, not the patient renderer or a connected agent. The synthetic combined action changes both analysis and display. Production tool dispatch must obtain confirmation before an analysis change.</p>
+<button id="synthetic-action">Execute synthetic combined action</button>
+<button id="synthetic-query">Execute synthetic read-only query</button>
+<p id="demo-status" role="status"></p>
+<details><summary>Current analysis and display state</summary><pre id="current-state"></pre></details>
+<div id="history"></div>
+<script src="state-core.js"></script><script src="action-history.js"></script>
+<script>
+'use strict';
+const initial={analysis:{population:[['DEMO','SYN-001']],ae_predicate:null,temporal_window:null},display:{view:{patient_sort:[{field:'USUBJID',direction:'asc'}],hidden_lanes:[],focus_patient_keys:[],display_date_window:null,selection:null},sort:'duration',tier:'auto',renderer:'timeline',camera:{start:0,end:100},alignment:null,highlights:[]}};
+const show=state=>{document.getElementById('current-state').textContent=JSON.stringify(state,null,2);};
+window.demoHistory=ViewActionHistory.createHistory({initial,commit:async next=>show(next)});
+ViewActionHistory.mountHistory(document.getElementById('history'),demoHistory);show(initial);
+async function execute(query) {
+  const before=demoHistory.snapshot().state,after=structuredClone(before);
+  if(!query){after.analysis.population=[];after.display.sort='desc';after.display.camera={start:-10,end:50};after.display.highlights=['SYN-AE-1'];}
+  try {
+    await demoHistory.execute({action:{tool:query?'query_data':'synthetic_combined',args:query?{unit:'AE records'}:{synthetic:true}},diff:ViewStateCore.stateDiff(before,after),record_ids:['SYN-AE-1']});
+    document.getElementById('demo-status').textContent='Synthetic action recorded.';
+  } catch(e){document.getElementById('demo-status').textContent=e.message;}
+}
+document.getElementById('synthetic-action').onclick=()=>execute(false);
+document.getElementById('synthetic-query').onclick=()=>execute(true);
+</script></html>
