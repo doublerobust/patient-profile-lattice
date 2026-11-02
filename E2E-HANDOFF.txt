@@ -1,0 +1,48 @@
+Task t_12576a50 implementation handoff
+
+Workspace: /Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_12576a50
+Branch: wt/t_12576a50
+Baseline: fast-forwarded clean isolated worktree from ca13cdf to upstream integrated d094b88.
+No main checkout or sibling files modified. No project AGENTS.md found.
+
+Added test_agent_e2e.py (9 strict local-mock Chromium acceptance cases),
+.github/workflows/model-agent-tests.yml and docs/model-agent-e2e.md.
+The documented acceptance command includes existing KN189 alignment and adapter
+checks, covering all nine task criteria without duplicating alignment fixtures.
+Production code and fixtures unchanged. Existing child t_53d44f12 is the independent
+fact-check lane; completion of this implementation releases it.
+
+Actual execution (all commands run in this workspace):
+  uv venv .venv
+  uv pip install --python .venv/bin/python -r requirements-test.txt
+  .venv/bin/python -m playwright install chromium
+    exit 0; Python 3.11.15, pinned Playwright 1.56.0.
+  npm ci && npm run build
+    exit 0; local Node v26.12.1, npm 11.20.0.
+  .venv/bin/python -m unittest test_agent_e2e -v
+    initial exit 1: 9 tests, one harness error (UTF-8 decoding binary fixture/cache).
+    Corrected fixture scan to compare credential bytes, not decode arbitrary files.
+    Evidence: evidence-e2e-first.log.
+  .venv/bin/python -m unittest test_agent_e2e test_alignment_browser test_model_agent -v
+    exit 0: 15 tests in 36.865s. evidence-e2e-green.log.
+  Same acceptance command repeated
+    exit 0: 15 tests in 33.917s. evidence-e2e-repeat.log.
+  .venv/bin/python -m unittest discover -v
+    exit 0: 93 tests in 212.344s. evidence-e2e-regression.log.
+  npm test
+    exit 0: 54 passing, zero failures. evidence-e2e-node.log.
+  node --test alignment-model.test.mjs
+    exit 0: 2 passing, zero failures. evidence-e2e-geometry.log.
+  git diff --check
+    exit 0.
+  git diff --exit-code -- static/lattice.js static/renderer3d.js
+    exit 0; build reproduced tracked bundles.
+
+CI workflow committed but not published/hosted-executed; do not claim a remote CI
+pass. It uses Ubuntu, Python 3.11, Node 22, pinned Playwright, full regression and
+repeated acceptance. Only local macOS execution is evidenced here. No external
+model or real credentials, deployment, physical iPad or independent approval.
+Model semantics are scripted: tests prove execution boundaries, not general natural
+language intent classification. See docs/model-agent-e2e.md for precise scan scope.
+The full regression generated untracked evidence-chat-interactions.json; not part
+of the changes. The new suite never writes a credential fixture or transcript.
