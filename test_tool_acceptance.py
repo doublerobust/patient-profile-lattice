@@ -29,6 +29,18 @@ class SourceToolAcceptance(unittest.TestCase):
                 self.assertEqual(result['record_ids'], [])
                 self.assertEqual((spec, engine.records), before)
 
+    def test_calendar_alignment_discloses_denominator_and_no_anchor_requirement(self):
+        for engine in self.engines.values():
+            before = copy.deepcopy(engine.records)
+            result = resolve_alignment(engine, 'calendar')
+            self.assertEqual(result['anchor'], 'calendar')
+            self.assertEqual(result['denominator'], len(engine.fixtures['population']))
+            self.assertEqual(result['denominator_unit'], 'loaded roster patients')
+            self.assertIn('no relative anchor required', result['missing_anchor_handling'])
+            self.assertIn('no dates imputed', result['missing_anchor_handling'])
+            self.assertIn(str(result['denominator']), result['note'])
+            self.assertEqual(engine.records, before)
+
     def test_ac2_proposal_counts_are_computed_from_actual_source_without_mutation(self):
         for engine in self.engines.values():
             spec = engine.default_spec()

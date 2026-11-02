@@ -3,10 +3,11 @@ Action history v1 (t_efdcbff1)
 Files and integration boundary
   static/action-history.js exports ViewActionHistory in browsers and CommonJS in Node.
   Load static/state-core.js first. No dependencies or external requests.
-  static/history-demo.html is a runnable synthetic component exercise. It does NOT
-  replace the patient app's legacy chat/history. Registry task t_d0e758a1 owns
-  wiring this component to validated dispatch and the atomic renderer bridge.
-  This separation avoids overwriting sibling changes in static/view-chat.js/app.py.
+  static/history-demo.html is a runnable synthetic component exercise.
+  The patient app now uses this controller through static/tool-registry.js and
+  static/view-chat.js, with atomic applySnapshot in static/app.js. The existing
+  panel renders inspectable entry JSON and shared Undo/Reset buttons; it does not
+  use mountHistory's separate demonstration DOM. See docs/tool-registry.md.
 
 API
   const history = ViewActionHistory.createHistory({initial, commit});

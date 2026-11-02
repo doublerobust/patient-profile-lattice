@@ -24,7 +24,7 @@ Then open one of:
 | `http://127.0.0.1:8765/lattice` | Patient x time x visual layer lattice, four free-rotating projections |
 | `http://127.0.0.1:8765/3d` | GPU prototype of the same records and the same pinned engine |
 
-The server binds loopback only. There are no uploads, no outbound service calls from the viewer, no telemetry, and the "Ask about this view" panel is a local rule parser with validated local tools, not a model connection. Touch devices get a shared pointer controller: one-finger rotate (or pan by toggle), two-finger translate, centred pinch zoom, with desktop drag conventions retained.
+The server binds loopback only. The "Ask about this view" panel starts disconnected, with explicitly labeled local rule/parser commands. An optional user-configured model connection sends requests through the loopback adapter only after endpoint/model testing and explicit egress consent; it is not enabled by default. Credentials are session-only. See [the tool registry contract](docs/tool-registry.md) for validation, analysis confirmation, source IDs, Undo/Reset and limitations. Touch devices get a shared pointer controller: one-finger rotate (or pan by toggle), two-finger translate, centred pinch zoom, with desktop drag conventions retained.
 
 Two read-only integrity checks:
 
@@ -60,7 +60,7 @@ The full comparison, the adopted and rejected concepts and the licensing reasoni
 
 These are rejections, not missing features pending a sprint:
 
-- No agent panel and no third-party model calls from the viewer.
+- No automatic model egress. Optional model calls require explicit configuration and consent; local parser commands do not call a model.
 - No signal inference or alert rules. Sentinel markers are display annotations, not clinical judgments.
 - No event-based alignment that drops patients without an anchor event, because it changes the displayed population.
 - No confirmed-response redefinition, and no arm-percentage comparison rows. The cohort view is a display summary, not an endpoint.

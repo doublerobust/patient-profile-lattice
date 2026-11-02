@@ -1,0 +1,37 @@
+Task t_ac9c93cd — implementation integrated and verified; downstream QA/fact-check pending.
+Workspace: /Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_ac9c93cd
+Branch: wt/t_ac9c93cd
+
+Integration:
+- Preserved previous partial implementation in stash commit 9ca272c059bde14b4f527e8872a00567f1e9de41. Do not reapply over this implementation.
+- Fast-forwarded to child acceptance commit 2aa33ee, incorporating core/history, adapter/UI and verified registry import 29934dd. Other worktrees untouched.
+- Restored alignment-model.test.mjs and test_alignment_browser.py from saved prior work. Updated inherited history assertion from entry.tool to entry.action.tool without changing behavior assertions.
+- Added failing calendar-disclosure regression, then implemented explicit denominator and missing-anchor/no-imputation policy for calendar reset.
+- Added docs/tool-registry.md; updated README optional-model wording and docs/action-history.md integration notes.
+
+Exact commands and results from this integration run:
+1. npm test && node --test alignment-model.test.mjs && npm run build — exit 0; 54 Node tests, 2 geometry tests and build pass.
+2. python -m unittest discover -v > evidence-registry-integration-first.log 2>&1 — exit 1; 83 tests, one KeyError from stale inherited entry.tool assertion. Corrected schema path afterwards.
+3. python -m unittest test_tool_acceptance.SourceToolAcceptance.test_calendar_alignment_discloses_denominator_and_no_anchor_requirement -v > evidence-registry-calendar-red.log 2>&1 — exit 1; missing denominator reproduced before fix.
+4. python -m unittest discover -v > evidence-registry-integration-green.log 2>&1 — exit 0; 84 tests in 120.398s, OK. Includes actual Chromium/local mock and KN189 alignment/projections/source preservation/Undo.
+5. npm test > evidence-registry-integration-node.log 2>&1 — exit 0; 54 tests passed.
+6. node --test alignment-model.test.mjs > evidence-registry-integration-alignment.log 2>&1 — exit 0; 2 tests passed.
+7. npm run build > evidence-registry-integration-build.log 2>&1 — exit 0; both bundles generated, no tracked bundle difference.
+8. git diff --check — exit 0.
+9. git diff --name-only ca13cdf -- data fixtures cohort.py scenario_adapter.py — exit 0, empty output: source fixtures/cohort/mapping unchanged.
+
+Acceptance evidence:
+- Allowlisted tools, finite JSON schemas, pure validated state diffs; model text is not executed and registry has no DOM access.
+- Separate analysis/display; analysis proposal exposes before/after consequences and commits only on matching human confirmation. Stale/cancelled proposals fail closed.
+- Queries return explicit units/contributing IDs; exact AE record filters cannot expand analysis.
+- In-page action JSON includes args/diff/source IDs/Undo-Reset metadata. Exact Undo/Reset covers combined analysis/display and alignment/camera/highlights.
+- Source conformance: generic treatment100/PR25/PD97/death0; KN189 treatment60/PR23/PD45/death36; randomization unsupported. PR uses RSORRES. Missing anchors stay unaligned, never imputed.
+- Development requests create LOCAL SESSION ledger entries, not fabricated results or external tickets. They survive view Undo/Reset, not reload.
+
+Limitations and downstream integration:
+- No external provider, real credentials, physical iPad, deployment/publication or independent approval performed. Local mock only.
+- Schema validation does not establish arbitrary natural-language intent classification; structured refusals/clarification are tested.
+- Canvas gestures are not comprehensively serialized during requests; detected snapshot drift rejects requests. No total gesture concurrency coverage claim.
+- Randomization, anchor-relative analytical windows and relative alignment outside /lattice remain unsupported.
+- Hotspots: app.py, static/app.js, static/view-chat.js, model_agent.py. UI changes already integrated; do not overwrite with old sibling snapshots or blindly reapply 694b3fd.
+- Consume integrated branch or final focused commit atop 2aa33ee. Children t_12576a50, t_53d44f12, t_bf154f89 inspected; implementation completion releases downstream QA, not same-card review.

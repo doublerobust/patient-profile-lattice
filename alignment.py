@@ -30,8 +30,13 @@ def complete(value):
 def resolve_alignment(engine, anchor):
     anchor = 'first_treatment' if anchor == 'first_dose' else anchor
     if anchor == 'calendar':
+        denominator = len(engine.fixtures['population'])
+        missing = 'Calendar display: no relative anchor required; no patients excluded and no dates imputed.'
         return {'status': 'resolved', 'anchor': anchor, 'axis_label': 'Calendar date',
-                'patients': [], 'record_ids': [], 'note': 'Absolute calendar dates restored; analysis unchanged.'}
+                'denominator': denominator, 'denominator_unit': 'loaded roster patients',
+                'missing_anchor_handling': missing,
+                'patients': [], 'record_ids': [],
+                'note': f'Absolute calendar dates restored; {denominator} loaded roster patients. {missing} Analysis unchanged.'}
     if anchor not in ANCHORS:
         return {'status': 'unsupported', 'anchor': anchor, 'record_ids': [],
                 'denominator': len(engine.fixtures['population']), 'denominator_unit': 'loaded roster patients (unchanged)',
