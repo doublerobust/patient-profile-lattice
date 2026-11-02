@@ -48,6 +48,16 @@ process.stdout.write(data);
         'permission': 'Yue explicitly authorized synthetic data reuse for this demo. No source-code reuse license verified; generator source is not retained.',
         'warning': 'This dataset is synthetic. NOT real trial data. NOT a submission-ready dataset.',
         'counts': {'patients': len(data['PTS']), **{k: sum(len(p[k]) for p in data['PTS']) for k in ('ae','cm','ex','tr','lb')}}}
+    # Re-importing the identical pinned output must not erase local derivative
+    # provenance or relabel the original import time as a fresh import.
+    manifest_path = ROOT / 'provenance.json'
+    if manifest_path.exists():
+        existing = json.loads(manifest_path.read_text())
+        if existing.get('raw_sha256') != RAW_SHA256 or existing.get('commit') != COMMIT:
+            raise ValueError('existing_provenance_mismatch')
+        metadata['imported_at_utc'] = existing['imported_at_utc']
+        if 'local_derivative' in existing:
+            metadata['local_derivative'] = existing['local_derivative']
     ROOT.mkdir(parents=True, exist_ok=True)
     (ROOT / 'raw.json').write_bytes(raw)
     (ROOT / 'provenance.json').write_text(json.dumps(metadata, indent=2) + '\n')

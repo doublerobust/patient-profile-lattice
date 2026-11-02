@@ -1,0 +1,14 @@
+test_term_query_and_highlight_retain_units_and_derivative_provenance (test_table_s4.TableS4Checks.test_term_query_and_highlight_retain_units_and_derivative_provenance) ... FAIL
+
+======================================================================
+FAIL: test_term_query_and_highlight_retain_units_and_derivative_provenance (test_table_s4.TableS4Checks.test_term_query_and_highlight_retain_units_and_derivative_provenance)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_6d894f3b/test_table_s4.py", line 70, in test_term_query_and_highlight_retain_units_and_derivative_provenance
+    self.assertIn('not trial prevalence', highlight['note'])
+AssertionError: 'not trial prevalence' not found in 'Current qualifying analysis, independent of view; exact AE onset calendar window inclusive, or all dates when omitted. Linked CM means documented association, not causation.'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.118s
+
+FAILED (failures=1)

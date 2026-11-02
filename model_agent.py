@@ -59,6 +59,7 @@ def capabilities(engine):
     return {'synthetic': True, 'dataset': engine.snapshot_sha256, 'cohort': engine.cohort,
             'tools': TOOLS, 'alignment': alignment_capabilities(engine),
             'limitations': ['No clinical inference, causal claims, treatment recommendations or inferred response.',
+                            'All counts describe synthetic fixtures, not trial prevalence. KN189 AE vocabulary comes from archived Table S4, carboplatin as-treated subgroup (N=294 vs 145); immune-related rows are categories including related terms. Term assignment and SOC mapping are local, not trial data.',
                             'AE filters only; dates are complete AESTDTC onset dates, inclusive. Omitted window means all dates.',
                             'Record IDs stay local by default; record-level egress requires explicit separate consent.',
                             'Analysis changes require a local confirmation; display changes do not affect analysis.']}

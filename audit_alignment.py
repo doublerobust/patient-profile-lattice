@@ -34,7 +34,9 @@ def audit():
     return {
         'source_sha256': {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in (
             'data/fixtures.json', 'data/manifest.json', 'cohort.py', 'scenario_adapter.py',
-            'fixtures/keynote189-synthetic/raw.json')},
+            'fixtures/keynote189-synthetic/raw.json',
+            'fixtures/keynote189-synthetic/table-s4-synthetic.json',
+            'fixtures/keynote189-synthetic/provenance.json', 'populate_ae_table_s4.py')},
         'cohorts': result,
     }
 

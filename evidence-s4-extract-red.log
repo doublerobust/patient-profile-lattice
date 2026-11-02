@@ -1,0 +1,38 @@
+test_reextract_does_not_erase_derivative_manifest (test_table_s4.TableS4Checks.test_reextract_does_not_erase_derivative_manifest) ... {
+  "synthetic_only": true,
+  "repository": "https://github.com/pzhang724/patient-profile-linkage",
+  "imported_at_utc": "2026-11-02T20:47:57Z",
+  "commit": "be3744cd7768373552e87201ea0efe90578c094f",
+  "generator_path": "src/cube/c0_data.js",
+  "source_url": "https://raw.githubusercontent.com/pzhang724/patient-profile-linkage/be3744cd7768373552e87201ea0efe90578c094f/src/cube/c0_data.js",
+  "source_sha256": "2faf6e878f7369bee9ac66ae4d6cd345ebfd0d8833beece9e677869f18ca3e64",
+  "raw_sha256": "4dd5639d3b9799ee6c8b31615659d2433452fd6e077aca1ba8cb7d26064fbb54",
+  "seed": 189,
+  "entrypoint": "PTS = Array.from({length:60},(_,i)=>makePatient(i)); then plant() IIFE",
+  "extraction": "Execute prefix before Derived per-patient metrics + signal engine in Node VM; serialize CUTOFF, DOM, LABS, PTS. Preserve raw outputs including planted anomalies. Do not execute derived metrics/signals or rewrite ds.eot.",
+  "permission": "Yue explicitly authorized synthetic data reuse for this demo. No source-code reuse license verified; generator source is not retained.",
+  "warning": "This dataset is synthetic. NOT real trial data. NOT a submission-ready dataset.",
+  "counts": {
+    "patients": 60,
+    "ae": 260,
+    "cm": 80,
+    "ex": 1771,
+    "tr": 391,
+    "lb": 4962
+  }
+}
+ERROR
+
+======================================================================
+ERROR: test_reextract_does_not_erase_derivative_manifest (test_table_s4.TableS4Checks.test_reextract_does_not_erase_derivative_manifest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_6d894f3b/test_table_s4.py", line 106, in test_reextract_does_not_erase_derivative_manifest
+    self.assertEqual(after['local_derivative'], json.loads(metadata)['local_derivative'])
+                     ~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'local_derivative'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.031s
+
+FAILED (errors=1)

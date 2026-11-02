@@ -81,9 +81,11 @@ Both were run against this release: `--verify-data` printed PASS, and `data/vali
 | Cohort | Source | Size | Status |
 |---|---|---|---|
 | `--cohort 100` (default) | `data/`, hand-authored spike snapshot `synthetic-spike-v1`, seed 82087039 | 100 patients, 298 qualifying AE source records | Invented feasibility records. No real patient or trial data. |
-| `--cohort keynote189` | `fixtures/keynote189-synthetic/`, imported generated output | 60 patients, 260 AE / 80 CM / 1771 EX / 391 TR / 4962 LB source rows | Synthetic. Not real trial data. Not a submission-ready dataset. |
+| `--cohort keynote189` | `fixtures/keynote189-synthetic/table-s4-synthetic.json`, local derivative of imported generated output | 60 patients, 260 AE / 80 CM / 1771 EX / 391 TR / 4962 LB source rows | Synthetic. Not real trial data. Not a submission-ready dataset. |
 
-The fixture is pinned by hash. `fixtures/keynote189-synthetic/provenance.json` records the upstream URL, commit, generator entry point, import time, both SHA-256 values, the vendored generator hash and the recomputed row counts. `extract_scenario.py` re-verifies the pinned generator hash before regenerating and re-verifies the raw output hash before writing (it needs Node; the viewer does not).
+Both fixture files are pinned by hash. `fixtures/keynote189-synthetic/provenance.json` retains the upstream URL, commit, generator entry point, import time, source/raw hashes and row counts, plus a separately identified local derivative. No generator source is vendored. `extract_scenario.py` regenerates only the unchanged upstream `raw.json` (needs Node). `populate_ae_table_s4.py --check` verifies the local derivative without writing.
+
+The derivative uses 40 literal AE terms from Table S4 of the archived 2022-01-08 NEJM appendix (DOI 10.1056/NEJMoa1801005), carboplatin as-treated subgroup N=294 vs 145, not the whole trial. The 12 immune-related rows are event categories including related terms, not single preferred terms. Assignment is our unweighted round-robin across existing synthetic AE rows, independent of arm; approximate SOC and `ir` mappings are also ours. No incidence weighting, trial prevalence, severity distribution, causality or actual patient events are reproduced. Imported `raw.json` remains byte-for-byte unchanged. See [exact vocabulary, source citation, mapping and hashes](docs/table-s4-synthetic.md).
 
 ## Acknowledgement: the reference repository and the KN189-style synthetic data
 

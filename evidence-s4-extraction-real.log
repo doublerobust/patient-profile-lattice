@@ -1,0 +1,53 @@
+{
+  "synthetic_only": true,
+  "repository": "https://github.com/pzhang724/patient-profile-linkage",
+  "imported_at_utc": "2026-10-31T18:38:32Z",
+  "commit": "be3744cd7768373552e87201ea0efe90578c094f",
+  "generator_path": "src/cube/c0_data.js",
+  "source_url": "https://raw.githubusercontent.com/pzhang724/patient-profile-linkage/be3744cd7768373552e87201ea0efe90578c094f/src/cube/c0_data.js",
+  "source_sha256": "a3fc77bc4f5c0244e4bef5cbe5dc45d0119e183debf535bd6547d268783efd0c",
+  "raw_sha256": "4dd5639d3b9799ee6c8b31615659d2433452fd6e077aca1ba8cb7d26064fbb54",
+  "seed": 189,
+  "entrypoint": "PTS = Array.from({length:60},(_,i)=>makePatient(i)); then plant() IIFE",
+  "extraction": "Execute prefix before Derived per-patient metrics + signal engine in Node VM; serialize CUTOFF, DOM, LABS, PTS. Preserve raw outputs including planted anomalies. Do not execute derived metrics/signals or rewrite ds.eot.",
+  "permission": "Yue explicitly authorized synthetic data reuse for this demo. No source-code reuse license verified; generator source is not retained.",
+  "warning": "This dataset is synthetic. NOT real trial data. NOT a submission-ready dataset.",
+  "counts": {
+    "patients": 60,
+    "ae": 260,
+    "cm": 80,
+    "ex": 1771,
+    "tr": 391,
+    "lb": 4962
+  },
+  "local_derivative": {
+    "file": "table-s4-synthetic.json",
+    "sha256": "4cd25aba56fd5163b99f6fee0ef76796dac53b03cc93b89c55284f3d87b11557",
+    "upstream_file": "raw.json",
+    "upstream_sha256": "4dd5639d3b9799ee6c8b31615659d2433452fd6e077aca1ba8cb7d26064fbb54",
+    "generator": "populate_ae_table_s4.py",
+    "assignment": "unweighted source-order round-robin across existing AE rows; independent of arm",
+    "changed_fields": [
+      "ae.term",
+      "ae.soc",
+      "ae.ir"
+    ],
+    "literal_terms": 40,
+    "any_cause_terms": 28,
+    "event_categories": 12,
+    "warning": "Local synthetic derivative, not trial data; no source-trial prevalence, causality or subject-level events are reproduced.",
+    "local_mapping_note": "SOC assignments are approximate display-only mappings from the evidence brief, not supplied by Table S4; ir is a local flag for the 12 events-of-interest rows, not patient-level adjudication. No arm mapping or incidence weighting is used.",
+    "event_category_note": "The 12 immune-related events-of-interest rows include related terms; they are event categories, not a claim of single MedDRA preferred terms.",
+    "citation": "Gandhi L et al. N Engl J Med 2018;378:2078-92. DOI 10.1056/NEJMoa1801005, Supplementary Appendix, Table S4 (printed pp. 25-28): Adverse Events in the As-Treated Population of Patients Who Received Carboplatin.",
+    "source_url": "https://www.nejm.org/doi/suppl/10.1056/NEJMoa1801005/suppl_file/nejmoa1801005_appendix.pdf",
+    "archive_url": "https://web.archive.org/web/20220108182644if_/https://www.nejm.org/doi/suppl/10.1056/NEJMoa1801005/suppl_file/nejmoa1801005_appendix.pdf",
+    "archived_at": "2022-01-08T18:26:44Z",
+    "pdf_sha256": "00a40a9743009677eda784fa52386f9efd4d7d83baed9afb3aceb0a68de44469",
+    "source_population": "Carboplatin as-treated subgroup: pembrolizumab-pemetrexed-carboplatin N=294 vs placebo-pemetrexed-carboplatin N=145, not the whole trial.",
+    "source_window": "During allocated treatment or within 30 days thereafter (90 for serious events), crossover excluded, regardless of investigator attribution. These windows are not applied to the synthetic fixture.",
+    "retrieval_caveat": "Live NEJM retrieval was Cloudflare-blocked; vocabulary is from the archived 2022-01-08 appendix, not a verified current revision."
+  }
+}
+PASS: upstream sha256=4dd5639d3b9799ee6c8b31615659d2433452fd6e077aca1ba8cb7d26064fbb54
+PASS: local synthetic derivative sha256=4cd25aba56fd5163b99f6fee0ef76796dac53b03cc93b89c55284f3d87b11557
+40 terms; unweighted assignment; not trial data or trial prevalence

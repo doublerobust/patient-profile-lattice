@@ -60,5 +60,5 @@ def query_records(engine, spec, args):
     return {'count': len(matches) if args['unit'] == 'AE records' else len(patients),
             'unit': args['unit'], 'record_ids': sorted(matches), 'patient_keys': sorted(patients),
             'linked_record_ids': sorted(links), 'scope': 'current_analysis',
-            'note': 'Current qualifying analysis, independent of view; exact AE onset calendar window inclusive, or all dates when omitted. Linked CM means documented association, not causation.',
+            'note': 'Synthetic fixture counts, not trial prevalence. Current qualifying analysis, independent of view; exact AE onset calendar window inclusive, or all dates when omitted. Linked CM means documented association, not causation.',
             'excluded_missing_grade': unknown_grade, 'excluded_incomplete_onset': incomplete_date}

@@ -1,0 +1,29 @@
+PASS: pinned file hashes, normalized spec, synthetic-only flag and SUPPAE parent links
+PASS: pinned file hashes, normalized spec, synthetic-only flag and SUPPAE parent links
+test_01_schema_and_manifest_integrity (__main__.GoldenContractChecks.test_01_schema_and_manifest_integrity) ... ok
+test_02_fixture_identity_and_provenance (__main__.GoldenContractChecks.test_02_fixture_identity_and_provenance) ... ok
+test_03_patient_vs_ae_record_counts (__main__.GoldenContractChecks.test_03_patient_vs_ae_record_counts) ... ok
+test_04_relationship_golden_outputs (__main__.GoldenContractChecks.test_04_relationship_golden_outputs) ... ok
+test_05_group_scope_collision_and_no_count_inflation (__main__.GoldenContractChecks.test_05_group_scope_collision_and_no_count_inflation) ... ok
+test_06_raw_blanks_and_documentation_not_inferred (__main__.GoldenContractChecks.test_06_raw_blanks_and_documentation_not_inferred) ... ok
+test_07_unresolved_group_preserves_evidence (__main__.GoldenContractChecks.test_07_unresolved_group_preserves_evidence) ... ok
+test_08_dataset_scope_fails_closed (__main__.GoldenContractChecks.test_08_dataset_scope_fails_closed) ... ok
+test_09_ambiguous_time_clarification (__main__.GoldenContractChecks.test_09_ambiguous_time_clarification) ... ok
+test_10_explicit_time_boundaries_and_partial_dates (__main__.GoldenContractChecks.test_10_explicit_time_boundaries_and_partial_dates) ... ok
+test_11_suppqual_parent_no_new_events (__main__.GoldenContractChecks.test_11_suppqual_parent_no_new_events) ... ok
+test_12_spec_exact_restore_and_analysis_reproduction (__main__.GoldenContractChecks.test_12_spec_exact_restore_and_analysis_reproduction) ... ok
+test_13_view_sort_peel_focus_and_stable_pick (__main__.GoldenContractChecks.test_13_view_sort_peel_focus_and_stable_pick) ... ok
+test_14_analytical_filter_clears_selection_never_retargets (__main__.GoldenContractChecks.test_14_analytical_filter_clears_selection_never_retargets) ... ok
+test_15_pin_mismatches_rejected (__main__.GoldenContractChecks.test_15_pin_mismatches_rejected) ... ok
+test_16_unknown_state_fields_and_semantic_inventions_rejected (__main__.GoldenContractChecks.test_16_unknown_state_fields_and_semantic_inventions_rejected) ... ok
+test_17_display_clip_does_not_filter_analysis (__main__.GoldenContractChecks.test_17_display_clip_does_not_filter_analysis) ... ok
+test_18_normalization_and_zero_not_clarification (__main__.GoldenContractChecks.test_18_normalization_and_zero_not_clarification) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.041s
+
+OK
+Verification evidence: /Users/openclaw/research/patient-profile-viz/work-base/.worktrees/t_6d894f3b/data/verification.json
+PASS: upstream sha256=4dd5639d3b9799ee6c8b31615659d2433452fd6e077aca1ba8cb7d26064fbb54
+PASS: local synthetic derivative sha256=4cd25aba56fd5163b99f6fee0ef76796dac53b03cc93b89c55284f3d87b11557
+40 terms; unweighted assignment; not trial data or trial prevalence

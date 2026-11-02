@@ -147,8 +147,8 @@ window.mountViewChat = bridge => {
     keys(call,['tool','args']);
     const result=await session.dispatch(call.tool,call.args,{recordEgress});
     syncHistory();
-    const summary=call.tool==='query_data'?`${result.count} ${result.unit}; read-only, view unchanged`:
-      call.tool==='highlight_events'?`Highlight overlay replaced: ${result.record_ids.length} AE records; analysis unchanged`:
+    const summary=call.tool==='query_data'?`${result.count} ${result.unit}; read-only, view unchanged. ${result.note}`:
+      call.tool==='highlight_events'?`Highlight overlay replaced: ${result.record_ids.length} AE records; analysis unchanged. ${result.note}`:
       result.note||`${call.tool}: ${result.status||'capabilities returned'}`;
     report(summary,[...(result.record_ids||[]),...(result.linked_record_ids||[]).map(id=>id+' (linked CM evidence)')]);
     return result;

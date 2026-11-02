@@ -1,0 +1,12 @@
+test_category_not_claimed_as_single_preferred_term (test_table_s4.TableS4Checks.test_category_not_claimed_as_single_preferred_term) ... ok
+test_derivative_preserves_upstream_and_only_changes_mapped_fields (test_table_s4.TableS4Checks.test_derivative_preserves_upstream_and_only_changes_mapped_fields) ... ok
+test_loader_rejects_corrupt_derivative (test_table_s4.TableS4Checks.test_loader_rejects_corrupt_derivative) ... ok
+test_manifest_pins_both_files_and_distinguishes_categories (test_table_s4.TableS4Checks.test_manifest_pins_both_files_and_distinguishes_categories) ... ok
+test_reextract_does_not_erase_derivative_manifest (test_table_s4.TableS4Checks.test_reextract_does_not_erase_derivative_manifest) ... ok
+test_term_query_and_highlight_retain_units_and_derivative_provenance (test_table_s4.TableS4Checks.test_term_query_and_highlight_retain_units_and_derivative_provenance) ... ok
+test_s4_highlight_query_and_credential_free_saved_download_replay (test_table_s4_browser.TableS4Browser.test_s4_highlight_query_and_credential_free_saved_download_replay) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 5.512s
+
+OK
