@@ -22,11 +22,12 @@
   },
   "local_derivative": {
     "file": "table-s4-synthetic.json",
-    "sha256": "4cd25aba56fd5163b99f6fee0ef76796dac53b03cc93b89c55284f3d87b11557",
+    "sha256": "1931f79eb754cc569d4cb2539fec1d2c3071e6daf18820ccc8f9dee6a251304e",
     "upstream_file": "raw.json",
     "upstream_sha256": "4dd5639d3b9799ee6c8b31615659d2433452fd6e077aca1ba8cb7d26064fbb54",
     "generator": "populate_ae_table_s4.py",
-    "assignment": "unweighted source-order round-robin across existing AE rows; independent of arm",
+    "assignment": "Uniform per-arm term dealing to ensure vocabulary coverage in both arms; arm is used as a balancing key, with no source incidence weights. Patient-level and arm-level patterns remain synthetic.",
+    "assignment_seed": 20261102,
     "changed_fields": [
       "ae.term",
       "ae.soc",
@@ -36,7 +37,7 @@
     "any_cause_terms": 28,
     "event_categories": 12,
     "warning": "Local synthetic derivative, not trial data; no source-trial prevalence, causality or subject-level events are reproduced.",
-    "local_mapping_note": "SOC assignments are approximate display-only mappings from the evidence brief, not supplied by Table S4; ir is a local flag for the 12 events-of-interest rows, not patient-level adjudication. No arm mapping or incidence weighting is used.",
+    "local_mapping_note": "SOC assignments are approximate display-only mappings from the evidence brief, not supplied by Table S4; ir is a local flag for the 12 events-of-interest rows, not patient-level adjudication. Fixture arm is a balancing key, not a mapping to source incidence columns; no incidence weighting is used.",
     "event_category_note": "The 12 immune-related events-of-interest rows include related terms; they are event categories, not a claim of single MedDRA preferred terms.",
     "citation": "Gandhi L et al. N Engl J Med 2018;378:2078-92. DOI 10.1056/NEJMoa1801005, Supplementary Appendix, Table S4 (printed pp. 25-28): Adverse Events in the As-Treated Population of Patients Who Received Carboplatin.",
     "source_url": "https://www.nejm.org/doi/suppl/10.1056/NEJMoa1801005/suppl_file/nejmoa1801005_appendix.pdf",

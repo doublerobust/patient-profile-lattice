@@ -1,18 +1,19 @@
 """Generate a LOCAL SYNTHETIC derivative; never overwrite the imported raw.json.
 
 Literal terms and approximate display SOC mapping: evidence task t_d2fb3039.
-Assignment is ours: unweighted source-order round-robin, independent of arm.
+Uniform per-arm term dealing to ensure vocabulary coverage in both arms; arm is used as a balancing key, with no source incidence weights. Patient-level and arm-level patterns remain synthetic.
 No Table S4 incidence, grade distribution, timing or causality is reproduced.
 """
 import argparse
 import copy
 import hashlib
 import json
+import random
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent / 'fixtures/keynote189-synthetic'
 UPSTREAM_SHA256 = '4dd5639d3b9799ee6c8b31615659d2433452fd6e077aca1ba8cb7d26064fbb54'
-DERIVATIVE_SHA256 = '4cd25aba56fd5163b99f6fee0ef76796dac53b03cc93b89c55284f3d87b11557'
+DERIVATIVE_SHA256 = '1931f79eb754cc569d4cb2539fec1d2c3071e6daf18820ccc8f9dee6a251304e'
 # Literal term, LOCAL approximate SOC, LOCAL event-of-interest flag.
 TABLE_S4 = [
     ('Nausea', 'Gastrointestinal disorders', False),
@@ -58,13 +59,21 @@ TABLE_S4 = [
 ]
 
 
-def populate(raw):
+def populate(raw, seed=20261102):
     result = copy.deepcopy(raw)
-    index = 0
+    rows_by_arm = {}
     for patient in result['PTS']:
-        for row in patient['ae']:
-            row['term'], row['soc'], row['ir'] = TABLE_S4[index % len(TABLE_S4)]
-            index += 1
+        rows_by_arm.setdefault(patient['arm'], [])
+        rows_by_arm[patient['arm']].extend(patient['ae'])
+    rng = random.Random(seed)
+    for arm in sorted(rows_by_arm):
+        rows = rows_by_arm[arm]
+        # Restart the full deck for each arm, then shuffle ALL dealt assignments.
+        # Cycling a once-shuffled deck would retain a 40-row positional pattern.
+        assignments = [TABLE_S4[index % len(TABLE_S4)] for index in range(len(rows))]
+        rng.shuffle(assignments)
+        for row, assignment in zip(rows, assignments):
+            row['term'], row['soc'], row['ir'] = assignment
     return result
 
 
@@ -87,7 +96,7 @@ def main():
         target.write_bytes(output)
     print('PASS: upstream sha256=' + UPSTREAM_SHA256)
     print('PASS: local synthetic derivative sha256=' + sha)
-    print('40 terms; unweighted assignment; not trial data or trial prevalence')
+    print('40 terms; uniform per-arm dealing; not trial data or trial prevalence')
 
 
 if __name__ == '__main__':

@@ -41,7 +41,7 @@ class TableS4Checks(unittest.TestCase):
         derived = manifest['local_derivative']
         self.assertEqual(derived['sha256'], DERIVATIVE_SHA256)
         self.assertEqual(hashlib.sha256((FIXTURE / derived['file']).read_bytes()).hexdigest(), derived['sha256'])
-        self.assertEqual(derived['assignment'], 'unweighted source-order round-robin across existing AE rows; independent of arm')
+        self.assertEqual(derived['assignment'], 'Uniform per-arm term dealing to ensure vocabulary coverage in both arms; arm is used as a balancing key, with no source incidence weights. Patient-level and arm-level patterns remain synthetic.')
         self.assertEqual(len(TABLE_S4), 40)
         self.assertEqual(sum(row[2] for row in TABLE_S4), 12)
         self.assertIn('not trial data', derived['warning'])
