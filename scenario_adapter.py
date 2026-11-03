@@ -39,7 +39,7 @@ def load_scenario(base):
     upstream = raw
     raw = json.loads(content)
     fixture = copy.deepcopy(base)
-    fixture.update(snapshot_id='synthetic-keynote189-table-s4-v2', synthetic_only=True,
+    fixture.update(snapshot_id='synthetic-keynote189-table-s4-v3', synthetic_only=True,
                    population=[], requests=[], synthetic_relationship_documentation=[])
     fixture['datasets'] = {d: [] for d in ('AE','CM','EX','RS','DS','RELREC','SUPPAE')}
     originals = {}
@@ -89,7 +89,7 @@ def load_scenario(base):
             add('DS','ds',None,ds,DSSTDTC=day(ds['eot']),DSDECOD='TREATMENT DISCONTINUATION',DSREAS=ds['reason'])
         if ds['xo'] is not None:
             add('DS','ds',None,ds,DSSTDTC=day(ds['xo']),DSDECOD='SUBSEQUENT ANTICANCER THERAPY',DSREAS='Recorded crossover')
-    metadata['adapter'] = 'synthetic-keynote189-table-s4-v2; local synthetic derivative; TR → RS; raw LB retained but not rendered by unchanged clinical engine'
+    metadata['adapter'] = 'synthetic-keynote189-table-s4-v3; local synthetic derivative; TR → RS; raw LB retained but not rendered by unchanged clinical engine'
     metadata['calendar_origin'] = '2025-01-01 (fictional display origin)'
     metadata['severity_note'] = 'Source provides toxicity grade and seriousness, not AESEV; severity predicates therefore match no rows. No grade-to-severity inference.'
     return fixture, originals, metadata

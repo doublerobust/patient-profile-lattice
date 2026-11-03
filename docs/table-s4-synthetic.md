@@ -30,16 +30,20 @@ The source footnote says that related terms are included in addition to the list
 
 ## Assignment: explicitly ours, without incidence weighting
 
-The evidence handoff offered arm-incidence-weighted assignment. Integration deliberately does NOT use those weights or map fixture arms to source columns. Under the orchestrator-approved simpler option, we cycle through the 40 terms in source order across the existing AE rows in patient/row order. This is deterministic unweighted round-robin, independent of arm; it exists to exercise all vocabulary, not to create a clinically plausible event mix.
+Uniform per-arm term dealing to ensure vocabulary coverage in both arms; arm is used as a balancing key, with no source incidence weights. Patient-level and arm-level patterns remain synthetic.
+
+For each arm separately, cycle the full 40-term source-order deck across that arm's AE row count, starting at index zero. Shuffle the entire finished assignment list, not just the deck, using Python `random.Random(20261102)` with arms processed in sorted order (B, P). Then assign to that arm's existing rows in patient/row order without moving any rows. This removes the repeated deck's positional structure and guarantees all 40 terms in both arms: 4–5 occurrences per term in P (179 rows), 2–3 in B (81 rows). The fixed seed is not selected by a statistical test. Coverage is the demo constraint, not a guarantee against term–arm association generally or a clinically plausible event mix. No source incidence inputs are used.
+
+This replaces the previous global round-robin derivative from `fe42e74` (SHA-256 `4cd25aba56fd5163b99f6fee0ef76796dac53b03cc93b89c55284f3d87b11557`), whose positional assignment left nine terms exclusive to P. Tests compare all non-target fields directly against those previous published bytes.
 
 Only `ae.term`, `ae.soc`, and `ae.ir` change. All 60 synthetic patients, their IDs, order, 260 AE rows, event dates, grades, seriousness flags, other domains and planted anomalies remain unchanged. The renamed terms do not establish causal links to drugs, diagnoses, outcomes or concomitant medication indications. Existing CM text is not rewritten to manufacture consistency. No trial incidence, severity distribution, timing or subject-level events are reproduced.
 
 ## Two files, two identities
 
 - `fixtures/keynote189-synthetic/raw.json` remains the imported generated output, byte-for-byte, SHA-256 `4dd5639d3b9799ee6c8b31615659d2433452fd6e077aca1ba8cb7d26064fbb54`.
-- `fixtures/keynote189-synthetic/table-s4-synthetic.json` is a LOCAL synthetic derivative, SHA-256 `4cd25aba56fd5163b99f6fee0ef76796dac53b03cc93b89c55284f3d87b11557`.
+- `fixtures/keynote189-synthetic/table-s4-synthetic.json` is a LOCAL synthetic derivative, SHA-256 `1931f79eb754cc569d4cb2539fec1d2c3071e6daf18820ccc8f9dee6a251304e`.
 - `provenance.json` retains the original import metadata and pins both identities, citation and qualifications. The upstream repository supplied generated synthetic data, not this term assignment. Upstream permission status remains as documented in `DATA.md`; no new license claim is made.
-- `--cohort keynote189` now loads the derivative as snapshot `synthetic-keynote189-table-s4-v2`; old reviews are not silently replayed against the changed snapshot.
+- `--cohort keynote189` now loads the derivative as snapshot `synthetic-keynote189-table-s4-v3`; old reviews are not silently replayed against the changed snapshot. Patient and record IDs are unchanged; only the snapshot version is advanced for the changed fixture identity.
 - Each adapted record identifies the derivative file/hash and upstream file/hash. Each AE also carries its original upstream row, derivative row, exact JSON pointer and term provenance. Export/replay retain these local synthetic source details. This is separate from model egress, which excludes source IDs/rows by default.
 
 Reproduce and verify from the repository root:
@@ -47,7 +51,7 @@ Reproduce and verify from the repository root:
 ```sh
 .venv/bin/python populate_ae_table_s4.py          # writes only the derivative
 .venv/bin/python populate_ae_table_s4.py --check  # read-only regeneration comparison
-.venv/bin/python -m unittest test_table_s4 test_table_s4_browser -v
+.venv/bin/python -m unittest test_table_s4_dealing test_table_s4 test_table_s4_browser -v
 ```
 
 Try “Highlight exact term Lacrimation increased” and approve the displayed scope proposal. Query with `query_data`, scope `current_analysis`, filters `{"term":"Lacrimation increased"}`, and explicit unit `AE records` or `patients`. In this deterministic fixture the term has 7 AE records; that is a synthetic test result, not a trial rate. Local source IDs remain inspectable; no real external provider was used to verify this flow.
